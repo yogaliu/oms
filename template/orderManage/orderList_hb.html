@@ -1,0 +1,712 @@
+<div id="orderList" class="jxOutDiv" ng-controller="orderListController">
+    <div class="jxOutDivContent">
+        <!-- 主搜索框和主按钮-->
+        <div id="simpleSearch" class="simpleSearch" ng-hide="advancedSearch == 'orderList'">
+            <div class="textsewv textsewv1">
+                <div class="sewv">
+                    <div class="sewvtop"><span style="color: rgb(102, 102, 102);">全部订单</span><i class="iconfont icon-xiajiantou"></i></div>
+                    <div class="content" style="display: none;">
+                        <ul class="sewvbm">
+                            <li ng-click="domOperate.allOrders()">全部订单</li>
+                            <li ng-click="domOperate.manualDealOrder()">待人工处理订单</li>
+                            <li ng-click="domOperate.notCompleteOrder()">未完结订单</li>
+                            <li ng-click="domOperate.completeOrder()">已完结订单</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <input class="klw-search" placeholder="商品编码" ng-model="SkuCode" ng-keydown="domOperate.productSearch($event,SkuCode)"/>
+            <span class="advancedSearchBtn" ng-click="domOperate.searchShow('orderList')">高级搜索</span>
+
+            <div class="fr">
+                <div class="sewv-pl">
+                    <menu-select menu-config="selectConfig.batchOperate"></menu-select>
+                </div>
+                <div class="btn  pl-import" ng-click="domOperate.refresh()"><i class="icon iconfont icon-icon_fanzhuan_default" ></i>刷新</div>
+                <div class="btn  pl-import"><i class="iconfont"></i>导入订单</div>
+                <div class="btn download-order"><i class="iconfont"></i>下载订单</div>
+                <div class="btn add-order" ng-click="domOperate.jumpToNew('订单列表：新增订单','../template/orderManage/addOrder.html')"><i
+                        class="iconfont"></i>新增订单
+                </div>
+            </div>
+        </div>
+
+        <!-- 高级搜索展开-->
+        <div id="advancedSearch" class="advancedSearch" ng-show="advancedSearch == 'orderList'">
+            <!-- 制单时间-->
+            <div class="searchItem timeInput">
+                <div>
+                    <div class="title textsewv" ng-hide="advancedSearchObj.timeShow">
+                        <div class="sewv">
+                            <div class="sewvtop">
+                                <span>制单时间</span>
+                                <i class="iconfont icon-xiajiantou"></i>
+                            </div>
+                            <div class="content">
+                                <ul class="sewvbm">
+                                    <li>制单时间</li>
+                                    <li>发货时间</li>
+                                    <li>审核时间</li>
+                                    <li>支付时间</li>
+                                    <li>预计发货时间</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="title" ng-show="advancedSearchObj.timeShow">制单时间</span>
+
+                    <div class="options">
+                        <input class="klw-input" id="create-order-time-start" ng-model="formData.CreateDateBegin" type="text">
+                        <i class="line"></i>
+                        <input class="klw-input" id="create-order-time-end" ng-model="formData.CreateDateEnd" type="text">
+                    </div>
+                </div>
+                <div class="more">
+                    <div class="btn klwk-spread timeSpreadBtn" ng-click="advancedSearchObj.isTimeShow()"><span>{{advancedSearchObj.timeText}}</span><i
+                            class="iconfont"></i></div>
+                </div>
+            </div>
+            <!-- 制单时间展开-->
+            <div class="searchItem timeInput timeSpread" ng-show="advancedSearchObj.timeShow">
+                <div class="time-chose">
+                    <span class="title">发货时间</span>
+
+                    <div class="options">
+                        <input class="klw-input" id="deliver-time-start" ng-model="formData.DeliveryDateBegin" type="text">
+                        <i class="line"></i>
+                        <input class="klw-input" id="deliver-time-end" ng-model="formData.DeliveryDateEnd"  type="text">
+                    </div>
+                </div>
+                <div class="time-chose">
+                    <span class="title">审核时间</span>
+
+                    <div class="options">
+                        <input class="klw-input" id="audit-time-start" ng-model="formData.AuditDateBegin" type="text">
+                        <i class="line"></i>
+                        <input class="klw-input" id="audit-time-end" ng-model="formData.AuditDateEnd" type="text">
+                    </div>
+                </div>
+                <div class="time-chose">
+                    <span class="title">支付时间</span>
+
+                    <div class="options">
+                        <input class="klw-input" id="pay-time-start" ng-model="formData.PayDateBegin" type="text">
+                        <i class="line"></i>
+                        <input class="klw-input" id="pay-time-end" ng-model="formData.PayDateEnd" type="text">
+                    </div>
+                </div>
+                <div class="time-chose">
+                    <span class="title">预计发货时间</span>
+
+                    <div class="options">
+                        <input class="klw-input" id="pre-delivery-time-start" ng-model="formData.PreShipmentDateBegin" type="text">
+                        <i class="line"></i>
+                        <input class="klw-input" id="pre-delivery-time-end" ng-model="formData.PreShipmentDateEnd" type="text">
+                    </div>
+                </div>
+            </div>
+            <!-- 订单状态-->
+            <advanced-search-more-list  search-config="StatusConfigData"></advanced-search-more-list>
+            <advance-search-more-list-show search-config="StatusConfigData"></advance-search-more-list-show>
+            <!-- 订单状态-->
+
+            <!-- 店铺-->
+
+            <advanced-search-more-list  search-config="storeListConfigData"></advanced-search-more-list>
+            <advance-search-more-list-show search-config="storeListConfigData"></advance-search-more-list-show>
+
+            <!-- 店铺-->
+
+            <!-- 平台类型-->
+
+            <advanced-search-more-list  search-config="plantformListConfigData"></advanced-search-more-list>
+            <advance-search-more-list-show search-config="plantformListConfigData"></advance-search-more-list-show>
+            <!-- 平台类型-->
+
+
+            <!-- 订单类型-->
+
+            <advanced-search-list config-data="TransTypeConfigData"></advanced-search-list>
+
+
+            <!-- 订单标记-->
+
+            <advanced-search-more-list  search-config="orderSignConfigData"></advanced-search-more-list>
+            <advance-search-more-list-show search-config="orderSignConfigData"></advance-search-more-list-show>
+
+            <!-- 订单标记-->
+
+
+            <!-- 推荐仓库-->
+            <advanced-search-more-list  search-config="commendWareHouseConfigData"></advanced-search-more-list>
+            <advance-search-more-list-show search-config="commendWareHouseConfigData"></advance-search-more-list-show>
+            <!-- 推荐仓库-->
+
+
+            <!-- 推荐快递-->
+
+            <advanced-search-more-list  search-config="commendExpressConfigData"></advanced-search-more-list>
+
+            <!-- 推荐快递展开-->
+
+            <advance-search-more-list-show search-config="commendExpressConfigData"></advance-search-more-list-show>
+
+            <!--订单来源-->
+
+            <advanced-search-list config-data="SourceTypeConfigData"></advanced-search-list>
+
+            <!-- 退款状态-->
+
+            <advanced-search-list config-data="RefundStatusConfigData"></advanced-search-list>
+
+            <!-- 预售类型-->
+
+            <advanced-search-list config-data="PreSaleTypeConfigData"></advanced-search-list>
+
+            <!-- 配货状态-->
+
+            <advanced-search-list config-data="DispatchTypeStatusConfigData"></advanced-search-list>
+
+            <!-- 发货状态-->
+
+            <advanced-search-list config-data="DeliveryTypeStatusConfigData"></advanced-search-list>
+
+
+            <div class="searchItem clear searchItemInput">
+                <div class="rows rowsText">
+                    <p>商品编码</p>
+
+                    <p>处理人</p>
+
+                    <p>收货信息</p>
+
+                    <p>支付金额</p>
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <input type="text" class="klw-input" ng-model="formChoseData.SkuCode"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="orderListCollect.searchHformData.CreateUserName"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="formChoseData.Address"/>
+                    </div>
+                    <div>
+                        <input type="text" class="input100 klw-input" ng-model="formChoseData.PayAmountBegin"/>
+                        至
+                        <input type="text" class="input100 klw-input" ng-model="formChoseData.PayAmountEnd"/>
+                    </div>
+                </div>
+                <div class="rows rowsText">
+                    <p>明细数量</p>
+
+                    <p>不含商品</p>
+
+                    <p>订单编号</p>
+
+                    <p>平台订单号</p>
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <input type="text" class="input100 klw-input" ng-model="formChoseData.QuantityBegin"/>
+                        至
+                        <input type="text" class="input100 klw-input" ng-model="formChoseData.QuantityEnd"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="formChoseData.NotContainSkuCode"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="formChoseData.Code"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="formChoseData.TradeId"/>
+                    </div>
+                </div>
+                <div class="rows rowsText">
+                    <p>平台商品</p>
+
+                    <p>快递单号</p>
+
+                    <p>分销单号</p>
+
+                    <p>配货单号</p>
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <input type="text" class="klw-input" ng-model="formChoseData.PlatformSkuId"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="formChoseData.ExpressNumber"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="formChoseData.DistributionTradeId"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="formChoseData.DispatchCode"/>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 已选择行-->
+            <div class="searchItem selected">
+                <span class="title">已选择</span>
+                <div class="selectedBox"
+                     ng-repeat="(key,orderlist) in formChoseData">
+                    <span class="selectedTitle">{{orderlist['title']}}：</span>
+                    <span class="selectedContent">{{orderlist['name']}}</span>
+                    <i class="icon iconfont icon-icon_guanbisousuo" ng-click="domOperate.clearChoseCondition(key,orderlist)"></i>
+                </div>
+            </div>
+
+            <div id="conditionSet">
+                <button class="btn btn-success btn-78" ng-click="domOperate.advanceSearchConfirm($event)">确定</button>
+                <button class="btn btn-default btn-78 advancedSearchCancelBtn" ng-click="domOperate.advanceSearchCancle($event)">取消</button>
+                <button class="btn btn-default btn-78" ng-click="domOperate.advanceSearchClear()">清空</button>
+            </div>
+        </div>
+
+        <!-- 特殊标识行-->
+        <div id="simpleSelect" class="simpleSelect clear">
+            <div class="selectItems fl">
+                <label ng-click="domOperate.threeSelect($event,'IsManual')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow" ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[formData.IsManual]"></i>
+                    <span>手工处理</span>
+                </label>
+                <label ng-click="domOperate.threeSelect($event,'IsPrepay')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow" ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[formData.IsPrepay]"></i>
+                    <span>预付款</span>
+                </label>
+                <label ng-click="domOperate.threeSelect($event,'IsCod')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow" ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[formData.IsCod]"></i>
+                    <span>货到付款</span>
+                </label>
+                <label ng-click="domOperate.threeSelect($event,'IsObsolete')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow" ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[formData.IsObsolete]"></i>
+                    <span>作废</span>
+                </label>
+                <label ng-click="domOperate.threeSelect($event,'HasInvoice')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow" ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[formData.HasInvoice]"></i>
+                    <span>开票</span>
+                </label>
+                <label ng-click="domOperate.threeSelect($event,'IsOutOfStock')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow" ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[formData.IsOutOfStock]"></i>
+                    <span>缺货</span>
+                </label>
+                <label ng-click="domOperate.threeSelect($event,'IsAbnormal')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow" ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[formData.IsAbnormal]"></i>
+                    <span>异常</span>
+                </label>
+                <label ng-click="domOperate.threeSelect($event,'ExpressFeeIsCod')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow" ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[formData.ExpressFeeIsCod]"></i>
+                    <span>物流到付</span>
+                </label>
+                <label ng-click="domOperate.threeSelect($event,'IsHold')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow" ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[formData.IsHold]"></i>
+                    <span>留单</span>
+                </label>
+                <label ng-click="domOperate.threeSelect($event,'IsBlacklist')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow" ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[formData.IsBlacklist]"></i>
+                    <span>黑名单</span>
+                </label>
+                <label ng-click="domOperate.threeSelect($event,'IsLock')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow" ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[formData.IsLock]"></i>
+                    <span>锁定</span>
+                </label>
+            </div>
+
+            <div class="ti-pagination">
+                <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                / 共 <span>{{paginationConf.totalItems}}</span>
+
+                <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont" ng-click="domOperate.prevPage()"></i></span>
+
+                <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont" ng-click="domOperate.nextPage()"></i></span>
+
+                <span class="config-column" ng-mouseover="isHover()" ng-mouseleave="isHover()" ng-click="domOperate.listAllocation()"><i class="iconfont"></i></span>
+
+                <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+            </div>
+        </div>
+
+        <!-- table -->
+        <div style="position: relative">
+            <div class="tableOut">
+                <table id="dataListTable">
+                    <thead class="template-head">
+                    <tr>
+                        <th>
+                            <label ng-click="domOperate.selectAll()">
+                                <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':checkAll}"></i>
+                            </label>
+                        </th>
+                        <th>
+                            序号
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                        <th ng-repeat="list in orderListThead">
+                            {{list.name}}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="list in orderListTbody" repeat-finished-directive condition="{{$last == true}}">
+                        <td>
+                            <label ng-click="domOperate.orderListChose($event,list)">
+                                <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':list.trShow}"></i>
+                            </label>
+                        </td>
+                        <td>{{$index+1}}</td>
+                        <td class="operate" ng-click="huangbiaoAction($event)">
+                            <div class="multilevel-menu"  >
+                                <div><span class="iconfont icon-operate"></span></div>
+                                <div class="content" ng-if="(orderSetting != 'completeOrder')">
+                                    <!-- 一级菜单 -->
+                                    <ul class="one_level">
+                                        <li ng-click="domOperate.jumpToDetails('订单列表：订单详情','../template/orderManage/orderDetail.html',list)">订单详情</li>
+                                        <li submenu="suoding" ng-mouseenter="showSecondMenu($event)">
+                                            <span>锁定</span>
+                                        </li>
+                                        <li submenu="dingdanbiaoji" ng-mouseenter="showSecondMenu($event)">
+                                            <span>订单标记</span>
+                                        </li>
+                                        <li submenu="tuijiankuaidi" ng-mouseenter="showSecondMenu($event)">
+                                            <span>推荐快递</span>
+                                        </li>
+                                        <li submenu="tuijiancangku" ng-mouseenter="showSecondMenu($event)">
+                                            <span>推荐仓库</span>
+                                        </li>
+                                        <li submenu="piliangxiugai" ng-mouseenter="showSecondMenu($event)" ng-if="(orderSetting == 'manualDeal') || (orderSetting == '')">
+                                            <span>批量修改</span>
+                                        </li>
+                                        <li ng-click="domOperate.auditOrder(list,$event)"
+                                            ng-if="(orderSetting == 'manualDeal') || (orderSetting == '')"
+                                            ng-class="{true : '',false : 'clickDisabled'}[domOperate.auditCondition(list)]" ng-mouseenter="showSecondMenu($event)">审核</li>
+                                        <li ng-click="domOperate.autoDispatch(list,$event)"
+                                            ng-if="(orderSetting == 'notComplete') || (orderSetting == '')"
+                                            ng-class="{true : '',false : 'clickDisabled'}[domOperate.isSelfLock(list)]" ng-mouseenter="showSecondMenu($event)">自动配货</li>
+                                        <li ng-click="domOperate.manualDispatch('订单列表：手工配货','../template/orderManage/manualDispatch.html',list,$event)"
+                                            ng-class="{true : '',false : 'clickDisabled'}[domOperate.isSelfLock(list)]" ng-mouseenter="showSecondMenu($event)">手工配货</li>
+                                        <li ng-click="domOperate.changeOrder(list,$event)"
+                                            ng-if="(orderSetting == 'manualDeal') ||  (orderSetting == '')"
+                                            ng-class="{true : '',false : 'clickDisabled'}[domOperate.changeCondition(list)]" ng-mouseenter="showSecondMenu($event)">修改</li>
+                                        <li ng-click="domOperate.changeOrder(list)" ng-if="(orderSetting == '')" ng-mouseenter="showSecondMenu($event)">复制</li>
+                                        <li ng-click="domOperate.obsoleteOrder(list,$event)"
+                                            ng-if="(orderSetting == 'manualDeal') || (orderSetting == '')"
+                                            ng-class="{true : '',false : 'clickDisabled'}[domOperate.obsoleteCondition(list)]" ng-mouseenter="showSecondMenu($event)">作废</li>
+                                        <li ng-click="domOperate.resetStatus(list,$event)"
+                                            ng-if="(orderSetting == 'manualDeal') || (orderSetting == '')"
+                                            ng-class="{true : '',false : 'clickDisabled'}[domOperate.resetCondition(list)]" ng-mouseenter="showSecondMenu($event)">重置状态</li>
+                                        <li ng-click="domOperate.createQuitOrExchangeBill('订单列表：生成退换货单','../template/orderManage/addQuitExchangeGoodsBill.html',list)"
+                                            ng-if="(orderSetting == '')" ng-mouseenter="showSecondMenu($event)">生成退换货单</li>
+                                        <li ng-click="domOperate.createRefundBill('订单列表：生成退款单','../template/orderManage/createRefundBill.html',list)"
+                                            ng-if="(orderSetting == '')" ng-mouseenter="showSecondMenu($event)">生成退款单</li>
+                                        <li ng-click="domOperate.addInsideLabel(list)" ng-mouseenter="showSecondMenu($event)">内部标签</li>
+                                    </ul>
+                                    <style>
+                                        .two_level{
+                                            position: absolute;
+                                            top: 0;
+                                            left: 130px;
+                                            width: 130px;
+                                            background: #fff;
+
+                                            height: 200px;
+                                            overflow: auto;
+                                        }
+                                        .two_level .menu-two{
+                                            display: none;
+                                        }
+
+                                        .two_level .menu-two ul li{
+                                            background: #fff;
+                                        }
+                                    </style>
+                                    <!-- 二级菜单 -->
+                                    <div class="two_level">
+                                        <ul class="menu-two suoding">
+                                            <li ng-click="domOperate.orderLock(list,$event)"
+                                                ng-class="{true : '',false : 'clickDisabled'}[domOperate.lockCondition(list)]">锁定</li>
+                                            <li ng-click="domOperate.orderUnLock(list,$event)"
+                                                ng-class="{true : '',false : 'clickDisabled'}[domOperate.unLocakCondition(list)]">解锁</li>
+                                            <li ng-click="domOperate.orderSuperUnlock(list,$event)"
+                                                ng-class="{true : '',false : 'clickDisabled'}[domOperate.superLockCondition(list)]">超级解锁</li>
+                                        </ul>
+                                        <ul class="menu-two dingdanbiaoji">
+                                            <li ng-click="domOperate.changeMark('',list)">取消订单标记</li>
+                                            <li ng-repeat="label in orderMarks" ng-click="domOperate.changeMark(label,list)">{{label.name}}</li>
+                                        </ul>
+
+                                        <ul class="menu-two tuijiankuaidi">
+                                            <li ng-click="domOperate.changeExpress('',list)">取消推荐</li>
+                                            <li ng-repeat="express in expressInfo" ng-click="domOperate.changeExpress(express,list)">{{express.name}}</li>
+                                        </ul>
+                                        <ul class="menu-two tuijiancangku">
+                                            <li ng-repeat="house in wareHouseInfo" ng-click="domOperate.changeWareHouse(house,list)">{{house.name}}</li>
+                                        </ul>
+                                        <ul class="menu-two piliangxiugai">
+                                            <li ng-click="domOperate.orderLeave(list)">留单</li>
+                                            <li ng-click="domOperate.forceSplitOrder(list)">强制拆单</li>
+                                            <li ng-click="domOperate.manualOrder(list)">手工处理</li>
+                                            <li ng-click="domOperate.bagContent(list)">个性化包裹</li>
+                                            <li ng-click="domOperate.speedDelivery(list)">加急发货</li>
+                                            <li ng-click="domOperate.getskuCodeInit(list,'False',$event)" ng-class="{true : '',false : 'clickDisabled'}[domOperate.giftCondition(list)]">添加赠品</li>
+                                            <li ng-click="domOperate.getskuCodeInit(list,'True',$event)"  ng-class="{true : '',false : 'clickDisabled'}[domOperate.giftCondition(list)]">添加赠品（叠加）</li>
+                                            <li ng-click="domOperate.getSuit(list,'False',$event)"  ng-class="{true : '',false : 'clickDisabled'}[domOperate.giftCondition(list)]">添加套装赠品</li>
+                                            <li ng-click="domOperate.getSuit(list,'True',$event)"  ng-class="{true : '',false : 'clickDisabled'}[domOperate.giftCondition(list)]">添加套装赠品（叠加）</li>
+                                            <li ng-click="domOperate.deleteGift(list)">删除赠品</li>
+                                            <li ng-click="domOperate.expressFee(list,true)">物流到付</li>
+                                            <li ng-click="domOperate.expressFee(list,false)">取消物流到付</li>
+                                        </ul>
+                                     </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td ng-repeat="item in orderListThead" ng-if="item.tag != ''">
+                            <p class="order-list-details" ng-bind-html="list[item.tag] | OrderListFilter : item.tag : list : item.otherInfo"></p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="huangbiao" style="display: none;z-index: 2;">
+                <div id=huangbiao_fix style="position: fixed;     background: #000;     top: 0;     left: 0;     right: 0;     bottom: 0;     opacity: 0.5; "></div>
+                <div id="huangbiao_content" class="multilevel-menu">
+
+
+                </div>
+            </div>
+        </div>
+
+
+        <!--分页-->
+        <tm-pagination conf="paginationConf"></tm-pagination>
+
+        <!-- 右侧列表配置 -->
+        <tm-listallocation allo="allocation"></tm-listallocation>
+    </div>
+
+    <!--批量备注模态框-->
+    <div class="modal fade info-get-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="info-tip">
+                    <div class="info-tip-head">
+                        <p class="info-tip-label">{{modal.title}}</p>
+                        <p class="info-tip-close" data-dismiss="modal">
+                            <i class="icon iconfont icon-icon_guanbisousuo"></i>
+                        </p>
+                    </div>
+                    <div class="info-tip-body">
+                        <textarea name="" id="" cols="30" rows="10" ng-model="content">请输入内容</textarea>
+                    </div>
+                    <div class="info-tip-header">
+                        <button type="button" class="btn btn-success btn-78" ng-click="modal.confirm(content)">确定</button>
+                        <button type="button" class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--弹出框时间选择-->
+    <div class="modal fade time-select" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="info-tip">
+                    <div class="info-tip-head">
+                        <p class="info-tip-label">{{timeSelect.title}}</p>
+                        <p class="info-tip-close" data-dismiss="modal">
+                            <i class="icon iconfont icon-icon_guanbisousuo"></i>
+                        </p>
+                    </div>
+                    <div class="info-tip-body">
+                        <input class="klw-input ng-pristine ng-valid ng-touched" id="time-select" ng-model="timeChose" type="text">
+                    </div>
+                    <div class="info-tip-header">
+                        <button type="button" class="btn btn-success btn-78" ng-click="timeSelect.confirm(timeChose)">确定</button>
+                        <button type="button" class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--添加商品弹出框-->
+    <div class="modal fade order-list-chose product-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="order-list-head">
+                    <div class="order-list-title">选择商品</div>
+                    <div class="order-list-close"><i class="icon iconfont icon-icon_guanbisousuo"></i></div>
+                </div>
+                <div class="order-list-body">
+
+                    <div class="rows rowsText">
+
+                        <p>商品编码 <span class="star">*</span></p>
+                        <p>商品名称<span class="star">*</span></p>
+                        <p>规格代码<span class="star">*</span></p>
+
+                    </div>
+                    <div class="rows rowsInput">
+                        <div>
+                            <input class="klw-input" ng-model="formData.SkuCode" type="text"/>
+                        </div>
+                        <div>
+                            <input class="klw-input" ng-model="productSearch.prodes" type="text"/>
+                        </div>
+                        <div>
+                            <input class="klw-input" ng-model="productSearch.skucode" type="text"/>
+                        </div>
+                    </div>
+                    <div class="rows rowsText">
+
+                        <p>规格名称 <span class="star">*</span></p>
+
+                    </div>
+                    <div class="rows rowsInput">
+                        <div>
+                            <input class="klw-input" ng-model="productSearch.skudes" type="text"/>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <button class="btn btn-success btn-78" ng-click="domOperate.searchConfirm()">确认</button>
+                        <button class="btn btn-default btn-78" ng-click="domOperate.searchCancle()">取消</button>
+                    </div>
+
+                    <div class="order-lists">
+
+                        <div class="tableOut">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th ng-repeat="column in productColumn">{{column.name}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="list in productInfo">
+                                    <td ng-repeat="column in productColumn"
+                                        ng-dblclick="domOperate.getProductDetails(list)">
+                                        <span ng-if="column.tag != ''">{{list[column.tag]}}</span>
+                                            <span ng-if="column.tag ==''">
+                                                <label ng-click="domOperate.skuChose($event,list)">
+                                                    <i class="iconfont icon-sel"></i>
+                                                </label>
+                                            </span>
+                                    </td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <!--分页-->
+                        <tm-pagination conf="productPage.paginationConf"></tm-pagination>
+                    </div>
+
+                    <div class="order-lists-details">
+                        <div class="tableOut">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th ng-repeat="column in productDetailsColumn">{{column.name}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="list in productInfoDetais">
+                                    <td ng-repeat="column in productDetailsColumn">
+                                        {{list[column.tag]}}
+                                    </td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <div class="footer">
+                            <button class="btn btn-success btn-78" ng-click="domOperate.saveProduct()">保存</button>
+                            <button class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--添加套装弹出框-->
+    <div class="modal fade order-list-chose suit-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="order-list-head">
+                    <div class="order-list-title">选择套装</div>
+                    <div class="order-list-close"><i class="icon iconfont icon-icon_guanbisousuo"></i></div>
+                </div>
+                <div class="order-list-body">
+
+                    <div class="rows rowsText">
+
+                        <p>套装代码 <span class="star">*</span></p>
+                        <p>套装名称<span class="star">*</span></p>
+                        <p>规格编码<span class="star">*</span></p>
+
+                    </div>
+                    <div class="rows rowsInput">
+                        <div>
+                            <input class="klw-input" ng-model="suit.Code" type="text"/>
+                        </div>
+                        <div>
+                            <input class="klw-input" ng-model="suit.Description" type="text"/>
+                        </div>
+                        <div>
+                            <input class="klw-input" ng-model="suit.SkuCode" type="text"/>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <button class="btn btn-success btn-78" ng-click="domOperate.suitSearchConfirm()">确认</button>
+                        <button class="btn btn-default btn-78" ng-click="domOperate.suitSearchCancle()">取消</button>
+                    </div>
+
+                    <div class="order-lists">
+
+                        <div class="tableOut">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th ng-repeat="column in suitColumn">{{column.name}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="list in suitInfo">
+                                    <td ng-repeat="column in suitColumn"
+                                        ng-dblclick="domOperate.getProductDetails(list)">
+                                        <span ng-if="column.tag != ''">{{list[column.tag]}}</span>
+                                        <span ng-if="column.tag ==''">
+                                            <label ng-click="domOperate.suitChose($event,list)">
+                                                <i class="iconfont icon-sel"></i>
+                                            </label>
+                                        </span>
+                                    </td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <!--分页-->
+                        <tm-pagination conf="suitPage.paginationConf"></tm-pagination>
+                    </div>
+                    <div class="footer">
+                        <button class="btn btn-success btn-78" ng-click="domOperate.saveSuit()">保存</button>
+                        <button class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

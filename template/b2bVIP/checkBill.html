@@ -1,0 +1,156 @@
+<div id="checkBill" class="jxOutDiv" ng-controller="checkBillController">
+    <div class="jxOutDivContent">
+        <!-- 高级搜索展开-->
+        <div id="advancedSearch" class="advancedSearch">
+            <div class="searchItem1 clear">
+                <div class="clear">
+                    <span class="title">档期时间 <span class="star">*</span></span>
+
+                    <div class="timeInputDiv timeInputDiv1 fl">
+                        <input class="klw-input dateTime" type="text" readonly ng-click="showDatetimePick($event)"
+                               data-date-format="yyyy-mm-dd" ng-model="searchForm.schedulebegindate">
+                        <i class="iconfont icon-time"></i>
+                    </div>
+
+                    <i class="line fl"></i>
+
+                    <div class="timeInputDiv fl">
+                        <input class="klw-input dateTime" type="text" readonly ng-click="showDatetimePick($event)"
+                               data-date-format="yyyy-mm-dd" ng-model="searchForm.scheduleenddate">
+                        <i class="iconfont icon-time"></i>
+                    </div>
+
+                    <span class="title">店铺名称</span>
+
+                    <div>
+                        <div class="sewv" ng-click="showShopModal()">
+                            <div class="sewvtop"><span>{{storeName}}</span></div>
+                        </div>
+                    </div>
+
+                    <span class="title">PO单号</span>
+
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchForm.pocode" placeholder="请输入PO单号"/>
+                    </div>
+                </div>
+            </div>
+
+            <div id="conditionSet">
+                <button class="btn btn-success btn-78" ng-click="search()">搜索</button>
+                <button class="btn btn-default btn-78" ng-click="empty()">清空</button>
+                <div class="fr">
+                    <div class="btn klwk-cancle exportBtn"><i class="iconfont"></i>导出</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="simpleSelect" class="simpleSelect clear">
+            <div class="ti-pagination">
+                <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                / 共 <span>{{paginationConf.totalItems}}</span>
+
+                <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont"
+                                                                                   ng-click="prev()"></i></span>
+
+                <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont"
+                                                                                                    ng-click="next()"></i></span>
+
+                 <span style="position: relative">
+                    <span class="config-column" ng-click="showColumnConfigPanel()"  ng-mouseover="isHover()" ng-mouseleave="isHover()">
+                        <i class="iconfont"></i>
+                    </span>
+                    <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+                    <tm-listallocation allo="allocation"></tm-listallocation>
+                </span>
+            </div>
+        </div>
+
+        <div class="tableOut">
+            <table id="checkBillTable" class="display" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="obj in tableList" repeat-finished-directive repeataction="initFunc()"
+                    repeatIndex="{{$index}}" condition="{{$last}}">
+                    <td ng-repeat="item in theadList">
+                        {{obj[item.tag]}}
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+        <!--分页-->
+        <tm-pagination conf="paginationConf"></tm-pagination>
+
+
+        <!--店铺选择弹框-->
+        <div class="modal fade shop-modal" id="shopModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="header-title">店铺</div>
+                        <div class="header-close" data-dismiss="modal" aria-hidden="true"><i class="icon iconfont icon-icon_guanbisousuo"></i></div>
+                    </div>
+                    <div class="modal-body clear">
+                        <div class="cf">
+                            <div class="fl left">
+                                <i class="iconfont icon-search-blod"></i>
+                                <input type="text" class="klw-search" placeholder="编码/名称">
+
+                                <div class="thead">
+                                    <span class="td">
+                                        <div class="klwk-check"><i class="iconfont"></i></div>
+                                    </span>
+                                    <span class="td">编码</span>
+                                    <span class="td">店铺名称</span>
+                                </div>
+                                <div class="tbody">
+                                    <div class="tr" ng-repeat="item in storeList"
+                                         ng-click="selectOneStore($event,$index)">
+                                        <div class="td oh">
+                                            <div class="klwk-check" ng-hide="isInSelectStoreList(item)"><i
+                                                    class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-if="isInSelectStoreList(item)"><i
+                                                    class="iconfont"></i></div>
+                                        </div>
+                                        <span class="td oh">{{item.code}}</span>
+                                        <span class="td oh">{{item.name}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fl left right">
+                                <div class="title">已选择</div>
+                                <div class="thead">
+                                    <span class="td">编码</span>
+                                    <span class="td">店铺名称</span>
+                                    <span class="td"></span>
+                                </div>
+                                <div class="tbody">
+                                    <div class="tr" ng-repeat="item in selectStoreList">
+                                        <span class="td oh">{{item.code}}</span>
+                                        <span class="td oh">{{item.name}}</span>
+
+                                        <div class="td oh" ng-click="deleteOneStore($index)">
+                                            <i class="iconfont icon-close"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-78 btn-success" ng-click="showStores()">确定</button>
+                        <button type="button" class="btn btn-78 btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

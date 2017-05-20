@@ -1,0 +1,135 @@
+<div id="presellPlanDetail" class="jxOutDiv jxOutDivDetail" ng-controller="presellPlanDetailController">
+    <div class="jxOutDivContent">
+        <div>
+            <button class="btn btn-default btn-78" ng-click="returnFun()"style="margin:35px 0 20px 50px;">返回</button>
+        </div>
+        <div class="detail-content-top">
+            <div class="detail-top-tab">
+                <ul>
+                    <li ng-class="{true:'current',false:''}[tab == 'first']" ng-click="isShow('first')">预售计划详情</li>
+                    <li ng-class="{true:'current',false:''}[tab == 'second']" ng-click="isShow('second')">所有店铺预售明细</li>
+                    <li ng-class="{true:'current',false:''}[tab == 'third']" ng-click="isShow('third')">操作日志</li>
+                </ul>
+            </div>
+        </div>
+        <!-- 预售计划详情-->
+        <div class="content-first" ng-show="tab == 'first'">
+            <div class="jxmessage">
+                <h3 class="detailTitle">
+                    预售开始时间&nbsp;&nbsp;&nbsp;<span>{{params.startTime}}&nbsp;&nbsp;至&nbsp;&nbsp;{{params.endTime}}</span>
+                    预售计划状态&nbsp;&nbsp;&nbsp;<span>{{params.status | jxFilter:'status':'presellPlan'}}</span>
+                </h3>
+            </div>
+            <div class="storeName jxmessage">
+                <h3 class="detailTitle">预售店铺名称</h3>
+
+                <div class="tableOut">
+                    <table id="storeNameTable" class="display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th ng-repeat="obj in theadList1">{{obj.name}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in tableList1 | limitTo :5" repeat-finished-directive repeataction="initFunc()" repeatIndex="{{$index}}" condition="{{$last == true}}">
+                            <td ng-repeat="item in theadList1">
+                                {{obj[item.tag] | setDefaultValueWithoutData}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="merchandiseDetail jxmessage">
+                <h3 class="detailTitle">预售商品明细</h3>
+
+                <div class="tableOut">
+                    <table id="merchandiseTable" class="display" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th ng-repeat="obj in theadList2">{{obj.name}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="obj in tableList2 | limitTo :5" repeat-finished-directive repeataction="initFunc()" repeatIndex="{{$index}}" condition="{{$last == true}}">
+                                <td ng-repeat="item in theadList2">
+                                    <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                                    {{obj[item.tag] | jxFilter:item.tag:'presellPlan' |isBoolean | setDefaultValueWithoutData}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--所有店铺预售明细-->
+        <div class="content-second" ng-show="tab == 'second'">
+            <div class="jxmessage">
+                <h3 class="detailTitle">
+                    预售开始时间&nbsp;&nbsp;&nbsp;<span>{{params.startTime}}&nbsp;&nbsp;至&nbsp;&nbsp;{{params.endTime}}</span>
+                    预售计划状态&nbsp;&nbsp;&nbsp;<span>{{params.status | jxFilter:'status':'presellPlan'}}</span>
+                </h3>
+            </div>
+            <div class="jxmessage">
+                <h3 class="detailTitle">预售店铺预售商品明细</h3>
+
+                <div class="tableOut">
+                    <table id="allStoreDetailTable" class="display" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+
+                                <th>操作</th>
+                                <th ng-repeat="obj in theadList3">{{obj.name}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="obj in tableList3 | limitTo :5" repeat-finished-directive repeataction="initFunc()" repeatIndex="{{$index}}" condition="{{$last == true}}">
+
+                                <td class="operate">
+                                    <div class="operateList">
+                                        <div class="operateIcon"><span class="iconfont icon-operate"></span></div>
+                                        <div class="content">
+                                            <ul class="one">
+                                                <li>开始预售</li>
+                                                <li>结束预售</li>
+                                                <li>重新开始</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td ng-repeat="item in theadList3">
+                                    {{obj[item.tag] | jxFilter:item.tag:'presellPlan'| setDefaultValueWithoutData}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!--操作日志-->
+        <div class="content-second" ng-show="tab == 'third'">
+            <div class="jxmessage">
+                <h3 class="detailTitle">操作记录</h3>
+
+                <div class="tableOut">
+                    <table id="operateTable" class="display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th ng-repeat="obj in theadList4">{{obj.name}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in tableList4" repeat-finished-directive repeataction="initFunc()" repeatIndex="{{$index}}" condition="{{$last == true}}">
+                            <td ng-repeat="item in theadList4">
+                                {{obj[item.tag] | setDefaultValueWithoutData}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

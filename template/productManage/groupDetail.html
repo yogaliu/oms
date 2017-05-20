@@ -1,0 +1,67 @@
+<!-- 组合套装信息 -->
+
+<div id="groupDetail" class="cj-product" ng-controller="groupDetailController">
+    <div class="product-content">
+
+        <div class="product-header">
+            <div class="header-tab">
+                <ul>
+                    <li ng-class="{true:'current',false:''}[tab == 'first']" ng-click="toggleTab('first')">套装信息</li>
+                    <li ng-class="{true:'current',false:''}[tab == 'second']" ng-click="toggleTab('second')">操作日志</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="product-body">
+            <button class="btn btn-default detail btn-78 mr" ng-click="goBack()">返回</button>
+            <!--套装信息-->
+            <div class="first" ng-show="tab == 'first'">
+                <h5 class="add-title">套装明细</h5>
+                <div class="row even">
+                    <div class="column">
+                        <span>套装名称<i>{{formData.description}}</i></span>
+                    </div>
+                </div>
+                <div class="body-table">
+                    <table id="groupDetailTable" class="display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <td id="operation">主商品</td>
+                            <td ng-repeat="obj in theadListInfo">{{obj.name}}</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in tableListInfo">
+                            <td>
+                                {{obj.ismainsku | isBoolean}}
+                                <i class="iconfont icon-icon9 correct" ng-if="obj.ismainsku === true"></i>
+                            </td>
+                            <td ng-repeat="item in theadListInfo">{{obj[item.tag]}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!--操作日志-->
+            <div class="second" ng-show="tab == 'second'">
+                <h5 class="add-title">操作记录</h5>
+                <table id="operateLogTable" class="display" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <td ng-repeat="obj in theadListLog">{{obj.name}}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="obj in tableListLog">
+                        <td ng-repeat="item in theadListLog">{{obj[item.tag]}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- /组合套装信息 -->

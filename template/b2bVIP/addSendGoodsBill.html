@@ -1,0 +1,126 @@
+<div id="addSendGoodsBill" class="jxOutDiv jxAdd" ng-controller="addSendGoodsBillController">
+    <div class="jxOutDivContent">
+        <div>
+            <button class="btn btn-default btn-78 topReturn" ng-click="returnFun()">返回</button>
+        </div>
+        <div class="basic-message jxmessage form">
+            <h3 class="addTitle">送货单基本信息</h3>
+
+            <div class="rows rowsText">
+                <p>唯品档期<span class="star">*</span></p>
+                <p>PO单号<span class="star">*</span></p>
+                <p>唯品店铺<span class="star">*</span></p>
+                <p>到货仓库<span class="star">*</span></p>
+            </div>
+            <div class="rows rowsInput">
+                <div>
+                    <input type="text" class="klw-input" placeholder="请选择唯品档期" readonly ng-model="modify.ScheduleName" ng-click="rightSideObj.schedulenameShow()"/>
+                </div>
+
+                <div>
+                    <input class="klw-input  validate" name="empty" type="text" ng-model="modify.PoCode" placeholder="请输入PO单号"/>
+                </div>
+
+                <div>
+                    <pull-select pull-config="selectStore"></pull-select>
+                </div>
+
+                <div>
+                    <pull-select pull-config="selectSendWareHouse"></pull-select>
+                </div>
+            </div>
+            <div class="rows rowsText">
+                <p>承运商<span class="star">*</span></p>
+                <p>到货时间<span class="star">*</span></p>
+                <p>送货时间<span class="star">*</span></p>
+                <p>运单号<span class="star">*</span></p>
+
+            </div>
+            <div class="rows rowsInput">
+                <div>
+                    <pull-select pull-config="selectCarrierName"></pull-select>
+                </div>
+
+                <div class="arrivalTime">
+                    <div class="timeInputDiv">
+                        <input class="klw-input dateTime validate" name="empty" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="modify.ArrivalTime">
+                        <i class="iconfont icon-time"></i>
+                    </div>
+                    <div>
+                        <pull-select pull-config="selectVipArrivalTime"></pull-select>
+                    </div>
+                </div>
+
+
+                <div class="timeInputDiv">
+                    <input class="klw-input dateTime validate" name="empty" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="modify.DeliveryTime">
+                    <i class="iconfont icon-time"></i>
+                </div>
+                <div>
+                    <input class="klw-input validate" name="empty" type="text" ng-model="modify.WaybillNumber" placeholder="请输入运单号"/>
+                </div>
+            </div>
+            <div class="rows rowsText">
+                <p>配送方式<span class="star">*</span></p>
+                <p>品牌<span class="star">*</span></p>
+            </div>
+            <div class="rows rowsInput">
+                <div>
+                    <pull-select pull-config="selectDeliveryMethod"></pull-select>
+                </div>
+                <div>
+                    <pull-select pull-config="selectBrand"></pull-select>
+                </div>
+            </div>
+            <div class="rows rowsText">
+                <p>备注</p>
+            </div>
+            <div class="rows rowsInput">
+                <div class="input100">
+                    <textarea class="klw-textarea remark" placeholder="请输入备注" ng-model="modify.note"></textarea>
+                </div>
+            </div>
+
+        </div>
+        <!-- 底部按钮-->
+        <div class="content-footer jxmessage">
+            <button class="btn btn-success btn-78" ng-click="submit()">保存</button>
+            <button class="btn btn-default btn-78" ng-click="returnFun()">取消</button>
+        </div>
+
+        <!--档期名称侧滑框-->
+        <div id="rightSideModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="header-title">选择唯品档期</div>
+                    <div class="header-close" ng-click="rightSideObj.hideModal()"><i class="icon iconfont icon-icon_guanbisousuo"></i></div>
+                </div>
+                <div class="product-body">
+                    <div class="searchBox">
+                        <input type="text" class="klw-search" ng-keyup="rightSideObj.search()" ng-model="rightSideObj.searchText"/>
+                    </div>
+                    <div class="tableOut">
+                        <table id="getRightSideTable" class="display" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>编码</th>
+                                    <th>名称</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="obj in tableRightSideList" ng-click="rightSideObj.select(obj,$event)" ng-hide='obj.isHide'>
+                                    <td>{{obj.schedulecode}}</td>
+                                    <td>{{obj.schedulename}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="footer mt">
+                        <button class="btn btn-success btn-78 mr" ng-click="rightSideObj.ensure()">保存</button>
+                        <button class="btn btn-default btn-78" ng-click="rightSideObj.hideModal()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

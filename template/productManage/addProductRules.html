@@ -1,0 +1,114 @@
+<!-- 新增规则 -->
+
+<div id="addProductRules" class="cj-product" ng-controller="addProductRulesController">
+    <div class="product-content">
+
+        <div class="product-header">
+
+            <!--父规则-->
+            <div class="parent-rules form">
+                <h5 class="add-title">商品属性编码规则</h5>
+                <div class="row odd">
+                    <div class="column">
+                        <label>编码<span class="important">*</span></label>
+                    </div>
+                    <div class="column">
+                        <label>名称<span class="important">*</span></label>
+                    </div>
+                    <div class="column">
+                        <label>序号</label>
+                    </div>
+                </div>
+                <div class="row even">
+                    <div class="column">
+                        <input type="text" class="klw-input validate" name="empty" placeholder="请输入编码" ng-model="parentItem.code">
+                    </div>
+                    <div class="column">
+                        <input type="text" class="klw-input validate" name="empty" placeholder="请输入名称" ng-model="parentItem.name">
+                    </div>
+                    <div class="column">
+                        <input type="text" class="klw-input" placeholder="请输入序号" maxlength="10" ng-model="parentItem.seq">
+                    </div>
+                </div>
+                <div class="parent-rules-check">
+                    <div class="body-check" ng-click="checkItem(parentItem,'isShow')">
+                        <div class="klwk-check" ng-hide="parentItem.isShow"><i class="iconfont"></i></div>
+                        <div class="klwk-check-x" ng-show="parentItem.isShow"><i class="iconfont"></i></div>
+                        <span class="ml">显示</span>
+                    </div>
+                    <div class="body-check"  ng-click="checkItem(parentItem,'isNumber')">
+                        <div class="klwk-check" ng-hide="parentItem.isNumber"><i class="iconfont"></i></div>
+                        <div class="klwk-check-x" ng-show="parentItem.isNumber"><i class="iconfont"></i></div>
+                        <span class="ml">生成款号</span>
+                    </div>
+                </div>
+            </div>
+
+            <!--子规则-->
+            <div class="child-rules form">
+                <h5 class="add-title">商品属性值</h5>
+
+                <div ng-show="ruleValue == 'start'">
+                    <div class="btn add-order green-btn" ng-click="child.module('ruleValue','import')"><i class="iconfont"></i>子规格</div>
+                </div>
+
+                <div ng-show="ruleValue == 'import'">
+                    <div>
+                        <div class="row odd">
+                            <div class="column">
+                                <label>代码<span class="important">*</span></label>
+                            </div>
+                            <div class="column">
+                                <label>名称<span class="important">*</span></label>
+                            </div>
+                            <div class="column">
+                                <label>排序</label>
+                            </div>
+                        </div>
+                        <div class="row even">
+                            <div class="column">
+                                <input type="text"  class="klw-input validate" name="empty" placeholder="请输入代码" ng-model="childItem.code"/>
+                            </div>
+                            <div class="column">
+                                <input type="text" class="klw-input validate" name="empty" placeholder="请输入名称" ng-model="childItem.name"/>
+                            </div>
+                            <div class="column">
+                                <input type="text" class="klw-input" placeholder="请输入排序" maxlength="10" ng-model="childItem.seq"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="child-among-btn">
+                        <button class="btn btn-success btn-78 mr" ng-click="child.ensure()">确定</button>
+                        <button class="btn btn-default btn-78" ng-click="child.cancel()">取消</button>
+                    </div>
+                </div>
+                <!--新增后生成表格-->
+                <div ng-show="parentItem.details.length != 0">
+                    <div ng-show="ruleValue == ''" class="btn add-order green-btn child-among-right" ng-click="child.module('ruleValue','import')"><i class="iconfont"></i>子规格</div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>操作</th>
+                            <th ng-repeat="item in theadList">{{item.name}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in parentItem.details">
+                            <td ng-click="tableEdit()"><i class="iconfont icon-icon21 amend"></i></td>
+                            <td ng-repeat="item in theadList" contenteditable="{{isEdit}}"  ng-keyup="userChange($event,item.tag,$index)">{{obj[item.tag]}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-btn">
+            <button class="btn btn-success btn-78 mr" ng-click="saveRule()">保存</button>
+            <button class="btn btn-default btn-78" ng-click="goBack()">取消</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- /新增规则 -->

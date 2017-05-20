@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en" ng-app="klwkOmsApp">
+<head>
+    <title>订单管理</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../public/css/bootstrap.css">
+
+</head>
+<body>
+<!-- 显示总的界面 -->
+<ui-view></ui-view>
+
+</body>
+<!-- 导入的基础插件，包含jquery,angularJs等 -->
+<script type="text/javascript" src="../../public/js/jquery.js"></script>
+<script type="text/javascript" src="../../public/js/base.js"></script>
+<script type="text/javascript" src="../../public/js/echarts.min.js"></script>
+<script type="text/javascript" src="../../public/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../demoApp.js"></script>
+<script>
+
+    /**
+     * 定义常量WAP_CONFIG;WAP为当前子模块功能
+     * */
+    angular.module('klwkOmsApp')
+            .config(["$stateProvider","$urlRouterProvider",function ($stateProvider, $urlRouterProvider) {
+                // 如果没有匹配的路径，则设置默认路径
+                $urlRouterProvider.otherwise('/index');
+                $stateProvider
+                    //首页
+                    .state('index',{
+                        url: '/index',
+                        template:'filterStudyTemp.html',
+                        controller:'AccordionDemoCtrl'
+                    })
+            }]);
+    /**
+     * 在为null， undefined， ""， 的情况下面设置默认值
+     * */
+    angular.module("klwkOmsApp")
+        .filter("setDefaultValueWithoutData",function(){
+            return function(inputValue,defaultValue){
+                if(inputValue == null || inputValue === undefined || inputValue == ""){
+                    return defaultValue;
+                }
+                return inputValue;
+            }
+        })
+            // 类似于数据字典
+            .filter('expressStateFilter', function() {
+                return function(value) {
+                    var state;
+                    switch (value) {
+                        case '0':
+                            state = '运输中';
+                            break;
+                        case '1':
+                            state = '揽件';
+                            break;
+                        case '2':
+                            state = '疑难';
+                            break;
+                        case '3':
+                            state = '签收成功';
+                            break;
+                        case '4':
+                            state = '已退签';
+                            break;
+                        case '5':
+                            state = '正在派件';
+                            break;
+                        case '6':
+                            state = '已退回';
+                            break;
+                    }
+                    return state;
+                };
+            });
+
+    angular.module("klwkOmsApp")
+        .controller("AccordionDemoCtrl", ["$scope","$filter" ,"$q",function($scope,$filter,$q) {
+//                var deferA = $q.defer();
+//                setTimeout(function(){
+//                    deferA.reject('this is DATA A')
+//                },500);
+//
+//
+//
+//                var deferB = $q.defer();
+//                setTimeout(function(){
+//                    deferB.resolve('this is DATA B');
+//                },1000);
+//
+//                var p=$q.all({
+//                    dataA:deferA.promise,
+//                    dataB:deferB.promise
+//                });
+//
+//                p.then(function(result){
+//                    console.log(result.dataA); // this is DATA A
+//                    console.log(result.dataB); // this is DATA B
+//                }).catch(function(error){
+//                    console.error(error);
+//                });
+
+
+                function myfunc(deffer){
+                    // 成功调用resolve 的方法
+                    if(true){
+                        deffer.resolve('myfunc is OK');
+                    }
+
+                    else{
+                        deffer.resolve('myfunc is OK');
+                    }
+                }
+
+
+                function func1(deffer){
+                    // 成功调用resolve 的方法
+                    if(true){
+                        deffer.resolve('func1 is OK');
+                    }
+
+                    else{
+                        deffer.reject('func1 IS BAD')
+                    }
+                }
+
+                function listenAll(){
+
+                    function aaa (myfunc){
+                        var deffer = $q.defer();
+                        myfunc(deffer);
+                        return deffer.promise;
+                    }
+
+                    var length = arguments.length;
+                    var results = {};
+                    for(var i = 0; i < length; i++){
+                        results["promise" + i] = aaa(arguments[i]);
+                    }
+
+
+                    var p=$q.all(results);
+
+                    return p;
+
+                }
+
+               function bbb(){
+                   var p = listenAll(myfunc,func1);
+                   p.then(function(result){
+                       console.log(result.promise0); // this is DATA A
+                   }).catch(function(error){
+                       bbb()
+                   });
+               }
+
+
+            }]);
+
+</script>
+</html>

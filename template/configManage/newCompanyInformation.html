@@ -1,0 +1,60 @@
+<div id="configManage" class="config-manage">
+    <div class="new-platform-interface" id="newCompanyInformation" ng-controller="newCompanyInformationController">
+        <div id="content" class="content form">
+            <div class="advance-search">
+                <div class="items">
+                    <div class="ipt cf">
+                        <label class="item">
+                            <span class="title">公司编码<i class="notice">*</i></span>
+                            <input type="text" id="code" class="klw-input validate" name="empty" ng-model="creatObj.code">
+                        </label>
+                        <label class="item">
+                            <span class="title">公司名称<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="creatObj.name">
+                        </label>
+                        <label class="item">
+                            <span class="title">公司电话</span>
+                            <input type="text" class="klw-input" ng-model="creatObj.telephone">
+                        </label>
+                        <label class="item">
+                            <span class="title">公司手机</span>
+                            <input type="text" class="klw-input" ng-model="creatObj.mobile">
+                        </label>
+                    </div>
+                    <div class="ipt cf">
+                        <label class="item">
+                            <span class="title">公司法人</span>
+                            <input type="text" class="klw-input" ng-model="creatObj.lawuser">
+                        </label>
+                        <label class="item">
+                            <span class="title">公司邮箱</span>
+                            <input type="text" class="klw-input" ng-model="creatObj.email">
+                        </label>
+                        <label class="item">
+                            <span class="title">官网地址</span>
+                            <input type="text" class="klw-input" ng-model="creatObj.website">
+                        </label>
+                        <label class="item">
+                            <span class="title">成立时间</span>
+                            <input type="text" class="klw-input" id="opendate" ng-model="creatObj.opendate" readonly>
+                        </label>
+                    </div>
+                    <div class="ipt cf">
+                        <label class="item md">
+                            <span class="title">公司地址</span>
+                            <input type="text" class="klw-input" ng-model="creatObj.address">
+                        </label>
+                        <label class="item md">
+                            <span class="title">备注</span>
+                            <input type="text" class="klw-input" ng-model="creatObj.remark">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <button ng-click="save()" class="btn btn-success btn-78">保存</button>
+                <button ng-click="back()" class="btn btn-default btn-78">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

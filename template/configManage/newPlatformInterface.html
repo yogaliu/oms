@@ -1,0 +1,132 @@
+<div id="configManage" class="config-manage">
+    <div class="new-platform-interface" id="newPlatformInterface" ng-controller="newPlatformInterfaceController">
+        <div id="content" class="content form">
+            <div class="advance-search" id="platform" ng-show="params.type == 'platform'">
+                <div class="items">
+                    <div class="ipt cf">
+                        <label class="item">
+                            <span class="title">名称<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="platformObj.name">
+                        </label>
+                        <label class="item">
+                            <span class="title">平台类型<i class="notice">*</i></span>
+                            <pull-select pull-config="platformtypeList"></pull-select>
+                        </label>
+                        <label class="item">
+                            <span class="title">AppKey<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="platformObj.appkey">
+                        </label>
+                        <label class="item">
+                            <span class="title">AppSecret<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="platformObj.appsecret">
+                        </label>
+                    </div>
+                    <div class="ipt cf">
+                        <label class="item">
+                            <span class="title">AccessToken</span>
+                            <input type="text" class="klw-input" ng-model="platformObj.accesstoken">
+                        </label>
+                        <label class="item">
+                            <span class="title">RefreshToken</span>
+                            <input type="text" class="klw-input" ng-model="platformObj.refreshtoken">
+                        </label>
+                        <label class="item md">
+                            <span class="title">服务地址</span>
+                            <input type="text" class="klw-input" ng-model="platformObj.url">
+                        </label>
+                    </div>
+                    <div class="ipt cf">
+                        <label class="item md">
+                            <span class="title md">回调地址</span>
+                            <input type="text" class="klw-input" ng-model="platformObj.redirecturl" readonly>
+                        </label>
+                        <label class="item md">
+                            <span class="title">扩展信息1</span>
+                            <input type="text" class="klw-input" ng-model="platformObj.extend1">
+                        </label>
+                    </div>
+                    <div class="ipt cf">
+                        <label class="item md">
+                            <span class="title">扩展信息2</span>
+                            <input type="text" class="klw-input" ng-model="platformObj.extend2">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="advance-search" id="logistics" ng-show="params.type == 'logistics'">
+                <div class="items">
+                    <div class="ipt cf">
+                        <label class="item">
+                            <span class="title">名称<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="logisticsObj.name">
+                        </label>
+                        <label class="item">
+                            <span class="title">服务商</span>
+                            <pull-select pull-config="logisticsfacilitator"></pull-select>
+                        </label>
+                        <label class="item">
+                            <span class="title">AppKey<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="logisticsObj.appkey">
+                        </label>
+                        <label class="item">
+                            <span class="title">AppSecret<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="logisticsObj.appsecret">
+                        </label>
+                    </div>
+                    <div class="ipt cf">
+                        <label class="item md">
+                            <span class="title">客户编码<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="logisticsObj.accesstoken">
+                        </label>
+                        <label class="item md">
+                            <span class="title">服务地址<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="logisticsObj.url">
+                        </label>
+                    </div>
+                </div>
+                <div class="sel">
+                    <label class="sel-item">
+                        <div class="line" ng-click="checkItem(logisticsObj,'iscainiao')">
+                            <div class="klwk-check-x" ng-show="logisticsObj.iscainiao"><i class="iconfont"></i></div>
+                            <div class="klwk-check" ng-hide="logisticsObj.iscainiao"><i class="iconfont"></i></div>
+                            <span class="title">是否菜鸟</span>
+                        </div>
+                    </label>
+                    <label class="sel-item">
+                        <div class="line" ng-click="checkItem(logisticsObj,'ispushstockchange')">
+                            <div class="klwk-check-x" ng-show="logisticsObj.ispushstockchange"><i class="iconfont"></i></div>
+                            <div class="klwk-check" ng-hide="logisticsObj.ispushstockchange"><i class="iconfont"></i></div>
+                            <span class="title">推送库存异动</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="advance-search" id="service" ng-show="params.type == 'service'">
+                <div class="items">
+                    <div class="ipt cf">
+                        <label class="item">
+                            <span class="title">名称<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="serviceObj.name">
+                        </label>
+                        <label class="item">
+                            <span class="title">服务商</span>
+                            <pull-select pull-config="servicefacilitator"></pull-select>
+                        </label>
+                        <label class="item">
+                            <span class="title">AppKey<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="serviceObj.appkey">
+                        </label>
+                        <label class="item">
+                            <span class="title">AppSecret<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="serviceObj.appsecret">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <button ng-click="save()" class="btn btn-success btn-78">保存</button>
+                <button ng-click="back()" class="btn btn-default btn-78">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

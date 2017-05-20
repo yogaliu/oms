@@ -1,0 +1,118 @@
+<div id="manualDispatch" ng-controller="manualDispatchController">
+    <div class="jxOutDivContent">
+        <div class="content-top">
+            <button class="btn btn-success btn-133 icon-refreshBtn" ng-click="domOperate.addAllocation()">添加明细</button>
+            <button class="btn btn-default btn-133 icon-refreshBtn" ng-click="domOperate.addMoreAllocation()">添加全部</button>
+        </div>
+
+        <div class="content">
+            <div class="table-top">
+                <div class="table-top-left">
+                    <div class="order-details" ng-repeat="(orderindex,order) in relevanceOrder" ng-show="!!order.details.length">
+                        <div class="title" ng-click="order.show = !order.show">
+                            订单号{{order.code}}
+                            <i class="icon iconfont" ng-class="{true :'icon-icon_zhankaiKPA',false :'icon-icon_shouqiKPA'}[!!order.show]"></i>
+                        </div>
+                        <table ng-hide="order.show">
+                            <thead>
+                                <tr>
+                                    <td ng-repeat="column in orderColumn">
+                                        {{column.name}}
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="(listIndex,list) in order.details track by listIndex"
+                                    ng-if="!!list"
+                                    ng-click="domOperate.checkDetails(list)">
+                                    <td ng-repeat="column in orderColumn">
+                                        <span ng-if="column.name == ''">
+                                            <label ng-click="domOperate.orderListChose($event,list,orderindex,listIndex)">
+                                                <i class="iconfont icon-sel"></i>
+                                            </label>
+                                        </span>
+                                        <span ng-if="column.name != ''" ng-bind-html="list[column.tag] | manualOrderFilter : order : column">
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="table-top-right">
+                    <div class="title">订单明细</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td ng-repeat="column in orderDetailsColumn">{{column.name}}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="list in productDetails">
+                                <td ng-repeat="column in orderDetailsColumn">{{list[column.tag]}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="table-bottom">
+                <div class="table-bottom-left tableOut">
+                    <div class="title">发货商品</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td ng-repeat="column in returnGoodsColumn">{{column.name}}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="list in allocation track by $index">
+                                <td ng-repeat="column in returnGoodsColumn">
+                                    <span ng-if="column.tag != ''">{{list[column.tag]}}</span>
+                                    <span ng-if="column.tag == ''" ng-click="domOperate.deleteAllocation(list)">
+                                        移除明细
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-bottom-right tableOut">
+                    <div class="title">收货信息</div>
+                    <table class>
+                        <thead>
+                            <tr>
+                                <td ng-repeat="column in changeOutColumn">{{column.name}}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{orderInfo.subOrder.consignee}}</td>
+                                <td>{{orderInfo.subOrder.mobile}}</td>
+                                <td>{{orderInfo.subOrder.telphone}}</td>
+                                <td>{{orderInfo.subOrder.zipcode}}</td>
+                                <td>{{orderInfo.subOrder.address}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="content-bottom">
+            <div class="match">
+                <pull-select pull-config="selectConfig.warsehouse"></pull-select>
+            </div>
+            <div class="match">
+                <pull-select pull-config="selectConfig.express"></pull-select>
+            </div>
+            <button class="btn btn-default btn-133 icon-refreshBtn" ng-click="domOperate.matchExpress()">自动匹配</button>
+            <button class="btn btn-success btn-133 icon-refreshBtn" ng-click="domOperate.createBill()">生成退货单</button>
+        </div>
+
+    </div>
+
+</div>

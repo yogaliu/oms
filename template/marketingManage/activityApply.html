@@ -1,0 +1,151 @@
+<div id="activityApply" class="jxOutDiv" ng-controller="activityApplyController">
+    <div class="jxOutDivContent">
+        <!-- 主搜索框和主按钮-->
+        <div id="simpleSearch" class="simpleSearch" ng-hide="advancedSearchObj.advancedSearch == 'activityApply'">
+            <input class="klw-search" placeholder="活动编号" ng-model="searchForm.activity" ng-keyup="dimSearch()"/>
+            <span class="advancedSearchBtn" ng-click="advancedSearchObj.isShow('activityApply')">高级搜索</span>
+
+            <div class="fr">
+                <div class="btn add-order btn6" ng-click="goOther('add')"><i class="iconfont"></i>新增活动报名</div>
+            </div>
+        </div>
+
+        <!-- 高级搜索展开-->
+        <div id="advancedSearch" class="advancedSearch" ng-show="advancedSearchObj.advancedSearch == 'activityApply'">
+            <!-- 活动时间-->
+            <div class="searchItem timeInput">
+                <div class="timeInput">
+                    <span class="title">活动时间</span>
+
+                    <div class="options">
+                        <input class="klw-input dateTime" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="searchForm.time1Start">
+                        <i class="line"></i>
+                        <input class="klw-input dateTime" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="searchForm.time1End">
+                    </div>
+                </div>
+            </div>
+            <!-- 商品编码-->
+            <div class="searchItem clear">
+                <div class="rows rowsText">
+                    <p>活动编码</p>
+                    <p>商品编码</p>
+                    <p>店铺</p>
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchForm.activity" placeholder="请输入活动编码"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchForm.merchandise" placeholder="请输入商品编码"/>
+                    </div>
+                    <div>
+                        <search-select search-config="selectStore"></search-select>
+                    </div>
+                </div>
+            </div>
+            <div id="conditionSet">
+                <button class="btn btn-success btn-78" ng-click="advancedSearchObj.isShow('false');search()">确定</button>
+                <button class="btn btn-default btn-78 advancedSearchCancelBtn"
+                        ng-click="advancedSearchObj.isShow('false',$event)">取消
+                </button>
+                <button class="btn btn-default btn-78" ng-click="empty()">清空</button>
+            </div>
+        </div>
+
+        <!-- 特殊标识行-->
+        <div id="simpleSelect" class="simpleSelect clear">
+            <div class="selectItems fl">
+                <label ng-click="isThreeSel($event,'1')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow"
+                       ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[simpleSelect.isForbid]"></i>
+                    <span>禁用</span>
+                </label>
+                <label ng-click="isThreeSel($event,'2')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow"
+                       ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[simpleSelect.isLoad]"></i>
+                    <span>按调拨数量上传</span>
+                </label>
+            </div>
+
+            <div class="ti-pagination">
+                <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                / 共 <span>{{paginationConf.totalItems}}</span>
+
+                <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont"
+                                                                                   ng-click="prev()"></i></span>
+
+                <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont"
+                                                                                                    ng-click="next()"></i></span>
+
+                 <span style="position: relative">
+                    <span class="config-column" ng-click="showColumnConfigPanel()"  ng-mouseover="isHover()" ng-mouseleave="isHover()">
+                        <i class="iconfont"></i>
+                    </span>
+                    <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+                    <tm-listallocation allo="allocation"></tm-listallocation>
+                </span>
+            </div>
+        </div>
+
+        <div class="tableOut">
+            <table id="activityApplyTable" class="display" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>操作</th>
+                        <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="obj in tableList" repeat-finished-directive repeataction="initFunc()"
+                    repeatIndex="{{$index}}" condition="{{$last == true}}">
+                    <td class="operate">
+                        <div class="operateList">
+                            <div class="operateIcon"><span class="iconfont icon-operate"></span></div>
+                            <div class="content">
+                                <ul class="one">
+                                    <li ng-click="goOther('modify',$index,$event)" ng-class="{true:'notClick'}[obj.registrationstatus==1 || obj.isdisabled==true]">修改活动</li>
+                                    <li ng-click="goOther('detail',$index)">活动详情</li>
+                                    <li ng-click="operate.check(obj.id,$event)" ng-class="{true:'notClick'}[obj.registrationstatus==1 ||obj.isdisabled==true]">审核</li>
+                                    <li ng-click="goOther('deduction',$index)" ng-class="{true:'notClick'}[obj.isdisabled==true]">修改库存扣减方式</li>
+                                    <li ng-click="operate.startAct(obj.id)" ng-class="{true:'notClick'}[obj.registrationstatus==0 || obj.isdisabled==true]">开始活动</li>
+                                    <li ng-click="operate.endAct(obj.id)" ng-class="{true:'notClick'}[obj.registrationstatus!=3 ||obj.isdisabled==true]">结束活动</li>
+                                    <li ng-click="operate.disable(obj.id,$event)" ng-class="{true:'notClick'}[obj.isdisabled==true]">作废</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td ng-repeat="item in theadList"  repeat-finished-directive repeataction="tableRepeatFinished()" condition="{{$last}}">
+                        <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                        {{obj[item.tag] | isBoolean | setDefaultValueWithoutData}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--分页-->
+        <tm-pagination conf="paginationConf"></tm-pagination>
+
+        <!-- 禁用弹框-->
+        <div class="modal fade changeSeq-modal" id="disableModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" style="width:400px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="header-title">提示</div>
+                        <div class="header-close" data-dismiss="modal" aria-hidden="true"><i class="icon iconfont icon-icon_guanbisousuo"></i></div>
+                    </div>
+                    <div class="modal-body clear" style="height:77px;line-height: 77px;text-align: center">
+                        <div class="cf">
+                            活动一旦禁用不能再次启用，确认要禁用活动？
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-78 btn-success" ng-click="operate.disableSubmit()"  data-dismiss="modal">确定</button>
+                        <button type="button" class="btn btn-78 btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

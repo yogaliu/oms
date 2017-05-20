@@ -1,0 +1,103 @@
+<!-- 修改库存扣减方式 -->
+
+<div id="modifyRepertory" class="jxOutDiv jxAdd" ng-controller="modifyRepertoryController">
+    <div class="jxOutDivContent">
+        <div>
+            <button class="btn btn-default btn-78" ng-click="returnFun()" style="margin: 20px 0 0 35px;">返回</button>
+        </div>
+        <div class="basic-message jxmessage form">
+            <h3 class="addTitle">修改库存扣减方式</h3>
+
+            <div class="rows rowsText">
+                <p>店铺 <span class="star">*</span></p>
+                <p>库存扣减方式 <span class="star">*</span></p>
+            </div>
+            <div class="rows rowsInput">
+
+                <div>
+                    <pull-select pull-config="selectStore"></pull-select>
+                </div>
+
+                <div>
+                    <pull-select pull-config="selectInventoryType"></pull-select>
+                </div>
+
+            </div>
+        </div>
+        <div class="jxmessage">
+            <div class="messageTitle clear">
+                <div class="fr message-button">
+                    <div class="btn klwk-cancle" ng-click="empty()"><i class="iconfont icon-delete"></i>清空
+                    </div>
+                    <div class="btn pl-import btn4" ng-click="isLeadShow(true)"><i class="iconfont"></i>导入商品
+                    </div>
+                </div>
+            </div>
+            <!-- 批量导入-->
+            <div class="merchandise-details message-content">
+                <div class="batchLeadDetails" ng-show="isLead">
+                    <div class="leadExplain">
+                        <p>导入说明</p>
+
+                        <p>1. 导入文件仅支持CSV、XLS、XLXS格式、大小不超过2M，数据不超过1万字</p>
+
+                        <p>2. 导入文件不能包含“合并单元格”，否则无法导入 </p>
+
+                        <p>3. 待补充</p>
+                    </div>
+                    <div class="leadTemplate">
+                        <p>导入模板 <span class="star">*</span></p>
+
+                        <div class="rows rowsInput">
+                            <div class="input50 leadFileInput" ng-click="leadObj.leadXlsx($event)">
+                                <input type="text" class="klw-input leadObj" placeholder="请选择导入文件" readonly/>
+                                <input type="file" class="fileElem" multiple accept="image/*" style="display:none">
+                                <i class="iconfont"></i>
+                            </div>
+                            <div class="notTemplate">
+                                还没有模板,
+                                <span ng-click="leadObj.downFile('InventoryDeductionsTPL')">
+                                    点此下载  <i class="iconfont icon-down"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-button">
+                        <button class="btn btn-success btn-78" ng-click="leadObj.leadConfirm()">确定</button>
+                        <button class="btn btn-default btn-cancel btn-78" ng-click="isLeadShow(false)">取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hasDetail">
+                <div class="tableOut">
+                    <table id="messageTable" class="display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <td>操作</td>
+                            <td  ng-repeat="obj in theadList1">{{obj.name}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr  ng-repeat="obj in tableList1" repeat-finished-directive repeataction="initFunc()"
+                             repeatIndex="{{$index}}" condition="{{$last == true}}">
+
+                            <td ng-click="delete($index)"><i class="iconfont icon-delete"></i></td>
+                            <td ng-repeat="item in theadList1">
+                                {{obj[item.tag] | setDefaultValueWithoutData}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="content-footer jxmessage">
+            <button type="button" class="btn btn-success btn-78 mr" ng-click="ensure()">开始修改</button>
+            <button type="button" class="btn btn-default btn-78" ng-click="returnFun()">取消</button>
+        </div>
+    </div>
+</div>
+
+<!-- /修改库存扣减方式 -->

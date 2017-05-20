@@ -1,0 +1,88 @@
+/*唯品档期*/
+#runSchedule .tableOut table td.operate .operateList ul {
+    left: 0;
+}
+
+/*唯品档期详情*/
+#runScheduleDetail .actBtn {
+    position: relative;
+    top: -15px;
+}
+
+#runScheduleDetail .actBtn > div:last-child {
+    margin-right: 0;
+}
+
+#runScheduleDetail .notClick,
+#runScheduleDetail .notClick:hover,
+#runScheduleDetail .notClick:active {
+    background: #fafafa;
+    color: #cdcdcd !important;
+    cursor: default !important;
+}
+
+/*配货单*/
+#matchGoodsBill .tableOut table td.operate .operateList ul {
+    left: 0;
+}
+
+#matchGoodsBill .tableOut table td.operate .operateList ul {
+    width: 132px;
+}
+
+#matchGoodsBill #rightSideModal {
+    width: 700px;
+}
+
+#matchGoodsBill #rightSideModal .product-body .tableOut {
+    max-height: 767px;
+    margin-bottom: 10px;
+}
+
+#matchGoodsBill #rightSideModal .product-body .rowsInput {
+    height: 70px;
+}
+
+/*送货单*/
+#sendGoodsBill .tableOut table td.operate .operateList ul {
+    left: 0;
+}
+
+/*调整单*/
+#adjustBill .tableOut table td.operate .operateList ul {
+    left: 0;
+}
+
+/*新增调整单*/
+#addAdjustBill #rightSideModal {
+    width: 700px;
+}
+
+/*调整单详情*/
+#adjustBillDeatil .tableOut table td.operate .operateList ul {
+    left: 0;
+}
+
+/*退货单*/
+#returnGoodsBill .tableOut table td.operate .operateList ul {
+    left: 0;
+}
+
+/*退货通知单*/
+#returnGoodsNoticeBill .tableOut table td.operate .operateList ul {
+    left: 0;
+}
+
+/*新增送货单*/
+#addSendGoodsBill .arrivalTime > div {
+    float: left;
+}
+
+#addSendGoodsBill .arrivalTime > div:first-child {
+    width: 65%;
+    margin-right: 2%;
+}
+
+#addSendGoodsBill .arrivalTime > div:last-child {
+    width: 33%;
+}

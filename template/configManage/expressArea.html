@@ -1,0 +1,134 @@
+<div id="configManage" class="config-manage">
+    <div id="expressArea" class="express-information express-area" ng-controller="expressAreaController">
+        <div id="content" class="content">
+            <div class="search cf">
+                <div class="items line fl">
+                    <div class="ipt line">
+                        <label class="item">
+                            <span class="title">快递名称</span>
+                            <pull-select pull-config="Express"></pull-select>
+                        </label>
+                        <label class="item">
+                            <span class="title">省</span>
+                            <pull-select pull-config="ProvinceList"></pull-select>
+                        </label>
+                        <label class="item">
+                            <span class="title">市</span>
+                            <pull-select pull-config="CityList"></pull-select>
+                        </label>
+                        <label class="item">
+                            <span class="title">区</span>
+                            <pull-select pull-config="CountyList"></pull-select>
+                        </label>
+                    </div>
+                </div>
+                <div class="oprate line fl">
+                    <span class="blue" ng-click="search()">搜索</span>
+                    <span ng-click="clearOnly()">清空</span>
+                </div>
+            </div>
+            <div class="table-oprate">
+                <button class="svg2" ng-click="batchDelete()">批量删除</button>
+                <button class="svg2" ng-click="showAreaSetModal()">区域设置</button>
+                <button class="svg2" ng-click="goCreatPage()">新增快递范围</button>
+                <button class="svg2">导入</button>
+                <button class="svg2" ng-click="exportFile()">导出</button>
+            </div>
+            <!--<div id="topTable" class="top-table cf">
+                <div class="fr">
+                    <div class="ti-pagination">
+                        <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                        / 共 <span>{{paginationConf.totalItems}}</span>
+                        <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont"  ng-click="prev()"></i></span>
+                        <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont" ng-click="next()"></i></span>
+                        <span class="config-column"><i class="iconfont"></i></span>
+                    </div>
+                </div>
+            </div>-->
+            <div class="more-table" style="height: calc(100% - 191px);">
+                <div class="ab-position">
+                    <div class="all-table">
+                        <table class="table-thead" cellspacing="0" style="width: calc(100% - 4px);">
+                            <thead>
+                            <tr>
+                                <th ng-click="selectAll()">
+                                    <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                                </th>
+                                <th>操作</th>
+                                <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <table id="mainTable" class="display main-table" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th ng-click="selectAll()">
+                                    <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                                </th>
+                                <th>操作</th>
+                                <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="obj in tableList" ng-class="{true:'',false:'not-set'}[obj.isset]">
+                                <td ng-click="selectItem($index)">
+                                    <div class="klwk-check" ng-hide="obj.isdatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="obj.isdatacheck"><i class="iconfont"></i></div>
+                                </td>
+                                <td class="over-show">
+                                    <div class="tr-oprate">
+                                        <div class="tr-icon"><i class="iconfont icon-operate"></i></div>
+                                        <ul class="tr-oprate-list">
+                                            <li ng-click="deleteItem($index)">删除</li>
+                                            <li ng-click="goEditPage($index)">修改</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td ng-repeat="item in theadList" title="{{obj[item.tag] | isBoolean }}">
+                                    <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                                    {{obj[item.tag] | isBoolean }}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+
+        </div>
+        <!--区域设置弹框-->
+        <div class="modal fade area-set-modal" id="areaSetModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">区域设置</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="ipt">
+                            <div class="item cf">
+                                <span class="title">快递公司</span>
+                                <pull-select pull-config="setExpressList"></pull-select>
+                            </div>
+                        </div>
+                        <menu expander='expander' all-menu="allRegion" children='expander.children' ng-repeat='expander in allRegion track by $index'></menu>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="saveAreaSet()">确定</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+</div>

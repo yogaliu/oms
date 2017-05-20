@@ -1,0 +1,248 @@
+<!-- 新增采购通知单 -->
+
+<div id="addPurchaseRequisition" class="cj-purchase" ng-controller="addPurchaseRequisitionController">
+    <div class="purchase-content">
+
+        <!--新增采购通知单基本信息-->
+        <div class="add-input form">
+            <h5 class="add-title">采购通知单基本信息</h5>
+            <div>
+                <div class="row odd">
+                    <div class="column">
+                        <label>采购单号<span class="important">*</span></label>
+                    </div>
+                    <div class="column">
+                        <label>收货仓库<span class="important">*</span></label>
+                    </div>
+                    <div class="column">
+                        <label>入库仓库<span class="important">*</span></label>
+                    </div>
+                    <div class="column">
+                        <label>到货批次号</label>
+                    </div>
+                </div>
+                <div class="row even">
+                    <div class="column">
+                        <input type="text" class="klw-input" name="code" readonly placeholder="请选择采购单号" ng-click="showModal('purchaseModal')" ng-model="formData.PurchaseOrderCode">
+                    </div>
+                    <div class="column">
+                        <pull-select pull-config="selectWarehouse"></pull-select>
+                    </div>
+                    <div class="column">
+                        <pull-select pull-config="selectVirtualWarehouse"></pull-select>
+                    </div>
+                    <div class="column">
+                        <input type="text" placeholder="请输入到货批次号" class="klw-input" ng-model="formData.ArriveBatchNo">
+                    </div>
+                </div>
+                <div class="row odd">
+                    <div class="column">
+                        <label>规格代码</label>
+                    </div>
+                </div>
+                <div class="row even">
+                    <div class="column">
+                        <input type="text" placeholder="请输入规格代码" class="klw-input">
+                    </div>
+                </div>
+                <div class="row even">
+                    <div class="remark">
+                        <label>备注</label>
+                        <textarea ng-model="formData.Remark"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--新增商品信息-->
+        <div class="add-purchase pr">
+            <h5 class="add-title">商品信息</h5>
+            <div ng-class="{true:'',false:'add-after-btn'}[tableInfoList.length == 0]">
+                <div class="btn pl-import" ng-click="addProduct.module('addOrder','batch')"><i class="iconfont"></i>批量导入</div>
+                <div class="btn pl-import ml" ng-if="tableInfoList.length != 0" ng-click="addProduct.delete()">
+                    <i class="iconfont"></i>批量删除
+                </div>
+            </div>
+            <!--批量导入-->
+            <div ng-if="addOrder == 'batch'" class="even">
+                <div class="explain">
+                    <h5 class="add-title">导入说明</h5>
+                    <span>1. 导入文件支持CSV、XLS、XLXS格式、大小不超过2M，数据不超过2万字</span>
+                    <span>2. 导入文件不能包括"合并单元格"，否则无法导入</span>
+                    <span>3. 待补充</span>
+                </div>
+                <div class="row odd">
+                    <div class="column">
+                        <label for="leadModule">导入模板<span class="important">*</span></label>
+                    </div>
+                </div>
+                <div class="row lModule even">
+                    <div class="column">
+                        <input type="text" id="leadModule" placeholder="请导入模板" class="klw-input" disabled>
+                        <i class="iconfont"></i>
+                    </div>
+                    <span>还没有模板下载，<i>点击下载</i><i class="iconfont icon-icon5"></i></span>
+                </div>
+                <div>
+                    <button class="btn btn-success btn-78 mr" ng-click="addProduct.module('addOrder','')">导入</button>
+                    <button class="btn btn-default btn-78" ng-click="addProduct.cancel()">取消</button>
+                </div>
+            </div>
+            <!--生成表格-->
+            <div ng-if="tableInfoList.length != 0">
+                <table>
+                    <thead>
+                    <tr>
+                        <th ng-click="addProduct.selectAll('tableInfoList')">
+                            <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                            <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                        </th>
+                        <th ng-repeat="obj in theadInfoList">{{obj.name}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="obj in tableInfoList" ng-show="obj.isShow">
+                        <td ng-click="addProduct.selectItem($index,'tableInfoList')">
+                            <div class="klwk-check" ng-hide="obj.isdatacheck"><i class="iconfont"></i></div>
+                            <div class="klwk-check-x" ng-show="obj.isdatacheck"><i class="iconfont"></i></div>
+                        </td>
+                        <td ng-repeat="item in theadInfoList">{{obj[item.tag]}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="footer-btn add-footer">
+            <button class="btn btn-success btn-78 mr" ng-click="saveOrder()">确定</button>
+            <button class="btn btn-default btn-78" ng-click="goBack()">取消</button>
+        </div>
+
+    </div>
+    <!--选择采购单号模态框-->
+    <div class="modal fade product-list" id="purchaseModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="product-head">
+                    <div class="product-title">选择采购单号</div>
+                    <div class="product-close" ng-click="hideModal('purchaseModal')"><i class="icon iconfont icon-icon_guanbisousuo"></i></div>
+                </div>
+                <div class="product-body">
+                    <div>
+                        <div class="row odd date">
+                            <label>创建日期</label>
+                            <input class="klw-input datePlugin" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="searchItem.BeginDate">
+                            <i class="line"></i>
+                            <input class="klw-input datePlugin" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="searchItem.EndDate">
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <label>采购单号</label>
+                            </div>
+                            <div class="column">
+                                <label>合同号</label>
+                            </div>
+                            <div class="column">
+                                <label>收货仓库</label>
+                            </div>
+                        </div>
+                        <div class="row odd">
+                            <div class="column">
+                                <input class="klw-input" ng-model="purchaseItem.Code" type="text"/>
+                            </div>
+                            <div class="column">
+                                <input class="klw-input" ng-model="purchaseItem.ContractNo" type="text"/>
+                            </div>
+                            <div class="column">
+                                <input class="klw-input" ng-model="purchaseItem.shortName" type="text"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <label>商品编码</label>
+                            </div>
+                            <div class="column">
+                                <label>供应商编码</label>
+                            </div>
+                            <div class="column">
+                                <label>供应商名称</label>
+                            </div>
+                        </div>
+                        <div class="row odd">
+                            <div class="column">
+                                <input class="klw-input" ng-model="purchaseItem.ProductCode" type="text"/>
+                            </div>
+                            <div class="column">
+                                <input class="klw-input" ng-model="purchaseItem.SupplierCode" type="text"/>
+                            </div>
+                            <div class="column">
+                                <input class="klw-input" ng-model="purchaseItem.SupplierName" type="text"/>
+                            </div>
+                        </div>
+                        <div class="mt">
+                            <button class="btn btn-success btn-78 mr" ng-click="purchase.search()">确认</button>
+                            <button class="btn btn-default btn-78" ng-click="purchase.searchCancel()">取消</button>
+                        </div>
+                    </div>
+
+                    <div class="mt">
+                        <div class="body-table">
+                            <table id="getPurchaseTable" class="display" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th ng-repeat="obj in theadPurchaseList">{{obj.name}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="obj in tablePurchaseList" ng-click="purchase.select($index,$event)">
+                                    <td ng-repeat="item in theadPurchaseList">{{obj[item.tag]}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <tm-pagination conf="paginationNumConf"></tm-pagination>
+                    </div>
+
+                    <div class="mt">
+                        <div class="body-table">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>商品编码</th>
+                                    <th>商品名称</th>
+                                    <th>规格编码</th>
+                                    <th>规格名称</th>
+                                    <th>采购数量</th>
+                                    <th>采购价</th>
+                                    <th>采购总金额</th>
+                                    <th>入库数量</th>
+                                    <th>备注</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in purchaseDetailData">
+                                    <td>{{item.productcode}}</td>
+                                    <td>{{item.productname}}</td>
+                                    <td>{{item.skucode}}</td>
+                                    <td>{{item.skuname}}</td>
+                                    <td>{{item.purchaseqty}}</td>
+                                    <td>{{item.currentprice}}</td>
+                                    <td>{{item.purchaseamount}}</td>
+                                    <td>{{item.instockqty}}</td>
+                                    <td>{{item.remark}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="footer mt">
+                            <button class="btn btn-success btn-78 mr" ng-click="purchase.ensure()">保存</button>
+                            <button class="btn btn-default btn-78" ng-click="hideModal('purchaseModal')">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /新增采购通知单 -->

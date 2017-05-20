@@ -1,0 +1,154 @@
+/*赠品策略*/
+#presentTactics .searchItem .sewvtop span {
+    color:#666;
+}
+
+#presentTactics .sewvtop em {
+    right: 21px;
+}
+
+#presentTactics .changeSeq-modal .modal-dialog {
+    width: 400px;
+}
+
+#presentTactics .modal-body span.fl {
+    width: 20%;
+    line-height: 40px;
+    font-size: 14px;
+}
+
+#presentTactics .modal-body div.fl {
+    width: 80%;
+}
+
+#presentTactics .searchItemStatus {
+    margin-top: 20px;
+}
+
+#presentTactics .searchItemStatus .title {
+    margin-top: 3px;
+}
+
+/*策略详情*/
+#presentTacticsDetail {
+
+}
+
+/*新增买就送*/
+.jxOutDiv .sortInput {
+    display: inline-block;
+}
+
+.jxOutDiv .sendOther {
+    margin-top: 15px;
+}
+
+.jxOutDiv .doubleSel {
+    width: 200px;
+    margin-right:20px;
+}
+
+#addTacticsBuy .pay-button,
+#addTacticsBuy .give-button {
+    overflow: hidden;
+}
+#addTacticsBuy .doubleInput{
+    margin-top:35px;
+}
+/*新增福袋*/
+
+#addTacticsLuckyBag .pay-button,
+#addTacticsLuckyBag .give-button {
+    overflow: hidden;
+}
+
+/*活动报名*/
+#activityApply #advancedSearch .searchItem {
+    border: 0;
+}
+
+#activityApply td.operate .operateList ul {
+    width: 165px;
+}
+
+#activityApply .sewvtop em {
+    right: 21px;
+}
+
+#activityApply .tableOut table td.operate .operateList ul {
+    left: 0;
+}
+
+/*活动报名详情*/
+#activityDetail .noteMessage .tableOut {
+    width: 70%;
+}
+
+/*新增活动报名*/
+#addActivityApply .pay-button,
+#addActivityApply .give-button {
+    overflow: hidden;
+}
+#addActivityApply label{
+    margin-top:10px;
+}
+/*预售计划*/
+#presellPlan #advancedSearch .searchItem {
+    border: 0;
+}
+
+#presellPlan .tableOut table td.operate .operateList ul {
+    width: 128px;
+}
+
+#presellPlan .searchItemStatus {
+    margin-top: 7px;
+}
+
+/*预售计划详情*/
+#presellPlanDetail .storeName .tableOut {
+    width: 400px;
+}
+
+#presellPlanDetail .tableOut {
+    margin-bottom: 20px;
+}
+
+#presellPlanDetail .tableOut table td.operate .operateList ul{
+    left:0;
+}
+
+/*新增预售计划*/
+#addPresellPlan .pay-button,
+#addPresellPlan .give-button {
+    overflow: hidden;
+}
+
+#addPresellPlan .shop-modal .leftTr .icon-modify {
+    cursor: pointer;
+    display: none;
+}
+
+#addPresellPlan .shop-modal .leftTr:hover .icon-modify {
+    display: inline-block;
+}
+
+#addPresellPlan .shop-modal .leftTr .input-modify {
+    width: 40px;
+    padding-left: 7px;
+    background: #ffffff;
+    border: 0;
+}
+
+/*会员信息*/
+#vipMessage .operateList .one {
+    left: 0;
+}
+
+#vipMessage .operateList .two {
+    top: 36px;
+    margin-left: 0 !important;
+}
+#addVipMessage .rows label{
+    margin-top:6px;
+}

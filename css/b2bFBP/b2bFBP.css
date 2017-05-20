@@ -1,0 +1,44 @@
+/*basic*/
+.jxOutDivContent .addItem{
+    padding:10px 0 40px 20px;
+}
+.jxOutDivContent .addTitle{
+    margin-bottom: 20px;
+}
+
+#fbpPlanBill .tableOut,#fbpNoticeBill .tableOut,#fbpSellOutputBill .tableOut{
+    height: 466px;
+     overflow: scroll;
+    position: relative;
+}
+
+#fbpPlanBillDetail .first tr:last-of-type{
+    background: #FAFAFA;
+}
+#fbpPlanBillDetail .detail-content-top{
+    position: relative;
+}
+#fbpPlanBillDetail .detail-top-tab .btn{
+    position: absolute;
+    right: 50px;
+    top:50%;
+    margin-top:-20px;
+}
+
+/*暂时的一些样式*/
+
+#addFbpPlanBill .addMerchandiseTable,#addFbpNoticeBill .addMerchandiseTable,#addFbpSellOutputBill .addMerchandiseTable , #addFbpQuitGoodsBill .addMerchandiseTable{
+    height: 500px;
+    float: left;
+    width: 70%;
+    overflow: scroll;
+}
+#addFbpPlanBill .wareHouseTable,#addFbpNoticeBill .wareHouseTable,#addFbpSellOutputBill .wareHouseTable,#addFbpQuitGoodsBill .wareHouseTable{
+    float: right;
+    width: 30%;
+    overflow: scroll;
+    position: initial;
+    padding: 0;
+    box-shadow: 0 0 0;
+    height: 500px;
+}

@@ -1,0 +1,298 @@
+<!-- 新增入库订单 -->
+<div id="inventoryManage" class="inventory-manage cj-product cj-purchase">
+    <div id="inOrderAdd" class="" ng-controller="inOrderAddController">
+        <div class="in-order-add" >
+            <div class="purchase-content">
+
+                <!--新增采购单基本信息-->
+                <div class="add-input">
+                    <h5 class="add-title">采购单基本信息</h5>
+                    <div>
+                        <div class="row odd">
+                            <div class="column">
+                                <label>收货仓库<span class="important">*</span></label>
+                            </div>
+                            <div class="column">
+                                <label>入库仓库<span class="important">*</span></label>
+                            </div>
+                            <div class="column">
+                                <label>入库类型<span class="important">*</span></label>
+                            </div>
+                            <div class="column">
+                                <label>来源货单</label>
+                            </div>
+                        </div>
+                        <div class="row even">
+                            <div class="column">
+                                <pull-select pull-config="selectConfig.warehouseList" ></pull-select>
+                            </div>
+
+                            <div class="column">
+                                <pull-select pull-config="selectConfig.warehouseSubList" ></pull-select>
+                            </div>
+                            <div class="column">
+                                <pull-select pull-config="selectConfig.inWarehouseTypeList" ></pull-select>
+                            </div>
+                            <div class="column">
+                                <input type="text" ng-model="formData.ContractNo" ng-click="showSearchOutOrderModal()" placeholder="请输入合同号" class="klw-input">
+                            </div>
+                        </div>
+                        <div class="row even">
+                            <div class="remark">
+                                <label>备注</label>
+                                <textarea ng-model="formData.Remark"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--新增商品信息-->
+                <div class="add-purchase pr">
+                    <h5 class="add-title">&nbsp;</h5>
+                    <div ng-class="{true:'',false:'add-after-btn'}[addOrder == 'addBefore']">
+                        <div class="btn add-order green-btn mr" ng-if="addOrder != 'addSelect'" ng-click="addProduct.toggleShowAddSkuPanel()">
+                            <i class="iconfont"></i>新增商品
+                        </div>
+                        <div class="btn pl-import" ng-if="addOrder != 'batch'" ng-click="addProduct.module('addOrder','batch')"><i class="iconfont"></i>批量导入</div>
+                        <div class="btn pl-import ml" ng-if="tableInfoList.length != 0" ng-click="addProduct.delete()">
+                            <i class="iconfont"></i>批量删除
+                        </div>
+                    </div>
+
+                    <!--选择商品-->
+                    <div  class="odd" ng-show="formData.isShowAddSkuPanel">
+                        <div class="new-header">
+                            <input type="text" class="klw-search" ng-model="productItem.productCode" placeholder="商品编码">
+                        </div>
+                        <div class="new-body" >
+                            <div class="body-table" >
+                                <div class="left-table">
+                                    <table id="" class="skuTable display inOrderAdd_skuTableList" cellspacing="0" width="100%" >
+                                        <thead>
+                                        <tr>
+                                            <th ng-click="selectAll($event)">
+                                                <div class=" klwk-check" ><i class="iconfont"></i></div>
+                                            </th>
+                                            <th ng-repeat="obj in theadSkuList">{{obj.name}}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="skuTableTbody">
+                                        <tr ng-repeat="obj in tableSkuList" repeat-finished-directive condition="{{$last}}" repeataction="tableRepeatFinished()" ng-click="getInventoryVirtualBySkuid(obj.code)">
+                                            <td >
+                                                <div class="oms_checkbox klwk-check " index="{{$index}}" ng-click="toggleSelectItem($event,$index)"><i class="iconfont"></i></div>
+                                            </td>
+                                            <td ng-repeat="item in theadSkuList">{{obj[item.tag]}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!--  根据SKU的规格编码 获取存货清单 -->
+                                <div class="right-table">
+                                    <div style="overflow: auto">
+                                        <table>
+                                            <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>仓库名称</th>
+                                                <th>库存数</th>
+                                                <th>可用数</th>
+                                                <th>可销数</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in tableInventoryList">
+                                                <td>{{$index}}</td>
+                                                <td>{{item.warehouseobj.name}}</td>
+                                                <td>{{item.quantity}}</td>
+                                                <td>{{item.canUseQuantity}}</td>
+                                                <td>{{item.canSaleQuantity}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <tm-pagination conf="paginationConf"></tm-pagination>
+                            <div class="mt">
+                                <button class="btn btn-success btn-78 mr" ng-click="addProduct.save()">确定</button>
+                                <button class="btn btn-default btn-78" ng-click="addProduct.toggleShowAddSkuPanel(falase)">取消</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--批量导入-->
+                    <div ng-if="addOrder == 'batch'" class="even">
+                        <div class="explain">
+                            <h5 class="add-title">导入说明</h5>
+                            <span>1. 导入文件支持CSV、XLS、XLXS格式、大小不超过2M，数据不超过2万字</span>
+                            <span>2. 导入文件不能包括"合并单元格"，否则无法导入</span>
+                            <span>3. 待补充</span>
+                        </div>
+                        <div class="row odd">
+                            <div class="column">
+                                <label for="leadModule">导入模板<span class="important">*</span></label>
+                            </div>
+                        </div>
+                        <div class="row lModule even">
+                            <div class="column">
+                                <input type="text" id="leadModule" placeholder="请导入模板" class="klw-input" disabled>
+                                <i class="iconfont"></i>
+                            </div>
+                            <span>还没有模板下载，<i>点击下载</i><i class="iconfont icon-icon5"></i></span>
+                        </div>
+                        <div>
+                            <button class="btn btn-success btn-78 mr" ng-click="addProduct.module('addOrder','')">导入</button>
+                            <button class="btn btn-default btn-78" ng-click="addProduct.cancel()">取消</button>
+                        </div>
+                    </div>
+
+                    <!--生成表格-->
+                    <div ng-show="tableInfoList.length != 0" class="inOrderAdd_tableInfoListWidget">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th ng-click="selectAll($event)">
+                                    <div class="klwk-check"><i class="iconfont"></i></div>
+                                </th>
+                                <th ng-repeat="obj in theadSkuList">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="obj in tableInfoList" index="{{$index}}">
+                                <td ng-click="selectOne($event);addProduct.addItem($index,'delete')">
+                                    <div class="oms_checkbox klwk-check" index="{{$index}}"><i class="iconfont"></i></div>
+                                </td>
+                                <td ng-repeat="item in theadSkuList" ng-if="item.tag !== 'PlanQty'">
+                                    {{obj[item.tag] | isBoolean}}
+                                    <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                                </td>
+                                <!-- 商品的数量，可以手动修改 -->
+                                <td ng-repeat="item in theadSkuList" contenteditable="true" ng-if="item.tag === 'PlanQty'" onkeyup="angular.element(this).scope().userChangeCount(event)">
+                                    {{obj[item.tag] | isBoolean}}
+                                    <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="footer-btn add-footer" ng-show="tableInfoList.length != 0">
+                    <button class="btn btn-success btn-78 mr" ng-click="saveAddInOrder()">保存</button>
+                    <button class="btn btn-default btn-78" ng-click="return()">取消</button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- 来源单号模态框 -->
+        <div class="modal fade product-list" id="inOrderAdd_outOrderModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="product-head">
+                        <div class="product-title">选择订单</div>
+                        <div class="product-close" ng-click="hideSearchOutOrderModal('productSpecModal')"><i class="icon iconfont icon-icon_guanbisousuo"></i></div>
+                    </div>
+                    <div class="product-body">
+                        <div>
+                            <div class="row">
+                                <div class="column">
+                                    <label>出库单号 </label>
+                                </div>
+                                <div class="column">
+                                    <label>商品编码</label>
+                                </div>
+                                <div class="column">
+                                    <label>出库仓库 </label>
+                                </div>
+                            </div>
+                            <div class="row odd">
+                                <div class="column">
+                                    <input class="klw-input" ng-model="outOrderQueryObj.code" type="text"/>
+                                </div>
+                                <div class="column">
+                                    <input class="klw-input" ng-model="outOrderQueryObj.productCode" type="text"/>
+                                </div>
+                                <div class="column">
+                                    <pull-select pull-config="outOrderQueryObj.allWarehouseList" ></pull-select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="column">
+                                    <label>出库类型</label>
+                                </div>
+                                <div class="column">
+                                    <label>制单时间</label>
+                                </div>
+                                <div class="column">
+                                    <label>至 </label>
+                                </div>
+                            </div>
+                            <div class="row odd">
+                                <div class="column">
+                                    <pull-select pull-config="outOrderQueryObj.outWarehouseTypeList" ></pull-select>
+                                </div>
+                                <div class="column">
+                                    <input class="klw-input datePlugin" readonly ng-click="showDatetimePick($event)" ng-model="outOrderQueryObj.BeginDate" type="text"/>
+                                </div>
+                                <div class="column">
+                                    <input class="klw-input datePlugin" readonly ng-click="showDatetimePick($event)" ng-model="outOrderQueryObj.EndDate" type="text"/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="column">
+                                    <label>单据状态 </label>
+                                </div>
+                                <div class="column">
+                                    <label>来源单号</label>
+                                </div>
+                            </div>
+                            <div class="row odd">
+                                <div class="column">
+                                    <pull-select pull-config="outOrderQueryObj.inventoryStatusList" ></pull-select>
+                                </div>
+                                <div class="column">
+                                    <input class="klw-input"  ng-model="outOrderQueryObj.FromCode" type="text"/>
+                                </div>
+                            </div>
+                            <div class="mt">
+                                <button class="btn btn-success btn-78 mr" ng-click="searchOutOrder()">搜索</button>
+                                <button class="btn btn-success btn-78 mr" ng-click="productSearchEnsure(1)">确认</button>
+                                <button class="btn btn-default btn-78" ng-click="resetSearchOutOrderQueryCondition()">清空</button>
+                            </div>
+                        </div>
+
+                        <div class="mt">
+                            <div class="body-table">
+                                <table  class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th ng-repeat="obj in theadOutOrderList">{{obj.name}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="obj in tableOutOrderList" ng-click="selectRowOutOrder(obj,$event)">
+                                        <td ng-repeat="item in theadOutOrderList">{{obj[item.tag] | inOrderTypeFilter:item.tag}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <tm-pagination conf="paginationOuterOrderConf"></tm-pagination>
+                        </div>
+
+                        <div class="mt">
+                            <div class="footer mt">
+                                <button class="btn btn-success btn-78 mr" ng-click="showOutboundOrderSkulist()">保存</button>
+                                <button class="btn btn-default btn-78" ng-click="hideModal('productSpecModal')">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 新增入库订单 -->

@@ -1,0 +1,224 @@
+<div id="configManage" class="config-manage">
+    <div id="userManage" class="express-information user-manage" ng-controller="userManageController">
+        <div id="content" class="content">
+            <div class="search cf">
+                <div class="items line fl">
+                    <div class="ipt line">
+                        <label class="item">
+                            <span class="title">登录名</span>
+                            <input type="text" class="klw-input" placeholder="请选择" ng-model="formData.loginname">
+                        </label>
+                        <label class="item">
+                            <span class="title">用户名</span>
+                            <input type="text" class="klw-input" placeholder="请选择" ng-model="formData.username">
+                        </label>
+                    </div>
+                </div>
+                <div class="oprate line fl">
+                    <span class="blue" ng-click="search()">搜索</span>
+                    <span ng-click="clearOnly()">清空</span>
+                </div>
+                <div class="fr line">
+                    <menu-select menu-config="menuInfo"></menu-select>
+                    <button class="svg2" ng-click="addItem()">新增</button>
+                </div>
+            </div>
+            <div id="topTable" class="top-table">
+                <div>
+                    <div class="ti-pagination">
+                        <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                        / 共 <span>{{paginationConf.totalItems}}</span>
+                        <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont"  ng-click="prev()"></i></span>
+                        <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont" ng-click="next()"></i></span>
+                        <span class="config-column"><i class="iconfont"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="cf more-table" style="height: calc(100% - 178px);">
+                <div class="ab-position">
+                    <div class="left-table" style="width: 70%;">
+                        <table class="table-thead" cellspacing="0" style="width: calc(70% - 4px);">
+                            <thead>
+                            <tr>
+                                <th ng-click="selectAll()">
+                                    <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                                </th>
+                                <th>操作</th>
+                                <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <table id="mainTable" class="display" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th ng-click="selectAll()">
+                                    <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                                </th>
+                                <th>操作</th>
+                                <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="obj in tableList" ng-click="queryRight($index)" ng-class="{'green':currentIndex == $index}">
+                                <td ng-click="selectItem($index);$event.stopPropagation();">
+                                    <div class="klwk-check" ng-hide="obj.isdatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="obj.isdatacheck"><i class="iconfont"></i></div>
+                                </td>
+                                <td class="over-show">
+                                    <div class="tr-oprate">
+                                        <div class="tr-icon"><i class="iconfont icon-operate"></i></div>
+                                        <ul class="tr-oprate-list">
+                                            <li ng-click="edit($index);$event.stopPropagation();">修改</li>
+                                            <li ng-click="showRoleModal($index);$event.stopPropagation();">角色分配</li>
+                                            <li ng-click="resetPassword($index);$event.stopPropagation();">重置密码</li>
+                                            <li ng-click="enabledItem($index);$event.stopPropagation();">启用</li>
+                                            <li ng-click="disabledItem($index);$event.stopPropagation();">禁用</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td ng-repeat="item in theadList" title="{{obj[item.tag] | isBoolean}}">
+                                    <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                                    {{obj[item.tag] | isBoolean}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="right-table" style="width: 30%;">
+                        <div class="title">
+                            角色列表
+                        </div>
+                        <div class="more-table" style="height: calc(100% - 45px);">
+                            <div class="ab-position">
+                                <div class="all-table">
+                                    <table class="table-thead" cellspacing="0" style="width: calc(100% - 4px);">
+                                        <thead>
+                                        <tr>
+                                            <th ng-repeat="obj in topTheadList">{{obj.name}}</th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                    <table class="display express-tabel contact-table" cellspacing="0" width="100%">
+                                        <thead>
+                                        <tr>
+                                            <th ng-repeat="obj in topTheadList">{{obj.name}}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="obj in topTableList" ng-click="queryExpresses($index)">
+                                            <td ng-repeat="item in topTheadList">
+                                                {{obj[item.tag]}}
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+
+        </div>
+
+
+        <!--新增&修改用户弹框-->
+        <div class="modal fade form" id="addUserModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog wide">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">新增</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="cf">
+                            <div class="item fl">
+                                <span>登录名<i class="notice">*</i></span>
+                                <input class="klw-input validate" name="empty" type="text" placeholder="请输入编码" ng-model="activeItem.loginname">
+                            </div>
+                            <div class="item fr">
+                                <span>用户名<i class="notice">*</i></span>
+                                <input class="klw-input validate" name="empty" type="text" placeholder="请输入名称" ng-model="activeItem.username">
+                            </div>
+                        </div>
+                        <div class="cf">
+                            <div class="item fl">
+                                <span>电话</span>
+                                <input class="klw-input" type="text" placeholder="请输入编码" ng-model="activeItem.telephone">
+                            </div>
+                            <div class="item fr">
+                                <span>地址</span>
+                                <input class="klw-input" type="text" placeholder="请输入名称" ng-model="activeItem.address">
+                            </div>
+                        </div>
+                        <div class="cf">
+                            <div class="item fl">
+                                <span>所属部门<i class="notice">*</i></span>
+                                <pull-select pull-config="departmentList"></pull-select>
+                            </div>
+                            <div class="item fr">
+                                <span>手机</span>
+                                <input class="klw-input" type="text" placeholder="请输入名称" ng-model="activeItem.mobile">
+                            </div>
+                        </div>
+                        <div class="cf">
+                            <div class="item wide">
+                                <span>备注</span>
+                                <input class="klw-input" type="text" placeholder="请输入扩展信息" ng-model="activeItem.note">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="addUser()">保存</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--角色分配弹框-->
+        <div class="modal fade set-role" id="setRoleModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">角色分配</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="item-title cf">
+                            <div class="one">
+                                <div class="klwk-check-x" ng-show="isallRoleChecked" ng-click="checkAllRole()"><i class="iconfont"></i></div>
+                                <div class="klwk-check" ng-hide="isallRoleChecked" ng-click="checkAllRole()"><i class="iconfont"></i></div>
+                            </div>
+                            <span class="text two">角色编码</span>
+                            <span class="text three">角色名称</span>
+                            <span class="text four">备注</span>
+                        </div>
+                        <div class="items">
+                            <div class="item cf" ng-repeat="item in roleList" data-id="{{item.id}}">
+                                <div class="one">
+                                    <div class="klwk-check-x" ng-show="item.ischecked" ng-click="checkRole($index)"><i class="iconfont"></i></div>
+                                    <div class="klwk-check" ng-hide="item.ischecked" ng-click="checkRole($index)"><i class="iconfont"></i></div>
+                                </div>
+                                <span class="text two">{{item.code}}</span>
+                                <span class="text three">{{item.name}}</span>
+                                <span class="text four oh">{{item.note}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="setRole()">确定</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

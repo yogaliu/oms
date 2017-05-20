@@ -1,0 +1,81 @@
+<div id="allocationNoticeBillDetail" class="jxOutDiv jxOutDivDetail" ng-controller="allocationNoticeBillDetailController">
+    <div class="jxOutDivContent">
+        <button class="btn btn-default btn-78" ng-click="domOperate.returnBack()" style="margin: 20px 0 0 35px;">返回</button>
+        <div class="detail-content-top">
+            <div class="detail-top-tab">
+                <ul>
+                    <li ng-class="{true:'current',false:''}[tab == 'first']" ng-click="isShow('first')">配货通知单详情</li>
+                    <li ng-class="{true:'current',false:''}[tab == 'second']" ng-click="isShow('second')">操作日志</li>
+                </ul>
+            </div>
+        </div>
+        <div class="content-first" ng-show="tab == 'first'">
+            <div class="jxmessage">
+                <div class="tableOut">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th ng-repeat="column in allocationNoticeBillDetailsColumn">
+                                <span ng-if="column.name != ''">
+                                    {{column.name}}
+                                </span>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="list in allocationNoticeBillDetails">
+                                <td ng-repeat="column in allocationNoticeBillDetailsColumn">
+                                    <span ng-if="column.name != '' && column.tag == ''" ng-click="domOperate.cancleDetails(list)" class="td-can-operate">取消明细</span>
+                                    <span ng-if="column.name != '' && column.tag != ''">{{list[column.tag] | quitGoodsListFilter : column : list}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="content-second" ng-show="tab == 'second'">
+            <div class="jxmessage">
+                <div class="tableOut">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th ng-repeat="column in operateLogColumn">{{column.name}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="list in operateLog">
+                                <td ng-repeat="column in operateLogColumn">{{list[column.tag]}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--取消配货模态框-->
+    <div class="modal fade info-get-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="info-tip">
+                    <div class="info-tip-head">
+                        <p class="info-tip-label">{{modal.title}}</p>
+                        <p class="info-tip-close" ng-click="domOperate.modalDismiss()">
+                            <i class="icon iconfont icon-icon_guanbisousuo"></i>
+                        </p>
+                    </div>
+                    <div class="info-tip-body">
+                        <textarea name="" id="" cols="30" rows="10" ng-model="content">请输入内容</textarea>
+                    </div>
+                    <div class="info-tip-header">
+                        <button type="button" class="btn btn-success btn-78" ng-click="modal.confirm(content)">确定</button>
+                        <button type="button" class="btn btn-default btn-78" ng-click="domOperate.modalDismiss()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

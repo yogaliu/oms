@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en" ng-app="klwkOmsApp">
+<head>
+    <title>订单管理</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../public/css/bootstrap.css">
+
+</head>
+<body>
+<!-- 显示总的界面 -->
+<ui-view></ui-view>
+
+
+
+</body>
+<!-- 导入的基础插件，包含jquery,angularJs等 -->
+<script type="text/javascript" src="../../public/js/jquery.js"></script>
+<script type="text/javascript" src="../../public/js/base.js"></script>
+<script type="text/javascript" src="../../public/js/echarts.min.js"></script>
+<script type="text/javascript" src="../../public/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../demoApp.js"></script>
+<script>
+
+    /**
+     * 定义常量WAP_CONFIG;WAP为当前子模块功能
+     * */
+    angular.module('klwkOmsApp')
+            .config(["$stateProvider","$urlRouterProvider",function ($stateProvider, $urlRouterProvider) {
+                // 如果没有匹配的路径，则设置默认路径
+                $urlRouterProvider.otherwise('/index');
+                $stateProvider
+                    //首页
+                    .state('index',{
+                        url: '/index',
+                        templateUrl:'treeDirectiveTemp.html',
+                        controller:'TreeController'
+                    })
+            }]);
+
+    angular.module("klwkOmsApp")
+            .controller("TreeController", function ($scope) {
+                $scope.folder = {
+                    name: 'techs',
+                    children: [
+                        {
+                            name: 'server-side',
+                            children: [
+                                {
+                                    name: 'Java'
+                                },
+                                {
+                                    name: 'Python'
+                                },
+                                {
+                                    name: 'Node',
+                                    children: [
+                                        {
+                                            name: 'Java1'
+                                        },
+                                        {
+                                            name: 'Python1'
+                                        },
+                                        {
+                                            name: 'Node1'
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            name: 'front-end',
+                            children: [
+                                {
+                                    name: 'jQuery'
+                                },
+                                {
+                                    name: 'Angular'
+                                },
+                                {
+                                    name: 'React'
+                                }
+                            ]
+                        }
+                    ]
+                };
+
+                $scope.cate = [
+                    {
+                        cateId: 1,
+                        cateName: '前端技术',
+                        child: [
+                            {
+                                cateId: 4,
+                                cateName: 'JavaScript'
+                            },
+                            {
+                                cateId: 5,
+                                cateName: 'HTML 5 + CSS 3'
+                            }
+                        ]
+                    },
+                    {
+                        cateId: 2,
+                        cateName: '后端技术',
+                        child: [
+                            {
+                                cateId: 3,
+                                cateName: 'PHP',
+                                child: [
+                                    {
+                                        cateId: 6,
+                                        cateName: 'ThinkPHP'
+                                    },
+                                    {
+                                        cateId: 7,
+                                        cateName: 'Symfony'
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ];
+
+            })
+            .directive('recursion', function ($compile) {
+
+                function cpl(element, link) {
+                    // Normalize the link parameter
+                    if (angular.isFunction(link)) {
+                        link = {post: link};
+                    }
+
+                    // Break the recursion loop by removing the contents
+                    var contents = element.contents().remove();
+                    var compiledContents;
+                    return {
+                        pre: (link && link.pre) ? link.pre : null,
+                        /**
+                         * Compiles and re-adds the contents
+                         */
+                        post: function (scope, element) {
+                            // Compile the contents
+                            if (!compiledContents) {
+                                compiledContents = $compile(contents);
+                            }
+                            // Re-add the compiled contents to the element
+                            compiledContents(scope, function (clone) {
+                                element.append(clone);
+                            });
+
+                            // Call the post-linking function, if any
+                            if (link && link.post) {
+                                link.post.apply(null, arguments);
+                            }
+                        }
+                    };
+                }
+
+                return {
+                    restrict: 'A',
+                    scope: {
+                        originData : '='
+                    },
+//                    template: '  <li ng-repeat="item in originData"><div cateID="{{item.cateId}}" style="cursor: pointer;">{{item.cateName}}</div>     <ul ng-if="item.child.length" recursion ng-init="cate=item.child"></ul> </li>',
+                    compile: function (tElement, tAttrs, transclude) {
+
+                        return cpl(tElement, function (scope, tElement, tAttrs, controller, transcludeFn) {
+                            console.dir(tElement);
+                            tElement.find("li").bind("click",function(){
+                               console.dir(this);
+                            });
+                            // Define your normal link function here.
+                            // Alternative: instead of passing a function,
+                            // you can also pass an object with
+                            // a 'pre'- and 'post'-link function.
+                        });
+
+//                        console.log("compile");
+//                        return {
+//                            pre : function(scope, iElement, iAttrs, controller){
+//                                console.log("pre");
+//                            },
+//                            post : function(scope, iElement, iAttrs, controller){
+//                                console.dir(scope);
+//                                console.log("post");
+//                                iElement.bind("click",function(event){
+//                                    alert(iAttrs.cateid);
+//                                    // 阻止事件冒泡
+//                                    event.stopPropagation();
+//                                })
+//                            }
+//                        }
+
+                    }
+                };
+            });
+
+</script>
+</html>

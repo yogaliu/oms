@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单校验</title>
+    <style>
+        .form1 div{
+            margin-top: 20px;
+        }
+        .form1 input{
+            height:30px;
+        }
+    </style>
+    <link rel="stylesheet" href="../../css/public.css">
+</head>
+<body>
+    <div>
+        <form class="form1">
+            <div >
+                用户名: <input class="klw-input" type="text" name="name">
+            </div>
+
+
+            <div>
+                密码: <input class="klw-input" type="password" name="password">
+            </div>
+
+            <div>
+                电话: <input class="klw-input" type="tel" name="phone">
+            </div>
+
+            <div>
+                邮箱: <input class="klw-input" type="text" name="email">
+            </div>
+        </form>
+    </div>
+</body>
+<script typet="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+<script>
+        function validate(_this) {
+            var validateType = _this.attr('name');
+            var val = _this.val();
+            switch (validateType){
+                case "name" :
+                    var pattern = /^[\u4E00-\u9FA5]{1,6}$/;
+                    if(! pattern.test(val)){
+                        return false
+                    }
+                    break;
+                case "password" :
+                    if(_this.val().length>6){
+                        return false
+                    }
+                    break;
+                case "phone" :
+                    var pattern = /^1[34578]\d{9}$/;
+                    if(! pattern.test(val)){
+                        return false
+                    }
+                    break;
+                case "email" :
+                    var pattern = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+                    if(! pattern.test(val)){
+                        return false
+                    }
+                    break;
+            }
+            return true;
+        }
+        $('.form1 input').on('blur',function () {
+            if(validate($(this))){
+                $(this).removeClass('klw-input-error');
+                $(this).addClass('klw-input-success');
+                return true;
+            }else{
+                $(this).removeClass('klw-input-success');
+                $(this).addClass('klw-input-error');
+                return false;
+            }
+        })
+    
+
+</script>
+</html>

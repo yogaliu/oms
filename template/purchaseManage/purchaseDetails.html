@@ -1,0 +1,71 @@
+<!-- 采购订单详情 -->
+
+<div id="purchaseDetails" class="cj-purchase" ng-controller="purchaseDetailsController">
+    <div class="purchase-content">
+
+        <div class="purchase-header">
+            <div class="header-tab">
+                <ul>
+                    <li ng-class="{true:'current',false:''}[tab == 'first']" ng-click="toggleTab('first')">采购详情</li>
+                    <li ng-class="{true:'current',false:''}[tab == 'second']" ng-click="toggleTab('second')">操作日志</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="purchase-body">
+            <button class="btn btn-default detail btn-78 mr" ng-click="goBack()">返回</button>
+            <!--采购单详情-->
+           <div class="first" ng-if="tab == 'first'">
+               <h5 class="add-title">商品信息</h5>
+               <div class="row even">
+                   <div class="column">
+                       <span>采购单号<i>{{formData.code}}</i></span>
+                   </div>
+                   <div class="column">
+                       <span>收货仓库<i>{{formData.warehousename}}</i></span>
+                   </div>
+                   <div class="column">
+                       <span>状态<i>{{formData.statusname}}</i></span>
+                   </div>
+               </div>
+               <div class="body-table">
+                   <table id="purchaseDetailTable" class="display" cellspacing="0" width="100%">
+                       <thead>
+                       <tr>
+                           <th ng-repeat="obj in theadListInfo">{{obj.name}}</th>
+                       </tr>
+                       </thead>
+                       <tbody>
+                       <tr ng-repeat="obj in tableListInfo">
+                           <td ng-repeat="item in theadListInfo">{{obj[item.tag]}}</td>
+                       </tr>
+                       </tbody>
+                   </table>
+               </div>
+           </div>
+
+            <!--操作日志-->
+           <div class="second" ng-if="tab == 'second'">
+               <h5 class="add-title">操作记录</h5>
+               <div class="body-table">
+                   <table id="purchaseLogTable" class="display" cellspacing="0" width="100%">
+                       <thead>
+                       <tr>
+                           <th ng-repeat="obj in theadListLog">{{obj.name}}</th>
+                       </tr>
+                       </thead>
+                       <tbody>
+                       <tr ng-repeat="obj in tableListLog">
+                           <td ng-repeat="item in theadListLog">{{obj[item.tag]}}</td>
+                       </tr>
+                       </tbody>
+                   </table>
+               </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- /采购订单详情 -->

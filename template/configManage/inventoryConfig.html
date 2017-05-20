@@ -1,0 +1,102 @@
+<div id="configManage" class="config-manage">
+    <div class="return-order-config inventory-config" id="inventoryConfig" ng-controller="inventoryConfigController">
+        <div id="topNav" class="top-nav">
+            <div class="path">
+                库存配置
+            </div>
+        </div>
+        <div id="content" class="content">
+            <div class="items">
+                <div class="sel-item cf">
+                    <span class="title fl">库存少于等于</span>
+                    <input type="number" class="klw-input fl" ng-model="formData.uploadLessQuantity">
+                    <span class="title fl two">上传到</span>
+                    <div class="more-select fl" ng-click="showShopModal()">
+                        <div class="select-content"><span>{{storeName}}</span><em><img src="../images/selebom.png"></em></div>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <span class="title">历史库存下载地址</span>
+                    <input type="text" class="klw-input" ng-model="formData.historyUrl">
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('enableOnPassage')">
+                        <div class="klwk-check-x" ng-show="formData.enableOnPassage"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.enableOnPassage"><i class="iconfont"></i></div>
+                        <span class="title">启用在途</span>
+                        <span class="detail">启用在途后，加载在途界面，计算在途数</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('uploadRounding')">
+                        <div class="klwk-check-x" ng-show="formData.uploadRounding"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.uploadRounding"><i class="iconfont"></i></div>
+                        <span class="title">库存上传四舍六入五成双</span>
+                        <span class="detail">库存上传时库存乘以比例后数量小于等于1.5，则上传1件，大于等于1.6时上传2件</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <button class="btn btn-success btn-78" ng-click="save()">保存</button>
+            </div>
+        </div>
+
+        <!--店铺选择弹框-->
+        <div class="modal fade shop-modal" id="shopModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">店铺</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="cf">
+                            <div class="fl left">
+                                <i class="iconfont icon-search-blod"></i>
+                                <input type="text" class="klw-search" placeholder="编码/名称">
+                                <div class="thead">
+                                    <span class="td" ng-click="selectAllStore()">
+                                        <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                        <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                                    </span>
+                                    <span class="td">编码</span>
+                                    <span class="td">店铺名称</span>
+                                </div>
+                                <div class="tbody">
+                                    <div class="tr" ng-repeat="item in storeList" ng-click="selectOneStore($index)">
+                                        <div class="td oh">
+                                            <div class="klwk-check" ng-hide="item.isdatacheck"><i class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-show="item.isdatacheck"><i class="iconfont"></i></div>
+                                        </div>
+                                        <span class="td oh">{{item.code}}</span>
+                                        <span class="td oh">{{item.name}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fl left right">
+                                <div class="title">已选择</div>
+                                <div class="thead">
+                                    <span class="td">编码</span>
+                                    <span class="td">店铺名称</span>
+                                </div>
+                                <div class="tbody">
+                                    <div class="tr" ng-repeat="item in selectStoreList">
+                                        <span class="td oh">{{item.code}}</span>
+                                        <span class="td oh">{{item.name}}</span>
+                                        <div class="td oh" ng-click="deleteOneStore($index)">
+                                            <i class="iconfont icon-close"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="showStores()">确定</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

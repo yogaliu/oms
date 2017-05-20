@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="klwkOmsApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="jxPublic.css">
+    <link rel="stylesheet" href="public.css">
+    <script type="text/javascript" src="../../public/js/jquery.js"></script>
+    <script type="text/javascript" src="../../public/js/base.js"></script>
+    <script type="text/javascript" src="../../public/js/echarts.min.js"></script>
+    <script type="text/javascript" src="../../public/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../demoApp.js"></script>
+    <script type="text/javascript" src="orderManagePublicDirective.js"></script>
+    <script src="orderManagePublicConstant.js"></script>
+    <script src="wap_config.js"></script>
+    <script src="orderManagePublicService.js"></script>
+    <script src="ApiService.js"></script>
+</head>
+<body>
+    <div ng-controller="testController" class="jxOutDiv">
+        <div class="advancedSearch">
+            <!--单选-->
+            <advanced-search-list config-data="TransTypeConfigData"></advanced-search-list>
+
+
+            <!--有多选和更多-->
+            <advanced-search-more-list  search-config="orderSignConfigData"></advanced-search-more-list>
+            <advance-search-more-list-show search-config="orderSignConfigData"></advance-search-more-list-show>
+
+
+
+
+            <div ng-repeat="list in formData">
+                {{list.title}}:{{list.name}}
+                <button ng-click="cancle(list)">删除</button>
+            </div>
+        </div>
+
+        <button ng-click="test()">查看formData</button>
+        <button ng-click="clear()">清空</button>
+    </div>
+
+    <script>
+        angular.module('klwkOmsApp')
+            .controller('testController',['$scope','orderManageConfigData','APP_MENU',function ($scope,orderManageConfigData,APP_MENU) {
+
+
+
+
+                    //存放已经选中的条件
+                $scope.formData = {};
+
+
+                //高级搜索订单标记数据配置（多选和更多都有）
+                $scope.orderSignConfigData = {
+                    //是否显示多选
+                    Multiselect:'true',
+                    //是否显示更多
+                    selectMore:'true',
+                    //是否显示搜索和按字母索引数据
+                    letterClassify : 'true',
+                    //将选中的条件保存起来到这个对象当中
+                    chosed : $scope.formData,
+                    title:'订单标记',
+                    placeHold : '订单标记',
+                    //后台中对应的字段名称
+                    filed:'TagName',
+                    list :  {//数据格式是这样的
+                        "listNum":5,
+                        "data":[{
+                            "id":0,
+                            "name":"新建"
+                        },{
+                            "id":10,
+                            "name":"审核异常"
+                        },{
+                            "id":11,
+                            "name":"审核已通过"
+                        },{
+                            "id":20,
+                            "name":"自动配货中"
+                        },{
+                            "id":21,
+                            "name":"自动配货异常"
+                        },{
+                            "id":22,
+                            "name":"已配货"
+                        },{
+                            "id":31,
+                            "name":"已部分发货"
+                        },{
+                            "id":32,
+                            "name":"已全部发货"
+                        }],
+                        "defaultShow":[{
+                            "id":0,
+                            "name":"新建"
+                        },{
+                            "id":10,
+                            "name":"审核异常"
+                        },{
+                            "id":11,
+                            "name":"审核已通过"
+                        },{
+                            "id":20,
+                            "name":"自动配货中"
+                        },{
+                            "id":21,
+                            "name":"自动配货异常"
+                        }],
+                        "globalShow":[{
+                            "id":0,
+                            "name":"新建"
+                        },{
+                            "id":10,
+                            "name":"审核异常"
+                        },{
+                            "id":11,
+                            "name":"审核已通过"
+                        },{
+                            "id":20,
+                            "name":"自动配货中"
+                        },{
+                            "id":21,
+                            "name":"自动配货异常"
+                        }],
+                        "A":[],
+                        "B":[],
+                        "C":[],
+                        "D":[],
+                        "E":[],
+                        "F":[],
+                        "G":[],
+                        "H":[],
+                        "I":[],
+                        "J":[],
+                        "K":[],
+                        "L":[],
+                        "M":[],
+                        "N":[],
+                        "O":[],
+                        "P":[],
+                        "Q":[],
+                        "R":[],
+                        "S":[{
+                            "id":10,
+                            "name":"审核异常"
+                        },{
+                            "id":11,
+                            "name":"审核已通过"
+                        }],
+                        "T":[],
+                        "U":[],
+                        "V":[],
+                        "W":[],
+                        "X":[{
+                            "id":0,
+                            "name":"新建"
+                        }],
+                        "Y":[{
+                            "id":22,
+                            "name":"已配货"
+                        },{
+                            "id":31,
+                            "name":"已部分发货"
+                        },{
+                            "id":32,
+                            "name":"已全部发货"
+                        }],
+                        "Z":[{
+                            "id":20,
+                            "name":"自动配货中"
+                        },{
+                            "id":21,
+                            "name":"自动配货异常"
+                        }]}
+                };
+
+                //订单类型配置数据(只有单选的情况)
+                $scope.TransTypeConfigData = {
+                    title : '订单类型',
+                    chosed : $scope.formData,
+                    filed : 'TransType',
+                    list :APP_MENU['preOrderType']
+                };
+                //查看scope的状态
+                $scope.test = function () {
+                    console.log($scope.formData)
+                };
+                //清空选中的条件
+                $scope.clear = function () {
+                    for(var item in $scope.formData){
+                        delete $scope.formData[item];
+                    }
+                };
+                //单个取消选中的条件
+                $scope.cancle =  function (list) {
+                    delete $scope.formData[list.filed];
+                }
+
+
+                    //数据是枚举值并且含有多选和更多
+//                    $scope.refundConfigData = {
+//                        //是否显示搜索和按字母索引数据
+//                        letterClassify : false,
+//                        //显示更多
+//                        selectMore : true,
+//                        //显示多选
+//                        Multiselect : true,
+//                        //将选中的条件保存起来到这个对象当中
+//                        chosed : $scope.formData1,
+//                        title:'订单状态',
+//                        placeHold : '订单状态',
+//                        //后台中对应的字段名称
+//                        filed:'Status',
+
+
+//                    $scope.orderStatus（处理后的数据）
+//                    5默认显示条数
+//                    true是不是枚举值类型
+//                        list :  toolsService.setDataShowType($scope,APP_MENU['orderStatus'],$scope.orderStatus,5,true)
+//                    };
+
+//                    从后台获取数据不是枚举值，先对数据进行处理
+//                    toolsService.setDataShowType(scope,responseData,scope.storeList,5);
+//                    $scope.storeListConfigData = {
+//                        //是否显示字母搜索
+//                        letterClassify:true,
+//                        //显示更多
+//                        selectMore : true,
+//                        //显示多选
+//                        Multiselect : true,
+//                        //将选中的条件保存起来到这个对象当中
+//                        chosed : $scope.formData1,
+//                        title:'店铺',
+//                        placeHold : '店铺',
+//                        //后台中对应的字段名称
+//                        filed:'StoreId',
+//                        list :  $scope.storeList
+//                    };
+
+            }]);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../css/public.css">
+    <title>分页组件demo</title>
+</head>
+<body ng-controller="testController">
+
+<!--使用方式 支持AE-->
+<tm-pagination conf="paginationConf"></tm-pagination>
+
+<div class="ti-pagination">
+    <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+    / 共 <span>{{paginationConf.totalItems}}</span>
+    <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont"  ng-click="prev()"></i></span>
+    <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont" ng-click="next()"></i></span>
+    <span class="config-column"><i class="iconfont"></i></span>
+</div>
+<script type="text/javascript" src="../../../public/js/angularjs.js"></script>
+<script type="text/javascript" src="../plug/tm.pagination.js"></script>
+
+<script>
+    angular.module('myApp', ['tm.pagination']).controller('testController', function($scope, $timeout){
+
+        /*计算每页的数据索引*/
+        $scope.getPageIndex = function (currentPage,itemsPerPage) {
+            //超出页码范围 return
+            if(currentPage === 0 || currentPage == Math.ceil($scope.paginationConf.totalItems / itemsPerPage + 1 )) return;
+
+            $scope.first = itemsPerPage * (currentPage-1) +1;
+            if(Math.ceil($scope.paginationConf.totalItems / itemsPerPage)  === currentPage){
+                $scope.last = $scope.paginationConf.totalItems;
+            }else{
+                $scope.last = currentPage *  itemsPerPage;
+            }
+
+        }
+
+        $scope.paginationConf = {
+            currentPage: 1,   //初始化默认显示第几页
+            totalItems: 488,  //总记录条数
+            itemsPerPage: 10,  //每页显示多少条
+            pagesLength: 5, //分页长度
+            perPageOptions: [6, 10, 15, 20, 25,50],  //配置配置可选择每页显示记录数 array
+            extClick : false , //当为外部点击翻页时为true
+            type: 0 ,  // 上一页0  下一页1
+            getPageIndex: $scope.getPageIndex,
+            onChange: function(){	//操作之后的回调
+            }
+        };
+
+        //初始化第一页
+        $scope.first = 1;
+
+        //初始化最后一页
+        $scope.last = $scope.paginationConf.itemsPerPage;
+
+        //外部上一页
+        $scope.prev = function () {
+            $scope.paginationConf.currentPage--;
+            $scope.paginationConf.type = 0 ;
+            $scope.paginationConf.extClick = true;
+            $scope.getPageIndex($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);
+        }
+
+        //外部下一页
+        $scope.next = function () {
+            $scope.paginationConf.currentPage++;
+            $scope.paginationConf.type = 1 ;
+            $scope.paginationConf.extClick = true;
+            $scope.getPageIndex($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);
+        }
+    })
+</script>
+
+</body>
+</html>

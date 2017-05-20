@@ -1,0 +1,57 @@
+/*手工核销*/
+#handworkVerification .sewvtop > span{
+    vertical-align: initial;
+}
+#handworkVerification .advancedSearch {
+    display: block;
+}
+
+#handworkVerification .title1 {
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 10px;
+    line-height: 40px;
+}
+
+#handworkVerification .fr{
+    margin-bottom: 15px;
+}
+#handworkVerification  .systemBills{
+    margin: 20px 0;
+}
+
+
+/*核销管理*/
+#verificationManage .searchItem1 > div > span {
+    width: 14%;
+}
+#verificationManage .searchItem1 > div > div {
+    width: 39%;
+}
+#verificationManage #autoModal .modal-body{
+    margin: 20px 42px 35px;
+}
+#verificationManage #autoModal .line{
+    width: 14px;
+    height: 2px;
+    background: #f0f0f0;
+    margin: 20px 10px 0 10px;
+    float: left;
+}
+#verificationManage #autoModal .modal-body .rows .timeInputDiv1 {
+    margin-right:0;
+}
+
+/*核销管理详情*/
+#verificationManageDetail .topTitle{
+    margin:40px 40px 20px;
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 1px;
+}
+
+
+/*核销记录*/
+#verificationRecord .timeInputDiv{
+    margin-right: 0;
+}

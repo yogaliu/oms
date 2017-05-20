@@ -1,0 +1,55 @@
+<div id="verificationManageDetail" class="jxOutDiv jxOutDivDetail" ng-controller="verificationManageDetailController">
+    <div class="jxOutDivContent">
+
+        <div>
+            <button class="btn btn-default btn-78" ng-click="returnFun()" style="margin:35px 0 20px 50px;">返回</button>
+        </div>
+        <div class="topTitle">核销单详情</div>
+
+        <div class="content-first" ng-show="tab == 'first'">
+            <div class="jxmessage">
+                <h3 class="detailTitle">
+                    店铺&nbsp;&nbsp;&nbsp;<span ng-bind="verificationDetailRoot.store"></span>
+                    核销单号&nbsp;&nbsp;&nbsp;<span ng-bind="verificationDetailRoot.billNumber"></span>
+                </h3>
+            </div>
+            <div class="jxmessage">
+                <h3 class="detailTitle">单据明细</h3>
+
+                <div class="tableOut">
+                    <table id="verificationManageDetailTable" class="display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in tableList">
+                            <td ng-repeat="item in theadList">
+                                <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                                {{obj[item.tag] | isBoolean |setDefaultValueWithoutData}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>小计</td>
+                            <td></td>
+                            <td></td>
+                            <td>{{total.money1}}</td>
+                            <td>{{total.num1}}</td>
+                            <td></td>
+                            <td>{{total.money2}}</td>
+                            <td>{{total.num2}}</td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="content-second" ng-show="tab == 'second'">
+
+        </div>
+
+
+    </div>
+</div>

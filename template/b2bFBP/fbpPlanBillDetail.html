@@ -1,0 +1,75 @@
+<div id="fbpPlanBillDetail" class="jxOutDiv jxOutDivDetail" ng-controller="fbpPlanBillDetailController">
+    <div class="jxOutDivContent">
+        <div class="detail-content-top">
+            <div class="detail-top-tab">
+                <ul>
+                    <li ng-class="{true:'current',false:''}[tab == 'first']" ng-click="isShow('first')">计划单详情</li>
+                    <li ng-class="{true:'current',false:''}[tab == 'second']" ng-click="isShow('second')">操作日志</li>
+
+                </ul>
+                <button class="btn btn-default btn-78" ng-click="domOperate.backTolist() ">返回</button>
+            </div>
+        </div>
+        <div class="content-first" ng-show="tab == 'first'">
+            <div class="jxmessage">
+                <h3 class="detailTitle">
+                    调整单号：
+                    <span>{{ plancode }}</span>
+                    调出仓库：
+                    <span>{{ outwarehousename }}</span>
+                    调入仓库：
+                    <span>{{ inwarehousename }}</span>
+                </h3>
+            </div>
+            <div class="activityMerchandise jxmessage">
+                <!--<h3 class="detailTitle">活动商品信息</h3>-->
+
+                <div class="tableOut">
+                    <table>
+                        <thead>
+                        <tr>
+                            <!-- 表头 -->
+                            <th ng-repeat="list in planListThead">{{ list.name }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- 表体 -->
+                        <tr ng-repeat="list in planListTbody">
+                            <td ng-repeat="item in planListThead">
+                                <p class="order-list-details" ng-bind-html="list[item.tag]"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- 暂时写死 -->
+                            <td>小计</td>
+                            <td colspan="3"></td>
+                            <td>{{ noticeNums }}</td>
+                            <td>{{ outNums }}</td>
+                            <td>{{ inNums }}</td>
+                            <td>{{ allPrices }}</td>
+                            <td>{{ allPrices }}</td>
+                            <td colspan="1"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="content-second" ng-show="tab == 'second'">
+            <div id="tableOut" style=" margin:30px;">
+                <table>
+                    <thead>
+                    <th ng-repeat="list in logListThead">{{ list.name }}</th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="list in logListTbody">
+                        <td ng-repeat="item in logListThead" ng-bind-html="list[item.tag]">
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

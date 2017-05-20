@@ -1,0 +1,326 @@
+<div id="configManage" class="config-manage">
+    <div id="characterManage" class="character-manage" ng-controller="characterManageController">
+        <div id="content" class="content">
+            <div class="search cf">
+                <div class="line fl">
+                    <div class="items line fl">
+                        <div class="ipt line">
+                            <label class="item">
+                                <span class="title">角色编码</span>
+                                <input type="text" class="klw-input" placeholder="请输入角色编码" ng-model="formData.code">
+                            </label>
+                            <label class="item">
+                                <span class="title">角色名称</span>
+                                <input type="text" class="klw-input" placeholder="请输入角色名称" ng-model="formData.name">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="oprate line fl">
+                        <span class="blue" ng-click="search()">搜索</span>
+                        <span ng-click="clearOnly()">清空</span>
+                    </div>
+                </div>
+                <div class="fr line">
+                    <button class="svg2" ng-click="add()">新增</button>
+                </div>
+            </div>
+            <!--<div id="topTable" class="top-table">
+                <div class="fr">
+                    <div class="ti-pagination">
+                        <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                        / 共 <span>{{paginationConf.totalItems}}</span>
+                        <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont"  ng-click="prev()"></i></span>
+                        <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont" ng-click="next()"></i></span>
+                        <span class="config-column"><i class="iconfont"></i></span>
+                    </div>
+                </div>
+            </div>-->
+            <div class="more-table" style="height: calc(100% - 120px);">
+                <div class="ab-position">
+                    <div class="all-table">
+                        <table class="table-thead" cellspacing="0" style="width: calc(100% - 4px);">
+                            <thead>
+                            <tr>
+                                <th>操作</th>
+                                <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <table id="mainTable" class="display" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>操作</th>
+                                <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="obj in tableList" ng-click="alert('jjljjjljkl')">
+                                <td class="over-show">
+                                    <div class="tr-oprate">
+                                        <div class="tr-icon"><i class="iconfont icon-operate"></i></div>
+                                        <ul class="tr-oprate-list">
+                                            <li ng-click="edit($index);$event.stopPropagation();">修改</li>
+                                            <li ng-click="showMenuPermissionModal($index);$event.stopPropagation();">菜单权限</li>
+                                            <li ng-click="showOperationPermissionModal($index);$event.stopPropagation();">操作权限</li>
+                                            <li ng-click="showFieldPermissionModal($index);$event.stopPropagation();">字段权限</li>
+                                            <li ng-click="showShopPermissionModal($index);$event.stopPropagation();">店铺权限</li>
+                                            <li ng-click="showWarehousePermissionModal($index);$event.stopPropagation();">仓库权限</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td ng-repeat="item in theadList" title="{{obj[item.tag]}}">
+                                    <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                                    {{obj[item.tag]}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+
+        </div>
+
+        <!--新增&修改弹框-->
+        <div class="modal fade form" id="creatModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">新增</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="item">
+                            <span>角色编码<i class="notice">*</i></span>
+                            <input class="klw-input validate" name="empty" type="text" placeholder="请输入编码" ng-model="activeItem.code">
+                        </div>
+                        <div class="item">
+                            <span>角色名称<i class="notice">*</i></span>
+                            <input class="klw-input validate" name="empty" type="text" placeholder="请输入名称" ng-model="activeItem.name">
+                        </div>
+                        <div class="item">
+                            <span>备注</span>
+                            <input class="klw-input" type="text" placeholder="请输入备注" ng-model="activeItem.note">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="newItem()">保存</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--菜单权限弹框-->
+        <div class="modal fade menu-permission-modal" id="menuPermissionModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">菜单权限</h4>
+                    </div>
+                    <div class="modal-body">
+                        <menu expander='expander' all-menu="allMenu" children='expander.children' ng-repeat='expander in allMenu'></menu>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="saveMenuPrivilege()">确定</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--操作权限弹框-->
+        <div class="modal fade menu-permission-modal" id="operationPermissionModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">操作权限</h4>
+                    </div>
+                    <div class="modal-body">
+                        <menu expander='expander' all-menu="allOperation" children='expander.children' ng-repeat='expander in allOperation'></menu>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="saveOperationPrivilege()">确定</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--字段权限弹框-->
+        <div class="modal fade menu-permission-modal" id="fieldPermissionModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">字段权限</h4>
+                    </div>
+                    <div class="modal-body">
+                        <menu expander='expander' all-menu="allField" children='expander.children' ng-repeat='expander in allField'></menu>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="saveFieldPrivilege()">确定</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--店铺权限弹框-->
+        <div class="modal fade shop-permission-modal" id="shopPermissionModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">店铺权限</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="cf">
+                            <div class="fl left">
+                                <i class="iconfont icon-search-blod"></i>
+                                <input type="text" class="klw-search" ng-keyup="searchLeft('store')" placeholder="编码/名称/平台类型" ng-model="leftSearchText">
+                                <div class="thead">
+                                    <span class="td" ng-click="selectLeftAll()">
+                                        <div class="klwk-check" ng-hide="isleftalldatacheck"><i class="iconfont"></i></div>
+                                        <div class="klwk-check-x" ng-show="isleftalldatacheck"><i class="iconfont"></i></div>
+                                    </span>
+                                    <span class="td">编码</span>
+                                    <span class="td">名称</span>
+                                    <span class="td">平台类型</span>
+                                </div>
+                                <div class="tbody">
+                                    <div class="tr" ng-repeat="item in noCheckList" ng-click="selectLeft($index)" ng-hide="item.ishide">
+                                        <div class="td oh">
+                                            <div class="klwk-check" ng-hide="item.isdatacheck"><i class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-show="item.isdatacheck"><i class="iconfont"></i></div>
+                                        </div>
+                                        <span class="td oh">{{item.code}}</span>
+                                        <span class="td oh">{{item.name}}</span>
+                                        <span class="td oh">{{item.platformtypename}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fl center">
+                                <div ng-class="{true:'center-btn',false:'center-btn disable'}[isLeftHasCheck]" ng-click="toAdd()">
+                                    <i class="iconfont icon-right"></i>
+                                </div>
+                                <div ng-class="{true:'center-btn',false:'center-btn disable'}[isRightHasCheck]" ng-click="toDelete()">
+                                    <i class="iconfont icon-left"></i>
+                                </div>
+                            </div>
+                            <div class="fl left">
+                                <i class="iconfont icon-search-blod"></i>
+                                <input type="text" class="klw-search" ng-keyup="searchRight('store')" placeholder="编码/名称/平台类型" ng-model="rightSearchText">
+                                <div class="thead">
+                                    <span class="td" ng-click="selectRightAll()">
+                                        <div class="klwk-check" ng-hide="isrightalldatacheck"><i class="iconfont"></i></div>
+                                        <div class="klwk-check-x" ng-show="isrightalldatacheck"><i class="iconfont"></i></div>
+                                    </span>
+                                    <span class="td">编码</span>
+                                    <span class="td">店铺名称</span>
+                                    <span class="td">平台类型</span>
+                                </div>
+                                <div class="tbody">
+                                    <div class="tr" ng-repeat="item in hasCheckList" ng-click="selectRight($index)" ng-hide="item.ishide">
+                                        <div class="td oh">
+                                            <div class="klwk-check" ng-hide="item.isdatacheck"><i class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-show="item.isdatacheck"><i class="iconfont"></i></div>
+                                        </div>
+                                        <span class="td oh">{{item.code}}</span>
+                                        <span class="td oh">{{item.name}}</span>
+                                        <span class="td oh">{{item.platformtypename}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="saveStorePrivilege()">确定</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--仓库权限弹框-->
+        <div class="modal fade warehouse-permission-Modal" id="warehousePermissionModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">仓库权限</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="cf">
+                            <div class="fl left">
+                                <i class="iconfont icon-search-blod"></i>
+                                <input type="text" class="klw-search" ng-keyup="searchLeft('warehouse')" placeholder="编码/名称/仓库类型/仓储类型" ng-model="leftSearchText">
+                                <div class="thead">
+                                    <span class="td" ng-click="selectLeftAll()">
+                                        <div class="klwk-check" ng-hide="isleftalldatacheck"><i class="iconfont"></i></div>
+                                        <div class="klwk-check-x" ng-show="isleftalldatacheck"><i class="iconfont"></i></div>
+                                    </span>
+                                    <span class="td">编码</span>
+                                    <span class="td">名称</span>
+                                    <span class="td">仓库类型</span>
+                                    <span class="td">仓储类型</span>
+                                </div>
+                                <div class="tbody">
+                                    <div class="tr" ng-repeat="item in noCheckList" ng-click="selectLeft($index)" ng-hide="item.ishide">
+                                        <div class="td oh">
+                                            <div class="klwk-check" ng-hide="item.isdatacheck"><i class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-show="item.isdatacheck"><i class="iconfont"></i></div>
+                                        </div>
+                                        <span class="td oh">{{item.code}}</span>
+                                        <span class="td oh">{{item.name}}</span>
+                                        <span class="td oh">{{item.warehousetypename}}</span>
+                                        <span class="td oh">{{item.storagetypename}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fl center">
+                                <div ng-class="{true:'center-btn',false:'center-btn disable'}[isLeftHasCheck]" ng-click="toAdd()">
+                                    <i class="iconfont icon-right"></i>
+                                </div>
+                                <div ng-class="{true:'center-btn',false:'center-btn disable'}[isRightHasCheck]" ng-click="toDelete()">
+                                    <i class="iconfont icon-left"></i>
+                                </div>
+                            </div>
+                            <div class="fl left">
+                                <i class="iconfont icon-search-blod"></i>
+                                <input type="text" class="klw-search" ng-keyup="searchRight('warehouse')" placeholder="编码/名称/仓库类型/仓储类型" ng-model="rightSearchText">
+                                <div class="thead">
+                                    <span class="td" ng-click="selectRightAll()">
+                                        <div class="klwk-check" ng-hide="isrightalldatacheck"><i class="iconfont"></i></div>
+                                        <div class="klwk-check-x" ng-show="isrightalldatacheck"><i class="iconfont"></i></div>
+                                    </span>
+                                    <span class="td">编码</span>
+                                    <span class="td">店铺名称</span>
+                                    <span class="td">仓库类型</span>
+                                    <span class="td">仓储类型</span>
+                                </div>
+                                <div class="tbody">
+                                    <div class="tr" ng-repeat="item in hasCheckList" ng-click="selectRight($index)" ng-hide="item.ishide">
+                                        <div class="td oh">
+                                            <div class="klwk-check" ng-hide="item.isdatacheck"><i class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-show="item.isdatacheck"><i class="iconfont"></i></div>
+                                        </div>
+                                        <span class="td oh">{{item.code}}</span>
+                                        <span class="td oh">{{item.name}}</span>
+                                        <span class="td oh">{{item.warehousetypename}}</span>
+                                        <span class="td oh">{{item.storagetypename}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="saveWarehousePrivilege()">确定</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

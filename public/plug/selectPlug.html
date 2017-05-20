@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>select框美化</title>
+    <link rel="stylesheet" href="../../../css/public.css">
+    <style>
+            .sewv{
+                width: 1200px;
+                float: left;
+                margin-right: 20px;
+                margin-top: 50px;
+            }
+    </style>
+</head>
+<body>
+<div id="aaa">
+    <!-- 下拉选框-->
+    <div class="sewv">
+        <div class="sewvtop"><span>请选择..</span><em><img src="images/selebom.png"></em></div>
+        <div class="content"><ul class="sewvbm">
+            <li>文本a</li>
+            <li>文本b</li>
+            <li>文本c</li>
+            <li>文本d</li>
+            <li>文本e</li>
+        </ul>
+        </div>
+    </div>
+
+    <!-- 多级菜单栏-->
+    <div class="sewv">
+        <div class="sewvtop"><span>批量操作</span><em><img src="images/selebom.png"></em></div>
+        <div class="content"><ul class="one">
+            <li>文本a</li>
+            <li>文本b</li>
+            <li>文本c</li>
+            <li>文本d</li>
+            <li class="more">文本e
+                <ul class="two" >
+                    <li>文本a</li>
+                    <li>文本b</li>
+                    <li>文本c</li>
+                    <li>文本d</li>
+                    <li class="more">文本e
+                        <ul class="three" >
+                            <li>文本a</li>
+                            <li>文本b</li>
+                            <li>文本c</li>
+                            <li>文本d</li>
+                            <li>文本e</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        </div>
+    </div>
+
+    <!-- 带搜索框的下拉选框 -->
+    <div class="sewv">
+        <div class="sewvtop"><span>请选择..</span><em><img src="images/selebom.png"></em></div>
+        <div class="content">
+            <ul class="sewvbm">
+                <div class="search-div"><input class="klw-search serch-input" placeholder="搜索订单号" /> </div>
+                <li>文本a</li>
+                <li>文本b</li>
+                <li>文本c</li>
+                <li>文本d</li>
+                <li>文本e</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- 按钮类型/多级菜单的批量操作-->
+    <div class="sewv-pl ">
+        <div class="sewvtop icon-svg"><span>批量操作</span></div>
+        <div class="content">
+            <ul class="one">
+                <li>文本a</li>
+                <li>文本b</li>
+                <li>文本c</li>
+                <li>文本d</li>
+                <li class="more">文本e
+                    <ul class="two" >
+                        <li>文本a</li>
+                        <li>文本b</li>
+                        <li>文本c</li>
+                        <li>文本d</li>
+                        <li class="more">文本e
+                            <ul class="three" >
+                                <li>文本a</li>
+                                <li>文本b</li>
+                                <li>文本c</li>
+                                <li>文本d</li>
+                                <li>文本e</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+<script typet="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="selectPlug.js"></script>
+<script>
+    /*调用方式*/
+    $('#aaa').selectPlug();
+</script>

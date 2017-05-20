@@ -1,0 +1,30 @@
+<div class="listAllocationDiv column-list" id="{{timestamp}}" style="height: 400px;">
+    <div class="titleList">
+        <ul style="height: 300px;overflow: auto;">
+            <li ng-repeat="obj in colLists" repeat-finished-directive repeataction="initFunc()" condition="{{$last == true}}">
+                <label >
+                    <i class="iconfont icon-sel icon-sel-zhengque" ng-click="toggleShow($event,$index)" itemobj="{{obj.tag}}-{{obj.name}}"></i>
+                    <span>{{obj.name}}</span>
+                </label>
+                <div class="fr">
+                     <span class="up" ng-click="moveBefore(1,$index)">
+                         <i class="iconfont icon-up"></i>
+                     </span>
+                     <span class="down" ng-click="moveAfter(2,$index)">
+                         <i class="iconfont icon-down"></i>
+                     </span>
+                     <span class="top" ng-click="moveFirst(1,$index)">
+                         <i class="iconfont icon-top"></i>
+                     </span>
+                     <span class="bottom" ng-click="moveLast(2,$index)">
+                         <i class="iconfont icon-bottom"></i>
+                     </span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="listAllocationBottom">
+        <button class="btn btn-success btn4" style="width: 128px;padding: 8px 15px;" ng-click="tableChangeAction()">保存自定义</button>
+        <button class="btn btn-default btn-78" ng-click="cancelBtn()">取消</button>
+    </div>
+</div>

@@ -1,0 +1,108 @@
+<!-- 铺货检查 -->
+
+<div id="goodsInspection" class="cj-product" ng-controller="goodsInspectionController">
+    <div class="product-content">
+
+        <div class="product-header">
+            <div class="left-btn">
+                <div class="btn add-order mr" ng-click="showModal('checkShopModal')">检查店铺</div>
+                <div class="btn add-order mr" ng-click="showModal('checkAllModal')">检查全部</div>
+                <div class="btn add-order mr" ng-click="showModal('checkRepetitionModal')">检测重复</div>
+                <div class="btn add-order mr">导出当前页</div>
+            </div>
+        </div>
+
+        <div class="product-body">
+            <h5 class="add-title">检查结果</h5>
+            <div class="body-table">
+                <table id="checkGoodsTable" class="display" cellspacing="0" width="100%">
+                    <thead>
+                        <tr><th ng-repeat="obj in theadList">{{obj.name}}</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="obj in tableList">
+                            <td ng-repeat="item in theadList">{{obj[item.tag]}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 检查店铺模态框 -->
+    <div class="cj-modal modal fade" id="checkShopModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">检查店铺</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-column">
+                        <label>店铺名称<span class="important">*</span></label>
+                        <search-select search-config="selectStore1"></search-select>
+                    </div>
+                    <div class="modal-column">
+                        <label>品牌</label>
+                        <pull-multi multi-config="selectBrand"></pull-multi>
+                    </div>
+                    <div class="modal-column">
+                        <label>商品编码</label>
+                        <input type="text" class="klw-input" placeholder="请输入商品编码" ng-model="activeItem.code">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-78 mr" ng-click="checkStore()">检查</button>
+                    <button type="button" class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--检查全部模态框-->
+    <div class="cj-modal modal fade" id="checkAllModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width: 460px;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <span class="remind-text">检查全部异常店铺耗时较长,确认要检查所有异常店铺吗?</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-78 mr" ng-click="checkAll()">确定</button>
+                    <button type="button" class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 检查重复模态框 -->
+    <div class="cj-modal modal fade" id="checkRepetitionModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">检查重复</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-column">
+                        <label>店铺名称<span class="important">*</span></label>
+                        <search-select search-config="selectStore2"></search-select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-78 mr" ng-click="checkRepeat()">检查</button>
+                    <button type="button" class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- /铺货检查 -->
+
+

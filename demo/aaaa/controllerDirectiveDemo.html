@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" ng-app="klwkOmsApp">
+<head>
+    <title>订单管理</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../public/css/bootstrap.css">
+
+</head>
+<body>
+<!-- 显示总的界面 -->
+<ui-view></ui-view>
+
+</body>
+<!-- 导入的基础插件，包含jquery,angularJs等 -->
+<script type="text/javascript" src="../../public/js/jquery.js"></script>
+<script type="text/javascript" src="../../public/js/base.js"></script>
+<script type="text/javascript" src="../../public/js/echarts.min.js"></script>
+<script type="text/javascript" src="../../public/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../demoApp.js"></script>
+<script>
+
+    /**
+     * 定义常量WAP_CONFIG;WAP为当前子模块功能
+     * */
+    angular.module('klwkOmsApp')
+            .config(["$stateProvider","$urlRouterProvider",function ($stateProvider, $urlRouterProvider) {
+                // 如果没有匹配的路径，则设置默认路径
+                $urlRouterProvider.otherwise('/index');
+                $stateProvider
+                    //首页
+                    .state('index',{
+                        url: '/index',
+                        templateUrl:'controllerDirectiveTemp.html',
+                        controller:'AccordionDemoCtrl'
+                    })
+            }]);
+
+    angular.module("klwkOmsApp")
+            .directive('classify', function ($compile) {
+                return {
+                    restrict: 'EA',
+                    replace: true,
+
+                    scope: {
+                        expander: '=',
+                        children: '='
+                    },
+
+                    template: '<ul> <li class="classify" id="{{expander.id}}"> <div class="classify-bg"> <span class="classify-text" ng-click="toggleExpand($event)"><i class="iconfont icon-icon3"></i>{{expander.name}}</span> <div class="classify-btn"> <span class="new" ng-click="showModal("addClassifyModal")">新增</span> <span class="edit" ng-click="showModal("modifyClassifyModal")">修改</span> </div> </div> </li> </ul>',
+
+                    link: function (scope, elm) {
+                        if (scope.children) {
+                            var html = $compile("<classify expander='expander' child='expander.children' ng-repeat='expander in children'></classify>")(scope);
+                            elm.append(html)
+                        }
+
+                    }
+                };
+            });
+
+
+    angular.module("klwkOmsApp")
+        .controller("AccordionDemoCtrl", ["$scope" ,function($scope) {
+//                $scope.init = function(){
+    //                alert(34);
+                    $scope.count= 10;
+//                };
+//                $scope.init();
+
+                $scope.addCount = function(){
+                    $scope.count++;
+                };
+                $scope.minuseCount = function(){
+                    $scope.count--;
+                };
+
+    }]);
+
+</script>
+</html>

@@ -1,0 +1,53 @@
+<div id="configManage" class="config-manage">
+    <div class="new-express-cost">
+        <div id="topNav" class="top-nav">
+            <div class="path">
+                新增快递成本
+            </div>
+        </div>
+        <div id="content" class="content">
+            <div class="advance-search">
+                <div class="items">
+                    <div class="ipt">
+                        <label class="item">
+                            <span class="title">仓库名称<i class="notice">*</i></span>
+                            <input type="text" class="klw-input" ng-model="formData.productName">
+                        </label>
+                        <label class="item">
+                            <span class="title">快递公司<i class="notice">*</i></span>
+                            <input type="text" class="klw-input" ng-model="formData.productNo">
+                        </label>
+                        <label class="item">
+                            <span class="title">省份<i class="notice">*</i></span>
+                            <input type="text" class="klw-input" ng-model="formData.typeNo">
+                        </label>
+                        <label class="item">
+                            <span class="title">起始重量</span>
+                            <input type="text" class="klw-input" ng-model="formData.typeNo">
+                        </label>
+                    </div>
+                    <div class="ipt">
+                        <label class="item">
+                            <span class="title">截止重量</span>
+                            <input type="text" class="klw-input" ng-model="formData.productName">
+                        </label>
+                        <label class="item">
+                            <span class="title">单价</span>
+                            <input type="text" class="klw-input" ng-model="formData.productNo">
+                        </label>
+                        <label class="item">
+                            <span class="title">单位（克）</span>
+                            <input type="text" class="klw-input" ng-model="formData.typeNo">
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <button ng-click="advanceSearch()" class="btn btn-success btn-78">保存</button>
+                <button class="btn btn-default btn-78" ng-click="clearOnly()">取消</button>
+            </div>
+
+        </div>
+    </div>
+</div>

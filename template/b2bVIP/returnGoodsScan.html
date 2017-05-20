@@ -1,0 +1,85 @@
+<div id="returnGoodsScan" class="jxOutDiv" ng-controller="returnGoodsScanController">
+    <div class="jxOutDivContent">
+        <div>
+            <button class="btn btn-default btn-78 topReturn" ng-click="returnFun()">返回</button>
+        </div>
+        <div class="basic-message jxmessage">
+            <div class="rows rowsText">
+                <p>退供单号</p>
+                <p>单据编号</p>
+                <p>退供仓库</p>
+                <p>签收仓库</p>
+            </div>
+            <div class="rows rowsInput">
+                <div>
+                    <input type="text" class="klw-input" value="{{params.tableList.vipreturnordercode}}" readonly/>
+                </div>
+                <div>
+                    <input type="text" class="klw-input" value="{{params.tableList.returnordercode}}" readonly/>
+                </div>
+                <div>
+                    <input type="text" class="klw-input" value="{{params.tableList.warehousename}}" readonly/>
+                </div>
+                <div>
+                    <input type="text" class="klw-input" value="{{params.tableList.inwarehousename}}" readonly/>
+                </div>
+            </div>
+            <div class="rows rowsText">
+                <p>商品箱码 <span class="star">*</span></p>
+                <p>商品规格</p>
+            </div>
+            <div class="rows rowsInput">
+                <div>
+                    <input class="klw-input" type="text" ng-modal=""/>
+                </div>
+                <div>
+                    <input class="klw-input" type="text"/>
+                </div>
+            </div>
+            <div class="rows rowsText">
+                <p>备注</p>
+            </div>
+            <div class="rows rowsInput">
+                <div class="input100">
+                    <textarea class="klw-textarea"></textarea>
+                </div>
+            </div>
+
+        </div>
+        <div class="activity-merchandise jxmessage">
+
+            <div class="hasDetail">
+                <div class="tableOut">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>PO单号</th>
+                            <th>箱码</th>
+                            <th>规格编码</th>
+                            <th>唯品编码</th>
+                            <th>退货数量</th>
+                            <th>签收数量</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- 底部按钮-->
+        <div class="content-footer jxmessage">
+            <button class="btn btn-success btn-78" ng-click="submit()">保存</button>
+            <button class="btn btn-default btn-78" ng-click="returnFun()">取消</button>
+        </div>
+    </div>
+</div>

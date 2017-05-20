@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<script type="text/javascript" src="../../public/js/base.js"></script>
+<script type="text/javascript" src="../../public/js/jquery.js"></script>
+<script type="text/javascript" src="../../public/js/angular-file-upload.min.js"></script>
+<body ng-app="app">
+<form class="form-horizontal" name="form" ng-controller="uploadController">
+    <div class="form-line">
+        <label>请选择证书文件：</label><span class="small-tip">证书文件只支持.pem格式，文件大小1M以内</span>
+        <div class="choose-file-area">
+            <input class="file-name" type="text" readonly="readonly" ng-model="fileItem.name"/>
+            <a href="javascript:;" class="choose-book">
+                <input type="file" name="certificate" nv-file-select uploader="uploader" ng-click="clearItems()"/>浏览
+            </a>
+        </div>
+    </div>
+    <button type="submit" ng-click="UploadFile()">提交</button>
+</form>
+<script>
+
+    var app = angular.module('app', ['angularFileUpload']);
+    app.controller('uploadController',['$scope', 'FileUploader', function($scope, FileUploader) {
+        $scope.uploadStatus = $scope.uploadStatus1 = false; //定义两个上传后返回的状态，成功获失败
+        var uploader = $scope.uploader = new FileUploader({
+            url: 'upload.php',
+            queueLimit: 1,     //文件个数
+            removeAfterUpload: true   //上传后删除文件
+        });
+        $scope.clearItems = function(){    //重新选择文件时，清空队列，达到覆盖文件的效果
+            uploader.clearQueue();
+        }
+        uploader.onAfterAddingFile = function(fileItem) {
+            $scope.fileItem = fileItem._file;    //添加文件之后，把文件信息赋给scope
+        };
+        uploader.onSuccessItem = function(fileItem, response, status, headers) {
+            $scope.uploadStatus = true;   //上传成功则把状态改为true
+        };
+        $scope.UploadFile = function(){
+            uploader.uploadAll();
+//            if(status){
+//                if(status1){
+//                    alert('上传成功！');
+//                }else{
+//                    alert('证书成功！私钥失败！');
+//                }
+//            }else{
+//                if(status1){
+//                    alert('私钥成功！证书失败！');
+//                }else{
+//                    alert('上传失败！');
+//                }
+//            }
+        }
+    }])
+
+</script>
+</body>
+</html>

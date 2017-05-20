@@ -1,0 +1,18 @@
+{
+  "devDependencies": {
+    "del": "^2.2.2",
+    "end-of-stream": "^1.4.0",
+    "gulp": "^3.9.1",
+    "gulp-angular-templatecache": "^2.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-if": "^2.0.2",
+    "gulp-ng-html2js": "^0.2.2",
+    "gulp-uglify": "^2.1.2",
+    "orchestrator": "^0.3.8",
+    "run-sequence": "^1.2.2"
+  },
+  "scripts": {
+    "first": "gulp step1",
+    "second": "gulp step2"
+  }
+}

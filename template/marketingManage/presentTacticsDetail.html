@@ -1,0 +1,89 @@
+
+<div id="presentTacticsDetail" class="jxOutDiv jxOutDivDetail" ng-controller="presentTacticsDetailController">
+    <div class="jxOutDivContent">
+        <div>
+            <button class="btn btn-default btn-78" ng-click="returnFun()" style="margin:35px 0 20px 50px;">返回</button>
+        </div>
+        <div class="detail-content-top">
+            <div class="detail-top-tab">
+                <ul>
+                    <li ng-class="{true:'current',false:''}[tab == 'first']" ng-click="isShow('first')">策略详情</li>
+                    <li ng-class="{true:'current',false:''}[tab == 'second']" ng-click="isShow('second')">操作日志</li>
+                </ul>
+            </div>
+        </div>
+        <div class="content-first" ng-show="tab == 'first'">
+            <div class="jxmessage">
+                <h3 class="detailTitle">店铺名称 &nbsp;&nbsp;&nbsp;&nbsp;
+                    <span ng-repeat="obj in tableList">{{obj.storename}}</span>
+                </h3>
+            </div>
+
+            <div class="activityMerchandise jxmessage" ng-show="isBagObj.isBagShow">
+                <h3 class="detailTitle">活动商品</h3>
+                <div class="tableOut">
+                    <table id="activityTable" class="display" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th ng-repeat="obj in theadList1">{{obj.name}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="obj in tableList1" repeat-finished-directive repeataction="initFunc()" repeatIndex="{{$index}}" condition="{{$last == true}}">
+                                <td ng-repeat="item in theadList1">
+                                    <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                                    {{obj[item.tag]  | isBoolean}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="giveMerchandise jxmessage">
+                <h3 class="detailTitle">{{isBagObj.content}}</h3>
+                <div class="tableOut">
+                    <table id="sendTable" class="display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th ng-repeat="obj in theadList2">{{obj.name}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in tableList2" repeat-finished-directive repeataction="initFunc()" repeatIndex="{{$index}}" condition="{{$last == true}}">
+                            <td ng-repeat="item in theadList2">
+                                <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                                {{obj[item.tag]}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="content-second" ng-show="tab == 'second'">
+            <div class="jxmessage">
+                <h3 class="detailTitle">操作记录</h3>
+
+                <div class="tableOut">
+                    <table id="operateTable" class="display" cellspacing="0" width="100%" style="width:100%;">
+                        <thead style="width: 100%;">
+                        <tr>
+                            <th ng-repeat="obj in theadList3">{{obj.name}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in tableList3 | limitTo:10" repeat-finished-directive repeataction="initFunc()" repeatIndex="{{$index}}" condition="{{$last == true}}">
+                            <td ng-repeat="item in theadList3">
+                                {{obj[item.tag] | setDefaultValueWithoutData}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+

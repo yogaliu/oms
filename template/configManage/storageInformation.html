@@ -1,0 +1,185 @@
+<div id="configManage" class="config-manage">
+    <div class="storage-information" id="storageInformation" ng-controller="storageInformationController">
+        <div id="topNav" class="top-nav">
+            <div class="path">
+                仓库信息
+            </div>
+        </div>
+        <div id="content" class="content">
+            <div class="search table-oprate cf">
+                <div class="items line fl">
+                    <div class="ipt line">
+                        <label class="item">
+                            <span class="title">仓库编码</span>
+                            <input type="text" class="klw-input" placeholder="请输入仓库编码" ng-model="formData.code">
+                        </label>
+                    </div>
+                </div>
+                <div class="oprate line fl">
+                    <span class="blue" ng-click="search()">搜索</span>
+                    <span ng-click="clearOnly()">清空</span>
+                </div>
+                <div class="fr line">
+                    <menu-select menu-config="menuInfo"></menu-select>
+                    <button class="svg2" ng-click="goNewStorage()">新增仓库信息</button>
+                </div>
+            </div>
+            <div id="topTable" class="top-table">
+                <div class="items fl">
+                    <label class="item" ng-click="queryCondition('isdisabled')">
+                        <div class="klwk-check-f" ng-if="formData.isdisabled === ''"><i class="iconfont"></i></div>
+                        <div class="klwk-check-x" ng-if="formData.isdisabled === true"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-if="formData.isdisabled === false"><i class="iconfont"></i></div>
+                        <span>禁用</span>
+                    </label>
+                    <label class="item" ng-click="queryCondition('ispush')">
+                        <div class="klwk-check-f" ng-if="formData.ispush === ''"><i class="iconfont"></i></div>
+                        <div class="klwk-check-x" ng-if="formData.ispush === true"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-if="formData.ispush === false"><i class="iconfont"></i></div>
+                        <span>推单</span>
+                    </label>
+                    <label class="item" ng-click="queryCondition('isintercept')">
+                        <div class="klwk-check-f" ng-if="formData.isintercept === ''"><i class="iconfont"></i></div>
+                        <div class="klwk-check-x" ng-if="formData.isintercept === true"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-if="formData.isintercept === false"><i class="iconfont"></i></div>
+                        <span>截单</span>
+                    </label>
+                </div>
+                <div class="fr">
+                    <div class="ti-pagination">
+                        <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                        / 共 <span>{{paginationConf.totalItems}}</span>
+                        <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont"  ng-click="prev()"></i></span>
+                        <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont" ng-click="next()"></i></span>
+                        <span class="config-column"><i class="iconfont"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="more-table" style="height: calc(100% - 178px);">
+                <div class="ab-position">
+                    <div class="all-table">
+                        <table class="table-thead" cellspacing="0" style="width: calc(100% - 4px);">
+                            <thead>
+                            <tr>
+                                <th ng-click="selectAll()">
+                                    <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                                </th>
+                                <th>操作</th>
+                                <th ng-repeat="obj in theadListOne">{{obj.name}}</th>
+                                <th ng-repeat="obj in theadListTwo">{{obj.name}}</th>
+                                <th ng-repeat="obj in theadListThree">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <table id="mainTable" class="display main-table" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th ng-click="selectAll()">
+                                    <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                                </th>
+                                <th>操作</th>
+                                <th ng-repeat="obj in theadListOne">{{obj.name}}</th>
+                                <th ng-repeat="obj in theadListTwo">{{obj.name}}</th>
+                                <th ng-repeat="obj in theadListThree">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="obj in tableList">
+                                <td ng-click="selectItem($index)">
+                                    <div class="klwk-check" ng-hide="obj.isdatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="obj.isdatacheck"><i class="iconfont"></i></div>
+                                </td>
+                                <td class="over-show">
+                                    <div class="tr-oprate">
+                                        <div class="tr-icon"><i class="iconfont icon-operate"></i></div>
+                                        <ul class="tr-oprate-list">
+                                            <li ng-click="goEditShop($index)">修改</li>
+                                            <li ng-click="enabledItem($index)">启用</li>
+                                            <li ng-click="disabledItem($index)">禁用</li>
+                                            <li ng-click="showPushModal($index)">推单设置</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td ng-repeat="item in theadListOne" title="{{obj[item.tag] | isBoolean }}">
+                                    <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                                    {{obj[item.tag] | isBoolean }}
+                                </td>
+                                <td ng-repeat="item in theadListTwo" title="{{obj.orderPushSetting[item.tag] | isBoolean }}">
+                                    <i class="iconfont icon-icon9 correct" ng-if="obj.orderPushSetting[item.tag] === true"></i>
+                                    {{obj.orderPushSetting[item.tag] | isBoolean }}
+                                </td>
+                                <td ng-repeat="item in theadListThree" title="{{obj[item.tag]}}">
+                                    <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                                    {{obj[item.tag]}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+
+        </div>
+        <!--推单设置弹框-->
+        <div class="modal fade set-order-push-modal" id="setOrderPushModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">推单设置</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div></div>
+                        <div class="item">
+                            <span>截单类型<i class="notice">*</i></span>
+                            <pull-select pull-config="truncatedTypeList"></pull-select>
+                        </div>
+                        <div class="item">
+                            <span>时间类型</span>
+                            <pull-select pull-config="timeTypeList"></pull-select>
+                        </div>
+                        <div class="item">
+                            <span>时间范围</span>
+                            <div class="time-area cf">
+                                <input class="klw-input" type="number" placeholder="请输入" ng-model="activeItem.orderPushSetting.begintime">
+                                <span class="text">点</span>
+                                <div class="short-line"></div>
+                                <input class="klw-input" type="number" placeholder="请输入" ng-model="activeItem.orderPushSetting.endtime">
+                                <span class="text">点</span>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <span>固定时间</span>
+                            <input class="klw-input" id="fixedtime" placeholder="请输入" ng-model="activeItem.orderPushSetting.fixedtime" readonly>
+                        </div>
+                        <label class="item sel">
+                            <div class="line" ng-click="checkItem('ispush')">
+                                <div class="klwk-check" ng-hide="activeItem.orderPushSetting.ispush"><i class="iconfont"></i></div>
+                                <div class="klwk-check-x" ng-show="activeItem.orderPushSetting.ispush"><i class="iconfont"></i></div>
+                                <span class="text">推单</span>
+                            </div>
+                        </label>
+                        <label class="item sel">
+                            <div class="line" ng-click="checkItem('isintercept')">
+                                <div class="klwk-check" ng-hide="activeItem.orderPushSetting.isintercept"><i class="iconfont"></i></div>
+                                <div class="klwk-check-x" ng-show="activeItem.orderPushSetting.isintercept"><i class="iconfont"></i></div>
+                                <span class="text">截单</span>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="setOrderPush()">保存</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

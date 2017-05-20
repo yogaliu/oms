@@ -1,0 +1,1957 @@
+/*消除bootstrap的影响*/
+.container{
+    padding: 0;
+    width: auto;
+}
+/*消除bootstrap的影响end*/
+/*配置管理模块公共样式*/
+.config-manage .klwk-check-x,.config-manage .klwk-check-f,.config-manage .klwk-check{
+    float: left;
+}
+.config-manage table .klwk-check-x,.config-manage table .klwk-check-f,.config-manage table .klwk-check{
+    float: none;
+}
+.config-manage .short-line{
+    display: inline-block;
+    width: 15px;
+    height: 1px;
+    background: #f0f0f0;
+    margin: 3px 23px;
+}
+.config-manage .blue{
+    color: #39A3E2;;
+    cursor: pointer;
+}
+.config-manage i.notice{
+    color: red;
+}
+.config-manage .line{
+    display: inline-block;
+}
+.config-manage .ac{
+    text-align: center;
+}
+.config-manage .ar{
+    text-align: right;
+}
+.config-manage .fr{
+     float: right;
+}
+.config-manage .fl{
+    float: left;
+}
+.config-manage .cf{
+    zoom:1;
+}
+.config-manage .oh{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.config-manage .cf:after{
+    display: block;
+    clear: both;
+    content: "";
+    visibility: hidden;
+    height: 0
+}
+.config-manage p.title{
+    height: 47px;
+    line-height: 47px;
+    font-size: 14px;
+}
+.config-manage label{
+    font-weight: normal;
+    margin:0;
+}
+.config-manage .svg2{
+    width: auto;
+    margin-left: 10px;
+    background: #ffffff;
+    font-size: 14px;
+    color: #999999;
+    letter-spacing: 1px;
+}
+.config-manage table tbody tr.darkgreen,
+.config-manage .peering-strategy .express-tabel tbody tr.darkgreen{
+    background: #E9F4E9;
+}
+.config-manage table{
+    width: 100%;
+    table-layout: fixed;
+}
+.config-manage table td,.config-manage table th{
+    text-align: center;
+    font-weight: normal;
+}
+.config-manage table td{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.config-manage .more-table .right-table table thead tr{
+    background: #F0F7F0;
+    font-size: 12px;
+    color: #666666;
+    letter-spacing: 0;
+    height: 38px;
+}
+.config-manage .more-table{
+    position: relative;
+}
+.config-manage .more-table .ab-position{
+    position: absolute;
+    top: 0px;
+    height: 100%;
+}
+.config-manage .more-table .ab-position .left-table,
+.config-manage .more-table .ab-position .all-table{
+    overflow: auto;
+    height: 100%;
+}
+.config-manage .more-table .ab-position .left-table .table-thead,
+.config-manage .more-table .ab-position .all-table .table-thead{
+    table-layout: fixed;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin-bottom: 0px;
+    z-index: 1;
+}
+.config-manage .more-table .right-table{
+    padding: 20px 10px;
+    float: right;
+    height: 100%;
+    background: #FBFDFB;
+    border: 1px solid #F5F5F5;
+}
+.config-manage .more-table .right-table .title{
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 15px;
+}
+.config-manage .more-table .right-table .title .btn-green{
+    height: 30px;
+    float: right;
+    border: 1px solid #54B254;
+    font-size: 14px;
+    color: #54B254;
+    letter-spacing: 1px;
+    background: #ffffff;
+    border-radius: 4px;
+    padding: 0 15px;
+}
+.config-manage{
+    height: 100%;
+    width: 100%;
+    background: #fafafa;
+    font-family: "微软雅黑";
+    font-size: 12px;
+    color: #999999;
+    margin: 0;
+}
+.config-manage>div{
+    height: 100%;
+    width: 100%;
+}
+.config-manage .top-nav{
+    height: 70px;
+    line-height: 70px;
+    display: none;
+}
+.config-manage .top-nav .path{
+    display: inline-block;
+    margin-right: 50px;
+    float: left;
+}
+.config-manage .content{
+    background: #FFFFFF;
+    padding: 25px 30px 15px 30px;
+    height: 100%;
+    overflow: auto;
+}
+.config-manage .content .top-table{
+    margin: 15px 0;
+    text-align: right;
+    clear: both;
+    overflow: hidden;
+}
+.config-manage .top-table .item{
+    margin-right: 25px;
+    margin-left: 15px;
+}
+.config-manage .top-table .item .klwk-check-f,
+.config-manage .top-table .item .klwk-check-x,
+.config-manage .top-table .item .klwk-check{
+    margin-top: 3px;
+}
+.config-manage .content .tit{
+    margin: 50px 0 20px 0;
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 1.33px;
+}
+.config-manage .content .sel-item{
+    margin: 20px 0;
+}
+.config-manage .content .sel-item .title{
+    font-size: 14px;
+    color: #999999;
+    letter-spacing: 1px;
+    cursor: default;
+}
+.config-manage .content .sel-item .klwk-check,
+.config-manage .content .sel-item .klwk-check-x{
+    margin-top: 4px;
+    margin-right: 10px;
+}
+.config-manage .search .fr{
+    display: inline-block;
+}
+.config-manage .search{
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eeeeee;
+    line-height: 40px;
+}
+.config-manage .search .klw-input,
+.config-manage .search .select-div{
+    width: 200px;
+    margin: 0 20px 0 10px;
+    display: inline-block;
+}
+.config-manage .search .oprate span{
+    margin-right: 10px;
+    cursor: pointer;
+}
+.config-manage .content .sel-item .detail{
+    font-size: 12px;
+    color: #C5C5C5;
+    letter-spacing: 1px;
+    margin-left: 15px;
+    display: inline-block;
+}
+.config-manage .content .sel-item .klw-input,
+.config-manage .content .sel-item .sewv{
+    margin-left: 16px;
+    height: 40px;
+}
+.config-manage .advance-search .item{
+    width: 25%;
+    float: left;
+}
+.config-manage .advance-search .item.lg{
+    width: 100%;
+}
+.config-manage .advance-search .item.md{
+    width: 50%;
+}
+.config-manage .advance-search .item.md input{
+    width: 95%;
+}
+.config-manage .advance-search .item.lg input{
+    width: 97.5%;
+}
+.config-manage .advance-search .item input{
+    display: block;
+    margin: 17px 0 0 0;
+    width: 90%;
+}
+.config-manage .advance-search .item .select-div{
+    width: calc(100% - 25px);
+    margin: 17px 0 0 0;
+}
+.config-manage .advance-search .item .select-div .content{
+    padding: 0;
+    overflow: visible;
+    height: 40px;
+    width: 100%;
+}
+.config-manage .advance-search .item input.line{
+    display: inline-block;
+    margin-left: 20px;
+}
+.config-manage .content .table-oprate{
+    text-align: right;
+    margin-top: 20px;
+}
+.config-manage .content .table-oprate .select-div{
+    margin-left: 10px;
+    background: #ffffff;
+    color: #999999;
+    letter-spacing: 1px;
+    width: 120px;
+    line-height: 38px;
+    height: 40px;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-block;
+}
+.config-manage .content .search .select-div{
+    margin-left: 10px;
+    background: #ffffff;
+    color: #999999;
+    letter-spacing: 1px;
+    line-height: 38px;
+    height: 40px;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-block;
+}
+.config-manage .content .table-oprate .select-div .select-content i:before,
+.config-manage .content .search .select-div .select-content i:before{
+    top: 2px;
+}
+.config-manage .content .table-oprate .select-div .sewvs li{
+    text-align: center;
+}
+.config-manage .advance-search .oprate{
+    margin-top: 20px;
+}
+.config-manage .advance-search .oprate button {
+    margin-right: 20px;
+}
+.config-manage .advance-search {
+    padding-bottom: 13px;
+    /*border-bottom: 1px solid #F5F5F5;*/
+}
+.config-manage .advance-search .ipt{
+    margin-bottom: 20px;
+}
+.config-manage .advance-search .ipt .title,.config-manage .search .ipt .title {
+    display: inline-block;
+    color: #666666;
+}
+.config-manage .footer button{
+    margin-right: 20px;
+}
+.config-manage input.klw-input2{
+    width: 545px;
+}
+.config-manage .ti-pagination{
+    width: auto;
+}
+.config-manage .left-table{
+    float: left;
+    width: 60%;
+    height: 100%;
+    overflow: auto;
+}
+/*.config-manage .right-table{
+    float: right;
+    width: 40%;
+    height: 100%;
+    overflow: auto;
+    background: #FBFDFB;
+    border: 1px solid #F5F5F5;
+    padding-bottom: 20px;
+}*/
+.config-manage .right-table .icon-delete:before{
+    font-size: 12px;
+    cursor: pointer;
+}
+.config-manage .top-table .item span{
+    margin-left: 15px;
+    font-size: 14px;
+    color: #7F7F7F;
+    letter-spacing: 0;
+}
+/*配置管理模块公共样式end*/
+/*下拉菜单*/
+.config-manage .sewv{
+    display: inline-block;
+    width: 260px;
+}
+.config-manage .sewv .content{
+    padding: 0;
+}
+.config-manage .cm-select{
+    position: relative;
+}
+.config-manage .cm-select:hover .cm-select-list{
+    display: block;
+}
+.config-manage .cm-select .cm-select-list{
+    position: absolute;
+    left: 0;
+    top: 40px;
+    border: 1px solid #F5F5F5;
+    box-shadow: 0 5px 20px 0 rgba(0,0,0,0.10);
+    border-radius: 4px;
+    width: 100%;
+    display: none;
+    background: #ffffff;
+    z-index: 500;
+    max-height: 190px;
+    overflow-y: auto;
+    font-size: 14px;
+}
+.config-manage .cm-select .cm-input{
+    width: 100%;
+    margin: 12px 0 20px 0;
+    display: block;
+    line-height: 40px;
+    height: 40px;
+    color: #666;
+    padding-left: 20px;
+    border-radius: 4px;
+    border: 1px solid #ebebeb;
+    font-size: 14px;
+    background: #ffffff;
+    cursor: pointer;
+}
+.config-manage .cm-select .cm-select-list li{
+    list-style: none;
+    padding: 10px 5px;
+    text-align: left;
+    color: #666666;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.config-manage .cm-select .cm-select-list li:hover{
+    background: #FAFAFA;
+}
+.config-manage table tr td.over-show{
+    overflow: visible;
+    text-align: center;
+}
+.config-manage .tr-oprate{
+    position: relative;
+    width: 20px;
+    display: inline-block;
+}
+.config-manage .tr-oprate:hover .tr-oprate-list{
+    display: block;
+}
+.config-manage .tr-icon{
+    line-height: 56px;
+    cursor: pointer;
+}
+.config-manage .tr-oprate-list{
+    position: absolute;
+    left: -20px;
+    top: 42px;
+    border: 1px solid #F5F5F5;
+    box-shadow: 0 5px 20px 0 rgba(0,0,0,0.10);
+    border-radius: 4px;
+    width: 114px;
+    display: none;
+    background: #ffffff;
+    z-index: 500;
+}
+.config-manage .tr-oprate-list li{
+    list-style: none;
+    padding: 10px 5px;
+    text-align: left;
+    color: #666666;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.config-manage .tr-oprate-list button{
+    list-style: none;
+    padding: 10px 5px;
+    text-align: left;
+    color: #666666;
+    letter-spacing: 1px;
+    cursor: pointer;
+    width: 100%;
+    display: block;
+    border: none;
+    background: #fff;
+}
+.config-manage .tr-oprate-list button[disabled]{
+    color: #cdcdcd;
+    cursor: default;
+}
+.config-manage .tr-oprate-list li:hover,
+.config-manage .tr-oprate-list button:hover{
+    background: #FAFAFA;
+}
+.config-manage .more-select{
+    position: relative;
+    display: inline-block;
+    width: 260px;
+    height: 40px;
+}
+.config-manage .more-select .select-content{
+    width: 100%;
+    height: 40px;
+    border: 1px #ebebeb solid;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 0px;
+}
+.config-manage .more-select .select-content > span{
+    display: inline-block;
+    width: 80%;
+    white-space: pre;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 38px;
+    color: #999;
+    padding: 0 5px;
+    vertical-align: middle;
+    padding-left: 10px;
+    color: #666666;
+}
+.config-manage .more-select .select-content > em{
+    display: inline-block;
+    width: 20px;
+    vertical-align: middle;
+}
+/*下拉菜单end*/
+/*字体图标*/
+.config-manage .iconfont{
+    margin-right: 6px;
+}
+.config-manage .iconfont.icon-operate{
+    margin-right: 0;
+}
+.config-manage .icon-more:before{
+    content: '\e684';
+    font-size: 10px;
+    color: #CACACA;
+    vertical-align: middle;
+}
+.config-manage .icon-operate:before{
+    content: '\e65c';
+}
+.config-manage .icon-download:before{
+    content: '\e681';
+}
+.config-manage .icon-fresh:before{
+    content: '\e672';
+}
+.config-manage .icon-new:before{
+    content: '\e66b'
+}
+.config-manage .icon-delete:before{
+    content: '\e661'
+}
+.config-manage .icon-left:before{
+    content: '\e657';
+}
+.config-manage .icon-right:before{
+    content: '\e64d';
+}
+.config-manage .icon-search-blod:before{
+    content: '\e662';
+}
+.config-manage .icon-close:before{
+    content: '\e661';
+}
+.config-manage .icon-edit:before{
+    content: '\e66f';
+}
+.config-manage .icon-set:before{
+    content: '\e65a';
+}
+/*字体图标end*/
+/*弹框*/
+.config-manage .modal-dialog{
+    width: 400px;
+    margin-top: 160px;
+}
+.config-manage .modal-dialog.wide{
+    width: 600px;
+}
+.config-manage .modal-dialog.wide .modal-body .item{
+    width: 48%;
+}
+.config-manage .modal-dialog.wide .modal-body .item.wide{
+    width: 100%;
+}
+.config-manage .modal-dialog .modal-body .check-item{
+    margin-right: 15px;
+}
+.config-manage .modal-dialog .modal-body .check-item .klwk-check,
+.config-manage .modal-dialog .modal-body .check-item .klwk-check-x{
+    margin-top: 2px;
+    margin-right: 5px;
+}
+.config-manage .modal-header{
+    height: 50px;
+    padding: 0 30px;
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 0.88px;
+    border-bottom: 1px solid #eeeeee;
+}
+.config-manage .modal-header .close{
+    line-height: 50px;
+    margin-top: 0;
+}
+.config-manage .modal-header .modal-title{
+    line-height: 50px;
+}
+.config-manage .modal-body{
+    padding: 30px;
+    color: #666666;
+}
+.config-manage .modal-body .klw-input,
+.config-manage .modal-body .sewv,
+.config-manage .modal-body .select-div{
+    width: 100%;
+    margin: 12px 0 20px 0;
+    display: block;
+}
+.config-manage .modal-body .item .title{
+    font-size: 12px;
+    color: #666666;
+    letter-spacing: 0;
+}
+.config-manage .modal-footer{
+    border-top: 1px solid #eeeeee;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    padding: 0;
+}
+.config-manage .modal-footer .btn{
+    padding: 9px 23px;
+}
+.config-manage .modal-footer .btn + .btn {
+    margin-left: 20px;
+}
+/*弹框end*/
+
+/*订单配置*/
+.config-manage .order-config .content{
+    padding: 0 30px 36px 30px;
+}
+.config-manage .order-config .sewv .content{
+    padding: 0;
+}
+.config-manage .order-config .select-div{
+    display: inline-block;
+    margin-left: -4px;
+    outline: none;
+    line-height: 38px;
+    width: 280px;
+    height: 40px;
+    color: #666;
+    padding-left: 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    background: #ffffff;
+}
+.config-manage .order-config .select-div .select-content i:before{
+    top: 2px;
+}
+/*订单配置end*/
+/*通用分类*/
+.general-classify .content .table-oprate{
+    margin-top: 20px;
+}
+.general-classify .content{
+    padding-bottom: 0;
+}
+/*通用分类end*/
+/*平台接口*/
+.config-manage .platform-interface .search{
+    border-bottom: none;
+}
+.config-manage .platform-interface .reauthorization .modal-dialog{
+    width: 50%;
+}
+.config-manage .platform-interface .reauthorization .modal-dialog iframe{
+    width: 100%;
+    height: 300px;
+    overflow: auto;
+    border: 1px solid #ebebeb;
+}
+.config-manage .platform-interface .reauthorization .tip{
+    margin-left: 60px;
+}
+.config-manage .platform-interface .reauthorization .ipt .item{
+    margin-bottom: 10px;
+}
+.config-manage .platform-interface .reauthorization .ipt .item .title{
+    width: 60px;
+    display: inline-block;
+    float: left;
+    line-height: 40px;
+}
+.config-manage .platform-interface .reauthorization .ipt .item .klw-input{
+    width: calc(100% - 60px);
+    margin: 0;
+    display: inline-block;
+    float: left;
+}
+.config-manage .platform-interface .reauthorization .ipt .item:nth-child(1) .btn{
+    width: 105px;
+    float: right;
+}
+.config-manage .platform-interface .reauthorization .ipt .item:nth-child(1) .klw-input{
+    width: calc(100% - 175px);
+}
+/*平台接口end*/
+/*新增平台接口*/
+.new-platform-interface .advance-search {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+.new-platform-interface .advance-search .sel{
+    margin-bottom: 20px;
+}
+.new-platform-interface .advance-search .sel .item{
+    margin-right: 20px;
+}
+.new-platform-interface .advance-search .sel input {
+    display: inline-block;
+}
+/*新增平台接口end*/
+/*短信账号*/
+.sms-account .content .table-oprate{
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+/*短信账号end*/
+/*新增短信账号*/
+.new-sms-account .advance-search {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+/*新增短信账号end*/
+/*短信模板*/
+.config-manage .sms-template.express-information.peering-strategy .left-table{
+    width: 70%;
+}
+.config-manage .sms-template.express-information.peering-strategy .right-table{
+    width: 30%;
+}
+.config-manage .sms-template .content .table-oprate{
+    margin-top: 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eeeeee;
+}
+.config-manage .sms-template .creat-modal .item.wide .tag{
+    display: inline-block;
+    background: #FFFFFF;
+    border: 1px solid #EBEBEB;
+    border-radius: 4px;
+    font-size: 10px;
+    color: #999999;
+    letter-spacing: 0.83px;
+    width: 76px;
+    text-align: center;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    height: 30px;
+    line-height: 30px;
+}
+.config-manage .sms-template .creat-modal .sms-content{
+    width: 100%;
+    height: 80px;
+    border: 1px solid #EBEBEB;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+.config-manage .sms-template .creat-modal .item.wide .tag-line{
+    margin-top:12px;
+}
+/*短信模板end*/
+/*仓库信息*/
+.config-manage .storage-information .content{
+    padding-bottom: 0;
+}
+.config-manage .storage-information .content .table-oprate{
+    margin-top:0;
+}
+.config-manage .storage-information .set-order-push-modal .item .time-area{
+    margin: 12px 0 20px 0;
+}
+.config-manage .storage-information .set-order-push-modal .item .time-area .klw-input{
+    margin: 0;
+    float: left;
+    width: 30%;
+}
+.config-manage .storage-information .set-order-push-modal .item .time-area .text{
+    float: left;
+    line-height: 40px;
+    margin-left: 10px;
+}
+.config-manage .storage-information .set-order-push-modal .item .time-area .short-line{
+    margin: 19px 23px;
+    float: left;
+}
+.config-manage .storage-information .set-order-push-modal .item.sel{
+    margin-right: 10px;
+}
+.config-manage .storage-information .set-order-push-modal .item.sel .text{
+    margin-left: 5px;
+}
+/*仓库信息end*/
+/*新增仓库信息*/
+.new-storage-information .advance-search {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+.config-manage .new-storage-information .advance-search .item .select-div{
+    width: 90%;
+}
+/*新增仓库信息end*/
+/*区域信息*/
+.area-information .title{
+    font-size: 14px;
+    color: #666666;
+    padding: 15px 0;
+    border-bottom: 1px solid #EEEEEE;
+    margin-bottom: 20px;
+    line-height: 40px;
+}
+.area-information .title .btn-green{
+    border: 1px solid #54B254;
+    font-size: 14px;
+    color: #54B254;
+    letter-spacing: 1px;
+    background: #ffffff;
+    border-radius: 4px;
+    height: 40px;
+    padding: 0 15px;
+    float: right;
+}
+.area-information .level{
+    margin: 10px 20px;
+    cursor: pointer;
+}
+.area-information .bg{
+    display: inline-block;
+    padding: 6px 10px 6px 40px;
+    position: relative;
+}
+.area-information .bg .iconfont{
+    position: absolute;
+    left: 18px;
+    top: 6px;
+}
+.area-information .bg .text{
+    margin-right: 29px;
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 0;
+}
+.area-information .bg .line span{
+    margin: 0 20px;
+}
+.area-information .bg .line span.new{
+    font-size: 14px;
+    color: #37BD4B;
+    letter-spacing: 0;
+}
+.area-information .bg .line span.edit{
+    font-size: 14px;
+    color: #999999;
+    letter-spacing: 0;
+}
+.area-information .bg .line{
+    display: none;
+}
+.area-information .bg:hover{
+    background: #fafafa;
+}
+.area-information .bg:hover .line{
+    display: inline-block;
+}
+/*区域信息end*/
+/*快递信息*/
+.config-manage .express-information .content{
+    padding-bottom: 0;
+}
+.config-manage .express-information .advance-search .item input{
+    display: inline-block;
+    margin: 0 40px 0 20px;
+}
+.config-manage .express-information .advance-search .ipt{
+    margin-bottom: 0px;
+}
+.config-manage .express-information .advance-search {
+    padding-bottom: 25px;
+}
+.config-manage .express-information .advance-search .oprate span{
+    cursor: pointer;
+    margin-right: 10px;
+}
+.config-manage .express-information .advance-search .oprate{
+    margin-top: 0;
+    line-height: 40px;
+}
+.config-manage .express-information .top-table .item{
+    margin-right: 25px;
+}
+.config-manage .express-information .top-table .item span{
+    margin-left: 15px;
+    font-size: 14px;
+    color: #7F7F7F;
+    letter-spacing: 0;
+}
+.config-manage .express-information .left-table{
+    float: left;
+    width: 60%;
+    overflow: auto;
+}
+.config-manage .express-information .right-table{
+    float: right;
+    width: 40%;
+    overflow: auto;
+    background: #FBFDFB;
+    border: 1px solid #F5F5F5;
+    padding-bottom: 20px;
+}
+.config-manage .express-information .right-table .title{
+    /*padding: 19px 10px;*/
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 0;
+}
+.config-manage .express-information .right-table .items{
+    /*padding: 19px 20px;
+    font-size: 12px;
+    color: #999999;
+    letter-spacing: 0;*/
+}
+.config-manage .express-information .right-table .items .item{
+    margin-right: 25px;
+}
+.config-manage .express-information .right-table .items .item .text{
+    color: #2A2A2A;
+    margin-left: 6px;
+}
+.config-manage .express-information .express-tabel{
+    /*margin: 0 auto;
+    width: calc(100% - 20px);*/
+}
+.config-manage .express-information .express-tabel thead tr{
+    background: #F0F7F0;
+    font-size: 12px;
+    color: #666666;
+    letter-spacing: 0;
+    height: 38px;
+}
+.config-manage .express-information .express-tabel tbody tr{
+    background: #FBFDFB;
+    height: 48px;
+    border-bottom: 1px solid #F5F5F5;
+}
+.config-manage .express-information .express-tabel tbody tr:last-child{
+    border-bottom: none;
+}
+.config-manage .express-information .left-table table thead tr th{
+    padding: 0;
+}
+.config-manage .express-information .left-table table thead tr th:nth-child(1),
+.config-manage .express-information .left-table table thead tr th:nth-child(2),
+.config-manage .express-information .left-table table thead tr th:nth-child(3),
+.config-manage .express-information .left-table table thead tr th:nth-child(4){
+    width: 4%;
+}
+.config-manage .express-information .left-table table thead tr th:nth-child(5),
+.config-manage .express-information .left-table table thead tr th:nth-child(6),
+.config-manage .express-information .left-table table thead tr th:nth-child(7){
+    width: 7%;
+}
+.config-manage .express-information .left-table table thead tr th:nth-child(8),
+.config-manage .express-information .left-table table thead tr th:nth-child(9),
+.config-manage .express-information .left-table table thead tr th:nth-child(10),
+.config-manage .express-information .left-table table thead tr th:nth-child(11),
+.config-manage .express-information .left-table table thead tr th:nth-child(12){
+    width: 5%;
+}
+.config-manage .express-information .left-table table thead tr th:nth-child(13),
+.config-manage .express-information .left-table table thead tr th:nth-child(14),
+.config-manage .express-information .left-table table thead tr th:nth-child(15){
+    width: 9%;
+}
+/*快递信息end*/
+/*快递范围*/
+.config-manage .express-area .content{
+    padding-bottom: 0;
+}
+.config-manage .express-area .advance-search{
+    padding-bottom: 20px;
+    border-bottom: none;
+}
+.config-manage .express-area .content .table-oprate{
+    padding-top: 15px;
+    border-top: 1px solid #eeeeee;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+.config-manage .express-area .search{
+    border-bottom: none;
+}
+.config-manage .express-area .area-set-modal .ipt{
+    margin-bottom: 15px;
+}
+.config-manage .express-area .area-set-modal .ipt .item .title{
+    float: left;
+    line-height: 40px;
+    width: 60px;
+}
+.config-manage .express-area .area-set-modal .ipt .item .select-div{
+    display: inline-block;
+    float: left;
+    margin: 0;
+    width: calc(100% - 60px);
+}
+.config-manage .express-area .area-set-modal .modal-body{
+    height: 360px;
+    overflow: auto;
+}
+.config-manage .express-area .area-set-modal .modal-body .classify{
+    margin: 0 0 3px 15px;
+}
+.config-manage .express-area .area-set-modal .classify-text{
+    display: block;
+}
+.config-manage .express-area .area-set-modal .classify-text .klwk-check,
+.config-manage .express-area .area-set-modal .classify-text .klwk-check-x{
+    margin-top: 7px;
+    margin-right: 5px;
+}
+.config-manage .express-area .area-set-modal .classify .noPadding{
+    padding: 0 20px 0 10px;
+}
+.config-manage .express-area .area-set-modal .classify-text .klwk-check-x i:before{
+    top: -7px;
+}
+/*快递范围end*/
+/*新增快递范围*/
+.new-express-area .content > .title{
+    font-size: 14px;
+    color: #666666;
+    padding: 1.5% 0;
+    border-bottom: 1px solid #EEEEEE;
+}
+.new-express-area .advance-search{
+    padding-top: 1.5%;
+    border-bottom: none;
+}
+.new-express-area .keyword{
+    display: block;
+}
+.new-express-area .advance-search .item.keyword input{
+    width: 80%;
+    display: inline-block;
+}
+.config-manage .new-express-area .advance-search .item .select-div{
+    width: 90%;
+}
+/*新增快递范围end*/
+/*快递成本*/
+.express-cost .advance-search .item{
+    width: auto;
+}
+.express-cost .advance-search .item .klw-input{
+    display: inline-block;
+    margin-top: 0;
+    margin-left: 20px;
+    margin-right: 40px;
+    width: 200px;
+}
+.express-cost .advance-search{
+    padding-bottom: 0;
+}
+.express-cost .advance-search .oprate{
+    line-height: 40px;
+    margin-top: 0;
+}
+.express-cost .advance-search .oprate span{
+    margin-left: 20px;
+    cursor: pointer;
+}
+.express-cost .content .table-oprate {
+    margin-top: 0;
+}
+.express-cost .content .table-oprate .svg2{
+    margin-left: 0;
+    margin-right: 10px;
+}
+/*快递成本end*/
+/*新增快递成本*/
+.new-express-cost .advance-search{
+    padding-bottom: 0;
+    border-bottom: none;
+}
+/*新增快递成本end*/
+/*店铺信息*/
+.config-manage .shop-information .content{
+    padding: 25px 30px 0 30px;
+}
+.config-manage .shop-information .content .table-oprate{
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+.config-manage .shop-information{
+    position: relative;
+}
+.config-manage .shop-information .has-not-set{
+    position: absolute;
+    top: -100px;
+    text-align: center;
+    width: 50%;
+    background: #FFFFFF;
+    border: 1px solid #EBEBEB;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.05);
+    border-radius: 4px;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 25%;
+}
+.config-manage .shop-information .has-not-set .text{
+    font-size: 14px;
+    color: #F18F1C;
+    letter-spacing: 0.85px;
+}
+.config-manage .shop-information .has-not-set .icon{
+    float: right;
+    cursor: pointer;
+    margin-right: 6px;
+}
+.config-manage .shop-information .main-table tr.not-set td{
+    color: #F18F1C;
+}
+.config-manage .shop-information .has-not-set .icon .icon-delete:before{
+
+}
+.config-manage .shop-information .over-show .not-set{
+    color: #FFC900;
+}
+.config-manage .shop-information .over-show .fr{
+    line-height: 58px;
+    cursor: pointer;
+}
+.shop-information .fl .svg2 {
+    margin-left: 0;
+    margin-right: 10px;
+}
+.shop-information .fr{
+    line-height: 40px;
+}
+.shop-information .cf{
+    margin-bottom: 1%;
+}
+.shop-information .shop-set-modal .modal-dialog{
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 49.3%;
+    margin: 0;
+}
+.shop-information .shop-set-modal .modal-content{
+    border-radius: 0;
+    height: 100%;
+}
+.shop-information .shop-set-modal .modal-body{
+    padding: 30px;
+}
+.shop-information .shop-set-modal .modal-footer{
+    border-top: none;
+    text-align: left;
+    padding-left: 30px;
+    position: absolute;
+    bottom: 20px;
+}
+.shop-information .shop-set-modal .advance-search{
+    padding-bottom: 0;
+    border-bottom: none;
+}
+.shop-information .shop-set-modal .advance-check .sel{
+    margin-bottom: 2%;
+}
+.shop-information .shop-set-modal .advance-check .sel .item{
+    width: 25%;
+    float: left;
+}
+.shop-information .shop-set-modal .advance-check .sel .item .klwk-check,
+.shop-information .shop-set-modal .advance-check .sel .item .klwk-check-x{
+    margin-top: 2px;
+    margin-right: 10px;
+}
+.shop-information .shop-set-modal .ipt .item{
+    width: 33.33%;
+}
+.shop-information .shop-set-modal .ipt .klw-input{
+    width: calc(100% - 25px);
+}
+.shop-information .shop-set-modal .modal-header{
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 1px;
+    padding: 0 15px;
+    border-bottom: 1px solid #EEEEEE;
+}
+.shop-information .shop-set-modal .modal-header .close{
+    line-height: 50px;
+}
+.shop-information .shop-set-modal .modal-header .tab{
+    display: inline-block;
+    line-height: 50px;
+    margin-right: 30px;
+    cursor: pointer;
+    padding: 0 15px;
+    box-sizing: border-box;
+    height: 50px;
+}
+.shop-information .shop-set-modal .modal-header .tab.active{
+    border-bottom: 4px solid #3FA248;
+}
+.shop-information .shop-set-modal .alt{
+    background: rgba(241,143,28,.2);
+    font-size: 12px;
+    color: #F18F1C;
+    letter-spacing: 0.86px;
+    text-align: center;
+    padding: 10px 0;
+}
+.shop-information .shop-set-modal .auto-stop .klw-input{
+    display: inline-block;
+    width: 30%;
+    margin-right: 0;
+}
+.shop-information .shop-set-modal .auto-stop .title{
+    display: block;
+}
+.shop-information .shop-set-modal .auto-stop.item{
+    width: 100%;
+}
+/*店铺信息end*/
+/*新增店铺*/
+.new-shop .advance-search{
+    border-bottom: none;
+}
+.new-shop .main-title{
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 1.31px;
+    padding-bottom: 20px;
+}
+.config-manage .new-shop .advance-search .item .select-div{
+    margin: 17px 0 0 0;
+    width: 90%;
+}
+/*新增店铺end*/
+/*配货策略*/
+.config-manage .more-table .right-table table.right-first thead tr{
+    background: #DCECDC;
+}
+.config-manage .express-information .express-tabel.contact-table tbody tr:last-child{
+    border-bottom: 1px solid #F5F5F5;
+}
+.config-manage .peering-strategy .content .search{
+    border-bottom: none;
+}
+.config-manage .express-information.peering-strategy .content{
+    padding-bottom: 15px;
+}
+.peering-strategy .set-express .modal-body{
+    height: 360px;
+    overflow: auto;
+    padding: 20px 30px;
+}
+.peering-strategy .set-express .modal-body .item{
+    padding: 10px;
+    position: relative;
+}
+.peering-strategy .set-express .modal-body .item .text{
+    margin-left: 10px;
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 0;
+}
+.peering-strategy .set-express .modal-body .item .klwk-check-x,
+.peering-strategy .set-express .modal-body .item .klwk-check{
+    margin-top: 3px;
+}
+.peering-strategy .set-express .modal-body .item .order,
+.peering-strategy .set-express .modal-body .item .order-edit{
+    position: absolute;
+    right: 56px;
+}
+.peering-strategy .set-express .modal-body .item .order-edit{
+    display: none;
+    background: #FFFFFF;
+    border: 1px solid #EBEBEB;
+    border-radius: 4px;
+    width: 76px;
+    text-align: center;
+}
+.peering-strategy .set-express .modal-body .item .edit{
+    display: none;
+    position: absolute;
+    right: 10px;
+    color: #D9D9D9;
+    cursor: pointer;
+}
+.peering-strategy .set-express .modal-body .item:hover{
+    background: #FAFAFA;
+}
+.peering-strategy .set-express .modal-body .item:hover .edit{
+    display: inline-block;
+}
+/*配货策略end*/
+/*仓库范围*/
+.config-manage .storage-area .content{
+    padding-bottom: 0;
+}
+.config-manage .storage-area .content .table-oprate{
+    border-top: 1px solid #eeeeee;
+    padding: 15px 0;
+}
+.storage-area .search{
+    padding-bottom: 0;
+    border-bottom: none;
+}
+.storage-area .top-table{
+    border-top: 1px solid #eeeeee;
+    padding-top: 20px;
+}
+.config-manage .storage-area .area-set-modal .ipt{
+    margin-bottom: 15px;
+}
+.config-manage .storage-area .area-set-modal .ipt .item .title{
+    float: left;
+    line-height: 40px;
+    width: 40px;
+}
+.config-manage .storage-area .area-set-modal .ipt .item .select-div{
+    display: inline-block;
+    float: left;
+    margin: 0;
+    width: calc(100% - 40px);
+}
+.config-manage .storage-area .area-set-modal .modal-body{
+    height: 360px;
+    overflow: auto;
+}
+.config-manage .storage-area .area-set-modal .modal-body .classify{
+    margin: 0 0 3px 15px;
+}
+.config-manage .storage-area .area-set-modal .classify-text{
+    display: block;
+}
+.config-manage .storage-area .area-set-modal .classify-text .klwk-check,
+.config-manage .storage-area .area-set-modal .classify-text .klwk-check-x{
+    margin-top: 7px;
+    margin-right: 5px;
+}
+.config-manage .storage-area .area-set-modal .classify .noPadding{
+    padding: 0 20px 0 10px;
+}
+.config-manage .storage-area .area-set-modal .classify-text .klwk-check-x i:before{
+    top: -7px;
+}
+/*仓库范围end*/
+/*系统日志*/
+.config-manage .system-log .content{
+    padding-bottom: 0;
+}
+.config-manage .system-log .advance-search {
+    padding-bottom: 20px;
+    border-bottom: none;
+}
+.config-manage .system-log .advance-search .select-div{
+    outline: none;
+    width: 200px;
+    height: 40px;
+    color: #666;
+    font-size: 14px;
+    background: #ffffff;
+    display: inline-block;
+    margin: 0;
+    line-height: 38px;
+}
+.config-manage .system-log .advance-search .select-div .select-content i:before{
+    top:2px;
+}
+.system-log .advance-search .item{
+    width: auto;
+}
+.system-log .advance-search .item .title{
+    width: 70px;
+}
+.system-log .advance-search .item input.klw-input{
+    display: inline-block;
+    width: 200px;
+    margin: 0;
+}
+.system-log .advance-search .item.log-type{
+    margin-left: 20px;
+}
+.system-log .advance-search .item.log-type .title{
+    margin-right: 5px;
+}
+.system-log .advance-search .oprate{
+    line-height: 40px;
+    margin-top: 0;
+}
+.system-log .advance-search .oprate span{
+    margin-left: 20px;
+    cursor: pointer;
+}
+/*系统日志end*/
+/*角色管理*/
+.config-manage .character-manage .content{
+    padding-bottom: 0;
+}
+.config-manage .character-manage .content .search{
+    border-bottom: none;
+}
+.character-manage .shop-permission-modal .modal-dialog{
+    width: 780px;
+}
+.character-manage .shop-permission-modal .modal-body{
+    padding: 0;
+    height: 378px;
+}
+.character-manage .shop-permission-modal .modal-body .cf{
+    height: 100%;
+}
+.character-manage .shop-permission-modal .modal-body .cf .klw-search{
+    width: 100%;
+    height: 30px;
+    margin-bottom: 10px;
+    background: #ffffff;
+}
+.character-manage .shop-permission-modal .modal-body .left,
+.character-manage .shop-permission-modal .modal-body .right{
+    width: 366px;
+    height: 100%;
+    padding: 10px 15px 0 10px;
+    position: relative;
+}
+.character-manage .shop-permission-modal .modal-body .center{
+    width: 46px;
+    height: 100%;
+    border-left: 1px solid #eeeeee;
+    border-right: 1px solid #eeeeee;
+    text-align: center;
+}
+.character-manage .shop-permission-modal .modal-body .center .center-btn{
+    background: #4DB556;
+    border-radius: 4px;
+    color: #ffffff;
+    width: 24px;
+    height: 24px;
+    padding: 2px 3px;
+    display: inline-block;
+}
+.character-manage .shop-permission-modal .modal-body .center .center-btn:nth-child(1){
+    margin-top: 164px;
+}
+.character-manage .shop-permission-modal .modal-body .center .center-btn:nth-child(2){
+    margin-top: 6px;
+}
+.character-manage .shop-permission-modal .modal-body .center .center-btn.disable{
+    background: #ffffff;
+    border: 1px solid #F0F0F0;
+    color: #EBEBEB;
+}
+.character-manage .shop-permission-modal .modal-body{
+    padding: 0;
+}
+.character-manage .shop-permission-modal .modal-body .left .icon-search-blod{
+    position: absolute;
+    left: 31px;
+    top: 15px;
+    color: #cccccc;
+}
+.character-manage .shop-permission-modal .modal-body .left .klw-search{
+    width: 100%;
+    height: 30px;
+    background: none;
+    margin-bottom: 12px;
+}
+.character-manage .shop-permission-modal .modal-body .left:nth-child(2) .title{
+    height: 42px;
+    line-height: 32px;
+    color: #666666;
+}
+.character-manage .shop-permission-modal .modal-body .left .thead{
+    height: 40px;
+    background: #FAFAFA;
+    border-bottom: 1px solid #EEEEEE;
+    border-top: 1px solid #EEEEEE;
+    color: #666666;
+    line-height: 38px;
+}
+.character-manage .shop-permission-modal .modal-body .left .thead .td,
+.character-manage .shop-permission-modal .modal-body .left .tbody .tr .td{
+    display: inline-block;
+    text-align: center;
+}
+.character-manage .shop-permission-modal .modal-body .left .thead .td:nth-child(1),
+.character-manage .shop-permission-modal .modal-body .left .tbody .tr .td:nth-child(1){
+    width: 15%;
+    float: left;
+    height: 100%;
+}
+.character-manage .shop-permission-modal .modal-body .left .thead .td:nth-child(2),
+.character-manage .shop-permission-modal .modal-body .left .tbody .tr .td:nth-child(2){
+    width: 25%;
+    float: left;
+}
+.character-manage .shop-permission-modal .modal-body .left .thead .td:nth-child(3),
+.character-manage .shop-permission-modal .modal-body .left .tbody .tr .td:nth-child(3){
+    width: 30%;
+    float: left;
+}
+.character-manage .shop-permission-modal .modal-body .left .thead .td:nth-child(4),
+.character-manage .shop-permission-modal .modal-body .left .tbody .tr .td:nth-child(4){
+    width: 30%;
+    float: left;
+}
+.character-manage .shop-permission-modal .modal-body .left .thead .td:nth-child(1) .klwk-check,
+.character-manage .shop-permission-modal .modal-body .left .thead .td:nth-child(1) .klwk-check-x,
+.character-manage .shop-permission-modal .modal-body .left .tbody .tr .td:nth-child(1) .klwk-check,
+.character-manage .shop-permission-modal .modal-body .left .tbody .tr .td:nth-child(1) .klwk-check-x{
+    margin-top: 13px;
+    margin-left: 9px;
+    line-height: 16px;
+}
+.character-manage .shop-permission-modal .modal-body .left .thead .td:nth-child(1) .klwk-check-x i:before,
+.character-manage .shop-permission-modal .modal-body .left .tbody .tr .td:nth-child(1) .klwk-check-x i:before{
+    top: -1px;
+}
+.character-manage .shop-permission-modal .modal-body .left .tbody{
+    height: calc(100% - 82px);
+    overflow: auto;
+}
+.character-manage .shop-permission-modal .modal-body .left .tbody .tr{
+    height: 40px;
+    line-height: 40px;
+}
+.character-manage .shop-permission-modal .modal-body .right .td .icon-close:before{
+    color: #cccccc;
+    font-size: 12px;
+}
+
+
+.character-manage .warehouse-permission-Modal .modal-dialog{
+    width: 780px;
+}
+.character-manage .warehouse-permission-Modal .modal-body{
+    padding: 0;
+    height: 378px;
+}
+.character-manage .warehouse-permission-Modal .modal-body .cf{
+    height: 100%;
+}
+.character-manage .warehouse-permission-Modal .modal-body .cf .klw-search{
+    width: 100%;
+    height: 30px;
+    margin-bottom: 10px;
+    background: #ffffff;
+}
+.character-manage .warehouse-permission-Modal .modal-body .left,
+.character-manage .warehouse-permission-Modal .modal-body .right{
+    width: 366px;
+    height: 100%;
+    padding: 10px 15px 0 10px;
+    position: relative;
+}
+.character-manage .warehouse-permission-Modal .modal-body .center{
+    width: 46px;
+    height: 100%;
+    border-left: 1px solid #eeeeee;
+    border-right: 1px solid #eeeeee;
+    text-align: center;
+}
+.character-manage .warehouse-permission-Modal .modal-body .center .center-btn{
+    background: #4DB556;
+    border-radius: 4px;
+    color: #ffffff;
+    width: 24px;
+    height: 24px;
+    padding: 2px 3px;
+    display: inline-block;
+}
+.character-manage .warehouse-permission-Modal .modal-body .center .center-btn:nth-child(1){
+    margin-top: 164px;
+}
+.character-manage .warehouse-permission-Modal .modal-body .center .center-btn:nth-child(2){
+    margin-top: 6px;
+}
+.character-manage .warehouse-permission-Modal .modal-body .center .center-btn.disable{
+    background: #ffffff;
+    border: 1px solid #F0F0F0;
+    color: #EBEBEB;
+}
+.character-manage .warehouse-permission-Modal .modal-body{
+    padding: 0;
+}
+.character-manage .warehouse-permission-Modal .modal-body .left .icon-search-blod{
+    position: absolute;
+    left: 31px;
+    top: 15px;
+    color: #cccccc;
+}
+.character-manage .warehouse-permission-Modal .modal-body .left .klw-search{
+    width: 100%;
+    height: 30px;
+    background: none;
+    margin-bottom: 12px;
+}
+.character-manage .warehouse-permission-Modal .modal-body .left:nth-child(2) .title{
+    height: 42px;
+    line-height: 32px;
+    color: #666666;
+}
+.character-manage .warehouse-permission-Modal .modal-body .left .thead{
+    height: 40px;
+    background: #FAFAFA;
+    border-bottom: 1px solid #EEEEEE;
+    border-top: 1px solid #EEEEEE;
+    color: #666666;
+    line-height: 38px;
+}
+.character-manage .warehouse-permission-Modal .modal-body .left .thead .td,
+.character-manage .warehouse-permission-Modal .modal-body .left .tbody .tr .td{
+    display: inline-block;
+    text-align: center;
+}
+.character-manage .warehouse-permission-Modal .modal-body .left .thead .td:nth-child(1),
+.character-manage .warehouse-permission-Modal .modal-body .left .tbody .tr .td:nth-child(1){
+    width: 12%;
+    float: left;
+    height: 100%;
+}
+.character-manage .warehouse-permission-Modal .modal-body .left .thead .td:nth-child(2),
+.character-manage .warehouse-permission-Modal .modal-body .left .tbody .tr .td:nth-child(2){
+    width: 22%;
+    float: left;
+}
+.character-manage .warehouse-permission-Modal .modal-body .left .thead .td:nth-child(3),
+.character-manage .warehouse-permission-Modal .modal-body .left .tbody .tr .td:nth-child(3){
+    width: 26%;
+    float: left;
+}
+.character-manage .warehouse-permission-Modal .modal-body .left .thead .td:nth-child(4),
+.character-manage .warehouse-permission-Modal .modal-body .left .tbody .tr .td:nth-child(4){
+    width: 20%;
+    float: left;
+}
+.character-manage .warehouse-permission-Modal .modal-body .left .thead .td:nth-child(5),
+.character-manage .warehouse-permission-Modal .modal-body .left .tbody .tr .td:nth-child(5){
+    width: 20%;
+    float: left;
+}
+.character-manage .warehouse-permission-Modal .modal-body .left .thead .td:nth-child(1) .klwk-check,
+.character-manage .warehouse-permission-Modal .modal-body .left .thead .td:nth-child(1) .klwk-check-x,
+.character-manage .warehouse-permission-Modal .modal-body .left .tbody .tr .td:nth-child(1) .klwk-check,
+.character-manage .warehouse-permission-Modal .modal-body .left .tbody .tr .td:nth-child(1) .klwk-check-x{
+    margin-top: 13px;
+    margin-left: 9px;
+    line-height: 16px;
+}
+.character-manage .warehouse-permission-Modal .modal-body .left .thead .td:nth-child(1) .klwk-check-x i:before,
+.character-manage .warehouse-permission-Modal .modal-body .left .tbody .tr .td:nth-child(1) .klwk-check-x i:before{
+    top: -1px;
+}
+.character-manage .warehouse-permission-Modal .modal-body .left .tbody{
+    height: calc(100% - 82px);
+    overflow: auto;
+}
+.character-manage .warehouse-permission-Modal .modal-body .left .tbody .tr{
+    height: 40px;
+    line-height: 40px;
+}
+.character-manage .warehouse-permission-Modal .modal-body .right .td .icon-close:before{
+    color: #cccccc;
+    font-size: 12px;
+}
+.config-manage .character-manage .menu-permission-modal .modal-body{
+    height: 360px;
+    overflow: auto;
+    padding: 10px;
+}
+.config-manage .character-manage .menu-permission-modal .modal-body .classify{
+    margin: 0 0 3px 15px;
+}
+.config-manage .character-manage .menu-permission-modal .classify-text{
+    display: block;
+}
+.config-manage .character-manage .menu-permission-modal .classify-text .klwk-check,
+.config-manage .character-manage .menu-permission-modal .classify-text .klwk-check-x{
+    margin-top: 7px;
+    margin-right: 5px;
+}
+.config-manage .character-manage .menu-permission-modal .classify .noPadding{
+    padding: 0 20px 0 10px;
+}
+.config-manage .character-manage .menu-permission-modal .classify-text .klwk-check-x i:before{
+    top: -7px;
+}
+/*库存配置*/
+.config-manage .shop-modal .modal-dialog{
+    width: 600px;
+}
+.config-manage .shop-modal .modal-body{
+    padding: 0;
+}
+.config-manage .shop-modal .modal-body .left{
+    width: 299px;
+    padding: 10px 20px 0 20px;
+    position: relative;
+}
+.config-manage .shop-modal .modal-body .left .icon-search-blod{
+    position: absolute;
+    left: 38px;
+    top: 14px;
+    color: #cccccc;
+}
+.config-manage .shop-modal .modal-body .left .klw-search{
+    width: 100%;
+    height: 30px;
+    background: none;
+    margin-bottom: 12px;
+}
+.config-manage .shop-modal .modal-body .left:nth-child(1){
+    border-right: 1px solid #EEEEEE;
+}
+.config-manage .shop-modal .modal-body .left:nth-child(2){
+    width: 298px;
+}
+.config-manage .shop-modal .modal-body .left:nth-child(2) .title{
+    height: 42px;
+    line-height: 32px;
+    color: #666666;
+}
+.config-manage .shop-modal .modal-body .left .thead{
+    height: 40px;
+    background: #FAFAFA;
+    border-bottom: 1px solid #EEEEEE;
+    border-top: 1px solid #EEEEEE;
+    color: #666666;
+    line-height: 38px;
+}
+.config-manage .shop-modal .modal-body .left .thead .td,
+.config-manage .shop-modal .modal-body .left .tbody .tr .td{
+    display: inline-block;
+    text-align: center;
+}
+.config-manage .shop-modal .modal-body .left .thead .td:nth-child(1),
+.config-manage .shop-modal .modal-body .left .tbody .tr .td:nth-child(1){
+    width: 15%;
+    float: left;
+    height: 100%;
+}
+.config-manage .shop-modal .modal-body .left .thead .td:nth-child(2),
+.config-manage .shop-modal .modal-body .left .tbody .tr .td:nth-child(2){
+    width: 25%;
+    float: left;
+}
+.config-manage .shop-modal .modal-body .left .thead .td:nth-child(3),
+.config-manage .shop-modal .modal-body .left .tbody .tr .td:nth-child(3){
+    width: 60%;
+    float: left;
+}
+.config-manage .shop-modal .modal-body .left.right .thead .td:nth-child(1),
+.config-manage .shop-modal .modal-body .left.right .tbody .tr .td:nth-child(1){
+    width: 25%;
+    float: left;
+}
+.config-manage .shop-modal .modal-body .left.right .thead .td:nth-child(2),
+.config-manage .shop-modal .modal-body .left.right .tbody .tr .td:nth-child(2){
+    width: 60%;
+    float: left;
+}
+.config-manage .shop-modal .modal-body .left.right .thead .td:nth-child(3),
+.config-manage .shop-modal .modal-body .left.right .tbody .tr .td:nth-child(3){
+    width: 15%;
+    float: left;
+}
+.config-manage .shop-modal .modal-body .left .thead .td:nth-child(1) .klwk-check,
+.config-manage .shop-modal .modal-body .left .thead .td:nth-child(1) .klwk-check-x,
+.config-manage .shop-modal .modal-body .left .tbody .tr .td:nth-child(1) .klwk-check,
+.config-manage .shop-modal .modal-body .left .tbody .tr .td:nth-child(1) .klwk-check-x{
+    margin-top: 13px;
+    margin-left: 9px;
+    line-height: 16px;
+}
+.config-manage .shop-modal .modal-body .left .thead .td:nth-child(1) .klwk-check-x i:before,
+.config-manage .shop-modal .modal-body .left .tbody .tr .td:nth-child(1) .klwk-check-x i:before{
+    top: -1px;
+}
+.config-manage .shop-modal .modal-body .left .tbody{
+    height: 244px;
+    overflow: auto;
+}
+.config-manage .shop-modal .modal-body .left .tbody .tr{
+    height: 40px;
+    line-height: 40px;
+}
+.config-manage .shop-modal .modal-body .right .td .icon-close:before{
+    color: #cccccc;
+    font-size: 12px;
+}
+/*库存配置end*/
+/*公司信息*/
+.config-manage .company-information .search{
+    border-bottom: none;
+}
+.config-manage .company-information .search .select-div{
+    width: 120px;
+}
+/*公司信息end*/
+/*部门信息*/
+.config-manage .department-information .search{
+    border-bottom: none;
+}
+.config-manage .department-information .search .select-div{
+    width: 120px;
+}
+/*部门信息end*/
+/*用户管理*/
+.config-manage .user-manage .right-table{
+    width: 30%;
+}
+.config-manage .user-manage .left-table{
+    width: 70%;
+}
+.config-manage .user-manage .set-role .modal-dialog{
+    width: 600px;
+}
+.config-manage .user-manage .set-role .modal-body{
+    padding: 0;
+}
+.config-manage .user-manage .set-role .modal-body .items{
+    height: 195px;
+    overflow: auto;
+}
+.config-manage .user-manage .set-role .modal-body .one{
+    width: 10%;
+    display: inline-block;
+    text-align: center;
+    float: left;
+}
+.config-manage .user-manage .set-role .modal-body .one .klwk-check,
+.config-manage .user-manage .set-role .modal-body .one .klwk-check-x{
+    margin-left: 30px;
+}
+.config-manage .user-manage .set-role .modal-body .two{
+    width: 25%;
+    display: inline-block;
+    text-align: center;
+    float: left;
+}
+.config-manage .user-manage .set-role .modal-body .three{
+    width: 25%;
+    display: inline-block;
+    text-align: center;
+    float: left;
+}
+.config-manage .user-manage .set-role .modal-body .four{
+    width: 40%;
+    display: inline-block;
+    text-align: center;
+    float: left;
+}
+.config-manage .user-manage .set-role .modal-body .item{
+    padding: 10px 0;
+}
+.config-manage .user-manage .set-role .modal-body .item-title{
+    background: #FAFAFA;
+    padding: 10px 0;
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #EEEEEE;
+}
+.config-manage .user-manage .set-role .modal-body .item .text{
+    font-size: 12px;
+    color: #999999;
+    letter-spacing: 1px;
+}
+.config-manage .user-manage .set-role .modal-body .item .klwk-check-x,
+.config-manage .user-manage .set-role .modal-body .item .klwk-check{
+    margin-top: 3px;
+}
+.config-manage .user-manage .set-role .modal-body .item:hover{
+    background: #FAFAFA;
+}
+/*用户管理end*/
+/*库存配置*/
+.config-manage .inventory-config .sel-item.cf .title{
+    line-height: 40px;
+}
+.config-manage .inventory-config .sel-item.cf .title.fl.two{
+    margin: 0 20px;
+}
+/*库存配置end*/
+/*区域关联*/
+.config-manage .area-contact .content{
+    padding-bottom: 0;
+}
+.config-manage .area-contact .content .search{
+    border-bottom:none;
+}
+/*区域关联end*/
+/*下载配置*/
+.config-manage .download-config .content .table-oprate{
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+/*下载配置end*/
+/*树形结构*/
+.config-manage .classify {
+    margin:0 0 16px 35px;
+}
+.config-manage .classify-text {
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 0;
+}
+.config-manage .classify-text i {
+    color: #CACACA;
+    margin-right: 10px;
+    font-size: 12px;
+}
+.config-manage .classify > div {
+    min-height: 30px;
+    line-height: 30px;
+}
+.config-manage .classify > .classify-bg{
+    display: inline-block;
+    padding: 0 20px;
+}
+.config-manage .classify .noPadding {
+    padding: 0 20px 0 0;
+}
+.config-manage .classify-btn {
+    display: none;
+    padding-left: 30px;
+}
+.config-manage .classify-btn .new {
+    font-size: 14px;
+    color: #37BD4B;
+}
+.config-manage .classify-btn .edit {
+    margin-left: 21px;
+    font-size: 14px;
+    color: #F6A623;
+}
+.config-manage .classify .classify-bg:hover {
+    background: #FAFAFA;
+}
+.config-manage .classify .classify-bg:hover .classify-btn {
+    display: inline-block;
+}
+.config-manage .classify .classify-bg .check-all{
+    color: #39A3E2;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 15px;
+    display: none;
+    float: right;
+}
+.config-manage .classify .classify-bg:hover .check-all{
+    display: inline-block;
+}
+.config-manage .icon-icon_zhankaiKPA:before {
+    content: "\e64b";
+}
+/*树形结构end*/

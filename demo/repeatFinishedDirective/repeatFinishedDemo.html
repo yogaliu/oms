@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" ng-app="klwkOmsApp">
+<head>
+    <title>订单管理</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../public/css/bootstrap.css">
+
+</head>
+<body>
+<!-- 显示总的界面 -->
+<ui-view></ui-view>
+
+</body>
+<!-- 导入的基础插件，包含jquery,angularJs等 -->
+<script type="text/javascript" src="../../public/js/jquery.js"></script>
+<script type="text/javascript" src="../../public/js/base.js"></script>
+<script type="text/javascript" src="../../public/js/echarts.min.js"></script>
+<script type="text/javascript" src="../../public/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../demoApp.js"></script>
+<script>
+
+    /**
+     * 定义常量WAP_CONFIG;WAP为当前子模块功能
+     * */
+    angular.module('klwkOmsApp')
+            .config(["$stateProvider","$urlRouterProvider",function ($stateProvider, $urlRouterProvider) {
+                // 如果没有匹配的路径，则设置默认路径
+                $urlRouterProvider.otherwise('/index');
+                $stateProvider
+                    //首页
+                    .state('index',{
+                        url: '/index',
+                        templateUrl:'repeatFinishedTemplate.html',
+                        controller:'AccordionDemoCtrl'
+                    })
+            }]);
+
+    angular.module("klwkOmsApp")
+            .directive("repeatFinishedDirective", function($timeout){
+                return {
+                    restrict: 'A',
+                    scope:{
+                        condition:"@",
+                        myaction:"&repeataction",
+                        "repeatIndex":"@"
+                    },
+                    controller:function($scope){
+                    },
+                    link: function(scope, element, attr) {
+                        console.dir(scope);
+                        // 查询条件是真，则触发该事件
+                        if (attr.condition == "true") {
+                            $timeout(function() {
+                                // 触发事件
+                                scope.$emit('conditionCallback');
+                                // 处理自定义的方法
+                                scope.myaction();
+                            });
+                        }
+                    }
+                }
+            });
+
+
+    angular.module("klwkOmsApp")
+        .controller("AccordionDemoCtrl", ["$scope" ,function($scope) {
+                $scope.list = ["huangbiao","liumei","haili"];
+
+                // 定义事件
+                $scope.$on("conditionCallback",function(){
+                    alert("conditionCallback")
+                });
+
+                // 触发的方法
+                $scope.initFunc = function(){
+                  console.log("myinit");
+                };
+    }]);
+
+</script>
+</html>

@@ -1,0 +1,238 @@
+<div id="addLoan" class="jxOutDiv jxAdd cj-product" ng-controller="addLoanInController">
+    <div class="jxOutDivContent">
+
+        <div>
+            <button class="btn btn-default btn-78 topReturn" ng-click="returnAddLoan('还入单','../template/inventoryManage/loanIn.html')">返回</button>
+        </div>
+
+        <div class="basic-message jxmessage">
+            <h3 class="addTitle">新增</h3>
+
+            <div class="rows rowsText">
+                <p>借调人 <span class="star">*</span></p>
+
+                <p>还入仓库<span class="star"></span></p>
+            </div>
+            <div class="rows rowsInput">
+                <div>
+                    <input type="text" class="klw-input" placeholder="请选择" ng-click="showModal('selectUserModal')" ng-model="productFormDate.loanuser"/>
+                </div>
+                <div>
+                    <pull-select pull-config="loanWarehouse" ></pull-select>
+                </div>
+            </div>
+            <div class="rows rowsText">
+                <p>备注</p>
+            </div>
+            <div class="rows rowsInput">
+                <div class="input100">
+                    <textarea style="color: #666666" class="klw-textarea remark" placeholder="请输入备注" ng-model="productFormDate.note"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="activity-merchandise jxmessage">
+            <div class="menu-div">
+                <button class="btn btn-default btn-78" ng-click="showModal('productSpecModal')">新增</button>
+                <button class="btn btn-default btn-78" ng-click="deleteProduct()">删除</button>
+            </div>
+            <div class="cf userManage">
+                <table id="addLoanTable" class="display" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <td></td>
+                        <td ng-repeat="obj in columnList">{{obj.name}}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="obj in loanList track by $index">
+                        <td>
+                            <label>
+                                <div class="klwk-check" data-index='$index' ng-click="toggleSelect(obj,$index,$event)"><i class="iconfont"></i></div>
+                            </label>
+                        </td>
+                        <td ng-repeat="item in columnList" ng-if="$index<4">
+                            {{obj.sku[item.tag]}}
+                        </td>
+                        <td ng-repeat="item in columnList" ng-if="$index==4">
+                            <input class="klw-input" style="width: 60px"  ng-model="obj.returnquantity">
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 底部按钮-->
+            <div class="content-footer jxmessage">
+                <button class="btn btn-success btn-78" ng-click="addBuySubmit()">保存</button>
+                <button class="btn btn-default btn-78" ng-click="returnAddLoan('还入单','../template/inventoryManage/loanIn.html')">取消</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="goodsRelationship" >
+        <!--选择用户模态框-->
+        <div class="modal fade product-list" id="selectUserModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="product-head">
+                        <div class="product-title">选择用户</div>
+                        <div class="product-close" ng-click="hideModal('selectUserModal')"><i class="icon iconfont icon-icon_guanbisousuo"></i></div>
+                    </div>
+                    <div class="product-body">
+                        <div>
+                            <div class="row">
+                                <div class="column">
+                                    <label>登录名 <span class="important"></span></label>
+                                </div>
+                                <div class="column">
+                                    <label>用户名<span class="important"></span></label>
+                                </div>
+                                <div class="column">
+                                    <label>部门<span class="important"></span></label>
+                                </div>
+                            </div>
+                            <div class="row odd">
+                                <div class="column">
+                                    <input class="klw-input" ng-model="formData.loginName" type="text"/>
+                                </div>
+                                <div class="column">
+                                    <input class="klw-input" ng-model="formData.userName" type="text"/>
+                                </div>
+                                <div class="column">
+                                    <input class="klw-input" ng-model="formData.departmentName" type="text"/>
+                                </div>
+                            </div>
+                            <div class="mt">
+                                <button class="btn btn-success btn-78 mr" ng-click="userSearchEnsure()">确认</button>
+                                <button class="btn btn-default btn-78" ng-click="userSearchCancel()">清空</button>
+                            </div>
+                        </div>
+
+                        <div class="mt">
+                            <div class="body-table ProductSpecTableContent">
+                                <table id="getUserTable" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th ng-repeat="obj in selectUserList">{{obj.name}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="obj in userList" ng-click="selectUser(obj)">
+                                        <td ng-repeat="item in selectUserList">{{obj[item.tag]}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <tm-pagination conf="paginationProductConf"></tm-pagination>
+                        <div class="footer mt" style="text-align: left">
+                            <button class="btn btn-success btn-78 mr" ng-click="userEnsure('selectUserModal')">确认</button>
+                            <button class="btn btn-default btn-78" ng-click="hideModal('selectUserModal')">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--选择规格模态框-->
+        <div class="modal fade product-list" id="productSpecModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="product-head">
+                        <div class="product-title">选择规格</div>
+                        <div class="product-close" ng-click="hideModal('productSpecModal')"><i class="icon iconfont icon-icon_guanbisousuo"></i></div>
+                    </div>
+                    <div class="product-body">
+                        <div>
+                            <div class="row">
+                                <div class="column">
+                                    <label>商品代码 <span class="important">*</span></label>
+                                </div>
+                                <div class="column">
+                                    <label>商品名称<span class="important">*</span></label>
+                                </div>
+                                <div class="column">
+                                    <label>规格代码 <span class="important">*</span></label>
+                                </div>
+                            </div>
+                            <div class="row odd">
+                                <div class="column">
+                                    <input class="klw-input" ng-model="productItem.productCode" type="text"/>
+                                </div>
+                                <div class="column">
+                                    <input class="klw-input" ng-model="productItem.productName" type="text"/>
+                                </div>
+                                <div class="column">
+                                    <input class="klw-input" ng-model="productItem.code" type="text"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="column">
+                                    <label>规格名称 <span class="important">*</span></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="column">
+                                    <input class="klw-input" ng-model="productItem.description" type="text"/>
+                                </div>
+                            </div>
+                            <div class="mt">
+                                <button class="btn btn-success btn-78 mr" ng-click="productSearchEnsure()">确认</button>
+                                <button class="btn btn-default btn-78" ng-click="productSearchCancel()">清空</button>
+                            </div>
+                        </div>
+
+                        <div class="mt">
+                            <div class="body-table ProductSpecContent">
+                                <table id="getProductSpecTable" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th ng-repeat="obj in theadSkuList">{{obj.name}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="obj in tableSkuList" ng-click="selectProduct(obj,$event,1)">
+                                        <td ng-repeat="item in theadSkuList">{{obj[item.tag]}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <tm-pagination conf="paginationSkuConf"></tm-pagination>
+                        </div>
+                        <div class="mt">
+                            <div class="body-table">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th>仓库名称</th>
+                                        <th>库存数</th>
+                                        <th>可用数</th>
+                                        <th>可销数</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="item in inventoryNum">
+                                        <td>{{item.warehouseName}}</td>
+                                        <td>{{item.quantity}}</td>
+                                        <td>{{item.canUseQuantity}}</td>
+                                        <td>{{item.canSaleQuantity}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="footer mt">
+                                <button class="btn btn-success btn-78 mr" ng-click="productEnsure('productSpecModal')">保存</button>
+                                <button class="btn btn-default btn-78" ng-click="hideModal('productSpecModal')">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

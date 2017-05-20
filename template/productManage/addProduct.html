@@ -1,0 +1,602 @@
+<!-- 新增商品信息 -->
+
+<div id="addProduct" class="cj-product" ng-controller="addProductController">
+    <div class="product-content">
+
+        <!--新增商品信息-->
+        <div class="add-basic form">
+            <h5 class="add-title">商品信息</h5>
+            <div class="btn add-order green-btn" style="width: 120px;" ng-show="basicInfo == 'addBefore'" ng-click="module('basicInfo','addAmong')">
+                <i class="iconfont"></i>基本信息
+            </div>
+            <!--新增前表单可输入方式呈现-->
+            <div class="add-among" ng-show="basicInfo == 'addAmong'">
+                <div>
+                    <div class="row odd">
+                        <div class="column">
+                            <label>商品编码<span class="important">*</span></label>
+                        </div>
+                        <div class="column">
+                            <label>外部编码</label>
+                        </div>
+                        <div class="column">
+                            <label>商品分类</label>
+                        </div>
+                        <div class="column">
+                            <label>年份</label>
+                        </div>
+                    </div>
+                    <div class="row even">
+                        <div class="column">
+                            <input type="text" class="klw-input validate" name="empty" placeholder="请输入商品编码" ng-model="formData.code">
+                        </div>
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入外部编码" ng-model="formData.gbcode">
+                        </div>
+                        <div class="column">
+                            <input type="text" class="klw-input" readonly ng-model="formData.categoryname" placeholder="请选择商品分类" ng-click="showModal('classifyModal')">
+                        </div>
+                        <div class="column">
+                            <pull-select pull-config="selectYear"></pull-select>
+                        </div>
+                    </div>
+                    <div class="row odd">
+                        <div class="column">
+                            <label>商品名称<span class="important">*</span></label>
+                        </div>
+                        <div class="column">
+                            <label>商品简称</label>
+                        </div>
+                        <div class="column">
+                            <label>季节</label>
+                        </div>
+                        <div class="column">
+                            <label>厂家货号</label>
+                        </div>
+                    </div>
+                    <div class="row even">
+                        <div class="column">
+                            <input type="text" class="klw-input validate" name="empty" placeholder="请输入商品名称" ng-model="formData.description">
+                        </div>
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入商品简称" ng-model="formData.shortname">
+                        </div>
+                        <div class="column">
+                            <pull-select pull-config="selectSeason"></pull-select>
+                        </div>
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入厂家货号" ng-model="formData.factorycode">
+                        </div>
+                    </div>
+                    <div class="row odd">
+                        <div class="column">
+                            <label>供应商</label>
+                        </div>
+                        <div class="column">
+                            <label>生产方式</label>
+                        </div>
+                        <div class="column">
+                            <label>品牌</label>
+                        </div>
+                        <div class="column">
+                            <label>重量（Kg）</label>
+                        </div>
+                    </div>
+                    <div class="row even">
+                        <div class="column">
+                            <pull-select pull-config="selectSupplier"></pull-select>
+                        </div>
+                        <div class="column">
+                            <pull-select pull-config="selectType"></pull-select>
+                        </div>
+                        <div class="column">
+                            <pull-select pull-config="selectBrand"></pull-select>
+                        </div>
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入重量" ng-model="formData.weight">
+                        </div>
+                    </div>
+                    <div class="row odd">
+                        <div class="column">
+                            <label>体积</label>
+                        </div>
+                        <div class="column">
+                            <label>箱规</label>
+                        </div>
+                        <div class="column">
+                            <label>公司</label>
+                        </div>
+                        <div class="column">
+                            <label>市场价</label>
+                        </div>
+                    </div>
+                    <div class="row even">
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入体积" ng-model="formData.volume">
+                        </div>
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入箱规" ng-model="formData.cartonspec">
+                        </div>
+                        <div class="column">
+                            <pull-select pull-config="selectCompany"></pull-select>
+                        </div>
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入市场价" ng-model="formData.firstprice">
+                        </div>
+                    </div>
+                    <div class="row odd">
+                        <div class="column">
+                            <label>销售价</label>
+                        </div>
+                        <div class="column">
+                            <label>实际售价</label>
+                        </div>
+                        <div class="column">
+                            <label>商品类型</label>
+                        </div>
+                        <div class="column">
+                            <label>财务成本</label>
+                        </div>
+                    </div>
+                    <div class="row even">
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入销售价" ng-model="formData.wholesaleprice">
+                        </div>
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入实际售价" ng-model="formData.retailprice">
+                        </div>
+                        <div class="column">
+                            <pull-select pull-config="selectProduct"></pull-select>
+                        </div>
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入财务成本" ng-model="formData.costprice">
+                        </div>
+                    </div>
+                    <div class="row odd">
+                        <div class="column">
+                            <label>经销价</label>
+                        </div>
+                        <div class="column">
+                            <label>采购价</label>
+                        </div>
+                        <div class="column">
+                            <label>主题</label>
+                        </div>
+                        <div class="column">
+                            <label>基本单位</label>
+                        </div>
+                    </div>
+                    <div class="row even">
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入经销价" ng-model="formData.platformprice">
+                        </div>
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入采购价" ng-model="formData.purchaseprice">
+                        </div>
+                        <div class="column">
+                            <pull-select pull-config="selectTheme"></pull-select>
+                        </div>
+                        <div class="column">
+                            <pull-select pull-config="selectUnit"></pull-select>
+                        </div>
+                    </div>
+                    <div class="row odd">
+                        <div class="column">
+                            <label>回货周期</label>
+                        </div>
+                        <div class="column">
+                            <label>上新日期</label>
+                        </div>
+                        <div class="column">
+                            <label>下线日期</label>
+                        </div>
+                        <div class="column">
+                            <label>安全库存天数</label>
+                        </div>
+                    </div>
+                    <div class="row even">
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入回货周期"  ng-model="formData.returnperiod">
+                        </div>
+                        <div class="column">
+                            <input class="klw-input datePlugin" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="formData.newonlinedate">
+                        </div>
+                        <div class="column">
+                            <input class="klw-input datePlugin" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="formData.offlinedate">
+                        </div>
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入安全库存天数" ng-model="formData.safetystockdays">
+                        </div>
+                    </div>
+                    <div class="row odd">
+                        <div class="column">
+                            <label>上限天数</label>
+                        </div>
+                        <div class="column">
+                            <label>下限天数</label>
+                        </div>
+                    </div>
+                    <div class="row even">
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入上限天数" ng-model="formData.ceilingday">
+                        </div>
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入下限天数" ng-model="formData.lowerday">
+                        </div>
+                    </div>
+                    <div class="row odd">
+                        <div class="remark">
+                            <label>备注</label>
+                            <textarea ng-model="formData.note"></textarea>
+                        </div>
+                    </div>
+                    <div class="row even isAccessories">
+                        <div class="body-check"  ng-click="checkItem(formData,'spareparts')">
+                            <div class="klwk-check" ng-hide="formData.spareparts"><i class="iconfont"></i></div>
+                            <div class="klwk-check-x" ng-show="formData.spareparts"><i class="iconfont"></i></div>
+                            <span>有配件</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-success btn-78 mr" ng-click="storedEnsure();">确定</button>
+                    <button class="btn btn-default btn-78" ng-click="module('basicInfo','addAfter');storedCancel()">取消</button>
+                </div>
+            </div>
+            <!--新增后仅读呈现-->
+            <div class="add-after" ng-show="basicInfo == 'addAfter'">
+                <div class="btn update-info add-after-btn" ng-click="editInfo()"><i class="iconfont"></i>修改商品信息</div>
+                <div class="row odd">
+                    <div class="column">
+                        <span>商品编码<i>{{formData.code}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>外部编码<i>{{formData.gbcode}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>商品分类<i>{{formData.categoryname}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>年份<i>{{formData.year}}</i></span>
+                    </div>
+                </div>
+                <div class="row odd">
+                    <div class="column">
+                        <span>年份<i>{{formData.description}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>商品简介<i>{{formData.shortname}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>季节<i>{{formData.season}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>厂家货号<i>{{formData.factorycode}}</i></span>
+                    </div>
+                </div>
+                <div class="row odd">
+                    <div class="column">
+                        <span>供应商<i>{{formData.suppliername}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>生产方式<i>{{formData.productionmode}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>品牌<i>{{formData.brand}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>重量（Kg）<i>{{formData.weight}}</i></span>
+                    </div>
+                </div>
+                <div class="row odd">
+                    <div class="column">
+                        <span>体积<i>{{formData.volume}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>箱规<i>{{formData.cartonspec}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>公司<i>{{formData.companyname}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>市场价<i>{{formData.firstprice}}</i></span>
+                    </div>
+                </div>
+                <div class="row odd">
+                    <div class="column">
+                        <span>销售价<i>{{formData.wholesaleprice}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>实际售价<i>{{formData.retailprice}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>商品类型<i>{{formData.producttypename}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>财务成本<i>{{formData.costprice}}</i></span>
+                    </div>
+                </div>
+                <div class="row odd">
+                    <div class="column">
+                        <span>经销价<i>{{formData.platformprice}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>采购价<i>{{formData.purchaseprice}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>主题<i>{{formData.theme}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>基本单位<i>{{formData.unit}}</i></span>
+                    </div>
+                </div>
+                <div class="row odd">
+                    <div class="column">
+                        <span>回货周期<i>{{formData.returnperiod}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>上新日期<i>{{formData.newonlinedate}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>下线日期<i>{{formData.offlinedate}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>安全库存天数<i>{{formData.safetystockdays}}</i></span>
+                    </div>
+                </div>
+                <div class="row odd">
+                    <div class="column">
+                        <span>上限天数<i>{{formData.ceilingday}}</i></span>
+                    </div>
+                    <div class="column">
+                        <span>下限天数<i>{{formData.lowerday}}</i></span>
+                    </div>
+                </div>
+                <div class="row odd" style="width: 100%;">
+                    <div class="column">
+                        <span>备注<i>{{formData.note}}</i></span>
+                    </div>
+                </div>
+                <div class="row even isAccessories">
+                    <div class="body-check">
+                        <div class="klwk-check" ng-hide="formData.spareparts"><i class="iconfont"></i></div>
+                        <div class="klwk-check-x" ng-show="formData.spareparts"><i class="iconfont"></i></div>
+                        <span>有配件</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--新增规格信息-->
+        <div class="add-standard form">
+            <h5 class="add-title">规格信息</h5>
+            <!--手动输入-->
+            <div>
+                <div ng-show="standardInfo == 'start'">
+                    <div class="btn add-order green-btn mr" ng-click="module('standardInfo','addAmong')" style="width: 120px;">
+                        <i class="iconfont"></i>新增规格
+                    </div>
+                    <div class="btn add-order" ng-click="standard.autoFirst()">自动生成</div>
+                </div>
+                <!--新增前可编辑-->
+                <div class="add-among" ng-show="standardInfo == 'addAmong'">
+                    <div class="add-after-btn">
+                        <div class="btn add-order green-btn mr" ng-show="standardInfo != 'addAmong'" ng-click="module('standardInfo','addAmong')" style="width: 120px;">
+                            <i class="iconfont"></i>新增规格
+                        </div>
+                        <div class="btn add-order" ng-click="standard.autoFirst()">自动生成</div>
+                    </div>
+                    <div ng-show="standardInfo == 'addAmong'">
+                        <div class="row odd">
+                            <div class="column">
+                                <label>规格编码<span class="important">*</span></label>
+                            </div>
+                            <div class="column">
+                                <label>规格名称<span class="important">*</span></label>
+                            </div>
+                            <div class="column">
+                                <label>颜色<span class="important">*</span></label>
+                            </div>
+                            <div class="column">
+                                <label>尺码<span class="important">*</span></label>
+                            </div>
+                        </div>
+                        <div class="row even">
+                            <div class="column">
+                                <input type="text" class="klw-input validate" name="empty" ng-model="standardItem.code" placeholder="请输入规格编码">
+                            </div>
+                            <div class="column">
+                                <input type="text" class="klw-input validate" name="empty" ng-model="standardItem.description" placeholder="请输入规格名称">
+                            </div>
+                            <div class="column">
+                                <input type="text" class="klw-input validate" name="empty" ng-model="standardItem.color" placeholder="请输入颜色">
+                            </div>
+                            <div class="column">
+                                <input type="text" class="klw-input validate" name="empty" ng-model="standardItem.size"  placeholder="请输入尺码">
+                            </div>
+                        </div>
+                        <div class="row odd">
+                            <div class="column">
+                                <label>自定义编码</label>
+                            </div>
+                        </div>
+                        <div class="row even">
+                            <div class="column">
+                                <input type="text" ng-model="standardItem.customcode" class="klw-input" placeholder="请输入自定义编码">
+                            </div>
+                        </div>
+                        <div class="row odd">
+                            <div class="remark">
+                                <label>备注</label>
+                                <textarea ng-model="standardItem.note"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-success btn-78 mr" ng-click="standard.inputSave()">确定</button>
+                        <button class="btn btn-default btn-78" ng-click="standard.inputCancel()">取消</button>
+                    </div>
+                </div>
+                <!--自动生成-->
+                <div class="auto-create" ng-show="standardInfo == 'auto'">
+                    <div class="auto-first" ng-if="standardStep == 'first'">
+                        <div class="body-check" ng-repeat="item in ruleList" ng-click="checkItem(item,1,1)">
+                            <div class="klwk-check" ng-show="item.isSelect == false"><i class="iconfont"></i></div>
+                            <div class="klwk-check-x" ng-show="item.isSelect == true"><i class="iconfont"></i></div>
+                            <span class="ml">{{item.name}}</span>
+                        </div>
+                        <div class="tip-fields">
+                            <div class="circle">!</div>
+                            <div class="tip-text">勾选编码规则的顺序,影响到下一步上衣尺码和上衣颜色的组合顺序</div>
+                        </div>
+                        <div>
+                            <button class="btn btn-success btn-78 mr" ng-click="module('standardStep','second');standard.autoSecond()">下一步</button>
+                            <button class="btn btn-default btn-78" ng-click="standard.autoCancel();">取消</button>
+                        </div>
+                    </div>
+                    <div class="auto-second" ng-if="standardStep == 'second'">
+                        <div class="table-content">
+                            <div class="left">
+                                <div ng-repeat="obj in valueList">
+                                    <h5 class="add-title">{{selectRule[$index].name}}</h5>
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <th ng-click="standard.selectAll($index)">
+                                                <div class="klwk-check" ng-hide="valueList[$index].isalldatacheck"><i class="iconfont"></i></div>
+                                                <div class="klwk-check-x" ng-show="valueList[$index].isalldatacheck"><i class="iconfont"></i></div>
+                                            </th>
+                                            <th>名称</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in obj.data">
+                                            <td ng-click="standard.selectItem(item,$parent.$index)">
+                                                <div class="klwk-check" ng-hide="item.isdatacheck"><i class="iconfont"></i></div>
+                                                <div class="klwk-check-x" ng-show="item.isdatacheck"><i class="iconfont"></i></div>
+                                            </td>
+                                            <td>{{item.name}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <h5 class="add-title">生成规格信息结果呈现</h5>
+                                <div class="btn klwk-cancle refresh" style="width: 185px;"><i class="iconfont icon-icon24"></i>规格编码顺序反转</div>
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <td>代码</td>
+                                        <td>名称</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="item in autoItemList">
+                                        <td>{{formData.code + item.code}}</td>
+                                        <td>{{item.name}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="btn btn-default btn-78 mr" ng-click="module('standardStep','first')">上一步</button>
+                            <button class="btn btn-default btn-78 mr" ng-click="standard.autoCancel()" >取消</button>
+                            <button class="btn btn-success btn-78" ng-click="module('standardInfo','addAfter');standard.autoSave()">生成</button>
+                        </div>
+                    </div>
+                </div>
+                <!--新增后生成表格-->
+                <div class="add-after" ng-show="tableListSkus.length != 0">
+                    <div class="add-after-btn" ng-show="standardInfo != 'auto'">
+                        <div class="btn add-order green-btn mr" ng-show="standardInfo != 'addAmong'" ng-click="module('standardInfo','addAmong')" style="width: 120px;">
+                            <i class="iconfont"></i>新增规格
+                        </div>
+                        <div class="btn add-order" ng-click="standard.autoFirst()()">自动生成</div>
+                    </div>
+                    <table id="productSkuTable" class="display" cellspacing="0" width="100%" repeat-finished-directive repeataction="initFunc()" repeatIndex="{{$index}}" condition="{{$last == true}}">
+                        <thead>
+                        <tr>
+                            <td>操作</td>
+                            <td ng-repeat="obj in theadListSkus">{{obj.name}}</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in tableListSkus">
+                            <td><i class="iconfont icon-icon21 amend"></i></td>
+                            <td ng-repeat="item in theadListSkus">{{obj[item.tag] | productFilter: item.tag}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!--新增商品属性-->
+        <div class="add-attribute">
+            <h5 class="add-title">商品属性</h5>
+            <div class="add-detail" ng-show="attributeInfo == 'addBefore'" ng-click="module('attributeInfo','addAmong')"><i class="iconfont"></i>新增商品属性</div>
+            <!--新增前表单可输入方式呈现-->
+            <div class="add-before" ng-show="attributeInfo == 'addAmong'">
+                <div>
+                    <div class="row">
+                        <div class="column" ng-repeat="item in attributeData track by $index">
+                            <label class="odd">{{item.name}}</label>
+
+                            <input ng-if="item.children.length == 0" type="text" class="klw-input even" placeholder=请输入{{item.name}} ng-model="item.worth">
+
+                            <div class="attribute-select" ng-if="item.children.length != 0" ng-mouseover="showAttribute($event)" ng-mouseleave="hideAttribute($event)">
+                                <span class="text">{{item.worth?item.worth:'请选择'}}</span>
+                                <i class="iconfont"></i>
+                                <div class="attribute-list">
+                                    <ul>
+                                        <li ng-repeat="i in item.children" ng-click="getAttribute(i.parentvalue,i.name,$event)">{{i.name}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-success btn-78 mr" ng-click="module('attributeInfo','addAfter');attributeEnsure()">确定</button>
+                    <button class="btn btn-default btn-78" ng-click="module('attributeInfo','addAfter');attributeCancel()">取消</button>
+                </div>
+            </div>
+            <!--新增后仅读呈现-->
+            <div class="add-after" ng-show="attributeInfo == 'addAfter'">
+                <div class="btn update-info add-after-btn" ng-click="module('attributeInfo','addAmong')"><i class="iconfont"></i>修改商品属性</div>
+                <div class="row odd">
+                    <div class="column attribute " ng-repeat="item in attributeData track by $index">
+                        <span>{{item.name}}<i>{{item.worth}}</i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-btn">
+            <button class="btn btn-success btn-78 mr" ng-click="saveProduct()">保存</button>
+            <button class="btn btn-default btn-78" ng-click="goBack()">取消</button>
+        </div>
+
+    </div>
+
+    <!--商品分类模态框-->
+    <div class="cj-modal modal fade" id="classifyModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-w600">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">选择商品分类</h4>
+                </div>
+                <div class="modal-body" style="height: 300px;overflow: auto">
+                    <classify show-modal="showModal" toggle-expand="toggleExpand" expander='expander' children='expander.children' ng-repeat='expander in classifyList'></classify>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- /新增商品信息 -->

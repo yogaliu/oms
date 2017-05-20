@@ -1,0 +1,65 @@
+<!-- 供应商管理 -->
+
+<div id="supplierInformation" class="cj-purchase" ng-controller="supplierInformationController">
+    <div class="purchase-content">
+
+        <!--搜索-->
+        <div class="purchase-header">
+            <div class="search">
+                <input type="text" class="klw-search" placeholder="供应商编码" ng-model='searchItem' ng-keyup="myKeyup($event)">
+            </div>
+            <div class="search-before-btn">
+                <div class="btn add-order" ng-click="add()"><i class="iconfont"></i>新增供应商信息</div>
+            </div>
+        </div>
+
+        <div class="purchase-body">
+
+            <div class="configuration">
+                <div class="ti-pagination">
+                    <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                    / 共 <span>{{paginationConf.totalItems}}</span>
+
+                <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont"
+                                                                                   ng-click="prev()"></i></span>
+
+                <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont"
+                                                                                                    ng-click="next()"></i></span>
+
+                <span class="config-column" ng-mouseover="isHover()" ng-mouseleave="isHover()"
+                      ng-click="showColumnConfigPanel()"><i class="iconfont"></i></span>
+
+                    <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+                </div>
+            </div>
+
+            <div class="body-table">
+
+                <table id="supplierTable" class="display" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <td>操作</td>
+                            <td ng-repeat="obj in theadList track by $index">{{obj.name}}</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="obj in tableList track by $index" id="{{obj.supplierid}}" repeat-finished-directive repeataction="initFunc()" repeatIndex="{{$index}}" condition="{{$last == true}}">
+                            <td class="oprate-one" ng-click="edit($index)">修改</td>
+                            <td ng-repeat="item in theadList">{{obj[item.tag]}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 右侧列表配置 -->
+        <div>
+            <tm-listallocation allo="allocation"></tm-listallocation>
+        </div>
+
+        <tm-pagination conf="paginationConf"></tm-pagination>
+
+    </div>
+</div>
+
+<!-- /供应商管理 -->

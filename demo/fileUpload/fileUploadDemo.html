@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en" ng-app="klwkOmsApp">
+<head>
+    <title>订单管理</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../public/css/bootstrap.css">
+
+</head>
+<body>
+<!-- 显示总的界面 -->
+<ui-view></ui-view>
+
+<form action="http://192.168.1.56:8089/commonImport/uploadExcel" method="POST" name="jUploadForm1494296396818"
+      id="jUploadForm1494296396818" enctype="multipart/form-data">
+    <input type="file" name="upfile" />
+    <input type="submit" value="提交">
+
+</form>
+
+</body>
+<!-- 导入的基础插件，包含jquery,angularJs等 -->
+<script type="text/javascript" src="../../public/js/jquery.js"></script>
+
+<script type="text/javascript" src="../../public/js/base.js"></script>
+<script type="text/javascript" src="../../public/js/echarts.min.js"></script>
+<script type="text/javascript" src="../../public/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../demoApp.js"></script>
+<script type="text/javascript" src="../../public/js/ajaxfileupload.js"></script>
+<script>
+
+    /**
+     * 定义常量WAP_CONFIG;WAP为当前子模块功能
+     * */
+    angular.module('klwkOmsApp')
+            .config(["$stateProvider","$urlRouterProvider",function ($stateProvider, $urlRouterProvider) {
+                // 如果没有匹配的路径，则设置默认路径
+                $urlRouterProvider.otherwise('/index');
+                $stateProvider
+                    //首页
+                    .state('index',{
+                        url: '/index',
+                        templateUrl:'fileUploadTemp.html',
+                        controller:'fileUploadTempDemoCtrl'
+                    })
+            }]);
+
+    /**
+     * 1、允许多少个上传的表单
+     * 2、返回的应该是一个时间戳
+     */
+    angular.module("klwkOmsApp")
+            .directive("fileUpload", function() {
+                return {
+                    restrict:'AE',
+                    scope:{
+                        // 文件变化触发的事件
+                        changeAction:"&",
+                        water:'='
+                    },
+                    template:'<input type="file" name="upfile" id="{{timestamp}}" ng-model="upfile" onchange="angular.element(this).scope().fileChangeAction(this.files)"/>',
+                    controller:function($scope){
+                        console.log("controller");
+                        console.dir($scope);
+
+                        $scope.timestamp = new Date().getTime() + new Number(Math.random()*1000);
+
+                        $scope.fileChangeAction = function(targetId,files){
+                            console.dir(arguments);
+                            console.log("fileChangeAction");
+
+                            $scope.changeAction(targetId,files);
+                        };
+
+                    },
+                    compile: function compile(tElement, tAttrs, transclude) {
+                        console.log("compile");
+                        return {
+                            pre: function preLink(scope, iElement, iAttrs, controller) {
+                                console.log("pre");
+                            },
+                            post: function postLink(scope, iElement, iAttrs, controller) {
+                                console.log("post");
+                            }
+                        }
+                    },
+                    link: function( scope, element, attrs ) {
+                        console.log("link");
+                    }
+
+                }
+            });
+
+
+    angular.module("klwkOmsApp")
+        .controller("fileUploadTempDemoCtrl", ["$scope" ,function($scope) {
+
+                $scope.userUploadAction = function(targetId,files){
+                    var mysetting = {
+                        url: "http://192.168.1.56:8089/commonImport/uploadExcel",
+                        fileElementId: targetId,
+                        dataType: 'json',
+                        crossDomain: true,
+                        data: "",
+                        //相当于java中try语句块的用法，这里data是你post后返回的结果，要与dataType类型匹配
+                        success: function (data, status) {
+                            alert("success");
+                        },
+                        //相当于java中catch语句块的用法
+                        error: function (data, status, e) {
+                            alert("error");
+                        }
+                    };
+                    $.ajaxFileUpload(mysetting);
+
+                };
+
+    }]);
+
+</script>
+</html>

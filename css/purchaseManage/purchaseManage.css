@@ -1,0 +1,722 @@
+/***************************采购管理公共样式********************************/
+.cj-purchase {
+    height: 100%;
+    background: #fafafa;
+    overflow: hidden;
+}
+.cj-purchase .purchase-content {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: #FFFFFF;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.05);
+    border-radius: 6px;
+    position: relative;
+}
+.cj-purchase .purchase-content > div {
+    margin: 0 30px;
+}
+.cj-purchase .klw-input {
+    width: 100%;
+}
+.cj-purchase .ml {
+    margin-left: 20px;
+}
+.cj-purchase .mt {
+    margin-top: 20px;
+}
+.cj-purchase .mr {
+    margin-right: 20px;
+}
+.cj-purchase .pr {
+    position: relative;
+}
+.cj-purchase .btn-success {
+    color: #FFFFFF;
+    background: #4DB556;
+    border-radius: 4px;
+}
+.cj-purchase .btn.btn-success:hover {
+    background: #3FA248;
+    color: #FFFFFF;
+}
+
+.cj-purchase .btn-success:focus, .btn-success:active {
+    background: #3FA248;
+    box-shadow: inset 0 5px 10px 0 rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    color: #FFFFFF;
+}
+.cj-purchase .btn {
+    padding:0;
+    box-sizing: content-box;
+}
+.cj-purchase .btn.forbid {
+    opacity: 0.5;
+}
+.cj-purchase .btn {
+    padding:0;
+    box-sizing: content-box;
+}
+.cj-purchase .purchase-content .disabled {
+    color: #CDCDCD;
+}
+.cj-purchase .purchase-content .disabled:hover {
+    background: #fff;
+    color: #CDCDCD;
+}
+.cj-purchase div[class='klwk-check'] {
+    display: inline-block;
+    position: relative;
+    top:3px;
+}
+.cj-purchase table div[class='klwk-check'] {
+    top: 0;
+}
+/*批量操作图标*/
+.cj-purchase .batch {
+    font-size: 12px;
+    position: absolute;
+    top:4px;
+    right:18px;
+    color: #E6E6E6;
+}
+/*下拉列表图标*/
+.cj-purchase .select {
+    font-size: 12px;
+    color: #D9D9D9;
+}
+/*必填字段*/
+.cj-purchase .important {
+    color: red;
+    margin-left: 5px;
+}
+/*新增按钮自定义*/
+.cj-purchase .green-btn {
+    border: 1px solid #54B254;
+    font-size: 14px;
+    color: #54B254;
+    letter-spacing: 1px;
+}
+.cj-purchase .green-btn i {
+    opacity: 0.3;
+    color: #59AF51;
+}
+.cj-purchase .green-btn:hover{
+    background: #F9FFFA;
+}
+.cj-purchase .green-btn:active{
+    background: #DFF7E2;
+}
+/*操作自定义*/
+.cj-purchase .operation .sewvtop{
+    border: 0;
+}
+.cj-purchase .operation .one {
+    width: 100px;
+    text-align: left;
+    left: 50%;
+    top: 32px;
+    margin-left: -50px;
+    display: none;
+}
+.cj-purchase .operation:hover .one {
+    display: block;
+}
+.cj-purchase .operation i{
+    color: #D8D8D8;
+}
+.cj-purchase .sewvtop > input {
+    border: 0;
+    display: inline-block;
+    width: 80%;
+    white-space: pre;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 38px;
+    color: #666;
+    padding: 0 5px;
+    vertical-align: middle;
+    padding-left: 10px;
+}
+
+/*头部公共样式 start*/
+.cj-purchase  .purchase-header {
+    padding: 30px 0;
+    position: relative;
+    border-bottom: 1px solid #EEEEEE;
+}
+/*tab栏*/
+.cj-purchase  .header-tab {
+    height: 61px;
+    padding-left: 50px;
+    background: #FFFFFF;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.05);
+    border-radius: 6px 6px 0 0;
+}
+.cj-purchase  .header-tab li{
+    float: left;
+    width: 118px;
+    height: 61px;
+    line-height: 61px;
+    font-size: 14px;
+    color: #999999;
+    letter-spacing: 1px;
+    margin-right: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+.cj-purchase  .header-tab li.current {
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 1.14px;
+    border-bottom: 4px solid #3FA248;
+}
+/*表单格式化*/
+.cj-purchase  .advanced-search {
+    margin-left: 15px;
+    font-size: 12px;
+    color: #999999;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.cj-purchase .row {
+    position: relative;
+    margin: 0;
+}
+.cj-purchase .even {
+    margin-bottom: 30px;
+}
+.cj-purchase .odd {
+    margin-bottom: 16px;
+}
+.cj-purchase .row label {
+    margin-right: 15px;
+    font-size: 12px;
+    color: #666666;
+    letter-spacing: 0;
+    font-weight: normal;
+}
+.cj-purchase .column:first-child {
+    margin: 0;
+}
+.cj-purchase .column {
+    float: left;
+    width: 23.5%;
+    margin-left: 2%;
+}
+.cj-purchase .column > span {
+    font-size: 14px;
+    color: #B3B3B3;
+    letter-spacing: 1px;
+    line-height: 30px;
+}
+.cj-purchase .column > span > i {
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 1px;
+    line-height: 30px;
+    font-style: normal;
+    padding-left: 20px;
+}
+.cj-purchase .remark label {
+    display: block;
+    margin-bottom: 16px;
+}
+.cj-purchase .remark textarea {
+    width: 100%;
+    height: 100px;
+    font-size:14px;
+    padding: 15px;
+    resize: none;
+    border: 1px solid #ebebeb;
+    border-radius: 4px;
+}
+/*制单时间*/
+.cj-purchase .input-time label {
+    display: inline-block;
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 0;
+    width: 60px;
+}
+.cj-purchase  .line {
+    display: inline-block;
+    width: 15px;
+    height: 1px;
+    background: #f0f0f0;
+    margin: 3px 23px;
+}
+.cj-purchase .input-time input {
+    width: 230px;
+    height: 40px;
+    margin: 0 10px;
+    background: url('../../images/time%20icon.svg') no-repeat 190px;
+}
+/*高级搜索*/
+.cj-purchase .purchase-content .search-top {
+    margin-top: 42px;
+}
+.cj-purchase .purchase-content .is-select {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    padding: 5px 0 10px 31px;
+    box-shadow: 0 2px 3px #eeeeee;
+    border: 0;
+    margin: 0;
+    height: 50px;
+}
+.cj-purchase .purchase-content .is-select > span {
+    line-height:45px;
+    color: #c5c5c5;
+    width: 55px;
+    float: left;
+}
+.cj-purchase .purchase-content .is-select .select-box {
+    min-width: 160px;
+    height: 30px;
+    display: inline-block;
+    border: 1px solid #F0F0F0;
+    border-radius: 3px;
+    line-height: 28px;
+    font-size: 10px;
+    padding: 0 10px;
+    margin-right: 10px;
+    margin-top: 7px;
+    color: #999999;
+    float: left;
+}
+.cj-purchase .purchase-content .is-select .select-title {
+    float: left;
+    margin-right: 4px;
+}
+.cj-purchase .purchase-content .is-select .select-content {
+    width: 67px;
+    display: inline-block;
+    color: #2A2A2A;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.cj-purchase .purchase-content .is-select .icon-icon_guanbisousuo {
+    float: right;
+    color: #d9d9d9;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 30px;
+}
+.cj-purchase .advanced-search {
+    margin-left: 15px;
+    font-size: 12px;
+    color: #999999;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.cj-purchase .search-check {
+    border-bottom: 1px dashed #EEEEEE;
+    line-height: 47px;
+    position: relative;
+}
+.cj-purchase .search-check label {
+    margin-right: 46px;
+    font-weight: normal;
+    position: absolute;
+}
+.cj-purchase .search-check > div {
+    padding-left: 100px;
+}
+.cj-purchase .search-check .enums {
+    margin-top: 20px;
+}
+.cj-purchase .search-check .singleWord {
+    color: #666;
+    cursor: pointer;
+    margin-left: 12px;
+}
+.cj-purchase .search-check .search-letter {
+    margin-right:31px;
+    color: #C5C5C5;
+}
+.cj-purchase .search-after .others-btn {
+    position: absolute;
+    top: -2px;
+    right:0;
+    z-index: 2;
+}
+.cj-purchase .more-footer-btn {
+    margin-bottom: 20px;
+}
+.cj-purchase .search-check span.current {
+    color: #469F45;
+}
+.cj-purchase .search-check span {
+    margin-left: 6px;
+    font-size: 12px;
+    color: #666666;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.cj-purchase .search-check .check-span {
+    color: #666;
+    margin-right: 40px;
+}
+.cj-purchase  .search-before-btn {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+.cj-purchase  .search-after-btn {
+    margin-top:15px;
+}
+/*头部公共样式 end*/
+
+
+/*主体内容公共样式 start*/
+.cj-purchase .purchase-body {
+    position: relative;
+    padding-top: 40px;
+}
+.cj-purchase .body-table {
+    position: relative;
+    height: 650px;
+    overflow: scroll;
+}
+.cj-purchase .oprate-one {
+    color: #39A3E2;
+    cursor: pointer;
+}
+.cj-purchase .detail-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.cj-purchase .detail-title h5{
+    font-size: 20px;
+    color: #666666;
+    letter-spacing: 0;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+.cj-purchase .add-title {
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 0;
+    margin: 30px 0;
+}
+.cj-purchase .add-title span {
+    display: block;
+    font-size: 14px;
+    color: #999999;
+}
+/*列表配置*/
+.cj-purchase .configuration {
+    position: absolute;
+    top: 5px;
+    right: 30px;
+}
+/*操作*/
+.cj-purchase .oprate{
+    position: relative;
+}
+.cj-purchase .oprate:hover .oprate-list{
+    display: block;
+}
+.cj-purchase .tr-icon{
+    line-height: 56px;
+    cursor: pointer;
+}
+.cj-purchase .oprate-list{
+    position: absolute;
+    left: 0;
+    top: 42px;
+    border: 1px solid #F5F5F5;
+    box-shadow: 0 5px 20px 0 rgba(0,0,0,0.10);
+    border-radius: 4px;
+    width: 114px;
+    display: none;
+    background: #ffffff;
+    z-index: 500;
+    max-height: 200px;
+    overflow: auto;
+}
+.cj-purchase .oprate-list li{
+    list-style: none;
+    padding: 10px 5px;
+    text-align: left;
+    color: #666666;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.cj-purchase .oprate-list li .disabled{
+    background: #cdcdcd;
+}
+.cj-purchase .oprate-list li:hover{
+    background: #FAFAFA;
+}
+.cj-purchase button.detail {
+    margin-top:20px;
+}
+/*主体内容公共样式 end*/
+
+
+/*模态框公共样式 start*/
+.cj-purchase .cj-modal {
+    top: 200px;
+    background: transparent;
+    overflow: hidden;
+}
+.cj-purchase .modal-content {
+    width: 400px;
+    background: #FFFFFF;
+    box-shadow: 0 5px 20px 0 rgba(0,0,0,0.05);
+    border-radius: 6px;
+}
+.cj-purchase .modal-header {
+    height: 50px;
+    padding: 12px 30px;
+    border-bottom: 1px solid #EEEEEE;
+}
+.cj-purchase .modal-header h4 {
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 0.89px;
+    vertical-align: middle;
+}
+.cj-purchase .modal-body{
+    margin: 30px 50px;
+}
+.cj-purchase .modal-column {
+    margin-bottom: 22px;
+}
+.cj-purchase .remind-text {
+    display: inline-block;
+    height: 48px;
+    line-height:48px;
+    font-size: 12px;
+    color: #999999;
+    letter-spacing: 0.85px;
+    width: 100%;
+    text-align: center;
+}
+.cj-purchase .modal-column:last-child{
+    margin: 0;
+}
+.cj-purchase .modal-column label{
+    font-size: 12px;
+    color: #999999;
+    font-weight: normal;
+    letter-spacing: 0;
+    margin-bottom: 16px;
+}
+.cj-modal .modal-footer {
+    height: 70px;
+    padding: 0;
+    line-height: 70px;
+    text-align: center;
+    border-top: 1px solid #EEEEEE;
+}
+.cj-purchase .product-list .modal-lg{
+    right: 0;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    bottom: 0;
+    top: 0;
+    width: 750px;
+}
+.cj-purchase .modal.product-list{
+    top : 0;
+}
+.cj-purchase .product-list .modal-content{
+    height: 100%;
+    border-radius: 0;
+    overflow: scroll;
+    width: 100%;
+}
+.cj-purchase .product-list .product-head{
+    width: 100%;
+    height: 54px;
+    border-bottom: 1px solid #eeeeee;
+    padding: 0 30px;
+}
+.cj-purchase .product-list .product-head .product-title{
+    float: left;
+    height: 100%;
+    line-height: 54px;
+    color: #666666;
+    font-size: 14px;
+}
+.cj-purchase .product-list .product-head .product-close{
+    float: right;
+    height: 100%;
+    line-height: 54px;
+    color: #CDCDCD;
+    font-size: 14px;
+}
+.cj-purchase .product-list .product-body{
+    padding: 25px 30px;
+}
+.cj-purchase .product-list .product-body .row .column{
+    width: 32%;
+}
+.cj-purchase .product-list .product-body .date input {
+    width: 30%;
+}
+.cj-purchase .product-list .body-table {
+    height:100%;
+}
+.cj-purchase .product-list .product-body .page-list {
+    min-width: 600px;
+}
+.cj-purchase .product-list .product-body .page-total {
+    margin-left: 5%;
+}
+.cj-purchase .product-list .product-body .page-list .page-container {
+    width: 100%;
+}
+/*模态框公共样式 end*/
+
+/*新增界面公共样式 start*/
+.cj-purchase  .add-input {
+    margin-top: 25px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #EEEEEE;
+}
+.cj-purchase .new-header {
+    margin-bottom:20px;
+}
+.cj-purchase .add-after-btn {
+    position: absolute;
+    top: -6px;
+    right: 0;
+}
+.cj-purchase  tr.current {
+    background: #FBFDFB;
+}
+.cj-purchase .left-table {
+    width: 70%;
+    float: left;
+}
+.cj-purchase .right-table {
+    width: 30%;
+    height: 100%;
+    float: right;
+    background: #FBFDFB;
+    border: 1px solid #F5F5F5;
+    padding: 10px 18px;
+    overflow: auto;
+}
+.cj-purchase .right-table thead td{
+    background: #DCECDC;
+    font-size: 12px;
+}
+.cj-purchase .right-table tr {
+    height: 48px;
+}
+.cj-purchase .right-table tbody tr {
+    border-bottom: 1px solid #EEE;
+    background: #FBFDFB;
+}
+.cj-purchase .explain {
+    height: 180px;
+    background: #FBFBFB;
+    padding: 32px 30px;
+    margin-bottom: 20px;
+}
+.cj-purchase .explain h5 {
+    margin:0 0 15px 0;
+}
+.cj-purchase .explain span {
+    display: block;
+    font-size: 14px;
+    color: #B3B3B3;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+.cj-purchase .lModule .column {
+    width: 49%;
+    position: relative;
+}
+.cj-purchase .lModule span{
+    font-size: 14px;
+    color: #2A0000;
+    letter-spacing: 1px;
+    line-height: 35px;
+    padding-left: 16px;
+}
+.cj-purchase .lModule span i {
+    color: #66A9FD;
+    margin-right: 5px;
+    cursor: pointer;
+    font-style: normal;
+}
+.cj-purchase .lModule .column i:before {
+    position: absolute;
+    right: 25px;
+    top: 8px;
+    content: "\e669";
+    color: #d9d9d9;
+}
+.cj-purchase .purchase-content .add-footer {
+    margin: 60px 30px;
+    padding-top: 20px;
+    border-top: 1px solid #EEEEEE;
+}
+/*新增界面公共样式 end*/
+
+
+/***************************采购管理单独样式********************************/
+
+/*tab页面消除公共样式*/
+#purchaseDetails .purchase-header,
+#purchaseRequisitionDetails .purchase-header,
+#returnRequisitionDetails .purchase-header {
+    margin:0;
+    padding: 0;
+}
+#purchaseDetails .purchase-body,
+#purchaseRequisitionDetails .purchase-body,
+#returnRequisitionDetails .purchase-body {
+    padding: 0;
+}
+/* 供应商管理 start*/
+#supplierInformation .add-order {
+    width: 155px;
+}
+#supplierInformation .one {
+    width: 70px;
+    margin-left: -26px;
+}
+/* 供应商管理 end*/
+
+/* 新增采购商信息 start*/
+#addSupplierInformation h5 {
+    margin: 30px;
+}
+#addSupplierInformation .add-input {
+    border-bottom:0;
+    padding-bottom:15px;
+}
+/* 新增采购商信息 end*/
+
+/*采购建议 start*/
+#purchaseAdvise .purchase-body {
+    padding-top: 20px;
+}
+#purchaseAdvise .configuration {
+    top: 25px;
+}
+#purchaseAdvise .product-trend {
+    margin-top:30px;
+}
+#purchaseAdvise .product-trend-pic {
+    margin-top: 25px;
+    height: 150px;
+}
+#purchaseAdvise .top {
+    height: 58px;
+}
+/*采购建议 end*/

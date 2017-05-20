@@ -1,0 +1,641 @@
+<div id="addQuitExchangeGoodsBill" class="jxOutDiv jxAdd" ng-controller="addQuitExchangeGoodsBillController">
+    <div class="jxOutDivContent">
+        <button class="btn btn-default btn-78" ng-click="domOperate.backToList()" style="margin: 20px 0 0 35px;">返回</button>
+        <!-- 退换货单信息-->
+        <div class="goodsBillForm jxmessage form">
+            <h3 class="addTitle">退换货单信息</h3>
+
+            <div class="rows rowsText">
+                <p>订单号 <span class="star">*</span></p>
+                <p>平台订单号 <span class="star">*</span></p>
+
+                <p>店铺名称 <span class="star">*</span></p>
+
+                <p>会员昵称 <span class="star">*</span></p>
+
+            </div>
+            <div class="rows rowsInput">
+                <div>
+                    <div class="sewv" ng-click="domOperate.orderDetailsShow()">
+                        <div class="sewvtop" >{{order.code}}</div>
+                    </div>
+                </div>
+                <div>
+                    <input class="klw-input validate" ng-disabled="(refundInfo.status == 1)" name="empty" type="text" ng-model="order.tradeid"/>
+                </div>
+                    <search-select search-config="pullSelect.store"></search-select>
+                <div>
+                    <input class="klw-input validate" name="empty" type="text" ng-model="order.customername" disabled/>
+                </div>
+            </div>
+            <div class="rows rowsText">
+                <p>退入仓库 <span class="star">*</span></p>
+
+                <p>换出仓库 <span class="star">*</span></p>
+
+                <p>退回快递</p>
+
+                <p>快递单号</p>
+            </div>
+            <div class="rows rowsInput">
+                <search-select search-config="pullSelect.inWarehouse"></search-select>
+                <search-select search-config="pullSelect.outWarehouse"></search-select>
+                <search-select search-config="pullSelect.express"></search-select>
+                <div>
+                    <input class="klw-input" type="text" ng-disabled="(refundInfo.status == 1)" ng-model="ExpressNo"/>
+                </div>
+            </div>
+            <div class="rows rowsText">
+                <p>退货类型 <span class="star">*</span></p>
+
+                <p>退货方式</p>
+                <p>补差价金额</p>
+                <p>收货人 <span class="star">*</span> </p>
+            </div>
+            <div class="rows rowsInput">
+                <pull-select pull-config="pullSelect.returnGoodsType"></pull-select>
+                <pull-select pull-config="pullSelect.RefundWay"></pull-select>
+                <div>
+                    <input class="klw-input" type="text" ng-model="OffsetAmount"/>
+                </div>
+                <div class="input">
+                    <input class="klw-input validate" name="empty" type="text" ng-model="order.subOrder.consignee"/>
+                </div>
+            </div>
+            <div class="rows rowsText">
+                <p>手机号码<span class="star">*</span></p>
+                <p>退款方式</p>
+                <p>收货地址</p>
+            </div>
+            <div class="rows rowsInput">
+                <div class="input">
+                    <input class="klw-input validate" name="phone" type="text" ng-model="order.subOrder.mobile"/>
+                </div>
+                <pull-select pull-config="pullSelect.returnType"></pull-select>
+                <div class="input">
+                    <input class="klw-input" type="text" ng-model="order.subOrder.address"/>
+                </div>
+
+            </div>
+            <div class="rows rowsText">
+                <p>备注</p>
+            </div>
+            <div class="rows rowsInput">
+                <div class="input50">
+                    <input class="klw-input" type="text" ng-model="order.note"/>
+                </div>
+            </div>
+        </div>
+
+        <!-- 退入商品-->
+        <div class="activity-merchandise jxmessage">
+            <div class="messageTitle clear">
+                <h3 class="addTitle">退入商品</h3>
+                <div class="fr message-button" ng-show="formDataChosed.swapInProduct.length">
+                    <div class="add-detail" ng-click="domOperate.addInProduct('addActive')"><i class="iconfont"></i>新增商品明细</div>
+                    <div class="btn add-order btn6" ng-click="domOperate.addInSuit('addSuit')"><i class="iconfont"></i>新增套装明细</div>
+                    <div class="btn  pl-import btn2" ng-click="isActiveShow('batchLead1')"><i class="iconfont"></i>导入</div>
+                    <div class="btn  pl-import"><i class="iconfont"></i>匹配明细</div>
+                    <div class="btn  delete-detail" ng-click="domOperate.productBackLine()"><i class="iconfont"></i>转入换货单</div>
+                </div>
+            </div>
+            <!-- 退入商品之button-->
+            <div class="message-button" ng-hide="formDataChosed.swapInProduct.length || activeContent">
+                <div class="add-detail" ng-click="domOperate.addInProduct('addActive')" ng-class="{'btn-disabled' : operatePower}"><i class="iconfont"></i>新增商品明细</div>
+                <div class="btn add-order btn6" ng-click="domOperate.addInSuit('addSuit')" ng-class="{'btn-disabled' : operatePower}"><i class="iconfont"></i>新增套装明细</div>
+                <div class="btn  pl-import btn2" ng-click="isActiveShow('batchLead1')" ng-class="{'btn-disabled' : operatePower}"><i class="iconfont"></i>导入</div>
+            </div>
+
+            <!-- 退入商品之详情界面 -->
+            <div class="merchandise-details message-content">
+                <!-- 新增活动商品详情-->
+                <div class="addMerchandiseDetails" ng-show="activeContent == 'addActive'">
+                    <div class="search360">
+                        <input type="text" class="klw-search" placeholder="商品代码" ng-model="productInCode" ng-keydown="domOperate.searchByProductInCode($event)"/>
+                    </div>
+                    <div class="body-table">
+                        <div class="left-table">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <label ng-click="domOperate.productInChoseAll()">
+                                            <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':productInCheckAll}"></i>
+                                        </label>
+                                    </th>
+                                    <th ng-repeat="column in productColumn">{{column.name}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="list in tmpData.swapOut1Product" ng-click="domOperate.getInDetails(list)">
+                                    <td>
+                                        <label ng-click="domOperate.productInChose(list)">
+                                            <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':list.trShow}"></i>
+                                        </label>
+                                    </td>
+                                    <td ng-repeat="column in productColumn">{{list[column.tag]}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="right-table">
+                            <div class="table-content">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th ng-repeat = "column in productDetailsColumn">{{column.name}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="list in tmpData.productsInDetails">
+                                        <td ng-repeat="column in productDetailsColumn">{{list[column.tag]}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--分页-->
+                    <tm-pagination conf="productInPage.paginationConf"></tm-pagination>
+                    <div class="footer-button">
+                        <button class="btn btn-success btn-78" ng-click="domOperate.addInProductConfirm()">确定</button>
+                        <button class="btn btn-default btn-cancel btn-78" ng-click="isActiveShow(false)">取消</button>
+                    </div>
+                </div>
+                <!-- 新增套装详情-->
+                <div class="addMerchandiseDetails" ng-show="activeContent == 'addSuit'">
+                    <div class="search360">
+                        <input type="text" class="klw-search" placeholder="套装代码" ng-model="suitInCode" ng-keydown="domOperate.searchBySuitInCode($event)"/>
+                    </div>
+
+                    <div class="body-table">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>
+                                    <label ng-click="domOperate.suitInChoseAll()">
+                                        <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':suitInChoseAll}"></i>
+                                    </label>
+                                </th>
+                                <th ng-repeat="column in suitColumn">{{column.name}}</th>
+                            </tr>
+
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="list in tmpData.suitInData">
+                                <td>
+                                    <label ng-click="domOperate.suitInChose(list)">
+                                        <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':list.trShow}"></i>
+                                    </label>
+                                </td>
+                                <td ng-repeat="column in suitColumn"
+                                    ng-bind-html="list[column.tag] | suitInfoFilter : column.tag"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--分页-->
+                    <tm-pagination conf="suitInPage.paginationConf"></tm-pagination>
+                    <div class="footer-button">
+                        <button class="btn btn-success btn-78" ng-click="domOperate.addInSuitConfirm()">确定</button>
+                        <button class="btn btn-default btn-cancel btn-78" ng-click="isActiveShow(false)">取消</button>
+                    </div>
+                </div>
+                <!-- 批量导入详情-->
+                <div class="batchLeadDetails" ng-show="activeContent == 'batchLead1'">
+                    <div class="leadExplain">
+                        <p>导入说明</p>
+
+                        <p>1. 导入文件仅支持CSV、XLS、XLXS格式、大小不超过2M，数据不超过1万字</p>
+
+                        <p>2. 导入文件不能包含“合并单元格”，否则无法导入 </p>
+
+                        <p>3. 待补充</p>
+                    </div>
+                    <div class="leadTemplate">
+                        <p>导入模板 <span class="star">*</span></p>
+                        <div class="rows rowsInput">
+                            <div class="input50 leadFileInput">
+                                <input type="text" class="klw-input" placeholder="请选择导入文件" readonly/>
+                                <i class="iconfont"></i>
+                            </div>
+                            <div class="notTemplate">
+                                还没有模板,
+                                <span>点此下载  <i class="iconfont">&#xe681;</i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rows rowsText">
+                        <p>店铺名称 <span class="star">*</span></p>
+
+                        <p>订单状态 <span class="star">*</span></p>
+                    </div>
+                    <div class="rows rowsInput">
+                        <div>
+                            <div class="sewv">
+                                <div class="sewvtop"><span>店铺名称</span></div>
+                                <div class="content">
+                                    <ul class="sewvbm">
+                                        <li>现金</li>
+                                        <li>刷卡</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sewv">
+                                <div class="sewvtop"><span>初始状态</span></div>
+                                <div class="content">
+                                    <ul class="sewvbm">
+                                        <li>现金</li>
+                                        <li>刷卡</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="footer-button">
+                        <button class="btn btn-success btn-78">确定</button>
+                        <button class="btn btn-default btn-cancel btn-78" ng-click="isActiveShow(false)">取消</button>
+                    </div>
+                </div>
+            </div>
+
+            <!--退入商品之有明细 -->
+            <div class="hasDetail" ng-show="formDataChosed.swapInProduct.length">
+                <div class="tableOut">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>
+                                <label ng-click="domOperate.choseProductInAll()">
+                                    <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':choseProductInChoseAll}"></i>
+                                </label>
+                            </th>
+                            <th>操作</th>
+                            <th ng-repeat="column in productInColumn">{{column.name}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="list in formDataChosed.swapInProduct track by $index" ng-class="{'green' : (list.skuid == inProductSkuid)}">
+                                <td>
+                                    <label ng-click="domOperate.choseProductIn(list)">
+                                        <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':list.trShow}"></i>
+                                    </label>
+                                </td>
+                                <td>
+                                    <span ng-click="domOperate.deleteInDetails(list)">
+                                        <i class="icon iconfont icon-icon_shaixuan_default2" ng-click="domOperate.deleteProduct(list)"></i>
+                                    </span>
+                                </td>
+                                <td ng-repeat="column in productInColumn">
+                                    <span ng-if="column.canEdit" contenteditable="plaintext-only" ng-keydown="domOperate.changeValue(list,column.tag,$event)">{{list[column.tag]}}</span>
+                                    <span ng-if="!column.canEdit">{{list[column.tag]}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>小计</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 换出商品-->
+        <div class="changeOut jxmessage">
+            <div class="messageTitle clear">
+                <h3 class="addTitle">换出商品</h3>
+
+                <div class="fr message-button" ng-show="formDataChosed.swapOutProduct.length">
+                    <div class="add-detail" ng-click="domOperate.addProduct('addActive')"><i class="iconfont"></i>新增商品明细</div>
+                    <div class="btn add-order btn6" ng-click="domOperate.addOutSuit('addSuit')"><i class="iconfont"></i>新增套装明细</div>
+                    <div class="btn  pl-import btn2" ng-click="isExchangeShow('batchLead1')"><i class="iconfont"></i>导入</div>
+                </div>
+            </div>
+            <!-- 换出商品之button-->
+            <div class="message-button"  ng-hide="formDataChosed.swapOutProduct.length || exchangeContent">
+                <div class="add-detail" ng-click="domOperate.addProduct('addActive')"><i class="iconfont"></i>新增商品明细</div>
+                <div class="btn add-order btn6" ng-click="domOperate.addOutSuit('addSuit')"><i class="iconfont"></i>新增套装明细</div>
+                <div class="btn  pl-import btn2" ng-click="isExchangeShow('batchLead1')"><i class="iconfont"></i>导入</div>
+            </div>
+
+            <!-- 换出商品之详情界面 -->
+            <div class="merchandise-details message-content">
+                <!-- 新增商品详情-->
+                <div class="addMerchandiseDetails" ng-show="exchangeContent == 'addActive'">
+                    <div class="search360">
+                        <input type="text" class="klw-search" placeholder="商品代码" ng-model="productOutCode" ng-keydown="domOperate.searchByProductOutCode($event)"/>
+                    </div>
+
+                    <div class="body-table">
+                        <div class="left-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <label ng-click="domOperate.productOutChoseAll()">
+                                                <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':productOutCheckAll}"></i>
+                                            </label>
+                                        </th>
+                                        <th ng-repeat="column in productColumn">{{column.name}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="list in tmpData.swapOutProduct" ng-click="domOperate.getOutDetails(list)">
+                                        <td>
+                                            <label ng-click="domOperate.productOutChose(list)">
+                                                <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':list.trShow}"></i>
+                                            </label>
+                                        </td>
+                                        <td ng-repeat="column in productColumn">{{list[column.tag]}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="right-table">
+                            <div class="table-content">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th ng-repeat = "column in productDetailsColumn">{{column.name}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="list in tmpData.productsOutDetails">
+                                        <td ng-repeat="column in productDetailsColumn">{{list[column.tag]}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--分页-->
+                    <tm-pagination conf="productOutPage.paginationConf"></tm-pagination>
+                    <div class="footer-button">
+                        <button class="btn btn-success btn-78" ng-click="domOperate.addOutProductConfirm()">确定</button>
+                        <button class="btn btn-default btn-cancel btn-78" ng-click="isExchangeShow(false)">取消</button>
+                    </div>
+                </div>
+                <!-- 新增套装详情-->
+                <div class="addMerchandiseDetails" ng-show="exchangeContent == 'addSuit'">
+                    <div class="search360">
+                        <input type="text" class="klw-search" placeholder="套装代码" ng-model="suitOutCode" ng-keydown="domOperate.searchBySuitOutCode($event)"/>
+                    </div>
+
+                    <div class="body-table">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <label ng-click="domOperate.suitOutChoseAll()">
+                                            <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':suitOutChoseAll}"></i>
+                                        </label>
+                                    </th>
+                                    <th ng-repeat="column in suitColumn">{{column.name}}</th>
+                                </tr>
+
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="list in tmpData.suitOutData" ng-click="domOperate.getOutDetails(list)">
+                                    <td>
+                                        <label ng-click="domOperate.suitOutChose(list)">
+                                            <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':list.trShow}"></i>
+                                        </label>
+                                    </td>
+                                    <td ng-repeat="column in suitColumn"
+                                        ng-bind-html="list[column.tag] | suitInfoFilter : column.tag"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                    </div>
+                    <!--分页-->
+                    <tm-pagination conf="suitOutPage.paginationConf"></tm-pagination>
+                    <div class="footer-button">
+                        <button class="btn btn-success btn-78" ng-click="domOperate.addOutSuitConfirm()">确定</button>
+                        <button class="btn btn-default btn-cancel btn-78" ng-click="isExchangeShow(false)">取消</button>
+                    </div>
+                </div>
+                <!-- 批量导入详情-->
+                <div class="batchLeadDetails" ng-show="exchangeContent == 'batchLead1'">
+                    <div class="leadExplain">
+                        <p>导入说明</p>
+
+                        <p>1. 导入文件仅支持CSV、XLS、XLXS格式、大小不超过2M，数据不超过1万字</p>
+
+                        <p>2. 导入文件不能包含“合并单元格”，否则无法导入 </p>
+
+                        <p>3. 待补充</p>
+                    </div>
+                    <div class="leadTemplate">
+                        <p>导入模板 <span class="star">*</span></p>
+                        <div class="rows rowsInput">
+                            <div class="input50 leadFileInput">
+                                <input type="text" class="klw-input" placeholder="请选择导入文件" readonly/>
+                                <i class="iconfont"></i>
+                            </div>
+                            <div class="notTemplate">
+                                还没有模板,
+                                <span>点此下载  <i class="iconfont">&#xe681;</i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rows rowsText">
+                        <p>店铺名称 <span class="star">*</span></p>
+
+                        <p>订单状态 <span class="star">*</span></p>
+                    </div>
+                    <div class="rows rowsInput">
+                        <div>
+                            <div class="sewv">
+                                <div class="sewvtop"><span>店铺名称</span></div>
+                                <div class="content">
+                                    <ul class="sewvbm">
+                                        <li>现金</li>
+                                        <li>刷卡</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sewv">
+                                <div class="sewvtop"><span>初始状态</span></div>
+                                <div class="content">
+                                    <ul class="sewvbm">
+                                        <li>现金</li>
+                                        <li>刷卡</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="footer-button">
+                        <button class="btn btn-success btn-78">确定</button>
+                        <button class="btn btn-default btn-cancel btn-78" ng-click="isExchangeShow(false)">取消</button>
+                    </div>
+                </div>
+            </div>
+
+            <!--换出商品之有明细 -->
+            <div class="hasDetail" ng-show="formDataChosed.swapOutProduct.length">
+                <div class="tableOut">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>操作</th>
+                            <th ng-repeat="column in productOutColumn">{{column.name}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="list in formDataChosed.swapOutProduct" ng-class="{'green' : (list.skuid == outProductSkuid)}">
+                                <td>
+                                    <span ng-click="domOperate.deleteOutDetails(list)">
+                                        <i class="icon iconfont icon-icon_shaixuan_default2" ng-click="domOperate.deleteProduct(list)"></i>
+                                    </span>
+                                </td>
+                                <td ng-repeat="column in productOutColumn">
+                                    <span ng-if="column.canEdit" contenteditable="plaintext-only" ng-keyup="domOperate.changeValue(list,column.tag,$event)">{{list[column.tag]}}</span>
+                                    <span ng-if="!column.canEdit">{{list[column.tag]}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer jxmessage">
+            <button class="btn btn-success btn-78" ng-click="domOperate.saveData()">保存</button>
+            <button class="btn btn-default btn-78" ng-click="domOperate.backToList()">取消</button>
+        </div>
+        <div class="modal fade order-list-chose" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="order-list-head">
+                        <div class="order-list-title">新增</div>
+                        <div class="order-list-close"><i class="icon iconfont icon-icon_guanbisousuo" ng-click="domOperate.closeModal()"></i></div>
+                    </div>
+                    <div class="order-list-body">
+
+                        <div class="rows rowsText">
+
+                            <p>订单编号 <span class="star">*</span></p>
+                            <p>平台编号<span class="star">*</span></p>
+                            <p>配货单号 <span class="star">*</span></p>
+
+                        </div>
+                        <div class="rows rowsInput">
+                            <div>
+                                <input class="klw-input" ng-model="formData.Code" type="text"/>
+                            </div>
+                            <div>
+                                <input class="klw-input" ng-model="formData.TradeId" type="text"/>
+                            </div>
+                            <div>
+                                <input class="klw-input" ng-model="formData.DispatchCode" type="text"/>
+                            </div>
+                        </div>
+                        <div class="rows rowsText">
+
+                            <p>会员信息 <span class="star">*</span></p>
+                            <p>收货人<span class="star">*</span></p>
+                            <p>手机<span class="star">*</span></p>
+
+                        </div>
+                        <div class="rows rowsInput">
+                            <div>
+                                <input class="klw-input" ng-model="formData.CustomerName" type="text"/>
+                            </div>
+                            <div>
+                                <input class="klw-input" ng-model="formData.consignee" type="text"/>
+                            </div>
+                            <div>
+                                <input class="klw-input" ng-model="formData.Mobile" type="text"/>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <button class="btn btn-success btn-78" ng-click="domOperate.searchConfirm()">确认</button>
+                            <button class="btn btn-default btn-78" ng-click="domOperate.searchCancle()">取消</button>
+                        </div>
+
+                        <div class="order-lists">
+
+                            <div class="tableOut">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th ng-repeat="column in orderListColumn">{{column.name}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="list in orderListData"
+                                            ng-click="domOperate.getOrderDetails(list)" ng-class="{'green' : (list.orderid == orderInfo.orderid)}">
+                                            <td ng-repeat="column in orderListColumn"
+                                                ng-bind-html="list[column.tag] | OrderListFilter : column.tag : list : column.otherInfo"></td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <!--分页-->
+                            <tm-pagination conf="paginationConf"></tm-pagination>
+                        </div>
+
+                        <div class="order-lists-details">
+                            <div class="tableOut">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <label ng-click="domOperate.orderDetailsChoseAll()">
+                                                    <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':orderDetailscheckAll}"></i>
+                                                </label>
+                                            </th>
+                                            <th ng-repeat="column in orderDetailsColumn">{{column.name}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="list in orderDetails">
+                                            <td>
+                                                <label ng-click="domOperate.orderDetailsChose(list)">
+                                                    <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':list.trShow}"></i>
+                                                </label>
+                                            </td>
+                                            <td ng-repeat="column in orderDetailsColumn">
+                                                <span ng-if="column.tag != ''"
+                                                      ng-bind-html="list[column.tag] | orderDetailsFilter : column : list">
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                            <div class="footer">
+                                <button class="btn btn-success btn-78" ng-click="domOperate.save()">保存</button>
+                                <button class="btn btn-default btn-78" ng-click="domOperate.closeModal()">取消</button>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

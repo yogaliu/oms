@@ -1,0 +1,142 @@
+
+<div id="presellPlan" class="jxOutDiv" ng-controller="presellPlanController">
+    <div class="jxOutDivContent">
+        <!-- 主搜索框和主按钮-->
+        <div id="simpleSearch" class="simpleSearch" ng-hide="advancedSearchObj.advancedSearch == 'presellPlan'">
+            <input class="klw-search" placeholder="预售单号" ng-model="searchForm.code" ng-keyup="dimSearch()"/>
+            <span class="advancedSearchBtn"  ng-click="advancedSearchObj.isShow('presellPlan')">高级搜索</span>
+            <div class="fr">
+                <div class="btn133">
+                    <menu-select menu-config="batchBtn"  ng-class="{false:'notClick'}[isZhengque]"></menu-select>
+                </div>
+                <div class="btn btn6 add-order" ng-click="goOther('add')"><i class="iconfont"></i>新增预售计划</div>
+            </div>
+        </div>
+
+        <!-- 高级搜索展开-->
+        <div id="advancedSearch" class="advancedSearch" ng-show="advancedSearchObj.advancedSearch == 'presellPlan'">
+            <!-- 活动时间-->
+            <div class="searchItem timeInput">
+                <div class="timeInput">
+                    <span class="title">制单时间</span>
+                    <div class="options">
+                        <input class="klw-input dateTime" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="searchForm.begindate">
+                        <i class="line"></i>
+                        <input class="klw-input dateTime" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="searchForm.enddate">
+                    </div>
+                </div>
+            </div>
+            <!-- 商品编码-->
+            <div class="searchItem clear">
+                <div class="rows rowsText">
+                    <p>预售单号</p>
+                    <p>商品编码</p>
+                    <p>店铺名称</p>
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchForm.code" placeholder="请输入预售单号"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchForm.skucode" placeholder="请输入商品编码"/>
+                    </div>
+                    <div>
+                        <search-select search-config="selectStore"></search-select>
+                    </div>
+                    <div class="searchItemStatus">
+                        <label ng-click="isLabelSel($event,true);statusFun()" class="selectItem">
+                            <i class="icon-sel iconfont"  ng-class="{true:'icon-sel-zhengque'}[searchForm.status==0]"></i>
+                            <span>禁用</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div id="conditionSet">
+                <button class="btn btn-success btn-78" ng-click="advancedSearchObj.isShow('false');search()">确定</button>
+                <button class="btn btn-default btn-78 advancedSearchCancelBtn" ng-click="advancedSearchObj.isShow('false',$event)">取消
+                </button>
+                <button class="btn btn-default btn-78" ng-click="empty()">清空</button>
+            </div>
+        </div>
+
+        <!-- 特殊标识行-->
+        <div id="simpleSelect" class="simpleSelect clear">
+            <div class="selectItems fl">
+                <label ng-click="isThreeSel($event,'1')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow" ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[simpleSelect.islisting]"></i>
+                    <span>自动上架</span>
+                </label>
+                <label ng-click="isThreeSel($event,'2')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow" ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[simpleSelect.isdynamic]"></i>
+                    <span>动态预售</span>
+                </label>
+            </div>
+
+
+            <div class="ti-pagination">
+                <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                / 共 <span>{{paginationConf.totalItems}}</span>
+
+                <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont" ng-click="prev()"></i></span>
+
+                <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont" ng-click="next()"></i></span>
+
+                 <span style="position: relative">
+                    <span class="config-column" ng-click="showColumnConfigPanel()"  ng-mouseover="isHover()" ng-mouseleave="isHover()">
+                        <i class="iconfont"></i>
+                    </span>
+                    <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+                    <tm-listallocation allo="allocation"></tm-listallocation>
+                </span>
+            </div>
+        </div>
+
+        <div class="tableOut">
+            <table id="presellPlanTable" class="display" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>
+                        <label ng-click="isLabelSel($event);operate.selAll($event)">
+                            <i class="iconfont icon-sel"></i>
+                        </label>
+                    </th>
+                    <th>操作</th>
+                    <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="obj in tableList" repeat-finished-directive repeataction="initFunc()" repeatIndex="{{$index}}" condition="{{$last == true}}">
+                    <td>
+                        <label ng-click="isLabelSel($event);operate.selSingle($event,$index)">
+                            <i class="iconfont icon-sel"></i>
+                        </label>
+                    </td>
+                    <td class="operate">
+                        <div class="operateList">
+                            <div class="operateIcon"><span class="iconfont icon-operate"></span></div>
+                            <div class="content">
+                                <ul class="one">
+                                    <li ng-click="goOther('detail',$index)">预售详情</li>
+                                    <li ng-click="goOther('modify',$index)"  ng-class="{true:'notClick'}[obj.status!=0]">修改</li>
+                                    <li ng-click="operate.check(obj,$event)" ng-class="{true:'notClick'}[obj.status!=0]">审核</li>
+                                    <li ng-click="operate.start(obj,$event)" ng-class="{true:'notClick'}[obj.status!=1]">整单开始预售</li>
+                                    <li ng-click="operate.end(obj,$event)" ng-class="{true:'notClick'}[obj.status!=2]">整单结束预售</li>
+                                    <li ng-click="goOther('copy',$index)">复制</li>
+                                    <li ng-click="operate.disable(obj,$event)" ng-class="{true:'notClick'}[obj.status==4]">禁用</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td ng-repeat="item in theadList">
+                        <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                        {{obj[item.tag] | isBoolean| jxFilter:item.tag:'presellPlan'|  setDefaultValueWithoutData}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--分页-->
+        <tm-pagination conf="paginationConf"></tm-pagination>
+    </div>
+</div>

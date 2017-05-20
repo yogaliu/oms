@@ -1,0 +1,147 @@
+<div id="refundBillDetail" class="jxOutDiv jxOutDivDetail" ng-controller="refundBillDetailController">
+    <div class="jxOutDivContent">
+        <button class="btn btn-default btn-78" ng-click="domOperate.backTolist()" style="margin: 20px 0 0 35px;">返回</button>
+        <div class="detail-content-top">
+            <div class="detail-top-tab">
+                <ul>
+                    <li ng-class="{true:'current',false:''}[tab == 'first']" ng-click="domOperate.isShow('first')">退款单信息</li>
+                    <li ng-class="{true:'current',false:''}[tab == 'second']" ng-click="domOperate.isShow('second')">操作日志</li>
+                </ul>
+            </div>
+        </div>
+        <div class="content-first" ng-show="tab == 'first'">
+            <div class="jxmessage">
+                <h3 class="detailTitle">
+                    退款单号：{{code}}
+                </h3>
+            </div>
+            <div class="quitEnter jxmessage">
+                <h3 class="detailTitle">
+                    退入商品
+                </h3>
+
+                <div class="tableOut">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th ng-repeat="column in refundBillDetailsColumn">{{column.name}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="list in refundBillDetails">
+                                <td ng-repeat="column in refundBillDetailsColumn">{{list[column.tag]}}</td>
+                            </tr>
+                            <tr>
+                                <td>小计</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>{{refundQuality}}</td>
+                                <td>{{shoutRefundAmount}}</td>
+                                <td>{{compensateAmount}}</td>
+                                <td>{{refundRealAmount}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="changeOut jxmessage">
+                <h3 class="detailTitle">
+                    换出商品
+                </h3>
+
+                <div class="tableOut">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th ng-repeat="column in swapOutGoodsColumn">{{column.name}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="list in swapOutGoods">
+                                <td ng-repeat="column in swapOutGoodsColumn">{{list[column.tag]}}</td>
+                            </tr>
+                            <tr>
+                                <td>小计</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>{{changeGoodsQuality}}</td>
+                                <td>{{changeGoodsAmount}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="insideTag jxmessage">
+                <h3 class="detailTitle">
+                    内部标签
+                </h3>
+                <div class="btn  add-detail" ng-click="domOperate.addLabel()"> 增加</div>
+                <div class="tableOut">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th ng-repeat="column in productLabelColumn">{{column.name}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="list in productLabel">
+                                <td ng-repeat="column in productLabelColumn">
+                                    <span ng-if="column.tag != ''">{{list[column.tag]}}</span>
+                                    <span ng-if="column.tag == ''">
+                                        <ul>
+                                            <li ng-click="domOperate.changeLabel(list)" class="td-can-operate">编辑</li>
+                                        </ul>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="content-second" ng-show="tab == 'second'">
+            <div class="jxmessage">
+                <div class="tableOut">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th ng-repeat="column in operateLogColumn">{{column.name}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="list in operateLog">
+                            <td ng-repeat="column in operateLogColumn">{{list[column.tag]}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--内部标签模态框模态框-->
+    <div class="modal fade info-get-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="info-tip">
+                    <div class="info-tip-head">
+                        <p class="info-tip-label">{{modal.title}}</p>
+                        <p class="info-tip-close" ng-click="domOperate.closeModal()">
+                            <i class="icon iconfont icon-icon_guanbisousuo"></i>
+                        </p>
+                    </div>
+                    <div class="info-tip-body">
+                        <textarea name="" id="" cols="30" rows="10" ng-model="content">请输入内容</textarea>
+                    </div>
+                    <div class="info-tip-header">
+                        <button type="button" class="btn btn-success btn-78" ng-click="modal.confirm()">确定</button>
+                        <button type="button" class="btn btn-default btn-78" ng-click="domOperate.closeModal()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

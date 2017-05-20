@@ -1,0 +1,219 @@
+<div id="matchGoodsBill" class="jxOutDiv" ng-controller="matchGoodsBillController">
+    <div class="jxOutDivContent">
+
+        <div id="simpleSearch" class="simpleSearch" ng-hide="advancedSearchObj.advancedSearch == 'matchGoodsBill'">
+            <input class="klw-search" placeholder="配货单号" ng-model="searchForm.dispatchordercode"
+                   ng-keyup="searchKeyup()"/>
+            <span class="advancedSearchBtn" ng-click="advancedSearchObj.isShow('matchGoodsBill')">高级搜索</span>
+
+            <div class="fr">
+                <div class="btn add-order btn6" ng-click="goOther('add')"><i class="iconfont"></i>新增配货单</div>
+            </div>
+        </div>
+
+        <div id="advancedSearch" class="advancedSearch" ng-show="advancedSearchObj.advancedSearch == 'matchGoodsBill'">
+            <!-- 制单时间-->
+            <div class="searchItem timeInput">
+                <span class="title">制单时间</span>
+
+                <div class="options">
+                    <input class="klw-input dateTime" type="text" readonly ng-click="showDatetimePick($event)"
+                           data-date-format="yyyy-mm-dd" ng-model="searchForm.startTime">
+                    <i class="line"></i>
+                    <input class="klw-input dateTime" type="text" readonly ng-click="showDatetimePick($event)"
+                           data-date-format="yyyy-mm-dd" ng-model="searchForm.endTime">
+                </div>
+            </div>
+            <!-- 配货单号-->
+            <div class="searchItem searchItemInput clear">
+                <div class="rows rowsText">
+                    <p>配货单号</p>
+
+                    <p>档期编号</p>
+
+                    <p>PO单号</p>
+
+                    <p>商品编码</p>
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchForm.dispatchordercode"
+                               placeholder="请输入配货单号"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchForm.schedulecode" placeholder="请输入档期编号"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchForm.pocode" placeholder="请输入PO单号"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchForm.productcode" placeholder="请输入商品编码"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="searchItem searchItemInput clear">
+                <div class="rows rowsText">
+                    <p>到货仓库</p>
+
+                    <p>单据状态</p>
+
+                    <p>入库单号</p>
+
+                    <p>拣货单号</p>
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <pull-select pull-config="selectsendwarehouse"></pull-select>
+                    </div>
+
+                    <div>
+                        <pull-select pull-config="selectStatus"></pull-select>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchForm.storageno" placeholder="请输入入库单号"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchForm.pickingcode" placeholder="请输入拣货单号"/>
+                    </div>
+                </div>
+            </div>
+            <div id="conditionSet">
+                <button class="btn btn-success btn-78" ng-click="advancedSearchObj.isShow('false');search()">确定</button>
+                <button class="btn btn-default btn-78 advancedSearchCancelBtn"
+                        ng-click="advancedSearchObj.isShow('false',$event)">取消
+                </button>
+                <button class="btn btn-default btn-78" ng-click="empty()">清空</button>
+            </div>
+        </div>
+
+        <div id="simpleSelect" class="simpleSelect clear">
+            <div class="selectItems fl">
+                <label ng-click="isThreeSel($event,'1')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow"
+                       ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[simpleSelect.iscreatebhed]"></i>
+                    <span>已完结</span>
+                </label>
+            </div>
+
+
+            <div class="ti-pagination">
+                <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                / 共 <span>{{paginationConf.totalItems}}</span>
+
+                <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont"
+                                                                                   ng-click="prev()"></i></span>
+
+                <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont"
+                                                                                                    ng-click="next()"></i></span>
+
+                 <span style="position: relative">
+                    <span class="config-column" ng-click="showColumnConfigPanel()"  ng-mouseover="isHover()" ng-mouseleave="isHover()">
+                        <i class="iconfont"></i>
+                    </span>
+                    <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+                    <tm-listallocation allo="allocation"></tm-listallocation>
+                </span>
+            </div>
+        </div>
+
+        <div class="tableOut">
+            <table id="matchGoodsBillTable" class="display" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>操作</th>
+                    <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="obj in tableList" repeat-finished-directive repeataction="initFunc()"
+                    repeatIndex="{{$index}}" condition="{{$last == true}}">
+
+                    <td class="operate text-center">
+                        <div class="operateList">
+                            <div class="operateIcon"><span class="iconfont icon-operate"></span></div>
+                            <div class="content">
+                                <ul class="one">
+                                    <li ng-click="goOther('detail',$index)">配货单详情</li>
+
+                                    <li ng-click="operate.selSend(obj,$event)"
+                                        ng-class="{true:'notClick'}[obj.status==10 ||obj.status==9 || obj.deliveryordercode!=undefined]">
+                                        选择送货单
+                                    </li>
+
+                                    <li ng-click="operate.creatRepair(obj,$event)"
+                                        ng-class="{true:'notClick'}[obj.status!=3 || !!obj.iscreatebhed]">生成补货单
+                                    </li>
+
+                                    <li ng-click="operate.abnormal(obj,$event)"
+                                        ng-class="{true:'notClick'}[obj.status!=10]">匹配异常商品
+                                    </li>
+
+                                    <li ng-click="operate.finish(obj,$event)"
+                                        ng-class="{true:'notClick'}[obj.status!=3 || !!obj.iscreatebhed]">完结
+                                    </li>
+
+                                    <li ng-click="operate.close(obj,$event)"
+                                        ng-class="{true:'notClick'}[obj.status!=1]">关闭
+                                    </li>
+
+                                    <li>导出明细</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td ng-repeat="item in theadList">
+                        <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                        {{obj[item.tag] | isBoolean | setDefaultValueWithoutData}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--分页-->
+        <tm-pagination conf="paginationConf"></tm-pagination>
+
+        <!--选择送货单侧滑框-->
+        <div id="rightSideModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="header-title">选择送货单</div>
+                    <div class="header-close" ng-click="rightSideObj.hideModal()"><i class="icon iconfont icon-icon_guanbisousuo"></i></div>
+                </div>
+                <div class="product-body">
+                    <div class="searchBox">
+                        <input type="text" class="klw-search" ng-keyup="rightSideObj.search()" ng-model="rightSideObj.searchText"/>
+                    </div>
+                    <div class="tableOut">
+                        <table id="getrightSideTable" class="display" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th ng-repeat="obj in theadRightSideList">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="obj in tableRightSideList" ng-click="rightSideObj.select(obj,$event)" ng-hide='obj.isHide'>
+                                <td ng-repeat="item in theadRightSideList">{{obj[item.tag] | setDefaultValueWithoutData}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="rows rowsText">
+                        <p>备注</p>
+                    </div>
+                    <div class="rows rowsInput">
+                        <div class="input100">
+                            <textarea class="klw-textarea" ng-model="sendObj.note"></textarea>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <button class="btn btn-success btn-78 mr" ng-click="rightSideObj.ensure()">保存</button>
+                        <button class="btn btn-default btn-78" ng-click="rightSideObj.hideModal()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

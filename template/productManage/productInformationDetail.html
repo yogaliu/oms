@@ -1,0 +1,141 @@
+<!-- 商品信息详情 -->
+
+<div id="productInformationDetail" class="cj-product" ng-controller="productInformationDetailController">
+    <div class="product-content">
+
+        <div class="product-header">
+            <div class="header-tab">
+                <ul>
+                    <li ng-class="{true:'current',false:''}[tab == 'first']" ng-click="toggleTab('first')">商品信息</li>
+                    <li ng-class="{true:'current',false:''}[tab == 'second']" ng-click="toggleTab('second')">操作日志</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="product-body">
+            <button class="btn btn-default detail btn-78 mr" ng-click="goBack()">返回</button>
+            <!--商品详情-->
+            <div class="first" ng-show="tab == 'first'">
+                <div>
+                    <h5 class="add-title">商品信息</h5>
+                    <div class="row">
+                        <div class="column">
+                            <span>商品编码<i>{{formData.code}}</i></span>
+                        </div>
+                        <div class="column">
+                            <span>商品名称<i>{{formData.description}}</i></span>
+                        </div>
+                    </div>
+                </div>
+                <!--规格信息-->
+                <div>
+                    <h5 class="add-title">规格信息</h5>
+                    <div>
+                        <table id="productSkuTable" class="display" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>操作</th>
+                                <th ng-repeat="obj in theadListSku">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="obj in tableListSku">
+                                <td class="oprate-one" ng-click="showModal('disabledSkuModal',$index)">禁用</td>
+                                <td ng-repeat="item in theadListSku">{{obj[item.tag] | productFilter:item.tag}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--变价信息-->
+                <div>
+                    <h5 class="add-title">变价信息</h5>
+                    <div>
+                        <table id="productChangeTable" class="display" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>操作</th>
+                                <th ng-repeat="obj in theadListChange">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="obj in tableListChange">
+                                <td class="oprate-one" ng-click="showModal('disabledChangeModal',$index)">禁用</td>
+                                <td ng-repeat="item in theadListChange">{{obj[item.tag]}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--自定义属性-->
+                <div>
+                    <h5 class="add-title">自定义属性</h5>
+                    <div class="row odd">
+                        <div class="attribute column" ng-repeat="item in attributeData track by $index">
+                            <span ng-if="item">{{item.name}}<i>{{formData['attribute'+($index+1)]?formData['attribute'+($index+1)]:''}}</i></span>
+                            <span ng-if="!item">属性{{$index+1}}<i>{{formData['attribute'+($index+1)]?formData['attribute'+($index+1)]:''}}</i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--操作日志-->
+            <div class="second" ng-show="tab == 'second'">
+                <h5 class="add-title">操作记录</h5>
+                <table id="operateLogTable" class="display" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <td ng-repeat="obj in theadListLog">{{obj.name}}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="obj in tableListLog">
+                            <td ng-repeat="item in theadListLog">{{obj[item.tag]}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!--规格信息禁用模态框-->
+    <div class="cj-modal modal fade" id="disabledSkuModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <span class="remind-text">数据禁用后将不可使用,是否继续禁用?</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-78 mr" ng-click="disabledSkuOp()">确定</button>
+                    <button type="button" class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--变价信息禁用模态框-->
+    <div class="cj-modal modal fade" id="disabledChangeModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <span class="remind-text">数据禁用后将不可使用,是否继续禁用?</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-78 mr" data-dismiss="modal" ng-click="disabledChangeOp()">确定</button>
+                    <button type="button" class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /商品信息详情 -->

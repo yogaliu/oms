@@ -1,0 +1,115 @@
+<div id="topHeader" class="topHeader">
+    <div class="top-left">
+        <div class="logo"><img src="../images/test.jpg"/></div>
+        <div class="title">OMS</div>
+    </div>
+    <div class="top-menu">
+        <div class="item" ng-class="{active:$index==0}" ng-click="loadPageContent($index+1,obj.name)" ng-repeat="obj in menuPower">{{obj.name}}</div>
+    </div>
+    <div class="top-right">
+        <div class="set-up"><i class="iconfont"></i></div>
+        <div class="inform"><i class="iconfont"></i></div>
+        <div class="public"><i class="iconfont"></i></div>
+        <div class="user"><img src="../images/test.jpg"/></div>
+    </div>
+</div>
+
+<div id="leftMenu" class="leftMenu">
+    <div class="left-container">
+
+        <!--订单管理-->
+        <div class="it orderManage" ng-if="obj.name=='订单管理'" ng-repeat="obj in menuPower" >
+            <div class="top">
+                <div class="item active-menu" ng-click="chekcMenu($event,1)">B2C</div>
+                <div class="item" ng-click="chekcMenu($event,2)">CIT</div>
+                <div class="item" ng-click="chekcMenu($event,3)">FBP</div>
+            </div>
+            <div class="body">
+                <div class="option b2c">
+
+                    <div class="one-level" ng-if="$index == 0"  ng-repeat="level1 in obj.children">
+                        <div class="one-name">{{level1.name}}</div>
+                        <div class="two-level hre" ng-class="{active:$index==0}" ng-repeat="level2 in level1.children" ng-click="addTab(level2.name,level2.url,$event)">
+                            {{level2.name}}
+                        </div>
+                        <div class="hr"></div>
+                    </div>
+
+                    <div class="one-level" ng-if="$index ==1"  ng-repeat="level1 in obj.children">
+                        <div class="one-name">{{level1.name}}</div>
+                        <div class="two-level hre"  ng-repeat="level2 in level1.children" ng-click="addTab(level2.name,level2.url,$event)">
+                            {{level2.name}}
+                        </div>
+                        <div class="hr"></div>
+                    </div>
+
+                </div>
+                <div class="option cit">
+
+                    <div class="one-level" ng-if="$index == 2"  ng-repeat="level1 in obj.children">
+                        <div class="one-name">{{level1.name}}</div>
+                        <div class="two-level hre" ng-repeat="level2 in level1.children" ng-click="addTab(level2.name,level2.url,$event)">
+                            {{level2.name}}
+                        </div>
+                        <div class="hr"></div>
+                    </div>
+
+                </div>
+                <div class="option fbp">
+
+                    <div class="one-level" ng-if="$index == 3"  ng-repeat="level1 in obj.children">
+                        <div class="one-name">{{level1.name}}</div>
+                        <div class="two-level hre " ng-repeat="level2 in level1.children" ng-click="addTab(level2.name,level2.url,$event)">
+                            {{level2.name}}
+                        </div>
+                        <div class="hr"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="it" ng-if="obj.name!='订单管理'"  ng-repeat="obj in menuPower" style="display: none">
+            <div class="left-container" >
+                <div class="one-level" ng-repeat="level1 in obj.children">
+                    <div class="one-name">{{level1.name}}</div>
+                    <div ng-repeat="level2 in level1.children" class="two-level hre" ng-click="addTab(level2.name,level2.url,$event)">
+                        {{level2.name}}
+                    </div>
+                    <div class="hr"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="container-body">
+    <div id="crumbs" class="crumbs">
+        <div class="crumbs-content">
+            <div class="crumbs-first">{{crumbs.first}}</div>
+            <div class="crumbs-icon"><i class="iconfont"></i></div>
+            <div class="crumbs-two">{{crumbs.two}}</div>
+            <div class="crumbs-icon"><i class="iconfont"></i></div>
+            <div class="crumbs-three">{{crumbs.three}}</div>
+        </div>
+    </div>
+    <div id="public-tabs" class="public-tabs">
+        <div ng-repeat='o in option' class="tab" ng-class="{active:$index == index}"  ng-show="$index <= 6" ng-click="changeTab($index,o)">
+            <div class="tab-name">{{o.name}}</div><i class="iconfont" ng-click="deleteTab($index)"></i>
+        </div>
+
+        <div class="tab-info" ng-show="option.length > 6" ng-click="showTabList()"><i class="iconfont"></i>
+            <ul ng-show="tabList">
+               <li ng-repeat="o in option" ng-click="addTab(o.name,o.url);$event.stopPropagation();">{{o.name}}</li>
+            </ul>
+        </div>
+
+    </div>
+    <!--内容区域-->
+    <div class="info">
+        <div ng-repeat="o in option"  data-index="{{$index}}" ng-include="o.url" ng-class="{active:$index === index}"></div>
+    </div>
+</div>
+

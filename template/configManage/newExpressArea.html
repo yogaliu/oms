@@ -1,0 +1,59 @@
+<div id="configManage" class="config-manage">
+    <div id="newExpressArea" class="new-express-area" ng-controller="newExpressAreaController">
+        <div id="content" class="content">
+            <div class="title">新增快递范围</div>
+            <div class="items advance-search">
+                <div class="ipt cf">
+                    <label class="item">
+                        <span class="title">快递公司<i class="notice">*</i></span>
+                        <pull-select pull-config="Express"></pull-select>
+                    </label>
+                    <label class="item">
+                        <span class="title">国家<i class="notice">*</i></span>
+                        <pull-select pull-config="CountryList"></pull-select>
+                    </label>
+                    <label class="item">
+                        <span class="title">省<i class="notice">*</i></span>
+                        <pull-select pull-config="ProvinceList"></pull-select>
+                    </label>
+                    <label class="item">
+                        <span class="title">市<i class="notice">*</i></span>
+                        <pull-select pull-config="CityList"></pull-select>
+                    </label>
+                </div>
+                <div class="ipt cf">
+                    <label class="item">
+                        <span class="title">区<i class="notice">*</i></span>
+                        <pull-select pull-config="CountyList"></pull-select>
+                    </label>
+                    <label class="item">
+                        <span class="title">集结地编码</span>
+                        <input type="text" class="klw-input" placeholder="请输入编码" ng-model="currentItem.packagecentercode">
+                    </label>
+                    <label class="item">
+                        <span class="title">集结地名称</span>
+                        <input type="text" class="klw-input" placeholder="请输入名称" ng-model="currentItem.packagecentername">
+                    </label>
+                </div>
+                <div class="ipt cf">
+                    <label class="item lg">
+                        <span class="title">关键字</span>
+                        <input type="text" class="klw-input" placeholder="关键字" ng-model="currentItem.keyword">
+                        <label class="sel-item">
+                            <div class="line" ng-click="checkItem('iskeywordarrive')">
+                                <div class="klwk-check-x" ng-show="currentItem.iskeywordarrive"><i class="iconfont"></i></div>
+                                <div class="klwk-check" ng-hide="currentItem.iskeywordarrive"><i class="iconfont"></i></div>
+                                <span class="title">关键字到达</span>
+                            </div>
+                        </label>
+                    </label>
+                </div>
+            </div>
+            <div class="footer">
+                <button ng-click="save()" class="btn btn-success btn-78">保存</button>
+                <button ng-click="goBack()" class="btn btn-default btn-78">取消</button>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,201 @@
+<div id="lendIn" class="inventory-manage jxOutDiv" ng-controller="loanInController">
+    <div id="content" class="content">
+        <div class="search" ng-hide="advance">
+            <input type="text" class="klw-search" placeholder="商品编码/调拨单号">
+            <span ng-click="showAdvance()" class="showAdvance">高级搜索</span>
+        </div>
+        <div class="advance-search" ng-show="advance">
+            <div class="items">
+                <div class="ipt">
+                    <label class="item col-width">
+                        <span class="title">单号</span>
+                        <input type="text" class="klw-input" ng-model="formData.code">
+                    </label>
+                    <label class="item col-width" style="height: 75px;">
+                        <span class="title">仓库</span>
+                        <div class="more-select" ng-click="showShopModal()">
+                            <div class="select-content "><span>{{storeName}}</span><em><img src="../images/selebom.png"></em></div>
+                        </div>
+                    </label>
+                    <label class="item col-width">
+                        <span class="title">商品编码</span>
+                        <input type="text" class="klw-input" ng-model="formData.productCode">
+                    </label>
+                    <label class="item col-width">
+                        <span class="title">规格编码</span>
+                        <input type="text" class="klw-input" ng-model="formData.skuCode">
+                    </label>
+                </div>
+                <div class="ipt">
+                    <label class="item col-width" style="float: left">
+                        <span class="title">状态</span>
+                        <div style="margin-top: 18px;">
+                            <pull-select pull-config="pullInfo" ></pull-select>
+                        </div>
+                    </label>
+                    <label class="item col-width" style="float: left">
+                        <span class="title">借调人</span>
+                        <input type="text" class="klw-input" ng-model="formData.loanUser">
+                    </label>
+                    <div class="searchItem timeInput" style="position: relative;left: 8px;display: grid;">
+                        <span class="title">制单时间</span>
+                        <div class="options" style="margin-top: 15px;">
+                            <input class="klw-input ng-pristine ng-untouched ng-valid" id="beginCreateDate" type="text" ng-model="formData.beginCreateDate">
+                            <i class="line"></i>
+                            <input class="klw-input ng-pristine ng-untouched ng-valid" id="endCreateDate" type="text" ng-model="formData.endCreateDate">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="oprate">
+                <button ng-click="advanceSearch()" class="btn btn-success btn-78">搜索</button>
+                <button class="btn btn-default btn-78" ng-click="showAdvance()">取消</button>
+                <button class="btn btn-default btn-78" ng-click="clearOnly()">清空</button>
+            </div>
+        </div>
+        <div id="topTable" class="top-table cf">
+            <div class="items fl">
+                <button class="btn btn-default btn-78" ng-click="addLoan('还入单:新增','../template/inventoryManage/addLoanIn.html')">新增</button>
+                <button class="btn btn-default btn-78" ng-disabled="isDisabled" ng-click="updateLoan('还入单:修改','../template/inventoryManage/addLoanIn.html')">修改</button>
+                <button class="btn btn-default btn-78" ng-disabled="isDisabled" ng-click="noticeWarehouse()">通知仓库</button>
+                <button class="btn btn-default btn-78" ng-click="Invalid()">作废</button>
+            </div>
+            <div class="ti-pagination">
+                <span class="num"><span>{{first}}</span>-<span>{{last}}</span></span>
+                / 共 <span>{{paginationConf.totalItems}}</span>
+                <span class="prev" ng-class="{disabled: conf.currentPage == 1}">
+                        <i class="iconfont"  ng-click="prev()"></i>
+                    </span>
+                <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}">
+                        <i class="iconfont" ng-click="next()"></i>
+                    </span>
+                <span class="config-column" ng-mouseover="isHover()" ng-mouseleave="isHover()" ng-click="listAllocation()"><i class="iconfont"></i></span>
+
+                <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+                <!-- 右侧列表配置 -->
+                <tm-listallocation allo="allocation"></tm-listallocation>
+            </div>
+        </div>
+        <div class="inventoryContent" >
+            <div class="cf userManage" style="height: 100%;width: 100%;">
+                <div class="left-table">
+                    <table id="omsDataTable" class="display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <td ng-repeat="obj in columnList">{{obj.name}}</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in loanList"  ng-click="getProductDetail(obj)">
+                            <td ng-repeat="item in columnList">
+                                <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                                {{obj[item.tag] | isBoolean}}
+                            </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="right-table">
+                    <table id="proDuctTable" class="display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <td ng-repeat="obj in productColumnList">{{obj.name}}</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in productList" >
+                            <td ng-repeat="item in productColumnList" ng-if="$index<4">
+                                {{obj.sku[item.tag]}}
+                            </td>
+                            <td ng-repeat="item in productColumnList" ng-if="$index>=4">
+                                {{obj[item.tag]}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <tm-pagination conf="paginationConf"></tm-pagination>
+    </div>
+    <div class="modal fade shop-modal config-manage" id="shopModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">仓库</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="cf">
+                        <div class="fl left">
+                            <i class="iconfont icon-search-blod"></i>
+                            <input type="text" class="klw-search" placeholder="编码/名称">
+                            <div class="thead">
+                                    <span class="td" ng-click="selectAllStore()">
+                                        <div class="klwk-check" ng-hide="isAllStoreList()"><i class="iconfont"></i></div>
+                                        <div class="klwk-check-x" ng-show="isAllStoreList()"><i class="iconfont"></i></div>
+                                    </span>
+                                <span class="td">编码</span>
+                                <span class="td">仓库名称</span>
+                            </div>
+                            <div class="tbody">
+                                <div class="tr" ng-repeat="item in storeList" ng-click="selectOneStore($index)">
+                                    <div class="td oh">
+                                        <div class="klwk-check" ng-hide="isInSelectStoreList(item)"><i class="iconfont"></i></div>
+                                        <div class="klwk-check-x" ng-show="isInSelectStoreList(item)"><i class="iconfont"></i></div>
+                                    </div>
+                                    <span class="td oh">{{item.code}}</span>
+                                    <span class="td oh">{{item.name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fl left right">
+                            <div class="title">已选择</div>
+                            <div class="thead">
+                                <span class="td">编码</span>
+                                <span class="td">仓库名称</span>
+                                <span class="td"></span>
+                            </div>
+                            <div class="tbody">
+                                <div class="tr" ng-repeat="item in selectStoreList">
+                                    <span class="td oh">{{item.code}}</span>
+                                    <span class="td oh">{{item.name}}</span>
+                                    <div class="td oh" ng-click="deleteOneStore($index)">
+                                        <i class="iconfont icon-close"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" ng-click="showStores()">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--延期模态框-->
+    <div class="modal fade creat-modal" id="expectreturn" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog wide">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">延期</h4>
+                </div>
+                <div class="modal-body">
+                    延期时间: <input type="text" class="klw-input" placeholder="请选择" ng-model="expectreturndate">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" ng-click="expectreturndateSvae()">保存</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

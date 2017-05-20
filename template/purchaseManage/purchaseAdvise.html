@@ -1,0 +1,170 @@
+<!-- 采购建议 -->
+
+<div id="purchaseAdvise" class="cj-purchase" ng-controller="purchaseAdviseController" >
+    <div class="purchase-content">
+
+        <div class="purchase-header">
+            <div>
+                <!--开始时间-->
+                <div class="row even input-time">
+                    <label>开始时间</label>
+                    <input class="klw-input datePlugin" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="searchItem.beginDate">
+                    <i class="line"></i>
+                    <input class="klw-input datePlugin" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="searchItem.endDate">
+                </div>
+                <!--表单输入-->
+                <div class="row odd">
+                    <div class="column">
+                        <label>供应商</label>
+                    </div>
+                    <div class="column">
+                        <label>显示类型</label>
+                    </div>
+                    <div class="column">
+                        <label>商品编码</label>
+                    </div>
+                </div>
+                <div class="row even">
+                    <div class="column">
+                        <input type="text" class="klw-input" ng-click="searchItem.supplier" placeholder="请输入供应商">
+                    </div>
+                    <div class="column">
+                        <pull-select pull-config="selectType"></pull-select>
+                    </div>
+                    <div class="column">
+                        <input type="text" class="klw-input" ng-model="searchItem.productCode" ng-click="showModal('productSelectModal')" readonly placeholder="请输入商品编码">
+                    </div>
+                </div>
+            </div>
+            <div class="search-after-btn">
+                <button class="btn btn-success btn-78 mr"  ng-click="search('ensure')">搜索</button>
+                <button class="btn btn-default btn-78" ng-click="search('empty')">清空</button>
+            </div>
+
+            <!--商品销量折线图-->
+            <div class="product-trend">
+                <div class="row">
+                    <label>商品销量走势</label>
+                </div>
+                <div class="product-trend-pic">
+                    <div id="productSales" style="width: 100%; height: 150px;">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="purchase-body">
+            <div class="top">
+                <div class="btn klwk-cancle"><i class="iconfont"></i>导出</div>
+                <div class="configuration">
+                    <div class="ti-pagination">
+                        <span class="config-column" ng-mouseover="isHover()" ng-mouseleave="isHover()"
+                      ng-click="showColumnConfigPanel()"><i class="iconfont"></i></span>
+
+                        <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+                    </div>
+                </div>
+            </div>
+            <div class="body-table">
+                <table id="purchaseAdviseTable" class="display" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <td>操作</td>
+                        <td ng-repeat="obj in theadList">{{obj.name}}</td>
+                        <td>销量趋势</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="obj in tableList">
+                        <td ng-click="addTab('新增采购订单','../template/purchaseManage/addPurchaseOrder.html')">生成采购订单</td>
+                        <td ng-repeat="item in theadList">{{obj[item.tag]}}</td>
+                        <td ng-click="trend()">图形</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 右侧列表配置 -->
+        <div>
+            <tm-listallocation allo="allocation"></tm-listallocation>
+        </div>
+    </div>
+
+    <!--选择商品模态框-->
+    <div class="modal fade product-list" id="productSelectModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="product-head">
+                    <div class="product-title">选择商品</div>
+                    <div class="product-close" ng-click="hideModal('productSelectModal')"><i class="icon iconfont icon-icon_guanbisousuo"></i></div>
+                </div>
+                <div class="product-body">
+                    <div>
+                        <div class="row">
+                            <div class="column">
+                                <label>商品代码</label>
+                            </div>
+                            <div class="column">
+                                <label>商品名称</label>
+                            </div>
+                            <div class="column">
+                                <label>规格代码</label>
+                            </div>
+                        </div>
+                        <div class="row odd">
+                            <div class="column">
+                                <input class="klw-input" ng-model="productItem.productCode" type="text"/>
+                            </div>
+                            <div class="column">
+                                <input class="klw-input" ng-model="productItem.productName" type="text"/>
+                            </div>
+                            <div class="column">
+                                <input class="klw-input" ng-model="productItem.code" type="text"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <label>规格名称</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <input class="klw-input" ng-model="productItem.description" type="text"/>
+                            </div>
+                        </div>
+                        <div class="mt">
+                            <button class="btn btn-success btn-78 mr" ng-click="SelectProduct.search()">确认</button>
+                            <button class="btn btn-default btn-78" ng-click="SelectProduct.searchCancel()">取消</button>
+                        </div>
+                    </div>
+
+                    <div class="mt">
+                        <div class="body-table">
+                            <table id="getProductTable" class="display" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th ng-repeat="obj in theadSkuList">{{obj.name}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="obj in tableSkuList" ng-click="SelectProduct.select(obj,$index)" ng-class="{true:'current',false:''}[obj.isProductSelect]">
+                                    <td ng-repeat="item in theadSkuList">{{obj[item.tag]}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <tm-pagination conf="paginationSkuConf"></tm-pagination>
+                        <div class="footer mt">
+                            <button class="btn btn-success btn-78 mr" ng-click="SelectProduct.save()">保存</button>
+                            <button class="btn btn-default btn-78" ng-click="hideModal('productSelectModal')">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /采购建议 -->

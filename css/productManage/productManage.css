@@ -1,0 +1,1118 @@
+/*******************************商品管理公共样式******************************/
+.cj-product {
+    height: 100%;
+    background: #fafafa;
+    overflow: hidden;
+}
+.cj-product .product-content {
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.05);
+    border-radius: 6px;
+    position: relative;
+    overflow: auto;
+}
+.cj-product .product-content > div {
+    margin: 0 30px;
+}
+
+.cj-product .klw-input {
+    width: 100%;
+}
+.cj-product .mt {
+    margin-top: 20px;
+}
+.cj-product .ml {
+    margin-left: 20px;
+}
+.cj-product .mr{
+    margin-right: 20px;
+}
+.cj-product .pr {
+    position: relative;
+}
+.cj-product .fr {
+    float: right;
+}
+.cj-product .btn-success {
+    color: #FFFFFF;
+    background: #4DB556;
+    border-radius: 4px;
+}
+.cj-product .btn.btn-success:hover {
+    background: #3FA248;
+    color: #FFFFFF;
+}
+
+.cj-product .btn-success:focus, .btn-success:active {
+    background: #3FA248;
+    box-shadow: inset 0 5px 10px 0 rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    color: #FFFFFF;
+}
+.cj-product .btn {
+    padding:0;
+    box-sizing: content-box;
+}
+.cj-product .btn.forbid {
+    opacity: 0.5;
+}
+.cj-product .product-content li.disabled {
+    color: #CDCDCD;
+}
+.cj-product .product-content li.disabled:hover {
+    background: #fff;
+    color: #CDCDCD;
+}
+.cj-product div[class*='klwk-check'] {
+    display: inline-block;
+    position: relative;
+    top:3px;
+}
+.cj-product table div[class*='klwk-check']{
+    top: 0;
+}
+/*刷新图标*/
+.cj-product .refresh i:before {
+    content:"\e672";
+}
+.cj-product .product-content .footer-btn {
+    margin: 20px 30px 30px 30px;
+}
+.cj-product .icon-icon_zhankaiKPA:before { content: "\e64b"; }
+/*正确图标*/
+.cj-product .correct {
+    color: #50D166;
+    font-size: 12px;
+}
+/*修改图标*/
+.cj-product .amend {
+    color: #d9d9d9;
+    font-size: 12px;
+}
+.cj-product .batch {
+    width: 133px;
+    display: inline-block;
+}
+.cj-product .batch.forbid {
+    opacity: 0.5;
+}
+/*导出图标*/
+.cj-product .exportBtn i:before {
+    content: '\e605';
+}
+/*必填字段*/
+.cj-product .important {
+    color: red;
+    margin-left: 5px;
+}
+/*新增按钮自定义*/
+.cj-product .green-btn {
+    border: 1px solid #54B254;
+    font-size: 14px;
+    color: #54B254;
+    letter-spacing: 1px;
+}
+.cj-product .green-btn i {
+    opacity: 0.3;
+    color: #59AF51;
+}
+.cj-product .green-btn:hover{
+    background: #F9FFFA;
+}
+.cj-product .green-btn:active{
+    background: #DFF7E2;
+}
+/*提示*/
+.cj-product .tip-fields {
+    position: absolute;
+    right: 0;
+    top: 40px;
+}
+.cj-product .tip-fields .circle {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid #FFC701;
+    color: #FFC701;
+    text-align: center;
+    line-height: 16px;
+    position: absolute;
+    right: 20px;
+}
+.cj-product .tip-fields:hover .tip-text{
+    display: inline-block;
+}
+.cj-product .tip-fields .tip-text {
+    width: 250px;
+    height: 54px;
+    background: #FFF8E6;
+    border: 2px solid #F5EFE1;
+    box-shadow: 0 2px 10px 0 rgba(0,0,0,0.10);
+    border-radius: 4px;
+    font-size: 12px;
+    color: #999999;
+    letter-spacing: 1px;
+    line-height: 20px;
+    padding: 7px 20px;
+    position: absolute;
+    top:22px;
+    right: -24px;
+    display: none;
+}
+
+/* 头部公共样式 start*/
+.cj-product .product-header {
+    padding: 30px 0;
+    position: relative;
+    border-bottom: 1px solid #EEEEEE;
+}
+.cj-product  .left-btn {
+    position: absolute;
+    top: 20px;
+    left: 0;
+}
+.cj-product .right-btn {
+    position: absolute;
+    top: 20px;
+    right: 0;
+}
+/*tab栏*/
+.cj-product .header-tab {
+    height: 61px;
+    padding-left: 50px;
+    background: #FFFFFF;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.05);
+    border-radius: 6px 6px 0 0;
+}
+.cj-product .header-tab li{
+    float: left;
+    width: 118px;
+    height: 61px;
+    line-height: 61px;
+    font-size: 14px;
+    color: #999999;
+    letter-spacing: 1px;
+    margin-right: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+.cj-product .header-tab li.current {
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 1.14px;
+    border-bottom: 4px solid #3FA248;
+}
+/*表单格式化*/
+.cj-product .row {
+    position: relative;
+    margin: 0;
+}
+.cj-product .even {
+    margin-bottom: 30px;
+}
+.cj-product .odd {
+    margin-bottom: 16px;
+}
+.cj-product .column:first-child {
+    margin: 0;
+}
+.cj-product .row label {
+    margin-right: 15px;
+    font-size: 12px;
+    color: #666666;
+    letter-spacing: 0;
+    font-weight: normal;
+}
+.cj-product .column {
+    float: left;
+    width: 23.5%;
+    margin-left: 2%;
+}
+.cj-product .column > span {
+    font-size: 14px;
+    color: #B3B3B3;
+    letter-spacing: 1px;
+    line-height: 30px;
+}
+.cj-product .attribute {
+    margin-bottom: 20px;
+    margin-left: 1.5%;
+}
+.cj-product .attribute:nth-of-type(5),
+.cj-product .attribute:nth-of-type(9),
+.cj-product .attribute:nth-of-type(13),
+.cj-product .attribute:nth-of-type(17){
+    margin: 0;
+}
+.cj-product .column > span > i {
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 1px;
+    line-height: 30px;
+    font-style: normal;
+    padding-left: 20px;
+}
+.cj-product .remark label {
+    display: block;
+    margin-bottom: 16px;
+}
+.cj-product .remark textarea {
+    width: 100%;
+    height: 100px;
+    font-size:14px;
+    padding: 15px;
+    resize: none;
+    border: 1px solid #ebebeb;
+    border-radius: 4px;
+}
+/*制单时间*/
+.cj-product .input-time .klw-input {
+    width: 230px;
+    margin: 10px 0;
+    background: url('../../images/time%20icon.svg') no-repeat 190px;
+}
+.cj-product .input-time label {
+    display: inline-block;
+    font-size: 14px;
+    width: 90px;
+}
+.cj-product .input-time .line {
+    display: inline-block;
+    width: 15px;
+    height: 1px;
+    background: #f0f0f0;
+    margin: 3px 23px;
+}
+/*高级搜索*/
+.cj-product .product-content .search-top {
+    margin-top: 42px;
+}
+.cj-product .product-content .is-select {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    padding: 5px 0 10px 31px;
+    box-shadow: 0 2px 3px #eeeeee;
+    border: 0;
+    margin: 0;
+    height: 50px;
+}
+.cj-product .product-content .is-select > span {
+    line-height:45px;
+    color: #c5c5c5;
+    width: 55px;
+    float: left;
+}
+.cj-product .product-content .is-select .select-box {
+    min-width: 160px;
+    height: 30px;
+    display: inline-block;
+    border: 1px solid #F0F0F0;
+    border-radius: 3px;
+    line-height: 28px;
+    font-size: 10px;
+    padding: 0 10px;
+    margin-right: 10px;
+    margin-top: 7px;
+    color: #999999;
+    float: left;
+}
+.cj-product .product-content .is-select .select-title {
+    float: left;
+    margin-right: 4px;
+}
+.cj-product .product-content .is-select .select-content {
+    width: 67px;
+    display: inline-block;
+    color: #2A2A2A;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.cj-product .product-content .is-select .icon-icon_guanbisousuo {
+    float: right;
+    color: #d9d9d9;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 30px;
+}
+.cj-product .advanced-search {
+    margin-left: 15px;
+    font-size: 12px;
+    color: #999999;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.cj-product .search-check {
+    border-bottom: 1px dashed #EEEEEE;
+    line-height: 47px;
+    position: relative;
+}
+.cj-product .search-check label {
+    margin-right: 46px;
+    font-weight: normal;
+    position: absolute;
+}
+.cj-product .search-check > div {
+    padding-left: 100px;
+}
+.cj-product .search-check .enums {
+    margin-top: 20px;
+}
+.cj-product .singleWord {
+    color: #666;
+    cursor: pointer;
+}
+.cj-product span.singleWord.current {
+    color: #469F45;
+}
+.cj-product .search-letter {
+    margin-right:31px;
+    color: #C5C5C5;
+}
+.cj-product .search-after .others-btn {
+    position: absolute;
+    top: -2px;
+    right:0;
+    z-index: 2;
+}
+.cj-product .more-footer-btn {
+    margin-bottom: 20px;
+}
+.cj-product .search-check span {
+    margin-left: 12px;
+    font-size: 12px;
+    color: #666666;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.cj-product .search-check .check-span {
+    color: #666;
+    margin-right: 40px;
+}
+.cj-product .search-check .check-span.current {
+    color: #469F45;
+}
+.cj-product .search-before-btn {
+    position: absolute;
+    top: 30px;
+    right: 0;
+}
+.cj-product .search-before-btn > div {
+    float: left;
+}
+.cj-product .search-after-btn {
+    margin-top:15px;
+}
+/*头部公共样式 end*/
+
+/*主体内容公共样式 start*/
+.cj-product .product-body {
+    position: relative;
+    padding-top: 40px;
+}
+.cj-product .detail-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.cj-product .detail-title h5{
+    font-size: 20px;
+    color: #666666;
+    letter-spacing: 0;
+    margin-bottom: 10px;
+}
+.cj-product .add-title {
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 0;
+    margin: 30px 0;
+}
+.cj-product .add-title span {
+    display: block;
+    font-size: 14px;
+    color: #999999;
+}
+.cj-product .body-check {
+    display: inline-block;
+    margin-right: 15px;
+}
+.cj-product .body-check label{
+    font-size: 14px;
+    color: #7F7F7F;
+    letter-spacing: 1px;
+    padding-left: 25px;
+    font-weight: normal;
+}
+/*列表配置*/
+.cj-product .configuration {
+    position: absolute;
+    top: 5px;
+    right: 0;
+}
+/*表格*/
+.cj-product .body-table {
+    position: relative;
+    height:550px;
+    overflow: scroll;
+}
+.cj-product .clear-scroll {
+    overflow: visible;
+}
+.cj-product  tr.current {
+    background: #FBFDFB;
+}
+.cj-product .left-table {
+    width: 70%;
+    float: left;
+    height:550px;
+    overflow: auto;
+}
+.cj-product .right-table {
+    width: 30%;
+    float: right;
+    background: #FBFDFB;
+    border: 1px solid #F5F5F5;
+    padding: 0 18px;
+    overflow: auto;
+    height: 550px;
+}
+.cj-product .right-table thead td{
+    background: #DCECDC;
+    font-size: 12px;
+}
+.cj-product .right-table tr {
+    height: 48px;
+}
+.cj-product .right-table tbody tr {
+    border-bottom: 1px solid #EEE;
+    background: #FBFDFB;
+}
+.cj-product .right-table .table-content {
+    padding: 10px 18px;
+}
+.cj-product .select-product {
+    position: absolute;
+    top: 28px;
+    right: 20px;
+}
+/*操作*/
+.cj-product .oprate{
+    position: relative;
+}
+.cj-product .oprate-one {
+    color: #39A3E2;
+    cursor: pointer;
+}
+.cj-product .oprate:hover .oprate-list{
+    display: block;
+}
+.cj-product .tr-icon{
+    line-height: 56px;
+    cursor: pointer;
+}
+.cj-product .oprate-list{
+    position: absolute;
+    left: 0;
+    top: 42px;
+    border: 1px solid #F5F5F5;
+    box-shadow: 0 5px 20px 0 rgba(0,0,0,0.10);
+    border-radius: 4px;
+    width: 114px;
+    display: none;
+    background: #ffffff;
+    z-index: 500;
+    max-height: 200px;
+    overflow: auto;
+}
+.cj-product .oprate-list li{
+    list-style: none;
+    padding: 10px 5px;
+    text-align: left;
+    color: #666666;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.cj-product .oprate-list li .disabled{
+    background: #cdcdcd;
+}
+.cj-product .oprate-list li:hover{
+    background: #FAFAFA;
+}
+/*自定义属性下拉框*/
+.cj-product .attribute-select {
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #EBEBEB;
+    border-radius: 4px;
+    position: relative;
+}
+.cj-product .attribute-select .text {
+    height: 40px;
+    line-height: 40px;
+    margin-left: 20px;
+    float: left;
+    color: #666;
+}
+.cj-product .attribute-select:hover i:before{
+    animation: rotatete 0.3s linear forwards;
+}
+.cj-product .attribute-select i:before {
+    content: '\e64b';
+    font-size: 12px;
+    position: relative;
+    float: right;
+    top: 12px;
+    right: 15px;
+    animation: rotatete2 0.3s linear forwards;
+}
+.cj-product .attribute-select .attribute-list {
+    float: left;
+    padding-top: 5px;
+    position: absolute;
+    top: 40px;
+    width: 101%;
+    z-index: 5000;
+    display: none;
+}
+.cj-product .attribute-select .attribute-list ul {
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 1000;
+    background: #FFFFFF;
+    border: 1px solid #F5F5F5;
+    border-radius: 6px;
+    position: absolute;
+    width: 99%;
+}
+.cj-product .attribute-select .attribute-list ul li {
+    cursor: pointer;
+    height: 42px;
+    line-height: 42px;
+    font-size: 14px;
+    color: #666;
+    padding-left: 5px;
+    position: relative;
+}
+.cj-product .attribute-select .attribute-list ul li:hover{
+    background: #fafafa;
+    color: #666666;
+}
+.cj-product button.detail {
+    margin-top:20px;
+}
+/* 主体内容公共样式 end*/
+
+/*模态框公共样式 start*/
+.cj-product .cj-modal {
+    top: 200px;
+    background: transparent;
+    overflow: hidden;
+}
+.cj-product .cj-modal .modal-content {
+    width: 400px;
+    background: #FFFFFF;
+    box-shadow: 0 5px 20px 0 rgba(0,0,0,0.05);
+    border-radius: 6px;
+}
+.cj-product .cj-modal .modal-w600 {
+    width: 600px;
+}
+.cj-product .cj-modal .modal-header {
+    height: 50px;
+    padding: 12px 30px;
+    border-bottom: 1px solid #EEEEEE;
+}
+.cj-product .cj-modal .modal-header h4 {
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 0.89px;
+    vertical-align: middle;
+}
+.cj-product .cj-modal .modal-body {
+    margin: 30px 50px;
+}
+.cj-product .cj-modal .input-time .klw-input{
+    width: 210px;
+    padding-left: 16px;
+    background: url('../../images/time%20icon.svg') no-repeat 160px;
+}
+.cj-product .cj-modal .input-time .line {
+    margin: 3px 12px;
+}
+.cj-product .cj-modal .input-check span{
+    margin-left: 12px;
+}
+.cj-product .cj-modal .modal-column {
+    margin-bottom: 22px;
+}
+.cj-product .cj-modal .modal-column:last-child{
+    margin: 0;
+}
+.cj-product .cj-modal .modal-column label{
+    font-size: 12px;
+    color: #999999;
+    font-weight: normal;
+    letter-spacing: 0;
+    margin-bottom: 16px;
+}
+.cj-product .modal-w600 .row {
+    display: flex;
+}
+.cj-product .modal-w600 .row .modal-column {
+    flex: 1;
+    margin-right: 15px;
+}
+.cj-product .remind-text {
+    display: inline-block;
+    height: 48px;
+    line-height:48px;
+    font-size: 12px;
+    color: #999999;
+    letter-spacing: 0.85px;
+    width: 100%;
+    text-align: center;
+}
+.cj-product .modal-w600 table tr{
+    height: 48px;
+}
+.cj-product .modal-w600 .modal-body-btn {
+    margin-top: 20px;
+}
+.cj-product  .modal-remark textarea{
+    height: 70px;
+}
+.cj-product  .modal-remark label {
+    position: relative;
+}
+.cj-product  .modal-remark .tip-fields {
+    top:0;
+    left:80px;
+}
+.cj-product .modal-remark .tip-fields .tip-text {
+    width: 215px;
+    height: 40px;
+    right: -64px;
+}
+.cj-product .cj-modal .modal-footer {
+    height: 70px;
+    line-height: 70px;
+    padding: 0;
+    text-align: center;
+    border-top: 1px solid #EEEEEE;
+}
+/*模态框公共样式 end*/
+
+
+/*商品分类 start*/
+.cj-product .classify {
+    margin:0 0 16px 35px;
+}
+.cj-product .classify-text {
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 0;
+}
+.cj-product .classify-text i {
+    color: #CACACA;
+    margin-right: 10px;
+    font-size: 12px;
+    font-weight: 700;
+}
+.cj-product .classify > div {
+    min-height: 30px;
+    line-height: 30px;
+}
+.cj-product .classify > .classify-bg{
+    display: inline-block;
+    padding: 0 20px;
+}
+.cj-product .classify .noPadding {
+    padding: 0 20px 0 6px;
+}
+.cj-product .classify-btn {
+    display: none;
+    padding-left: 30px;
+}
+.cj-product .classify-btn .new {
+    font-size: 14px;
+    color: #37BD4B;
+}
+.cj-product .classify-btn .edit {
+    margin-left: 21px;
+    font-size: 14px;
+    color: #F6A623;
+}
+.cj-product .classify .classify-bg:hover {
+    background: #FAFAFA;
+}
+.cj-product .classify .classify-bg:hover .classify-btn {
+    display: inline-block;
+}
+#addGroup .classify-bg:hover,
+#addProduct .classify-bg:hover {
+    background: #fff;
+}
+#addGroup .classify-btn,
+#addProduct .classify-btn {
+    display: none;
+}
+/*商品分类 end*/
+
+/***************************商品管理单独样式**********************************/
+
+/*tab页面消除公共样式*/
+#productSettingUp .product-header,
+#productInformationDetail .product-header,
+#groupDetail .product-header {
+    margin:0;
+    border: 0;
+    padding: 0;
+}
+/*详情页面消除公共样式*/
+#productInformationDetail .product-body,
+#groupDetail .product-body{
+    padding: 0;
+}
+
+/*商品设置 start*/
+#productSettingUp .configuration {
+    top:26px;
+}
+#productSettingUp .left-btn > div,
+#productSettingUp .right-btn > div{
+    float: left;
+}
+/*商品编码规则*/
+#productSettingUp .first{
+    margin-top: 40px;
+}
+#productSettingUp .first .right-table .title {
+    margin:20px 52px 22px 8px;
+    font-size: 12px;
+    color: #666666;
+    letter-spacing: 0;
+    display: inline-block;
+}
+#productSettingUp .first .right-table .title span {
+    font-size: 12px;
+    color: #3F3F3F;
+    letter-spacing: 0;
+    line-height: 17px;
+}
+/*自定义属性*/
+#productSettingUp .second input.klw-search {
+    position: relative;
+    top:-20px;
+}
+/*商品分类*/
+#productSettingUp .third .green-btn{
+    width: 90px;
+    top: 20px;
+    position: absolute;
+    right: 10px;
+}
+/*商品设置 end*/
+
+
+/*新增商品规则 start*/
+#addProductRules .parent-rules {
+    border-bottom: 1px solid #EEEEEE;
+    margin-bottom: 30px;
+}
+#addProductRules .parent-rules-check .body-check{
+    margin-right: 85px;
+    padding-bottom: 30px;
+    cursor: pointer;
+}
+#addProductRules .child-rules {
+    position: relative;
+}
+#addProductRules .child-before {
+    height: 80px;
+    padding-bottom: 40px;
+}
+#addProductRules .child-among-right {
+    position: absolute;
+    right:0;
+    top: -10px;
+}
+#addProductRules .child-among-btn {
+    margin: 50px 0 40px 0;
+}
+/*新增商品规则 end*/
+
+
+/*新增商品信息 start*/
+#addProduct .product-content > div {
+    position: relative;
+}
+#addProduct .add-basic {
+    padding: 30px 0 40px 0;
+    border-bottom: 1px solid #EEEEEE;
+}
+#addProduct .isAccessories {
+    position: relative;
+    height: 40px;
+}
+#addProduct .add-after {
+    padding: 30px 20px;
+}
+#addProduct .isAccessories span{
+    margin-left: 45px;
+    font-size: 14px;
+    color: #7F7F7F;
+    letter-spacing: 0;
+}
+#addProduct .isAccessories div {
+    position: absolute;
+    top:2px;
+}
+#addProduct .add-standard,
+#addProduct .add-attribute{
+    padding: 20px 0 40px 0;
+    border-bottom: 1px solid #EEEEEE;
+}
+#addProduct .add-after-btn {
+    position: absolute;
+    right: 0;
+    top: 28px;
+}
+#addProduct .auto-create .body-check{
+    margin:0 92px 40px 0;
+}
+#addProduct  .auto-second > div.table-content {
+    border-top: 1px solid #EEEEEE;
+    border-bottom: 1px solid #EEEEEE;
+    display: flex;
+    margin-bottom: 40px;
+    height: 500px;
+    overflow: auto;
+}
+#addProduct .auto-second .left {
+    flex:1;
+    overflow: auto;
+    flex-direction: row;
+    display: flex;
+}
+#addProduct .auto-second table {
+    margin-bottom: 75px;
+}
+#addProduct .auto-second .left > div {
+    flex: 1;
+    min-width:400px;
+    padding: 0 30px ;
+    border-right:1px solid #EEEEEE;
+}
+#addProduct .auto-second .left > div:last-child {
+    border: 0;
+}
+#addProduct .auto-second .right {
+    display: inline-block;
+    flex:1;
+    position: relative;
+    border-left:1px solid #EEEEEE;
+    padding: 0 30px ;
+}
+#addProduct  .auto-second .right .btn{
+    position: absolute;
+    right: 30px;
+    top:25px;
+}
+#addProduct .add-attribute .add-before .column:nth-of-type(5),
+#addProduct .add-attribute .add-before .column:nth-of-type(9),
+#addProduct .add-attribute .add-before .column:nth-of-type(13),
+#addProduct .add-attribute .add-before .column:nth-of-type(17) {
+    margin: 0;
+}
+/*新增商品信息 end*/
+
+/*编码生成 start*/
+#codeBuilder .row {
+    padding: 0 30px;
+}
+#codeBuilder .product-row {
+    margin: 30px 0 30px 15px;
+}
+#codeBuilder .generative-rule,
+#codeBuilder .generative-sort{
+    position: absolute;
+    right: 30px;
+    top: 46px;
+}
+#codeBuilder .generative-rule {
+    right: 240px;
+}
+/*编码生成 end*/
+
+
+/* 新增组合套装 start*/
+#addGroup  .add-input {
+    margin-top: 25px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #EEEEEE;
+}
+#addGroup  .add-show {
+    position: relative;
+    margin-top: 43px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #EEEEEE;
+}
+#addGroup .add-before-btn {
+    margin-bottom: 25px;
+}
+#addGroup .add-after-btn {
+    position: absolute;
+    top: -6px;
+    right: 0;
+}
+#addGroup .purchase-content .footer-btn {
+    margin: 20px 0 20px 30px;
+}
+#addGroup .content-table {
+    margin-top: 25px;
+}
+#addGroup .new-header {
+    margin-bottom: 20px;
+}
+#addGroup .new-body .body-table {
+    height: 650px;
+}
+#addGroup .new-body .left-table,
+#addGroup .new-body .right-table{
+    height: 650px;
+}
+#addGroup .old-table {
+    position: relative;
+    padding-top: 45px;
+    margin-bottom: 40px;
+}
+#addGroup .old-table .btn {
+    position: absolute;
+    right: 0;
+    top:-12px;
+}
+/*新增组合套装 end*/
+
+/*铺货关系 start*/
+#goodsRelationship .configuration {
+    top: 18px;
+}
+#goodsRelationship .product-body {
+    padding-top: 12px;
+}
+#goodsRelationship .search-before-btn .sewv-pl ul {
+    max-height: 205px;
+    overflow: auto;
+}
+#goodsRelationship .sewv-pl:first-child .one {
+    width: 150px;
+}
+#goodsRelationship .product-body .top {
+    height: 45px;
+}
+#goodsRelationship .product-body .bottom .left-table{
+    width: 70%;
+    overflow: auto;
+    height: 550px;
+}
+#goodsRelationship .right-table .add-title {
+    margin: 40px 0 20px 0;
+}
+#goodsRelationship .right-table label {
+    width: 20%;
+    font-weight: normal;
+    font-size: 14px;
+}
+#goodsRelationship .right-table .odd > div {
+    line-height:38px;
+    display: inline-block;
+}
+#goodsRelationship .right-table input,
+#goodsRelationship .right-table .odd > div {
+    width: 79%;
+}
+#goodsRelationship .right-table .odd {
+    margin-bottom:10px;
+}
+
+#goodsRelationship .product-list .modal-lg{
+    right: 0;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    bottom: 0;
+    top: 0;
+    width: 750px;
+}
+#goodsRelationship .modal.product-list{
+    top : 0;
+}
+#goodsRelationship .product-list .modal-content{
+    height: 100%;
+    border-radius: 0;
+    overflow: scroll;
+}
+#goodsRelationship .product-list .product-head{
+    width: 100%;
+    height: 54px;
+    border-bottom: 1px solid #eeeeee;
+    padding: 0 30px;
+}
+#goodsRelationship .product-head .product-title{
+    float: left;
+    height: 100%;
+    line-height: 54px;
+    color: #666666;
+    font-size: 14px;
+}
+#goodsRelationship .product-head .product-close{
+    float: right;
+    height: 100%;
+    line-height: 54px;
+    color: #CDCDCD;
+    font-size: 14px;
+}
+#goodsRelationship .product-body{
+    padding: 25px 30px;
+}
+#goodsRelationship .product-body .row .column{
+    width: 32%;
+}
+#goodsRelationship .product-list .body-table {
+    height:100%;
+}
+#goodsRelationship .product-body .page-list {
+    min-width: 600px;
+}
+#goodsRelationship .product-body .page-total {
+    margin-left: 5%;
+}
+#goodsRelationship .product-body .page-list .page-container {
+    width: 100%;
+}
+/*铺货关系 end*/
+
+/*修改库存扣减方式 start*/
+#modifyInventory .right-btn {
+    top: 11px;
+}
+/*修改库存扣减方式 end*/
+
+/*铺货检查 start*/
+#goodsInspection .product-header{
+    height: 80px;
+}
+#goodsInspection .product-body {
+    padding-top: 0;
+}
+#goodsInspection .configuration {
+    top: -8px;
+}
+/*铺货检查 end*/
+
+
+

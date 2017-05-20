@@ -1,0 +1,75 @@
+<div id="inventoryManage" class="inventory-manage">
+    <div class="in-order-add" id="noticeOrderDetail" ng-controller="noticeOrderDetailController">
+        <div class="purchase-content">
+            <div class="detail">
+                <div class="purchase-header">
+                    <div class="header-tab">
+                        <ul>
+                            <li ng-class="{true:'current',false:''}[tab == 'first']" ng-click="toggleTab('first')">虚拟调拨详情</li>
+                            <li ng-class="{true:'current',false:''}[tab == 'second']" ng-click="toggleTab('second')">操作日志</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="purchase-body">
+
+                    <button class="btn btn-default detail btn-78 mr" ng-click="goBack()">返回</button>
+                    <!--套装信息-->
+                    <div class="first" ng-show="tab == 'first'">
+                        <h5 class="add-title">调拨通知单详情</h5>
+                        <div class="row even">
+                            <div class="column">
+                                <span>计划单号<i>{{params.allocationplancode}}</i></span>
+                            </div>
+                            <div class="column">
+                                <span>出库单号<i>{{params.code}}</i></span>
+                            </div>
+                            <div class="column">
+                                <span>调出仓库<i>{{params.outwarehousename}}</i></span>
+                            </div>
+                            <div class="column">
+                                <span>占用仓库<i>{{params.virtualwarehousename}}</i></span>
+                            </div>
+                        </div>
+                        <div class="row even">
+                            <div class="column">
+                                <span>调入仓库<i>{{params.inwarehousename}}</i></span>
+                            </div>
+                        </div>
+                        <div class="body-table">
+                            <table id="detailsTable" class="display" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <td ng-repeat="obj in theadListInfo">{{obj.name}}</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="obj in tableListInfo">
+                                    <td ng-repeat="item in theadListInfo">{{obj[item.tag]}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!--操作日志-->
+                    <div class="second" ng-show="tab == 'second'">
+                        <h5 class="add-title">操作记录</h5>
+                        <table id="operateLogTable" class="display" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <td ng-repeat="obj in theadListLog">{{obj.name}}</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="obj in tableListLog">
+                                <td ng-repeat="item in theadListLog">{{obj[item.tag]}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

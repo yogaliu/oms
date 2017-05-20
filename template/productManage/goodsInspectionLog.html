@@ -1,0 +1,138 @@
+<!-- 铺货日志 -->
+
+<div id="goodsInspectionLog" class="cj-product" ng-controller="goodsInspectionLogController">
+    <div class="product-content">
+
+        <!--高级搜索显示配置-->
+        <div class="is-select" ng-if="num != 0">
+            <span>已选择</span>
+            <div class="select-box" ng-if="radioStore.status == 'selected'">
+                <span class="select-title">店铺名称：</span>
+                <span class="select-content">{{radioStore.content}}</span>
+                <i class="icon iconfont icon-icon_guanbisousuo" ng-click="closeSelect('radioStore','storeid','store')"></i>
+            </div>
+        </div>
+
+        <div class="product-header" ng-class="{true:'search-top',false:''}[num != 0]">
+
+            <!--高级搜索默认-->
+            <div class="search-before" ng-show="showSearchElement">
+                <input type="text" class="klw-search" placeholder="平台商品ID" ng-model="searchItem.platformId" ng-keyup="myKeyup($event)">
+                <span class="advanced-search" ng-click="search('unfold')">高级搜索</span>
+            </div>
+            <!--高级搜索展开-->
+            <div class="search-after" ng-hide="showSearchElement">
+                <!--店铺-->
+                <div class="search-check" ng-if="radioStore.status == 'selecting'">
+                    <label>店铺</label>
+                    <div class="more-before" ng-if="store == 'radio'">
+                        <div>
+                            <span ng-repeat="item in searchStore | limitTo:6" class="check-span" ng-click="radioList('radioStore','storeid',item.name,item.id);">{{item.name}}</span>
+                        </div>
+                        <div class="others-btn">
+                            <div class="btn klwk-spread mr" ng-click="module('store','more')">更多<i class="iconfont"></i></div>
+                        </div>
+                    </div>
+                    <div class="more-after" ng-if="store == 'more'">
+                        <div class="enums">
+                            <input class="klw-search" type="text" ng-keyup="singleWordSearch(queryStore,'singleWordData')" ng-model="queryStore" placeholder="店铺名称">
+                            <div class="word-search">
+                                <span class="search-letter">所搜的店铺</span>
+                                <span class="singleWord" ng-click="singleWordQuery(item,'singleWordData','searchStore',$event)"  ng-repeat="item in singleWord">{{item}}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span ng-click="radioList('radioStore','storeid',item.name,item.id);" ng-show="item.isHide == false" class="check-span" ng-repeat="item in searchStore">{{item.name}}</span>
+                        </div>
+                        <div class="others-btn">
+                            <div class="btn klwk-spread mr" ng-click="module('store','radio')">收起<i class="iconfont"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <!--表单输入-->
+                <div class="mt">
+                    <div class="row odd">
+                        <div class="column">
+                            <label for="productId">平台商品ID</label>
+                        </div>
+                        <div class="column">
+                            <label for="codeId">平台规格ID</label>
+                        </div>
+                        <div class="column">
+                            <label for="merchantsCode">商家规格编码</label>
+                        </div>
+                        <div class="column">
+                            <label for="merchantsCode">商家商品编码</label>
+                        </div>
+                    </div>
+                    <div class="row even">
+                        <div class="column">
+                            <input type="text" id="productId" class="klw-input" ng-model="searchItem.platformId" placeholder="请输入平台商品ID">
+                        </div>
+                        <div class="column">
+                            <input type="text" id="codeId" class="klw-input" ng-model="searchItem.platformSkuId" placeholder="请输入平台规格ID">
+                        </div>
+                        <div class="column">
+                            <input type="text" id="merchantsCode" class="klw-input" ng-model="searchItem.skuCode" placeholder="请输入商家规格编码">
+                        </div>
+                        <div class="column">
+                            <input type="text" id="merchantsProduct" class="klw-input" ng-model="searchItem.productCode" placeholder="请输入商家商品编码">
+                        </div>
+                    </div>
+                </div>
+                <div class="search-after-btn">
+                    <button class="btn btn-success btn-78 mr"  ng-click="search('ensure')">确定</button>
+                    <button class="btn btn-default btn-78 mr" ng-click="search('cancel')">取消</button>
+                    <button class="btn btn-default btn-78" ng-click="search('empty')">清空</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-body">
+
+            <div class="configuration">
+                <div class="ti-pagination">
+                    <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                    / 共 <span>{{paginationConf.totalItems}}</span>
+
+                <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont"
+                                                                                   ng-click="prev()"></i></span>
+
+                <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont"
+                                                                                                    ng-click="next()"></i></span>
+
+                <span class="config-column" ng-mouseover="isHover()" ng-mouseleave="isHover()"
+                      ng-click="showColumnConfigPanel()"><i class="iconfont"></i></span>
+
+                    <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+                </div>
+            </div>
+
+            <div class="body-table">
+                <table id="goodsLogTable" class="display" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <td ng-repeat="obj in theadList track by $index">{{obj.name}}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="obj in tableList" repeat-finished-directive repeataction="initFunc()" repeatIndex="{{$index}}" condition="{{$last == true}}">
+                        <td ng-repeat="item in theadList">{{obj[item.tag]}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <tm-pagination conf="paginationConf"></tm-pagination>
+
+        <!-- 右侧列表配置 -->
+        <div>
+            <tm-listallocation allo="allocation"></tm-listallocation>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- /铺货日志 -->

@@ -1,0 +1,160 @@
+<!-- 组合套装 -->
+
+<div id="productGroup" class="cj-product" ng-controller="productGroupController">
+    <div class="product-content">
+
+        <div class="product-header">
+
+            <!--高级搜索默认-->
+            <div class="search-before" ng-show="showSearchElement">
+                <input type="text" class="klw-search" ng-model="searchItem.groupCode" placeholder="套装编码" ng-keyup="myKeyup($event)">
+                <span class="advanced-search" ng-click="search('unfold')">高级搜索</span>
+                <div class="search-before-btn">
+                    <div class="batch mr">
+                        <menu-select menu-config="batch"></menu-select>
+                    </div>
+                    <div class="btn add-order" ng-click="add()"><i class="iconfont"></i>新增套装</div>
+                </div>
+            </div>
+            <!--高级搜索展开-->
+            <div class="search-after" ng-show="!showSearchElement">
+                <!--表单输入-->
+                <div>
+                    <div class="row odd">
+                        <div class="column">
+                            <label>套装编码</label>
+                        </div>
+                        <div class="column">
+                            <label>套装名称</label>
+                        </div>
+                        <div class="column">
+                            <label>规格编码</label>
+                        </div>
+                    </div>
+                    <div class="row even">
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入套装编码" ng-model="searchItem.groupCode">
+                        </div>
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入套装名称" ng-model="searchItem.groupName">
+                        </div>
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入规格编码" ng-model="searchItem.skuCode">
+                        </div>
+                    </div>
+                </div>
+                <div class="search-after-btn">
+                    <button class="btn btn-success btn-78 mr"  ng-click="search('ensure')">确定</button>
+                    <button class="btn btn-default btn-78 mr" ng-click="search('cancel')">取消</button>
+                    <button class="btn btn-default btn-78" ng-click="search('empty')">清空</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-body">
+
+            <div class="configuration">
+                <div class="ti-pagination">
+                    <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                    / 共 <span>{{paginationConf.totalItems}}</span>
+
+                <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont"
+                                                                                   ng-click="prev()"></i></span>
+
+                <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont"
+                                                                                                    ng-click="next()"></i></span>
+
+                <span class="config-column" ng-mouseover="isHover()" ng-mouseleave="isHover()"
+                      ng-click="showColumnConfigPanel()"><i class="iconfont"></i></span>
+
+                    <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+                </div>
+            </div>
+            
+            <div class="body-table">
+                <table id="groupTable" class="display" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th ng-click="selectAll()">
+                                <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                            </th>
+                            <th id="operation">操作</th>
+                            <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="obj in tableList" repeat-finished-directive repeataction="initFunc()" repeatIndex="{{$index}}" condition="{{$last == true}}">
+                            <td ng-click="selectItem($index)">
+                                <div class="klwk-check" ng-hide="obj.isdatacheck"><i class="iconfont"></i></div>
+                                <div class="klwk-check-x" ng-show="obj.isdatacheck"><i class="iconfont"></i></div>
+                            </td>
+                            <td class="over-show">
+                                <div class="oprate">
+                                    <div class="tr-icon"><i class="iconfont icon-icon2"></i></div>
+                                    <ul class="oprate-list">
+                                        <li ng-click="detail(obj)">套装详情</li>
+                                        <li ng-click="edit($index)" ng-class="{true:'',false:'disabled'}[obj.status != 2]">修改</li>
+                                        <li ng-class="{true:'',false:'disabled'}[obj.status == 0]" ng-click="singleAudit($index)">审核</li>
+                                        <li ng-class="{true:'',false:'disabled'}[obj.status != 2]" ng-click="showModal($index,'isDisabledModal')">禁用</li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td ng-repeat="item in theadList">
+                                {{obj[item.tag] | isBoolean | isZero}}
+                                <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <tm-pagination conf="paginationConf"></tm-pagination>
+
+        <!-- 右侧列表配置 -->
+        <div>
+            <tm-listallocation allo="allocation"></tm-listallocation>
+        </div>
+    </div>
+
+    <!--禁用模态框-->
+    <div class="cj-modal modal fade" id="isDisabledModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <span class="remind-text">数据禁用后将不可使用,是否继续禁用?</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-78 mr" ng-click="singleDisabledOp()">确定</button>
+                    <button type="button" class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--批量禁用模态框-->
+    <div class="cj-modal modal fade" id="batchIsDisabledModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <span class="remind-text">数据禁用后将不可使用,是否继续禁用?</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-78 mr" ng-click="batchDisabledOp()">确定</button>
+                    <button type="button" class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /组合套装 -->

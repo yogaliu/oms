@@ -1,0 +1,1328 @@
+/*公用样式*/
+.jxOutDiv i.triangle {
+    border-left: 1px solid #f5f5f5;
+    border-top: 1px solid #f5f5f5;
+    width: 10px;
+    height: 10px;
+    background: #ffffff;
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.jxOutDiv .klw-textarea {
+    outline: none;
+    width: 100%;
+    height: 70px;
+    color: #C5C5C5;
+    padding-left: 20px;
+    padding-top: 8px;
+    border-radius: 4px;
+    border: 1px solid #ebebeb;
+    font-size: 14px;
+    background: #ffffff;
+}
+
+.jxOutDiv .klw-textarea.remark {
+    height: 80px;
+}
+
+.jxOutDiv .fr {
+    float: right;
+}
+
+.jxOutDiv .fl {
+    float: left;
+}
+
+.jxOutDiv .clear:after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.jxOutDiv .star {
+    font-size: 12px;
+    color: #F24A41;
+    margin-left: 3px;
+}
+
+.jxOutDiv .color666 {
+    color: #666666;
+}
+
+.jxOutDiv .color999 {
+    color: #999999;
+}
+
+.jxOutDiv .color3F {
+    color: #3F3F3F;
+}
+
+/*返回按钮*/
+.jxOutDiv .topReturn {
+    margin: 35px 0 0 20px;
+}
+
+/*复选框*/
+
+.jxOutDiv .icon-sel-yellow {
+    width: 18px;
+    height: 18px;
+    background: url('../images/placeholder.svg') no-repeat;
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    right: 3px;
+}
+
+.jxOutDiv .icon-sel {
+    width: 18px;
+    height: 18px;
+    background: url('../images/fuxuan1%20icom.svg') no-repeat;
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    right: 3px;
+}
+
+.jxOutDiv .icon-sel-zhengque {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    right: 3px;
+    background: url('../images/fuxuan2%20icom.svg') no-repeat;
+}
+
+/*删除*/
+.jxOutDiv .icon-delete {
+    cursor: pointer;
+}
+
+.jxOutDiv .icon-delete:before {
+    content: '\e639';
+}
+
+/*下载*/
+.jxOutDiv .icon-down:before {
+    content: '\e65f';
+}
+
+/*更多*/
+.jxOutDiv .klwk-spread i:before {
+    content: '\e64b';
+}
+
+/*收起*/
+.jxOutDiv .klwk-noSpread i:before {
+    content: '\e63c';
+}
+
+/*多选*/
+.jxOutDiv .check-box i:before {
+    content: '\e66b';
+}
+
+/*时间*/
+.jxOutDiv .icon-time:before {
+    content: '\e675';
+}
+
+.jxOutDiv .icon-modify:before {
+    content: '\e66f'
+}
+
+.jxOutDiv .icon-leftArrows,
+.jxOutDiv .icon-rightArrows,
+.jxOutDiv .icon-listAllocation {
+    color: #d9d9d9;
+    font-size: 18px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.jxOutDiv .icon-listAllocation:before {
+    content: '\e69b';
+}
+
+.jxOutDiv .icon-xiajiantou:before {
+    content: '\e64b';
+    position: relative;
+    top: 2px;
+    font-size: 12px;
+    color: #D9D9D9;
+}
+
+/*修改public公共样式*/
+.jxOutDiv .sewv-pl {
+    margin-top: 0;
+    margin-left: 0;
+}
+
+.jxOutDiv .sewvtop {
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    border: 1px solid #ebebeb;
+}
+
+.jxOutDiv .sewvtop em {
+    position: absolute;
+    top: -2px;
+    text-align: center;
+    right: 25px;
+}
+
+.jxOutDiv .sewvtop > span {
+    vertical-align: initial;
+}
+
+.jxOutDiv .sewvbm {
+    max-height: 180px;
+    overflow-y: scroll;
+    overflow-x: auto;
+}
+
+.jxOutDiv .textsewv {
+    width: 100px;
+    float: left;
+}
+
+.jxOutDiv .textsewv .sewvbm {
+    width: 112px;
+    left: -20px;
+}
+
+.jxOutDiv .textsewv .sewvtop {
+    width: 100px;
+    border: 0;
+}
+
+.jxOutDiv .textsewv .sewvtop > span,
+.jxOutDiv .textsewv .sewvbm > li {
+    font-size: 12px;
+}
+
+.jxOutDiv .textsewv .sewvtop span {
+    padding-left: 0;
+    width: 74px;
+}
+
+.jxOutDiv .textsewv .sewvtop:hover {
+    border: 0;
+}
+
+.jxOutDiv .textsewv .sewvtop > i {
+    position: relative;
+    top: -26px;
+    right: 5px;
+}
+
+.jxOutDiv .textsewv .sewvbm > li {
+    padding-left: 28px;
+}
+
+.jxOutDiv .textsewv1 {
+    margin-top: 9px;
+    position: relative;
+    top: -7px;
+}
+
+.jxOutDiv .textsewv1 .sewvtop > span {
+    font-size: 14px;
+}
+
+.jxOutDiv .textsewv1 .sewvtop > i {
+    position: relative;
+    top: -18px;
+    right: -8px;
+}
+
+/*外部布局*/
+.jxOutDiv {
+    width: 100%;
+    height: 100%;
+    background: #FAFAFA;
+    color: #666;
+    box-sizing: border-box;
+}
+.jxOutDiv .menu-div{
+    margin-bottom: 20px;
+}
+
+.jxOutDiv .jxOutDivContent {
+    height: 100%;
+    overflow: auto;
+    margin: 0 0 20px;
+    padding: 0 30px 20px;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+}
+
+.jxOutDiv .jxmessage {
+    margin-top: 30px;
+    border-bottom: 1px solid #eee;
+    padding: 0 0 40px 20px;
+}
+
+.jxOutDiv .jxmessage:after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.jxOutDiv .jxmessage h3.addTitle {
+    font-size: 16px;
+    font-weight: normal;
+    color: #666;
+    /*margin: 0 0 20px;*/
+    line-height: 40px;
+}
+
+.jxOutDiv .jxmessage .messageTitle {
+    overflow: hidden;
+    height: 60px;
+    line-height: 40px;
+}
+
+.jxOutDiv .jxmessage .messageTitle h3.addTitle {
+    width: 20%;
+    float: left;
+}
+
+.jxOutDiv .jxmessage .message-button {
+    overflow: hidden;
+}
+
+.jxOutDiv .jxmessage .message-button > div {
+    float: left;
+    box-sizing: content-box;
+    margin-right: 10px;
+}
+
+.jxOutDiv .jxmessage .messageTitle .message-button > div:last-child {
+    margin-right: 0;
+}
+
+.jxOutDiv div.span-text {
+    float: left;
+    width: 25%;
+    color: #666666;
+}
+
+.jxOutDiv div.span-text .span-odd {
+    color: #B3B3B3;
+    margin-right: 15px;
+}
+
+/*button*/
+.jxOutDiv .btn2 {
+    width: 93px;
+}
+
+.jxOutDiv .btn4 {
+    width: 123px;
+}
+
+.jxOutDiv .btn6 {
+    width: 157px;
+}
+
+.jxOutDiv .btn133 {
+    width: 133px;
+}
+
+
+.jxOutDiv .btn {
+    padding: 0;
+    box-sizing: content-box;
+    border: 1px solid #f0f0f0;
+    margin-right: 20px;
+}
+/*禁止点击，制灰按钮*/
+.jxOutDiv .disabledBtn,
+.jxOutDiv .disabledBtn:hover,
+.jxOutDiv .disabledBtn:active
+{
+    background: #B6E6BA;
+    cursor: not-allowed;
+}
+
+.jxOutDiv .add-detail {
+    box-sizing: content-box;
+}
+
+.jxOutDiv .icon-operate:before {
+    content: '\e65c';
+}
+
+/*批量导入*/
+.jxOutDiv .batchLeadBtn i:before {
+    content: '\e601';
+}
+
+/*刷新*/
+.jxOutDiv .icon-refreshBtn i:before {
+    content: '\e626';
+    color: #e6e6e6;
+}
+
+/*重新推送Btn*/
+.jxOutDiv .rePushBtn i:before {
+    content: '';
+}
+
+/*导出Btn*/
+.jxOutDiv .exportBtn i:before {
+    content: '\e605';
+}
+
+/*导入Btn*/
+.jxOutDiv .leadBtn i:before {
+    content: '\e665';
+}
+
+/*平台发货btn*/
+.jxOutDiv .terraceSendBtn i:before {
+    content: '';
+}
+
+/*系统发货btn*/
+.jxOutDiv .systemSendBtn i:before {
+    content: '';
+}
+
+.jxOutDiv .rightButton {
+    float: right;
+}
+/*可编辑的*/
+.jxOutDiv  input.input-modify {
+    height:35px;
+    padding-left: 7px;
+    background: #ffffff;
+    border: 0;
+}
+
+/*input*/
+.jxOutDiv .klw-input {
+    width: 100%;
+}
+
+.jxOutDiv .timeInputDiv {
+    position: relative;
+}
+
+.jxOutDiv .timeInputDiv > i.icon-time {
+    position: absolute;
+    top: 5px;
+    right: 25px;
+    font-size: 23px;
+    color: #e6e6e6;
+}
+
+.jxOutDiv .timeSelInput {
+    position: relative;
+}
+
+.jxOutDiv .timeSelInput > i {
+    background: url('../images/time%20icon.svg') no-repeat;
+    position: absolute;
+    right: 25px;
+}
+
+.jxOutDiv .leadFileInput {
+    position: relative;
+}
+
+.jxOutDiv .leadFileInput i:before {
+    position: absolute;
+    right: 25px;
+    top: 1px;
+    content: "\e66b";
+    color: #d9d9d9;
+}
+
+.jxOutDiv .rows {
+    height: 48px;
+}
+
+.jxOutDiv .rowsText {
+    font-size: 12px;
+    height: 40px;
+    line-height: 40px;
+}
+
+.jxOutDiv .rowsInput {
+    font-size: 14px;
+}
+
+.jxOutDiv .rowsText > p {
+    float: left;
+    width: 23.5%;
+    margin-right: 2%;
+    text-align: left;
+}
+
+.jxOutDiv .rowsText > p:last-child {
+    margin-right: 0;
+}
+
+.jxOutDiv .rowsInput > div {
+    float: left;
+    width: 23.5%;
+    margin-right: 2%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.jxOutDiv .rowsInput > div:last-child {
+    margin-right: 0;
+}
+
+.jxOutDiv .rowsInput > div.input50 {
+    width: 49%;
+}
+
+.jxOutDiv .rowsInput > div.input75 {
+    width: 74.5%;
+}
+
+.jxOutDiv .rowsInput > div.input100 {
+    width: 100%;
+}
+
+.jxOutDiv .rowsInput > div.input100 > label {
+    margin-left: 20px;
+}
+
+.jxOutDiv input.input70 {
+    width: 70px;
+}
+
+.jxOutDiv input.input100 {
+    width: 100px;
+}
+
+.jxOutDiv .rowsFooter div {
+    float: left;
+    width: 15%;
+    color: #808080;
+    margin-top: 25px;
+}
+
+/*高级搜索部分*/
+.jxOutDiv #simpleSearch {
+    padding: 25px 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.jxOutDiv #simpleSearch .advancedSearchBtn {
+    color: #999999;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.jxOutDiv #simpleSearch > .fr > div {
+    margin-right: 20px;
+    float: left;
+    /*width: 200px;*/
+}
+
+.jxOutDiv #simpleSearch > .fr > div:last-child {
+    margin-right: 0;
+}
+
+.jxOutDiv .advancedSearch {
+    padding-top: 30px;
+    border-bottom: 1px solid #eee;
+    /*transition: all linear 0.5s;*/
+}
+
+.jxOutDiv .advancedSearch .searchItem {
+    min-height: 40px;
+    border-bottom: 1px dashed #EEEEEE;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.jxOutDiv .advancedSearch .searchItem .title {
+    width: 90px;
+    display: inline-block;
+    vertical-align: top;
+    color: #666;
+}
+
+.jxOutDiv .advancedSearch .searchItem .options {
+    width: 80%;
+    display: inline-block;
+    color: #999999;
+}
+
+.jxOutDiv .advancedSearch .searchItem .options > span,
+.jxOutDiv .advancedSearch .searchItem .options > label {
+    margin-right: 40px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    color: #999999;
+}
+
+.jxOutDiv .advancedSearch .searchItem .options .greenSpan {
+    color: #469F45;
+}
+
+.jxOutDiv .advancedSearch .searchItem .options .wordSearch {
+    line-height: 25px;
+    margin-top: 10px;
+}
+
+.jxOutDiv .advancedSearch .searchItem .options .wordSearch span {
+    margin-right: 10px;
+}
+
+.jxOutDiv .advancedSearch .searchItem .more {
+    position: absolute;
+    right: 0;
+    top: -2px;
+}
+
+.jxOutDiv .advancedSearch .searchItem .spreadContent label {
+    margin-top: 10px;
+}
+
+/*特别的searchItem1*/
+.jxOutDiv .searchItem1 > div {
+    margin-bottom: 20px;
+    height: 40px;
+}
+
+.jxOutDiv .searchItem1 > div > span,
+.jxOutDiv .searchItem1 > div > div,
+.jxOutDiv .searchItem1 > div > i {
+    float: left;
+}
+
+.jxOutDiv .searchItem1 > div > span.title {
+    width: 7%;
+    margin-top: 12px;
+}
+
+.jxOutDiv .searchItem1 > div > div {
+    width: 18%;
+    margin-right: 2%;
+}
+
+.jxOutDiv .searchItem1 > div > div {
+    width: 18%;
+    margin-right: 2%;
+}
+
+.jxOutDiv .searchItem1 > div > div:last-child {
+    margin-right: 0;
+}
+
+/*更多 多选 右边距*/
+.jxOutDiv .advancedSearch .searchItem .more > div {
+    margin-right: 10px;
+}
+
+.jxOutDiv .advancedSearch .searchItem .more > div:last-child {
+    margin-right: 0;
+}
+
+/*有input框的searchItem无下边框*/
+.jxOutDiv .advancedSearch .searchItemInput,
+.jxOutDiv .advancedSearch .timeInput {
+    border: 0;
+}
+
+.jxOutDiv .advancedSearch .searchItemInput {
+    margin-top: 5px;
+}
+
+.jxOutDiv .advancedSearch .searchItemInput .options {
+    margin-top: 10px;
+}
+
+.jxOutDiv .timeInput .klw-input {
+    width: 230px;
+    background: url('../images/time%20icon.svg') no-repeat 190px;
+}
+
+.jxOutDiv .advancedSearch .timeInput > span,
+.jxOutDiv .advancedSearch .searchItemInput > span {
+    margin: 10px 0 0;
+}
+
+.jxOutDiv .advancedSearch .timeInput .more {
+    top: 14px;
+}
+
+.jxOutDiv .line {
+    display: inline-block;
+    width: 10px;
+    height: 2px;
+    background: #f0f0f0;
+    margin: 20px 8px 3px;
+}
+
+.jxOutDiv .advancedSearch .spreadFooterBtn {
+    margin: 10px 0;
+}
+
+.jxOutDiv label {
+    font-weight: normal;
+    /*margin-bottom: 0;*/
+    margin-right: 50px;
+    cursor: pointer;
+}
+.jxOutDiv .labelMarTop6{
+    margin-top:6px;
+}
+.jxOutDiv table label {
+    margin: 0;
+}
+
+.jxOutDiv .advancedSearch .singleWord {
+    color: #666;
+    cursor: pointer;
+}
+
+.jxOutDiv .advancedSearch .selected {
+    border: 0;
+}
+
+.jxOutDiv .advancedSearch .selected span.title {
+    color: #c5c5c5;
+    width: 55px;
+    float: left;
+    margin-top: 13px;
+}
+
+.jxOutDiv .advancedSearch .selected .selectedBox {
+    width: 172px;
+    height: 30px;
+    display: inline-block;
+    border: 1px solid #F0F0F0;
+    border-radius: 3px;
+    line-height: 28px;
+    font-size: 10px;
+    padding: 0 10px;
+    margin-right: 10px;
+    margin-top: 7px;
+    color: #999999;
+    float: left;
+}
+
+.jxOutDiv .advancedSearch .selected .selectedBox .selectedTitle {
+    float: left;
+    margin-right: 4px;
+}
+
+.jxOutDiv .advancedSearch .selected .selectedBox > span.selectedContent {
+    width: 67px;
+    display: inline-block;
+    color: #2A2A2A;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.jxOutDiv .advancedSearch .selected .selectedBox > i {
+    float: right;
+    color: #d9d9d9;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 30px;
+}
+
+.jxOutDiv .advancedSearch .selected .selectedBox > i:before {
+    content: '\e661';
+}
+
+.jxOutDiv .advancedSearch #conditionSet {
+    margin: 15px 0;
+}
+
+.jxOutDiv #simpleSelect {
+    padding: 20px;
+}
+
+.jxOutDiv #simpleSelect .selectItems {
+    width: 70%;
+}
+
+.jxOutDiv #simpleSelect .selectItems .selectItem {
+    margin-right: 15px;
+    cursor: pointer;
+    color: #999999;
+}
+
+.jxOutDiv .searchItem1 > div > div.timeInputDiv1 {
+    margin-right: 0;
+}
+
+/*table*/
+.jxOutDiv .notClick {
+    color: #cdcdcd !important;
+    cursor: auto !important;
+    pointer-events: none;
+}
+.jxOutDiv .notClick .text{
+    color:#cdcdcd !important;
+}
+
+.jxOutDiv .tableOut {
+    overflow-x: auto;
+}
+.jxOutDiv .tableOut table td{
+    max-width:155px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space : nowrap;
+}
+.jxOutDiv .tableOut table td.operate {
+    overflow: visible;
+    position: relative;
+    cursor: pointer;
+}
+
+.jxOutDiv .tableOut table td.operate .operateList {
+    padding: 0 5px;
+}
+
+.jxOutDiv .tableOut table td.operate .operateList ul {
+    width: 114px;
+    text-align: left;
+    display: none;
+    position: absolute;
+    left: -22px;
+    top: 40px;
+    z-index: 1000;
+    background: #FFFFFF;
+    border: 2px solid #F5F5F5;
+    box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+}
+
+.jxOutDiv .tableOut table td.operate .operateList ul li {
+    cursor: pointer;
+    width: 100%;
+    height: 36px;
+    line-height: 42px;
+    font-size: 14px;
+    color: #666;
+    padding-left: 20px;
+}
+
+.jxOutDiv .tableOut table td.operate .operateList ul li:hover {
+    background: #fafafa;
+    color: #666666;
+}
+
+.jxOutDiv .tableOut table td.operate .operateList:hover ul.one {
+    display: block;
+}
+
+.jxOutDiv .tableOut table td.operate .operateList .much:hover > ul {
+    display: block;
+}
+
+.jxOutDiv .tableOut table td.operate .operateList ul.two {
+    left: 110px;
+}
+.jxOutDiv .tableOut table  thead th:first-child{
+      padding-left: 25px;
+  }
+.jxOutDiv .tableOut table  tbody td:first-child{
+    padding-left: 25px;
+}
+.order-list-details span {
+    display: inline-block;
+    padding: 0 5px;
+    color: #999999;
+}
+
+.order-list-details .order-list-abnormal {
+    color: #F13A30;
+}
+
+.order-list-details .order-list-speeddelivery {
+    color: #F08C1B;
+}
+
+.order-list-details .order-list-obsolete {
+    column-rule: #666666;
+}
+
+/*footer*/
+.jxOutDiv .footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.jxOutDiv .footer .footerPage {
+    display: inline-block;
+}
+
+/*新增页面*/
+.jxAdd .footer {
+    text-align: right;
+}
+
+.jxAdd .search360 {
+    width: 360px;
+    margin-bottom: 27px;
+}
+
+/*新增商品明细详情*/
+.jxAdd .merchandise-details .addMerchandiseDetails {
+    position: relative;
+}
+.jxAdd .messageSearchBtn{
+    margin:8px 0 15px;
+}
+/*商品信息之详情界面*/
+.jxAdd .message-content .footer-button {
+    margin: 20px 0;
+}
+
+/*二级table*/
+.jxAdd .merchandise-details .addMerchandiseDetails .wareHouseTable {
+    width: 60%;
+    background: #FFFFFF;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.10);
+    padding: 35px 30px;
+    position: absolute;
+    top: 150px;
+    left: 20px;
+}
+
+.jxAdd .merchandise-details .addMerchandiseDetails .wareHouseTable tr {
+    height: 50px;
+}
+
+/*批量导入详情*/
+.jxAdd .merchandise-details .batchLeadDetails {
+    font-size: 14px;
+}
+
+.jxAdd .merchandise-details .batchLeadDetails .leadExplain {
+    padding: 32px 30px;
+    background: #FBFBFB;
+}
+
+.jxAdd .merchandise-details .batchLeadDetails .leadExplain p:first-child {
+    margin-bottom: 20px;
+}
+
+.jxAdd .merchandise-details .batchLeadDetails .leadExplain p:not(:first-child) {
+    font-size: 14px;
+    color: #B3B3B3;
+    letter-spacing: 1px;
+    line-height: 30px;
+}
+
+.jxAdd .merchandise-details .batchLeadDetails .leadTemplate {
+    overflow: hidden;
+    font-size: 14px;
+    padding-bottom: 20px;
+}
+
+.jxAdd .merchandise-details .batchLeadDetails .leadTemplate p {
+    margin: 30px 0 10px;
+}
+
+.jxAdd .merchandise-details .batchLeadDetails .leadTemplate > div {
+    height: 40px;
+    line-height: 40px;
+}
+
+.jxAdd .merchandise-details .batchLeadDetails .leadTemplate .batchLeadBtn {
+    margin-left: 0;
+}
+
+.jxAdd .merchandise-details .batchLeadDetails .notTemplate {
+    font-size: 14px;
+    color: #2A0000;
+    letter-spacing: 1px;
+}
+
+.jxAdd .merchandise-details .batchLeadDetails .notTemplate span,
+.jxAdd .merchandise-details .batchLeadDetails .leadDefeat span {
+    color: #66A9FD;
+    cursor: pointer;
+}
+
+.jxAdd .merchandise-details .batchLeadDetails .leadDefeat {
+    color: #FF2C30;
+}
+
+/*详情页面*/
+.jxOutDivDetail .jxOutDivContent {
+    padding: 0;
+}
+
+.jxOutDivDetail .jxmessage {
+    padding: 0 40px;
+    border: 0;
+}
+
+.jxOutDivDetail h3.detailTitle {
+    font-size: 14px;
+    color: #999999;
+    letter-spacing: 1px;
+    margin: 0 0 20px;
+}
+
+.jxOutDivDetail h3.detailTitle span {
+    color: #666666;
+}
+
+.jxOutDivDetail h3.detailTitle span {
+    margin-right: 20px;
+}
+
+.jxOutDivDetail h3.detailTitle span:last-child {
+    margin-right: 0;
+}
+
+.jxOutDivDetail .detail-content-top {
+    height: 61px;
+    padding-left: 38px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+
+.jxOutDivDetail .detail-top-tab li {
+    height: 61px;
+    float: left;
+    line-height: 61px;
+    margin-right: 35px;
+    padding: 0 15px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    color: #999999;
+    letter-spacing: 1px;
+}
+
+.jxOutDivDetail .detail-top-tab li.current {
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 1.3px;
+    border-bottom: 4px solid #3FA248;;
+}
+.jxOutDivDetail .content-first,
+.jxOutDivDetail .content-second
+{
+    padding-bottom:50px;
+}
+/*模态框*/
+.jxOutDiv .modal {
+    top: 200px;
+    background: transparent;
+    overflow: hidden;
+}
+
+.jxOutDiv .modal-content {
+    background: #FFFFFF;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    height:100%;
+}
+
+.jxOutDiv .modal-header {
+    width: 100%;
+    height: 54px;
+    border-bottom: 1px solid #eeeeee;
+    padding: 0 30px;
+}
+
+.jxOutDiv .modal-header .header-title {
+    float: left;
+    height: 100%;
+    line-height: 54px;
+    color: #666666;
+    font-size: 14px;
+}
+
+.jxOutDiv .modal-header .header-close {
+    float: right;
+    height: 100%;
+    line-height: 54px;
+    color: #CDCDCD;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0 8px;
+}
+
+.jxOutDiv .modal-body {
+    margin: 30px 49px;
+    padding: 0;
+}
+
+.jxOutDiv .modal-body .rows > p,
+.jxOutDiv .modal-body .rows > div.input50 {
+    width: 240px;
+    margin-right: 20px;
+}
+
+.jxOutDiv .modal-body .rows > p:last-child,
+.jxOutDiv .modal-body .rows > div:last-child {
+    margin-right: 0;
+}
+
+.jxOutDiv .modal .timeInputDiv > i.icon-time {
+    top: 5px;
+}
+
+.jxOutDiv .modal-footer {
+    height: 70px;
+    line-height: 70px;
+    padding: 0;
+    text-align: center;
+    border-top: 1px solid #EEEEEE;
+}
+
+/*一行摆一个输入框*/
+.jxOutDiv .modal1 .modal-dialog {
+    width: 400px;
+}
+
+.jxOutDiv .modal1 .modal-body .rows > p,
+.jxOutDiv .modal1 .modal-body .rows > div {
+    width: 300px;
+    margin-right: 4%;
+}
+
+/*店铺多选模态框*/
+.jxOutDiv .oh {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.jxOutDiv .shop-modal .modal-dialog {
+    width: 600px;
+}
+
+.jxOutDiv .shop-modal .modal-body {
+    padding: 0;
+    margin: 0;
+}
+
+.jxOutDiv .shop-modal .modal-body .left {
+    width: 299px;
+    padding: 10px 20px 0 20px;
+    position: relative;
+}
+
+.jxOutDiv .shop-modal .modal-body .left .icon-search-blod {
+    position: absolute;
+    left: 38px;
+    top: 14px;
+    color: #cccccc;
+}
+
+.jxOutDiv .shop-modal .modal-body .left .klw-search {
+    width: 100%;
+    height: 30px;
+    background: none;
+    margin-bottom: 12px;
+}
+
+.jxOutDiv .shop-modal .modal-body .left:nth-child(1) {
+    border-right: 1px solid #EEEEEE;
+}
+
+.jxOutDiv .shop-modal .modal-body .left:nth-child(2) {
+    width: 298px;
+}
+
+.jxOutDiv .shop-modal .modal-body .left:nth-child(2) .title {
+    height: 42px;
+    line-height: 32px;
+    color: #666666;
+}
+
+.jxOutDiv .shop-modal .modal-body .left .thead {
+    height: 40px;
+    background: #FAFAFA;
+    border-bottom: 1px solid #EEEEEE;
+    border-top: 1px solid #EEEEEE;
+    color: #666666;
+    line-height: 38px;
+}
+
+.jxOutDiv .shop-modal .modal-body .left .thead .td,
+.jxOutDiv .shop-modal .modal-body .left .tbody .tr .td {
+    display: inline-block;
+    text-align: center;
+}
+
+.jxOutDiv .shop-modal .modal-body .left .thead .td:nth-child(1),
+.jxOutDiv .shop-modal .modal-body .left .tbody .tr .td:nth-child(1) {
+    width: 15%;
+    float: left;
+}
+
+.jxOutDiv .shop-modal .modal-body .left .thead .td:nth-child(2),
+.jxOutDiv .shop-modal .modal-body .left .tbody .tr .td:nth-child(2) {
+    width: 25%;
+    float: left;
+
+}
+
+.jxOutDiv .shop-modal .modal-body .left .thead .td:nth-child(3),
+.jxOutDiv .shop-modal .modal-body .left .tbody .tr .td:nth-child(3) {
+    width: 60%;
+    float: left;
+}
+
+.jxOutDiv .shop-modal .modal-body .left.right .thead .td:nth-child(1),
+.jxOutDiv .shop-modal .modal-body .left.right .tbody .tr .td:nth-child(1) {
+    width: 25%;
+    float: left;
+}
+
+.jxOutDiv .shop-modal .modal-body .left.right .thead .td:nth-child(2),
+.jxOutDiv .shop-modal .modal-body .left.right .tbody .tr .td:nth-child(2) {
+    width: 60%;
+    float: left;
+}
+
+.jxOutDiv .shop-modal .modal-body .left.right .thead .td:nth-child(3),
+.jxOutDiv .shop-modal .modal-body .left.right .tbody .tr .td:nth-child(3) {
+    width: 15%;
+    float: left;
+}
+
+.jxOutDiv .shop-modal .modal-body .left .thead .td:nth-child(1) .klwk-check,
+.jxOutDiv .shop-modal .modal-body .left .thead .td:nth-child(1) .klwk-check-x,
+.jxOutDiv .shop-modal .modal-body .left .tbody .tr .td:nth-child(1) .klwk-check,
+.jxOutDiv .shop-modal .modal-body .left .tbody .tr .td:nth-child(1) .klwk-check-x {
+    margin-top: 13px;
+    margin-left: 9px;
+    line-height: 16px;
+}
+
+.jxOutDiv .shop-modal .modal-body .left .tbody .tr .td:nth-child(1) .klwk-check-x i:before {
+    top: -1px;
+}
+
+.jxOutDiv .shop-modal .modal-body .left .tbody {
+    height: 244px;
+    overflow: auto;
+}
+
+.jxOutDiv .shop-modal .modal-body .left .tbody .tr {
+    height: 40px;
+    line-height: 40px;
+}
+
+.jxOutDiv .shop-modal .modal-body .right .td .icon-close:before {
+    color: #cccccc;
+    font-size: 12px;
+}
+
+.jxOutDiv .shop-modal .modal-body .right .td .icon-close:before {
+    color: #cccccc;
+    font-size: 12px;
+    content: '\e661';
+}
+
+.jxOutDiv .icon-search-blod:before {
+    content: '\e662';
+}
+
+/*左右摆放的表格*/
+.jxOutDiv .body-table .fl {
+    width: 70%;
+    height: 639px;
+    overflow: auto;
+}
+
+.jxOutDiv .body-table .fr {
+    width: 30%;
+    height: 639px;
+    overflow: auto;
+    background: #f4f9f4;
+    border: 1px solid #F5F5F5;
+    padding: 10px 18px;
+}
+
+.jxOutDiv .body-table .fr .title {
+    font-size: 12px;
+    color: #666666;
+    letter-spacing: 0;
+    display: inline-block;
+    height: 46px;
+    padding-top: 10px;
+}
+
+.jxOutDiv .body-table .fr .title:first-child {
+    margin-right: 15px;
+}
+
+.jxOutDiv .body-table .fr .title span {
+    font-size: 12px;
+    color: #3F3F3F;
+    letter-spacing: 0;
+    width: 162px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space : nowrap;
+    margin-bottom: -4px;
+}
+
+.jxOutDiv .body-table .fr thead tr {
+    height: 38px;
+    background: #DCECDC;
+}
+
+.jxOutDiv .body-table .fr tbody tr {
+    background: #f4f9f4;
+}
+
+
+/*侧滑框唯品档期选择*/
+.jxOutDiv #rightSideModal{
+    position: absolute;
+    top:0;
+    right:0;
+    width:430px;
+    height:100%;
+    display: none;
+}
+.jxOutDiv #rightSideModal .product-body {
+    padding: 25px 30px;
+    position: relative;
+    height:94%;
+}
+.jxOutDiv #rightSideModal .product-body .searchBox{
+    width:300px;
+    margin-bottom: 15px;
+}
+.jxOutDiv #rightSideModal .product-body .searchBox .klw-search{
+    width:100%;
+}
+.jxOutDiv #rightSideModal .product-body .tableOut{
+    overflow: auto;
+    max-height:767px;
+}
+.jxOutDiv #rightSideModal .product-body .footer{
+    text-align: left;
+    position: fixed;
+    bottom: 22px;
+}

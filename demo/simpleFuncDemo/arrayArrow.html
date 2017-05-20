@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>订单管理</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../public/css/bootstrap.css">
+    <link rel="stylesheet" href="../../public/css/layer.css">
+</head>
+<body>
+
+
+
+
+<div id="huangbiao">dsadfsa</div>
+</body>
+<!-- 导入的基础插件，包含jquery,angularJs等 -->
+<script type="text/javascript" src="../../public/js/jquery.js"></script>
+<script>
+    var myArray = [
+        {name: "状态", tag: 'status'},
+        {name: "入库订单", tag: 'code'},
+        {name: "来源订单", tag: 'fromcode'},
+        {name: "收货仓库", tag: 'warehousename'},
+        {name: "入库仓库", tag: 'virtualwarehousename'},
+        {name: "入库类型", tag: 'typename'},
+        {name: "制单人", tag: 'createuser '},
+        {name: "制单时间", tag: 'createdate'},
+        {name: "审核人", tag: 'audituser'},
+        {name: "审核时间", tag: 'auditdate'}
+    ];
+
+//    function upAction(){
+//
+//    }
+//    var index = 2;
+//    var secondObj = myArray[index];
+
+//    var resul1t = myArray.splice(index,1);
+//    var result = myArray.splice(index-1,0,resul1t[0]);
+//    console.dir(resul1t);
+//    console.dir(result);
+//    console.dir(myArray);
+
+    Array.prototype.moveBefore = function(index){
+        // 如果传入的参数不是数字
+        if(isNaN(index)){
+            return this;
+        }
+        // 如果传入的参数是数字
+        else{
+            var myArray = this;
+            var arrayLength = this.length - 1;
+            // 如果传入的参数小于等于0，则不用往前移动
+            if(index <= 0){
+                return this;
+            }
+            // 如果大于最大索引，则设置index 为最后的索引
+            else if(index > arrayLength){
+                index = arrayLength;
+            }
+
+            var targetArray = myArray.splice(index,1);
+            myArray.splice(index-1,0,targetArray[0]);
+            return myArray;
+        }
+    };
+
+//    console.dir(myArray.moveBefore(6));
+//    console.dir(myArray.moveBefore(66));
+//    console.dir(myArray.moveBefore(-66));
+
+    Array.prototype.moveAfter = function(index){
+        // 如果传入的参数不是数字
+        if(isNaN(index)){
+            return this;
+        }
+        // 如果传入的参数是数字
+        else{
+            var arrayLength = this.length - 1;
+            var myArray = this;
+            // 如果选择的索引大于最大数组长度,则返回当前对象
+            if(index >= arrayLength){
+                return this;
+            }
+            // 如果索引小于等于0，则设置index为0
+            else if(index <=0){
+                index = 0;
+            }
+            var targetArray = myArray.splice(index,1);
+            myArray.splice(index+1,0,targetArray[0]);
+            return myArray;
+        }
+    };
+
+//    console.dir(myArray.moveAfter(6));
+//    console.dir(myArray.moveAfter(66));
+//    console.dir(myArray.moveAfter(-66));
+
+    Array.prototype.moveFirst = function(index){
+        // 如果传入的参数不是数字
+        if(isNaN(index)){
+            return this;
+        }
+        // 如果传入的参数是数字
+        else{
+            var arrayLength = this.length - 1;
+            var myArray = this;
+            if(index <= 0){
+                return this;
+            }
+            // 如果选择的索引大于最大数组长度
+            if(index >= arrayLength){
+                index = arrayLength;
+            }
+            var targetArray = myArray.splice(index,1);
+            myArray.splice(0,0,targetArray[0]);
+            return myArray;
+        }
+
+    };
+//    console.dir(myArray.moveFirst(6));
+//    console.dir(myArray.moveFirst(66));
+//    console.dir(myArray.moveFirst(-66));
+
+    Array.prototype.moveLast = function(index){
+        // 如果传入的参数不是数字
+        if(isNaN(index)){
+            return this;
+        }
+        // 如果传入的参数是数字
+        else{
+            var arrayLength = this.length - 1;
+            var myArray = this;
+            if(index >= arrayLength){
+                return this;
+            }
+            // 如果选择的索引大于最大数组长度
+            if(index <= 0){
+                index = 0;
+            }
+            var targetArray = myArray.splice(index,1);
+            myArray.splice(arrayLength,0,targetArray[0]);
+            return myArray;
+        }
+    };
+//    console.dir(myArray.moveLast(6));
+//    console.dir(myArray.moveLast(76));
+//    console.dir(myArray.moveLast(-76));
+
+//var aaa= "hhh";
+//    alert(isNaN(aaa));
+//    alert(isNaN(1545));
+
+</script>
+</html>

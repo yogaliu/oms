@@ -1,0 +1,251 @@
+<div id="addFbpPlanBill" class="jxOutDiv jxAdd" ng-controller="addFbpPlanBillController">
+    <div class="jxOutDivContent">
+        <!--<div class="addItem">-->
+         <!-- -->
+         <!--<div class="add-detail" ng-click="isEdit=true" ng-show="!isEdit"><i class="iconfont"></i>基本信息</div>-->
+        <!--</div>-->
+        <!--ng-show="isEdit"-->
+        <div class="basic-message jxmessage form" >
+            <h3 class="addTitle">档期基本信息</h3>
+            <div class="rows rowsText">
+                <p>调出仓库<span class="star">*</span></p>
+
+                <p>调入仓库<span class="star">*</span></p>
+
+                <p>占用仓库<span class="star">*</span></p>
+
+                <p>店铺名称<span class="star">*</span></p>
+
+            </div>
+            <div class="rows rowsInput">
+
+                <div>
+                    <div class="sewv">
+                        <!--调出仓库-->
+                        <pull-select pull-config="searchConfig.outWarehouse"></pull-select>
+                    </div>
+                </div>
+                <div>
+                    <!--调入仓库-->
+                    <div class="sewv">
+                        <pull-select pull-config="searchConfig.inWarehouse"></pull-select>
+                    </div>
+                </div>
+                <div>
+                    <!--占用仓库-->
+                    <div class="sewv">
+                        <pull-select pull-config="searchConfig.occWarehouse"></pull-select>
+                        </div>
+                    </div>
+                <div>
+                    <!--店铺名称-->
+                    <div class="sewv">
+                        <pull-select pull-config="searchConfig.storeName"></pull-select>
+                    </div>
+                </div>
+                </div>
+            <div class="rows rowsText">
+                <p>批次号</p>
+
+                <p>备注</p>
+            </div>
+            <div class="rows rowsInput">
+                <div>
+                    <input class="klw-input" type="text" ng-model="formData.ScheduleNo" />
+                </div>
+                <div class="input75">
+                    <input class="klw-input" type="text" ng-model="formData.Remark"/>
+                </div>
+            </div>
+            <!--<div class="content-footer jxmessage">-->
+                <!--<button class="btn btn-success btn-78">保存</button>-->
+                <!--<button class="btn btn-default btn-78" ng-click="isEdit=false">取消</button>-->
+            <!--</div>-->
+        </div>
+        <div class="activity-merchandise jxmessage">
+            <div class="messageTitle clear">
+                <h3 class="addTitle">档期商品信息</h3>
+
+                <div class="fr message-button">
+                    <div class="add-detail" ng-click="addProduct('addActive')"><i class="iconfont"></i>新增活动商品</div>
+                    <div class="btn  pl-import btn2" ng-click="isActiveShow('batchLead1')"><i class="iconfont"></i>导入
+                    </div>
+                    <div class="btn  delete-detail btn4"><i class="iconfont"></i>批量删除</div>
+                </div>
+
+            </div>
+            <!-- 活动商品之button-->
+            <div class="message-button" ng-show="false">
+                <div class="add-detail" ng-click="isActiveShow('addActive')"><i class="iconfont"></i>新增活动商品</div>
+                <div class="btn  pl-import btn2" ng-click="isActiveShow('batchLead1')"><i class="iconfont"></i>导入</div>
+                <div class="btn  delete-detail btn4"><i class="iconfont"></i>批量删除</div>
+            </div>
+
+            <!-- 活动商品之详情界面 -->
+            <div class="merchandise-details message-content">
+                <!-- 新增活动商品详情-->
+                <div class="addMerchandiseDetails" ng-show="addActive">
+                    <div class="search360">
+                        <input type="text" class="klw-search" placeholder="商品代码／商品名称／规格代码／规格名称"/>
+                    </div>
+                      <div class="clearfix">
+                    <div class="addMerchandiseTable tableOut">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>
+                                <label ng-click="domOperate.selectAll('productListTbody')">
+                                    <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':isalldatacheck}"></i>
+                                </label>
+                                </th>
+                                <th>序号</th>
+                                <th ng-repeat="list in productListThead">
+                                    {{ list.name }}
+                                </th>
+                            </tr>
+
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="list in productListTbody" ng-click="getProductInfo(list)">
+                                <td>
+                                <label ng-click="domOperate.selectItem($index,'productListTbody',$event)">
+                                    <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':list.isdatacheck}"></i>
+                                </label>
+                                </td>
+                                 <td>{{ $index+1 }}</td>
+                                <td ng-repeat="item in productListThead">
+                                    {{ list[item.tag] }}
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="wareHouseTable tableOut">
+                        <i class="triangle"></i>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th ng-repeat="list in productListInfoThead">{{ list.name }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="list in productListInfoTbody">
+                                <td>{{ $index+1 }}</td>
+                                <td ng-repeat="item in productListInfoThead" ng-bind-html="list[item.tag]"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                          </div>
+                    <div class="footer">
+                        <tm-pagination conf="paginationConf"></tm-pagination>
+                    </div>
+                    <div class="footer-button">
+                        <button class="btn btn-success btn-78" ng-click="domOperate.selectReady()">确定</button>
+                        <button class="btn btn-default btn-cancel btn-78" ng-click="isActiveShow(false)">取消</button>
+                    </div>
+                </div>
+                <!-- 批量导入详情-->
+                <div class="batchLeadDetails" ng-show="activeContent == 'batchLead1'">
+                    <div class="leadExplain">
+                        <p>导入说明</p>
+
+                        <p>1. 导入文件仅支持CSV、XLS、XLXS格式、大小不超过2M，数据不超过1万字</p>
+
+                        <p>2. 导入文件不能包含“合并单元格”，否则无法导入 </p>
+
+                        <p>3. 待补充</p>
+                    </div>
+                    <div class="leadTemplate">
+                        <p>导入模板 <span class="star">*</span></p>
+
+                        <div class="rows rowsInput">
+                            <div class="input50 leadFileInput">
+                                <input type="text" class="klw-input" placeholder="请选择导入文件" readonly/>
+                                <i class="iconfont"></i>
+                            </div>
+                            <div class="notTemplate">
+                                还没有模板,
+                                <span>点此下载  <i class="iconfont">&#xe681;</i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rows rowsText">
+                        <p>店铺名称 <span class="star">*</span></p>
+
+                        <p>订单状态 <span class="star">*</span></p>
+                    </div>
+                    <div class="rows rowsInput">
+                        <div>
+                            <div class="sewv">
+                                <div class="sewvtop"><span>店铺名称</span></div>
+                                <div class="content">
+                                    <ul class="sewvbm">
+                                        <li>现金</li>
+                                        <li>刷卡</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sewv">
+                                <div class="sewvtop"><span>初始状态</span></div>
+                                <div class="content">
+                                    <ul class="sewvbm">
+                                        <li>现金</li>
+                                        <li>刷卡</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="footer-button">
+                        <button class="btn btn-success btn-78">确定</button>
+                        <button class="btn btn-default btn-cancel btn-78" ng-click="isActiveShow(false)">取消</button>
+                    </div>
+                </div>
+            </div>
+
+            <!--活动商品之有明细 -->
+            <div class="hasDetail" ng-show="productSelectList.length">
+                <div class="tableOut">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>操作</th>
+                            <th ng-repeat="list in selectProductThead">
+                                {{ list.name }}
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="list in productSelectList">
+                            <td>
+                                <i class="icon iconfont icon-icon_shaixuan_default2" ng-click="domOperate.deleteProduct(list,$event)" ></i>
+                            </td>
+                        <td ng-repeat=" item in selectProductThead " contenteditable="true" ng-blur="domOperate.addAmount(list,$event)">{{ list[item.tag] }}</td>
+                        </tr>
+                        <tr>
+                            <td>小计</td>
+                            <td colspan="4"></td>
+                            <td>{{ PlanQtyNums }}</td>
+                            <td colspan="3"></td>
+                            <td>{{ Amount }}</td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- 底部按钮-->
+        <div class="content-footer jxmessage">
+            <button class="btn btn-success btn-78" ng-click="domOperate.save()">保存</button>
+            <button class="btn btn-default btn-78" ng-click="domOperate.cancel()">取消</button>
+        </div>
+    </div>
+</div>
+</div>

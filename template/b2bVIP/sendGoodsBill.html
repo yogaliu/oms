@@ -1,0 +1,174 @@
+<div id="sendGoodsBill" class="jxOutDiv" ng-controller="sendGoodsBillController">
+    <div class="jxOutDivContent">
+        <div id="simpleSearch" class="simpleSearch" ng-hide="advancedSearchObj.advancedSearch == 'sendGoodsBill'">
+            <input class="klw-search" placeholder="送货单号" ng-model="searchForm.deliveryordercode" ng-keyup="searchKeyup()"/>
+            <span class="advancedSearchBtn"  ng-click="advancedSearchObj.isShow('sendGoodsBill')">高级搜索</span>
+
+            <div class="fr">
+                <div class="btn add-order btn6" ng-click="goOther('add')"><i class="iconfont"></i>新增送货单</div>
+            </div>
+        </div>
+
+        <div id="advancedSearch" class="advancedSearch" ng-show="advancedSearchObj.advancedSearch == 'sendGoodsBill'">
+            <!-- 制单时间-->
+            <div class="searchItem timeInput">
+                <span class="title">制单时间</span>
+
+                <div class="options">
+                    <input class="klw-input dateTime" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="searchForm.begindate">
+                    <i class="line"></i>
+                    <input class="klw-input dateTime" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="searchForm.enddate">
+                </div>
+            </div>
+            <!-- 配货单号-->
+            <div class="searchItem searchItemInput clear">
+                <div class="rows rowsText">
+                    <p>送货单号</p>
+                    <p>PO单号</p>
+                    <p>商品编码</p>
+                    <p>收货仓库</p>
+
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchForm.deliveryordercode" placeholder="请输入送货单号"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchForm.pocode" placeholder="请输入PO单号"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchForm.productcode" placeholder="请输入商品编码"/>
+                    </div>
+                    <div>
+                        <pull-select pull-config="selectSendWareHouse"></pull-select>
+                    </div>
+                </div>
+            </div>
+            <div class="searchItem searchItemInput clear">
+                <div class="rows rowsText">
+                    <p>入库单号</p>
+
+                    <p>拣货单号</p>
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchForm.storageno" placeholder="请输入入库单号"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchForm.pickingcode" placeholder="请输入拣货单号"/>
+                    </div>
+                </div>
+            </div>
+            <div id="conditionSet">
+                <button class="btn btn-success btn-78" ng-click="advancedSearchObj.isShow('false');search()">确定</button>
+                <button class="btn btn-default btn-78 advancedSearchCancelBtn" ng-click="advancedSearchObj.isShow('false',$event)">取消
+                </button>
+                <button class="btn btn-default btn-78" ng-click="empty()">清空</button>
+            </div>
+        </div>
+
+        <div id="simpleSelect" class="simpleSelect clear">
+
+            <div class="ti-pagination">
+                <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                / 共 <span>{{paginationConf.totalItems}}</span>
+
+                <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont" ng-click="prev()"></i></span>
+
+                <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont" ng-click="next()"></i></span>
+
+                 <span style="position: relative">
+                    <span class="config-column" ng-click="showColumnConfigPanel()"  ng-mouseover="isHover()" ng-mouseleave="isHover()">
+                        <i class="iconfont"></i>
+                    </span>
+                    <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+                    <tm-listallocation allo="allocation"></tm-listallocation>
+                </span>
+            </div>
+        </div>
+
+        <div class="tableOut">
+            <table id="sendGoodsBillTable" class="display" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>操作</th>
+                    <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="obj in tableList" repeat-finished-directive repeataction="initFunc()"
+                    repeatIndex="{{$index}}" condition="{{$last == true}}">
+
+                    <td class="operate text-center">
+                        <div class="operateList">
+                            <div class="operateIcon"><span class="iconfont icon-operate"></span></div>
+                            <div class="content">
+                                <ul class="one">
+                                    <li ng-click="goOther('detail',$index)">送货单详情</li>
+
+                                    <li ng-click="goOther('modify',$index,$event)" ng-class="{true:'notClick'}[obj.status==2]">修改</li>
+
+                                    <li ng-click="operate.sendGoods(obj,$event)" ng-class="{true:'notClick'}[obj.status==1]">发货</li>
+
+                                    <li ng-click="operate.close(obj,$event)" ng-class="{true:'notClick'}[obj.status==1]">关闭</li>
+
+                                    <li>导出明细</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td ng-repeat="item in theadList">
+                        <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                        {{obj[item.tag] | isBoolean | jxFilter:item.tag:'sendGoodsBill' | setDefaultValueWithoutData}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <!--分页-->
+        <tm-pagination conf="paginationConf"></tm-pagination>
+
+        <!-- 发货弹出框-->
+        <div class="modal modal1 fade sendGoods-modal" id="sendGoodsModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="header-title">询问</div>
+                        <div class="header-close" data-dismiss="modal" aria-hidden="true"><i class="icon iconfont icon-icon_guanbisousuo"></i></div>
+                    </div>
+                    <div class="modal-body clear" style="height:77px;line-height: 77px;text-align: center">
+                        <div>
+                            请确认wms出库数据回写完毕，可以发货？
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-78 btn-success" ng-click="operate.sendGoodsSubmit()"  data-dismiss="modal">确定</button>
+                        <button type="button" class="btn btn-78 btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 关闭弹出框-->
+        <div class="modal modal1 fade close-modal" id="closeModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="header-title">询问</div>
+                        <div class="header-close" data-dismiss="modal" aria-hidden="true"><i class="icon iconfont icon-icon_guanbisousuo"></i></div>
+                    </div>
+                    <div class="modal-body clear" style="height:77px;line-height: 77px;text-align: center">
+                        <div>
+                            确认关闭该送货单?
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-78 btn-success" ng-click="operate.closeSubmit()"  data-dismiss="modal">确定</button>
+                        <button type="button" class="btn btn-78 btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

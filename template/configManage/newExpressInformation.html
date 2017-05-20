@@ -1,0 +1,85 @@
+<div id="configManage" class="config-manage">
+    <div class="" id="newExpressInformation" ng-controller="newExpressInformationController">
+        <div id="content" class="content form">
+            <div class="advance-search">
+                <div class="items">
+                    <div class="ipt cf">
+                        <label class="item">
+                            <span class="title">快递编码<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="currentItem.code">
+                        </label>
+                        <label class="item">
+                            <span class="title">快递名称<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="currentItem.name">
+                        </label>
+                        <label class="item">
+                            <span class="title">电话</span>
+                            <input type="text" class="klw-input" ng-model="currentItem.telephone">
+                        </label>
+                        <label class="item">
+                            <span class="title">手机</span>
+                            <input type="text" class="klw-input" ng-model="currentItem.mobile">
+                        </label>
+                    </div>
+                    <div class="ipt cf">
+                        <label class="item">
+                            <span class="title">快递类型</span>
+                            <pull-select pull-config="expresstypeList"></pull-select>
+                        </label>
+                        <label class="item">
+                            <span class="title">快递排序</span>
+                            <input type="number" class="klw-input" ng-model="currentItem.seq">
+                        </label>
+                        <label class="item">
+                            <span class="title">外部编码<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="currentItem.warehouseexpresscode">
+                        </label>
+                    </div>
+                    <div class="ipt cf">
+                        <label class="item md">
+                            <span class="title">Email</span>
+                            <input type="text" class="klw-input" ng-model="currentItem.email">
+                        </label>
+                        <label class="item md">
+                            <span class="title">地址</span>
+                            <input type="text" class="klw-input" ng-model="currentItem.address">
+                        </label>
+                    </div>
+                    <div class="ipt cf">
+                        <label class="item md">
+                            <span class="title">备注</span>
+                            <input type="text" class="klw-input" ng-model="currentItem.note">
+                        </label>
+                    </div>
+                </div>
+                <div class="sel">
+                    <label class="sel-item">
+                        <div class="line" ng-click="checkItem('iscancod')">
+                            <div class="klwk-check-x" ng-show="currentItem.iscancod"><i class="iconfont"></i></div>
+                            <div class="klwk-check" ng-hide="currentItem.iscancod"><i class="iconfont"></i></div>
+                            <span class="title">支持货到付款</span>
+                        </div>
+                    </label>
+                    <label class="sel-item">
+                        <div class="line" ng-click="checkItem('isonlycancod')">
+                            <div class="klwk-check-x" ng-show="currentItem.isonlycancod"><i class="iconfont"></i></div>
+                            <div class="klwk-check" ng-hide="currentItem.isonlycancod"><i class="iconfont"></i></div>
+                            <span class="title">仅支持货到付款</span>
+                        </div>
+                    </label>
+                    <label class="sel-item">
+                        <div class="line" ng-click="checkItem('isusecloudsstack')">
+                            <div class="klwk-check-x" ng-show="currentItem.isusecloudsstack"><i class="iconfont"></i></div>
+                            <div class="klwk-check" ng-hide="currentItem.isusecloudsstack"><i class="iconfont"></i></div>
+                            <span class="title">支持云栈电子面单</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="footer">
+                <button ng-click="save()" class="btn btn-success btn-78">保存</button>
+                <button ng-click="goBack()" class="btn btn-default btn-78">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

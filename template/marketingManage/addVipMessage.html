@@ -1,0 +1,126 @@
+<div id="addVipMessage" class="jxOutDiv jxAdd" ng-controller="addVipMessageController">
+    <div class="jxOutDivContent">
+
+        <div>
+            <button class="btn btn-default btn-78 topReturn" ng-click="returnFun()">返回</button>
+        </div>
+        <div class="basic-message jxmessage form">
+            <h3 class="addTitle">会员基本信息</h3>
+
+                <div class="rows rowsText">
+                    <p>会员编码 <span class="star">*</span></p>
+
+                    <p>会员昵称 <span class="star">*</span></p>
+
+                    <p>性别 <span class="star">*</span></p>
+
+                    <p>状态 <span class="star">*</span></p>
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <input class="klw-input validate" name="empty" type="text" placeholder="请输入会员编码" maxlength="20" ng-model="vipObj.code"/>
+                    </div>
+                    <div>
+                        <input class="klw-input validate" name="empty"  type="text" placeholder="请输入会员昵称" maxlength="20"
+                               ng-model="vipObj.name"/>
+                    </div>
+
+                    <div>
+                        <pull-select pull-config="selectSex"></pull-select>
+                    </div>
+                    <div>
+                        <pull-select pull-config="selectUserStatus"></pull-select>
+                    </div>
+                </div>
+                <div class="rows rowsText">
+                    <p>所属店铺 <span class="star">*</span></p>
+
+                    <p>手机</p>
+
+                    <p>固定电话</p>
+
+                    <p>Email</p>
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <pull-select pull-config="selectStore"></pull-select>
+                    </div>
+                    <div>
+                        <input class="klw-input validate" type="text" placeholder="请输入手机" ng-model="vipObj.mobile" name="phone"/>
+                    </div>
+                    <div>
+                        <input class="klw-input validate" type="text" placeholder="请输入固定电话" ng-model="vipObj.telephone" name="phone"/>
+                    </div>
+                    <div>
+                        <input class="klw-input validate" type="text" placeholder="请输入Email" ng-model="vipObj.email" name="email"/>
+                    </div>
+                </div>
+                <div class="rows rowsText">
+
+                    <p>收货人</p>
+
+                    <p>会员等级</p>
+
+                    <p>消费金额</p>
+
+                    <p>购买次数</p>
+
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <input class="klw-input validate" type="text" placeholder="请输入收货人" ng-model="vipObj.consignee"/>
+                    </div>
+                    <div>
+                        <pull-select pull-config="selectLevel"></pull-select>
+                    </div>
+                    <div>
+                        <input class="klw-input" type="text" placeholder="请输入消费金额" ng-model="vipObj.price"/>
+                    </div>
+                    <div>
+                        <input class="klw-input" type="text" placeholder="请输入购买次数" ng-model="vipObj.buytimes"/>
+                    </div>
+                </div>
+                <div class="rows rowsText">
+                    <p>国家 <span class="star">*</span></p>
+                    <p>省<span class="star">*</span></p>
+                    <p>市<span class="star">*</span></p>
+                    <p>区 <span class="star">*</span></p>
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <pull-select pull-config="selectNational"></pull-select>
+                    </div>
+                    <div>
+                        <pull-select pull-config="selectProvince"></pull-select>
+                    </div>
+                    <div>
+                        <pull-select pull-config="selectCity"></pull-select>
+                    </div>
+                    <div>
+                        <pull-select pull-config="selectCounty"></pull-select>
+                    </div>
+                </div>
+                <div class="rows rowsText">
+                    <p>地址 <span class="star">*</span></p>
+                </div>
+                <div class="rows rowsInput">
+                    <div class="input50">
+                        <input class="klw-input  validate" name="empty"  type="text" placeholder="请输入地址" name="phone"
+                               ng-model="vipObj.address"/>
+                    </div>
+                    <div>
+                        <label ng-click="isLabelSel($event,'speeddelivery');">
+                            <i class="iconfont icon-sel" ng-class="{true:'icon-sel-zhengque'}[!!vipObj.speeddelivery]"></i>
+                            <span>加急发货</span>
+                        </label>
+                    </div>
+                </div>
+        </div>
+        <!-- 底部按钮-->
+        <div class="content-footer jxmessage">
+            <button class="btn btn-success btn-78" ng-click="addSubmit()">保存</button>
+            <button class="btn btn-default btn-78" ng-click="returnFun()">取消</button>
+        </div>
+
+    </div>
+</div>

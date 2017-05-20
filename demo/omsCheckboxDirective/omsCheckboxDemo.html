@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en" ng-app="klwkOmsApp">
+<head>
+    <title>订单管理</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../public/css/bootstrap.css">
+    <link rel="stylesheet" href="../../public/css/layer.css">
+    <link rel="stylesheet" href="../../public/fonts/iconfont.css">
+    <link rel="stylesheet" href="../../css/public.css">
+    <link rel="stylesheet" href="../../css/jxPublic.css">
+
+</head>
+<body>
+<!-- 显示总的界面 -->
+<ui-view></ui-view>
+
+</body>
+<!-- 导入的基础插件，包含jquery,angularJs等 -->
+<script type="text/javascript" src="../../public/js/jquery.js"></script>
+<script type="text/javascript" src="../../public/js/base.js"></script>
+<script type="text/javascript" src="../../public/js/echarts.min.js"></script>
+<script type="text/javascript" src="../../public/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../demoApp.js"></script>
+<script>
+
+    /**
+     * 定义常量WAP_CONFIG;WAP为当前子模块功能
+     * */
+    angular.module('klwkOmsApp')
+            .config(["$stateProvider","$urlRouterProvider",function ($stateProvider, $urlRouterProvider) {
+                // 如果没有匹配的路径，则设置默认路径
+                $urlRouterProvider.otherwise('/index');
+                $stateProvider
+                    //首页
+                    .state('index',{
+                        url: '/index',
+                        templateUrl:'omsCheckboxTemplate.html',
+                        controller:'AccordionDemoCtrl'
+                    })
+            }]);
+
+    angular.module("klwkOmsApp").directive("omsCheckboxDirective", function($timeout){
+        return {
+            restrict: 'A',
+            scope:{
+                // 是否是全选按钮，true 表示是全选按钮，false 表示不是全选按钮
+                isCheckboxSwitch : "@",
+                // 开关控制的范围
+                switchScope:"@",
+                clickAction : "&useraction",
+                checkboxValue:"@"
+            },
+            controller:function($scope){
+            },
+            link: function(scope, element, attr) {
+                // 给当前控件绑定时间，是否选中
+                element.on("click",function(){
+                    // 如果是有总开关控制
+                    if(attr["isCheckboxSwitch"] !== undefined && attr["switchScope"] !== undefined){
+                        var isCheckboxSwitch = attr["isCheckboxSwitch"];
+                        var switchScope = attr["switchScope"];
+                        // 如果是全选 checkbox
+                        if(isCheckboxSwitch == "true"){
+                            // 如果已经是选中了的，则 让内容全部不选中
+                            if(element.hasClass("icon-sel-zhengque")){
+                                angular.element(attr["switchScope"]).find(".icon-sel.iconfont[is-checkbox-switch='false']").removeClass("icon-sel-zhengque");
+                            }
+                            // 如果没有选中，则 让内容全部选中
+                            else{
+                                angular.element(attr["switchScope"]).find(".icon-sel.iconfont[is-checkbox-switch='false']").addClass("icon-sel-zhengque");
+                            }
+                            element.toggleClass("icon-sel-zhengque");
+                        }
+                        // 如果不是全选按钮
+                        else{
+                            element.toggleClass("icon-sel-zhengque");
+                            // 所有的checkbox
+                            var allCheckboxLength = angular.element(attr["switchScope"]).find(".icon-sel.iconfont[is-checkbox-switch='false']").length;
+                            // 选中的checkbox
+                            var allCheckboxedLength =  angular.element(attr["switchScope"]).find(".icon-sel.iconfont.icon-sel-zhengque[is-checkbox-switch='false']").length;
+                            // 如果选中的checkbox 与 所有的checkbox 数量相同，则表示全选，那么全选按钮应该关联选中
+                            if(allCheckboxLength == allCheckboxedLength){
+                                angular.element(attr["switchScope"]).find("[is-checkbox-switch='true']").addClass("icon-sel-zhengque");
+                            }
+                            // 如果选中的checkbox 与 所有的checkbox 数量不相同，则表示全选，那么全选按钮应该关联不选中
+                            else{
+                                angular.element(attr["switchScope"]).find("[is-checkbox-switch='true']").removeClass("icon-sel-zhengque");
+                            }
+                        }
+
+                    }
+                    else{
+                        element.toggleClass("icon-sel-zhengque");
+                    }
+
+//                    scope.$emit("omsCheckboxClick",scope.checkboxValue);
+//                    console.dir(scope)
+                    scope.clickAction(scope.checkboxValue);
+                });
+
+            }
+        }
+    });
+
+
+
+    angular.module("klwkOmsApp")
+        .controller("AccordionDemoCtrl", ["$scope" ,function($scope) {
+
+                $scope.$on("omsCheckboxClick",function(myevent,data){
+                    console.log("omsCheckboxClick");
+                    console.dir(data);
+                });
+
+                $scope.useraction1 = function(data){
+                    console.dir(data);
+                };
+
+                var lists = [{
+                    username:"huangbiao",
+                    age:24
+                },{
+                    username:"huangbiao1",
+                    age:241
+                },{
+                    username:"huangbiao2",
+                    age:242
+                }];
+
+                $scope.lists = lists;
+
+    }]);
+
+</script>
+</html>

@@ -1,0 +1,86 @@
+<div id="configManage" class="config-manage">
+    <div class="return-order-config" ng-controller="smsConfigController">
+        <div id="topNav" class="top-nav">
+            <div class="path">
+                短信配置
+            </div>
+        </div>
+        <div id="content" class="content">
+            <div class="items">
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('sendNotify')">
+                        <div class="klwk-check-x" ng-show="formData.sendNotify"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.sendNotify"><i class="iconfont"></i></div>
+                        <span class="title">订单发货短信</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('fictitiousOrderNotNotify')">
+                        <div class="klwk-check-x" ng-show="formData.fictitiousOrderNotNotify"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.fictitiousOrderNotNotify"><i class="iconfont"></i></div>
+                        <span class="title">虚拟订单不发送短信</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('salesOrderSignChangeNotify')">
+                        <div class="klwk-check-x" ng-show="formData.salesOrderSignChangeNotify"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.salesOrderSignChangeNotify"><i class="iconfont"></i></div>
+                        <span class="title">订单标记更改短信</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('exchangeOrderNotify')">
+                        <div class="klwk-check-x" ng-show="formData.exchangeOrderNotify"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.exchangeOrderNotify"><i class="iconfont"></i></div>
+                        <span class="title">换货订单发送短信</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('presellOrderNotify')">
+                        <div class="klwk-check-x" ng-show="formData.presellOrderNotify"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.presellOrderNotify"><i class="iconfont"></i></div>
+                        <span class="title">预售订单发送短信</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('expressChangeNotify')">
+                        <div class="klwk-check-x" ng-show="formData.expressChangeNotify"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.expressChangeNotify"><i class="iconfont"></i></div>
+                        <span class="title">订单快递变更短信</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('approveRefundNotify')">
+                        <div class="klwk-check-x" ng-show="formData.approveRefundNotify"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.approveRefundNotify"><i class="iconfont"></i></div>
+                        <span class="title">同意退款短信</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('refundNotify')">
+                        <div class="klwk-check-x" ng-show="formData.refundNotify"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.refundNotify"><i class="iconfont"></i></div>
+                        <span class="title">退款成功短信</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('approveReturnNotify')">
+                        <div class="klwk-check-x" ng-show="formData.approveReturnNotify"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.approveReturnNotify"><i class="iconfont"></i></div>
+                        <span class="title">同意退货短信</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('receiveReturnNotify')">
+                        <div class="klwk-check-x" ng-show="formData.receiveReturnNotify"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.receiveReturnNotify"><i class="iconfont"></i></div>
+                        <span class="title">收到退货短信</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <button class="btn btn-success btn-78" ng-click="save()">保存</button>
+            </div>
+        </div>
+    </div>
+</div>

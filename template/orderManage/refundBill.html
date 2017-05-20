@@ -1,0 +1,264 @@
+<div id="refundBill" class="jxOutDiv" ng-controller="refundBillController">
+    <div class="jxOutDivContent">
+        <!-- 主搜索框和主按钮-->
+        <div id="simpleSearch" class="simpleSearch" ng-hide="advancedSearchObj.advancedSearch == 'refundBill'">
+            <input class="klw-search" placeholder="订单编号" ng-model="formData.SalesOrderCode" ng-keydown="domOperate.searchByCode($event)"/>
+            <span class="advancedSearchBtn"  ng-click="advancedSearchObj.isShow('refundBill')">高级搜索</span>
+
+            <div class="fr">
+                <div class="sewv-pl">
+                    <menu-select menu-config="batchOperate"></menu-select>
+                    <!--<div class="sewvtop icon-svg"><span>批量操作</span><i class="iconfont icon-xiajiantou"></i></div>-->
+                    <!--<div class="content">-->
+                        <!--<ul class="one">-->
+                            <!--<li ng-click="domOperate.lockOrder(true)">锁定</li>-->
+                            <!--<li ng-click="domOperate.unlockOrder(true)">解锁</li>-->
+                            <!--<li ng-click="domOperate.auditOrder(true)">审核</li>-->
+                            <!--<li ng-click="domOperate.reAuditOrder(true)">复核</li>-->
+                            <!--<li ng-click="domOperate.obsoluteOrder(true)">作废</li>-->
+                            <!--<li class="more">-->
+                                <!--标记-->
+                                <!--<ul class="two">-->
+                                    <!--<li ng-click="domOperate.addTag(true,'标记正品')">标记正品</li>-->
+                                    <!--<li ng-click="domOperate.addTag(true,'标记次品')">标记次品</li>-->
+                                <!--</ul>-->
+                            <!--</li>-->
+                            <!--<li ng-click="domOperate.addLabel(true)">内部标签</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                </div>
+                <div class="btn  pl-import" ng-click="domOperate.refresh()"><i class="icon iconfont icon-icon_fanzhuan_default" ></i>刷新</div>
+                <div class="btn klwk-cancle exportBtn"><i class="iconfont"></i>导出</div>
+                <div class="btn add-order" ng-click="domOperate.jumpToNew('退款单：新增退款单','../template/orderManage/addRefundBill.html')">
+                    <i class="iconfont"></i>
+                    新增退款单
+                </div>
+            </div>
+        </div>
+
+        <!-- 高级搜索展开-->
+        <div id="advancedSearch" class="advancedSearch" ng-show="advancedSearchObj.advancedSearch == 'refundBill'">
+            <!-- 制单时间-->
+            <div class="searchItem timeInput">
+                <div>
+                    <div class="title textsewv" ng-hide="advancedSearchObj.timeShow">
+                        <div class="sewv">
+                            <div class="sewvtop">
+                                <span>制单时间</span>
+                                <i class="iconfont icon-xiajiantou"></i>
+                            </div>
+                            <div class="content">
+                                <ul class="sewvbm">
+                                    <li>制单时间</li>
+                                    <li>审核时间</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="title" ng-show="advancedSearchObj.timeShow">制单时间</span>
+                    <div class="options">
+                        <input class="klw-input" id="CreateDateBegin" ng-model="formData.CreateDateBegin" type="text">
+                        <i class="line"></i>
+                        <input class="klw-input" id="CreateDateEnd" ng-model="formData.CreateDateEnd" type="text">
+                    </div>
+                </div>
+                <div class="more">
+                    <div class="btn klwk-spread timeSpreadBtn" ng-click="advancedSearchObj.isTimeShow()"><span>{{advancedSearchObj.timeText}}</span><i class="iconfont"></i></div>
+                </div>
+            </div>
+            <!-- 制单时间展开-->
+            <div class="searchItem timeInput timeSpread" ng-show="advancedSearchObj.timeShow">
+                <div>
+                    <span class="title">审核时间</span>
+
+                    <div class="options">
+                        <input class="klw-input" id="ApproveDateBegin" ng-model="formData.ApproveDateBegin" type="text">
+                        <i class="line"></i>
+                        <input class="klw-input" id="ApproveDateEnd" ng-model="formData.ApproveDateEnd" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 单据状态-->
+            <advanced-search-list config-data="receiptsConfigData"></advanced-search-list>
+            <!-- 单据状态-->
+
+            <!-- 店铺-->
+            <advanced-search-more-list  search-config="storeListConfigData"></advanced-search-more-list>
+            <advance-search-more-list-show search-config="storeListConfigData"></advance-search-more-list-show>
+            <!-- 店铺-->
+
+            <!-- 退款类型-->
+            <advanced-search-list config-data="refundTypeConfigData"></advanced-search-list>
+            <!-- 退款类型-->
+
+            <!-- 退款方式-->
+            <advanced-search-list config-data="refundWayConfigData"></advanced-search-list>
+            <!-- 退款方式-->
+
+            <!-- 会员信息-->
+            <div class="searchItem searchItemInput">
+                <div class="rows rowsText">
+                    <p>会员昵称</p>
+                    <p>手机</p>
+                    <p>复核人</p>
+                    <p>审核人</p>
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <input type="text" class="klw-input" ng-model="formData.CustomerName" placeholder="会员昵称"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="formData.Mobile" placeholder="手机"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="formData.AuditUser"  placeholder="复核人"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="formData.ApproveUser"  placeholder="审核人"/>
+                    </div>
+                </div>
+            </div>
+            <div class="searchItem searchItemInput">
+                <div class="rows rowsText">
+                    <p>锁定人</p>
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <input type="text" class="klw-input" ng-model="formData.LockedUserName"  placeholder="锁定人"/>
+                    </div>
+                </div>
+            </div>
+            <!-- 已选择行-->
+            <div class="searchItem selected">
+                <span class="title">已选择</span>
+                <div class="selectedBox"
+                     ng-repeat="(key,orderlist) in formChoseData">
+                    <span class="selectedTitle">{{orderlist['title']}}：</span>
+                    <span class="selectedContent">{{orderlist['name']}}</span>
+                    <i class="icon iconfont icon-icon_guanbisousuo" ng-click="domOperate.clearChoseCondition(orderlist)"></i>
+                </div>
+            </div>
+            <div id="conditionSet">
+                <button class="btn btn-success btn-78" ng-click="domOperate.advanceSearchConfirm($event)">确定</button>
+                <button class="btn btn-default btn-78 advancedSearchCancelBtn" ng-click="domOperate.advanceSearchCancle($event)">取消
+                </button>
+                <button class="btn btn-default btn-78" ng-click="domOperate.advanceSearchClear()">清空</button>
+            </div>
+        </div>
+
+        <!-- 特殊标识行-->
+        <div id="simpleSelect" class="simpleSelect clear">
+            <div class="selectItems fl">
+                <label ng-click="domOperate.threeSelect($event,'IsLocked')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow" ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[formData.IsLocked]"></i>
+                    <span>锁定</span>
+                </label>
+            </div>
+
+            <div class="ti-pagination">
+                <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                / 共 <span>{{paginationConf.totalItems}}</span>
+
+                <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont" ng-click="prev()"></i></span>
+
+                <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont" ng-click="next()"></i></span>
+
+                <span class="config-column" ng-mouseover="isHover()" ng-mouseleave="isHover()" ng-click="domOperate.listAllocation()"><i class="iconfont"></i></span>
+
+                <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+            </div>
+        </div>
+
+        <div class="tableOut">
+            <table>
+                <thead>
+                <tr>
+                    <th>
+                        <label ng-click="domOperate.sellectAll()">
+                            <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':checkAll}"></i>
+                        </label>
+                    </th>
+                    <th>序号</th>
+                    <th>操作</th>
+                    <th ng-repeat="column in refondBillHead">{{column.name}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="list in refondBillBody">
+                    <td>
+                        <label ng-click="domOperate.refundChose(list)">
+                            <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':list.trShow}"></i>
+                        </label>
+                    </td>
+                    <td>{{$index+1}}</td>
+                    <td class="operate">
+                        <div class="multilevel-menu">
+                            <div><span class="iconfont icon-operate"></span></div>
+                            <div class="content">
+                                <ul class="one">
+                                    <li ng-click="domOperate.jumpToDetails('退款单：退款单详情','../template/orderManage/refundBillDetail.html',list)">退款单详情</li>
+                                    <li ng-click="domOperate.lockOrder(list,$event)"
+                                        ng-class="{true : '',false : 'clickDisabled'}[operateCheck.lockOrderCheck(list)]">锁定</li>
+                                    <li ng-click="domOperate.unlockOrder(list,$event)"
+                                        ng-class="{true : '',false : 'clickDisabled'}[operateCheck.unlockOrderCheck(list)]">解锁</li>
+                                    <li ng-click="domOperate.auditOrder(list,$event)"
+                                        ng-class="{true : '',false : 'clickDisabled'}[operateCheck.auditOrderCheck(list)]">审核</li>
+                                    <li ng-click="domOperate.reAuditOrder(list,$event)"
+                                        ng-class="{true : '',false : 'clickDisabled'}[operateCheck.reAuditOrderCheck(list)]">复核</li>
+                                    <li ng-click="domOperate.auditReturn(list,$event)"
+                                        ng-class="{true : '',false : 'clickDisabled'}[operateCheck.auditReturnCheck(list)]">反审</li>
+                                    <li ng-click="domOperate.obsoluteOrder(list,$event)"
+                                        ng-class="{true : '',false : 'clickDisabled'}[operateCheck.obsoluteOrderCheck(list)]">作废</li>
+                                    <li ng-click="domOperate.modifyOrder(list,$event)"
+                                        ng-class="{true : '',false : 'clickDisabled'}[operateCheck.modifyOrderCheck(list)]">修改</li>
+                                    <li class="more">
+                                        标记
+                                        <ul class="two">
+                                            <li ng-click="domOperate.addTag(false,'标记正品',list)">标记正品</li>
+                                            <li ng-click="domOperate.addTag(false,'标记次品',list)">标记次品</li>
+                                        </ul>
+                                    </li>
+                                    <li ng-click="domOperate.addLabel(false,list)">内部标签</li>
+                                    <li ng-click="domOperate.awakeWW()">旺旺</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td ng-repeat="column in refondBillHead"
+                        ng-if="column.tag != ''"
+                        ng-bind-html="list[column.tag] | refoundBillFilter : column : list">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--内部标签模态框模态框-->
+        <div class="modal fade info-get-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="info-tip">
+                        <div class="info-tip-head">
+                            <p class="info-tip-label">{{modal.title}}</p>
+                            <p class="info-tip-close" data-dismiss="modal">
+                                <i class="icon iconfont icon-icon_guanbisousuo"></i>
+                            </p>
+                        </div>
+                        <div class="info-tip-body">
+                            <textarea name="" id="" cols="30" rows="10" ng-model="content">请输入内容</textarea>
+                        </div>
+                        <div class="info-tip-header">
+                            <button type="button" class="btn btn-success btn-78" ng-click="modal.confirm(content)">确定</button>
+                            <button type="button" class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--分页-->
+        <tm-pagination conf="paginationConf"></tm-pagination>
+
+        <!-- 右侧列表配置 -->
+        <tm-listallocation allo="allocation"></tm-listallocation>
+    </div>
+</div>

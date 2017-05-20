@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" ng-app="klwkOmsApp">
+<head>
+    <title>订单管理</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../public/css/bootstrap.css">
+
+</head>
+<body>
+<!-- 显示总的界面 -->
+<ui-view></ui-view>
+
+</body>
+<!-- 导入的基础插件，包含jquery,angularJs等 -->
+<script type="text/javascript" src="../../public/js/jquery.js"></script>
+<script type="text/javascript" src="../../public/js/base.js"></script>
+<script type="text/javascript" src="../../public/js/echarts.min.js"></script>
+<script type="text/javascript" src="../../public/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../demoApp.js"></script>
+<script>
+
+    /**
+     * 定义常量WAP_CONFIG;WAP为当前子模块功能
+     * */
+    angular.module('klwkOmsApp')
+            .config(["$stateProvider","$urlRouterProvider",function ($stateProvider, $urlRouterProvider) {
+                // 如果没有匹配的路径，则设置默认路径
+                $urlRouterProvider.otherwise('/index');
+                $stateProvider
+                    //首页
+                    .state('index',{
+                        url: '/index',
+                        templateUrl:'filterStudyTemp.html',
+                        controller:'AccordionDemoCtrl'
+                    })
+            }]);
+    /**
+     * 在为null， undefined， ""， 的情况下面设置默认值
+     * */
+    angular.module("klwkOmsApp")
+        .filter("setDefaultValueWithoutData",function(){
+            return function(inputValue,defaultValue){
+                if(inputValue == null || inputValue === undefined || inputValue == ""){
+                    return defaultValue;
+                }
+                return inputValue;
+            }
+        })
+            // 类似于数据字典
+            .filter('expressStateFilter', function() {
+                return function(value) {
+                    var state;
+                    switch (value) {
+                        case '0':
+                            state = '运输中';
+                            break;
+                        case '1':
+                            state = '揽件';
+                            break;
+                        case '2':
+                            state = '疑难';
+                            break;
+                        case '3':
+                            state = '签收成功';
+                            break;
+                        case '4':
+                            state = '已退签';
+                            break;
+                        case '5':
+                            state = '正在派件';
+                            break;
+                        case '6':
+                            state = '已退回';
+                            break;
+                    }
+                    return state;
+                };
+            });
+
+    angular.module("klwkOmsApp")
+        .controller("AccordionDemoCtrl", ["$scope","$filter" ,function($scope,$filter) {
+                $scope.formData = {
+                    username : "",
+                    expressState : '3',
+                    age : 16
+                };
+
+                $scope.num = $filter('currency')(123534);
+            }]);
+
+</script>
+</html>

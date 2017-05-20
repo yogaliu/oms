@@ -1,0 +1,1676 @@
+/*消除bootstrap的影响*/
+.inventory-manage .container{
+    padding: 0;
+    width: auto;
+}
+/*消除bootstrap的影响end*/
+/*库存管理模块公共样式*/
+.inventory-manage .short-line{
+    display: inline-block;
+    width: 15px;
+    height: 1px;
+    background: #f0f0f0;
+    margin: 3px 23px;
+}
+.inventory-manage .blue{
+    color: #66A9FD;
+    cursor: pointer;
+}
+.inventory-manage i.notice{
+    color: red;
+}
+.inventory-manage .line{
+    display: inline-block;
+}
+.inventory-manage .ac{
+    text-align: center;
+}
+.inventory-manage .ar{
+    text-align: right;
+}
+.inventory-manage p.title{
+    height: 47px;
+    line-height: 47px;
+    font-size: 14px;
+}
+.inventory-manage label{
+    font-weight: normal;
+}
+.inventory-manage .klw-search{
+    margin-right: 15px;
+}
+.inventory-manage .svg2{
+    width: auto;
+    margin-left: 10px;
+    background: #ffffff;
+}
+.inventory-manage{
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    background: #fafafa;
+    font-family: "微软雅黑";
+    font-size: 12px;
+    color: #999999;
+    margin: 0;
+}
+.inventory-manage>div{
+    height: 100%;
+    width: 100%;
+}
+.inventory-manage .fr{
+    float: right;
+}
+.inventory-manage .fl{
+    float: left;
+}
+
+.inventory-manage .m1{
+    margin-left: 40px;
+}
+.inventory-manage .cf{
+    zoom:1;
+}
+.inventory-manage .cf:after{
+    display: block;
+    clear: both;
+    content: "";
+    visibility: hidden;
+    height: 0
+}
+.inventory-manage .search .title input{
+    margin-top: 10px;
+}
+.inventory-manage .oprate , .inventory-manage .import {
+    margin-top: 31px;
+}
+.inventory-manage .blue{
+    color: #67A9FD;
+    cursor: pointer;
+}
+.inventory-manage .red{
+    color: #F13A30;
+    cursor: pointer;
+}
+.inventory-manage .yellow{
+    color: #F08C1B;
+    cursor: pointer;
+}
+.inventory-manage .top-nav{
+    height: 70px;
+    line-height: 70px;
+    display: none;
+}
+.inventory-manage .top-nav .top-cl{
+    color: #66A9FD;
+    cursor: pointer;
+}
+.inventory-manage .top-nav .top-condition{
+    display: inline-block;
+    margin: 21px 20px 0 0;
+    float: left;
+    padding: 0px 26px 0px 10px;
+    vertical-align: middle;
+    border: 1px solid #F0F0F0;
+    border-radius: 3px;
+    line-height: 26px;
+    font-size: 10px;
+    color: #999999;
+}
+.inventory-manage .top-nav .top-condition span{
+    color: #2A2A2A;
+}
+.inventory-manage .top-nav .top-condition img{
+    cursor: pointer;
+}
+.inventory-manage .top-nav .path{
+    display: inline-block;
+    margin-right: 50px;
+    float: left;
+}
+.inventory-manage .content{
+    background: #FFFFFF;
+    padding: 25px 30px 15px 30px;
+    height: 100%;
+    overflow: auto;
+}
+.inventory-manage .content .tab{
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 1.14px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.05);
+    border-radius: 6px 6px 0 0;
+    width: calc(100% + 60px);
+    margin-left: -30px;
+    padding-left: 30px;
+}
+.inventory-manage .content .tab .title{
+    padding: 0 8px 8px 8px;
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 50px;
+}
+.inventory-manage .content .tab .title.active{
+    border-bottom: 4px solid #3FA248;
+}
+.inventory-manage .content .search{
+    border-bottom: 1px solid #F5F5F5;
+    padding-bottom: 20px;
+}
+.inventory-manage .content .search .showAdvance{
+    cursor: pointer;
+}
+.inventory-manage .advance-search{
+    padding-bottom: 13px;
+    border-bottom: 1px solid #F5F5F5;
+}
+.inventory-manage .advance-search .oprate button{
+    margin-right: 20px;
+}
+.inventory-manage .advance-search .list{
+    border-bottom: 1px dashed #EEEEEE;
+    padding: 11px 0;
+}
+.inventory-manage .advance-search .ipt{
+    margin: 16px 0;
+}
+.inventory-manage .advance-search .list .title,.inventory-manage .advance-search .ipt .title{
+    display: inline-block;
+    width: 97px;
+    color: #666666;
+}
+.inventory-manage .advance-search .list .item{
+    margin-right: 40px;
+    cursor: pointer;
+    color: #999999;
+    letter-spacing: 1px;
+}
+.inventory-manage .advance-search .list .im-check-box .item,
+.inventory-manage .advance-search .list .more-item .item{
+    padding: 10px 0;
+}
+.inventory-manage .advance-search .list .items.line>.item{
+    max-width: 136px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.inventory-manage .advance-search .list .im-check-box .im-check-box-items{
+    margin-bottom: 20px;
+}
+.inventory-manage .advance-search .list .item.sel{
+    color: #469F45;
+}
+.inventory-manage .advance-search .list .right-btn .more{
+    line-height: 24px;
+    height: 24px;
+    padding: 0 14px 0 14px;
+    border: 1px solid #f0f0f0;
+    text-align: left;
+    font-size: 12px;
+    border-radius: 2px;
+    cursor: pointer;
+    background-color: #ffffff;
+}
+.inventory-manage .more i:before{
+    content: '\e64b';
+    font-size: 12px;
+}
+.inventory-manage .more-check i:before{
+    content: '\e64b';
+    font-size: 12px;
+    float: left;
+}
+.inventory-manage .advance-search .list .right-btn .more-check{
+    line-height: 24px;
+    height: 24px;
+    padding: 0 14px 0 26px;
+    border: 1px solid #f0f0f0;
+    text-align: right;
+    font-size: 12px;
+    border-radius: 2px;
+    cursor: pointer;
+    background-color: #ffffff;
+    margin-left: 14px;
+}
+.inventory-manage .advance-search .items .item{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+.inventory-manage .advance-search .col-width{
+    width: 22%;
+    margin-right: 2.5%;
+}
+.inventory-manage .advance-search .col-width .more-select{
+    outline: none;
+    width: 99%;
+    height: 40px;
+    color: #666;
+    padding-left: 20px;
+    border-radius: 4px;
+    border: 1px solid #ebebeb;
+    font-size: 14px;
+    background: #ffffff;
+    margin-top: 15px;
+}
+.inventory-manage .advance-search .col-width .more-select .select-content{
+    height: 40px;
+    line-height: 40px;
+}
+.inventory-manage .advance-search .col-width .more-select .select-content span{
+    width: 75%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.inventory-manage .advance-search .col-width .more-select .select-content em{
+    float: right;
+    margin-right: 20px;
+}
+
+.inventory-manage .advance-search .items .item input,
+.inventory-manage .advance-search .items .item .sewv{
+    margin: 17px 25px 0 0;
+    display: block;
+}
+.inventory-manage .top-table{
+    padding: 16px;
+    text-align: right;
+}
+.inventory-manage .top-table .items{
+    display: inline-block;
+}
+
+.inventory-manage .advance-search .items .itemBtn {
+    margin-top: 32px;
+    margin-left: 30px;
+}
+.inventory-manage .advance-search .items .itemBtn  div{
+    margin-right: 0px;
+}
+
+.inventory-manage .top-table .items .item{
+    margin-right: 15px;
+    cursor: pointer;
+}
+.inventory-manage .top-table .items .item input{
+    margin-right: 6px;
+}
+.inventory-manage .top-table .items .item span{
+    margin-right: 15px;
+}
+.inventory-manage table{
+    width: 100%;
+}
+.inventory-manage table td,.inventory-manage table th{
+    text-align: center;
+}
+.inventory-manage table thead tr{
+    background: #FAFAFA;
+    height: 58px;
+}
+.inventory-manage table thead tr th{
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 1px;
+    font-weight: normal;
+}
+.inventory-manage table tbody tr{
+    height: 58px;
+}
+.inventory-manage table tbody tr:nth-child(even){
+    background: #FBFBFB;
+}
+.inventory-manage table tbody tr:nth-child(odd){
+    background: #ffffff;
+}
+.inventory-manage .footer{
+}
+.inventory-manage .systemConfig-foot .content-num{
+    position: relative;
+}
+.inventory-manage .footer button{
+    margin-right: 20px;
+}
+.inventory-manage .klwk-check,
+.inventory-manage .klwk-check-x,
+.inventory-manage .klwk-check-f{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+/*字体图标*/
+.inventory-manage .iconfont{
+    margin-right: 6px;
+    vertical-align: middle;
+}
+.inventory-manage .iconfont.icon-operate{
+    margin-right: 0;
+}
+.inventory-manage .icon-operate:before{
+    content: '\e65c';
+}
+.inventory-manage .icon-download:before{
+    content: '\e65f';
+}
+.inventory-manage .icon-import:before{
+    content: '\e605';
+}
+.inventory-manage .icon-fresh:before{
+    content: '\e69a';
+}
+.inventory-manage .icon-new:before{
+    content: '\e66b';
+    font-size: 14px;
+    vertical-align: middle;
+}
+.inventory-manage .icon-delete:before{
+    content: '\e697';
+}
+/*字体图标end*/
+/*下拉菜单*/
+.inventory-manage .sewv{
+    display: inline-block;
+    width: 250px;
+}
+.inventory-manage .sewv .content{
+    padding: 0;
+}
+.inventory-manage .tr-oprate{
+    position: relative;
+}
+.inventory-manage .tr-oprate:hover .tr-oprate-list{
+    display: block;
+}
+.inventory-manage .tr-icon{
+    line-height: 56px;
+    cursor: pointer;
+}
+.inventory-manage .tr-oprate-list{
+    position: absolute;
+    left: 0;
+    top: 42px;
+    border: 1px solid #F5F5F5;
+    box-shadow: 0 5px 20px 0 rgba(0,0,0,0.10);
+    border-radius: 4px;
+    width: 114px;
+    display: none;
+    background: #ffffff;
+    z-index: 500;
+}
+.inventory-manage .tr-oprate-list li{
+    list-style: none;
+    padding: 10px 5px;
+    text-align: left;
+    color: #666666;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.inventory-manage .tr-oprate-list li:hover{
+    background: #FAFAFA;
+}
+/*下拉菜单end*/
+/*弹框*/
+.inventory-manage .modal-dialog{
+    width: 400px;
+    margin-top: 160px;
+}
+.inventory-manage .modal-header{
+    height: 50px;
+    padding: 0 30px;
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 0.88px;
+    border-bottom: 1px solid #eeeeee;
+}
+.inventory-manage .modal-header .close{
+    line-height: 50px;
+    margin-top: 0;
+}
+.inventory-manage .modal-header .modal-title{
+    line-height: 50px;
+}
+.inventory-manage .modal-body{
+    padding: 30px;
+}
+.inventory-manage .modal-body .klw-input,
+.inventory-manage .modal-body .sewv{
+    width: 100%;
+    margin: 12px 0 20px 0;
+    display: block;
+}
+.inventory-manage .modal-body .item .title{
+    font-size: 12px;
+    color: #999999;
+    letter-spacing: 0;
+}
+.inventory-manage .modal-footer{
+    border-top: 1px solid #eeeeee;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    padding: 0;
+}
+.inventory-manage .modal-footer .btn{
+    padding: 9px 23px;
+}
+.inventory-manage .modal-footer .btn + .btn {
+    margin-left: 20px;
+}
+/*弹框end*/
+/*库存管理模块公共样式end*/
+
+/*虚拟调拨样式*/
+/*.virtual-transfer .top-table{*/
+    /*text-align: right;*/
+    /*overflow: hidden;*/
+/*}*/
+.virtual-transfer .advance-search .items .item input.klw-input.start-time{
+    margin-right: 0;
+}
+.virtual-transfer .advance-search .items .item input.klw-input.start-time,
+.virtual-transfer .advance-search .items .item input.klw-input.end-time{
+    display: inline-block;
+    margin-top: 0;
+}
+.virtual-transfer .advance-search .list .title{
+    width: 97px;
+    float: left;
+}
+.virtual-transfer .advance-search .list>.line{
+    width: calc(100% - 97px);
+    float: left;
+}
+.virtual-transfer .advance-search .list .items{
+    width: 84%;
+    float: left;
+}
+.virtual-transfer .advance-search .list .im-check-box .items{
+    width: 100%;
+}
+.virtual-transfer .advance-search .list .right-btn{
+    width: 16%;
+    float: right;
+    text-align: right;
+}
+.virtual-transfer .advance-search .list .list-search{
+    margin-bottom: 10px;
+}
+.virtual-transfer .advance-search .list .list-search .item {
+    margin-right: 10px;
+    cursor: pointer;
+    color: #666666;
+    padding: 0;
+}
+.virtual-transfer .advance-search .list .list-search .title{
+    color: #C5C5C5;
+    width: auto;
+    margin-right: 30px;
+}
+.virtual-transfer .advance-search .list .klw-search{
+    margin-bottom: 20px;
+}
+/*虚拟调拨样式end*/
+
+/*调拨详情*/
+.transfer-detail .log .title{
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 1px;
+    margin: 30px 0 15px 0;
+}
+.transfer-detail .items{
+    text-align: center;
+}
+.transfer-detail .items .main-item{
+    color: #666666;
+    font-size: 20px;
+    margin: 20px;
+}
+.transfer-detail .items .item {
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 25px;
+}
+.transfer-detail .items .item .title{
+    margin-right: 5px;
+    color: #999999;
+}
+.transfer-detail .items .item .text{
+    color: #666666;
+}
+.transfer-detail .table-title{
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 1.14px;
+    margin: 20px 0;
+}
+/*调拨详情end*/
+/*新增调拨*/
+.new-transfer .table-title{
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 1.14px;
+    margin: 20px 0;
+    line-height: 40px;
+}
+.new-transfer .main-title{
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 0;
+}
+.new-transfer .ipt .item{
+    width: 25%;
+    float: left;
+}
+.new-transfer .ipt .item .klw-input{
+    width: 90%;
+}
+.new-transfer .product-info .svg2{
+    margin-left: 0;
+    margin-right: 10px;
+}
+.new-transfer .product-info .fr .svg2{
+    margin-left: 10px;
+    margin-right: 0;
+}
+.new-transfer .product-info{
+    padding: 43px 0 40px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+.new-transfer .product-info .main-title{
+    margin-bottom: 30px;
+}
+.new-transfer .product-info .main-title.line{
+    display: inline-block;
+    line-height: 40px;
+    margin-bottom: 0;
+}
+.new-transfer .product-info .klw-search{
+    margin: 14px 0 26px 0;
+}
+.new-transfer .product-info .table-footer{
+    margin-top: 25px;
+}
+.new-transfer .product-info .table-footer .btn{
+    margin-right: 10px;
+}
+.new-transfer .product-info .product-list{
+    margin-top: 15px;
+}
+.new-transfer .product-info .import-area{
+    padding-top: 24px;
+}
+.new-transfer .product-info .import-area .title{
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 0;
+    margin-bottom: 20px;
+}
+.new-transfer .product-info .import-area .title.second{
+    margin-top: 35px;
+}
+.new-transfer .product-info .import-area ul{
+    border-bottom: 1px solid #F7F7F7;
+    padding-bottom: 20px;
+}
+.new-transfer .product-info .import-area ul li{
+    font-size: 14px;
+    color: #B3B3B3;
+    letter-spacing: 1px;
+    margin: 9px 0;
+}
+/*新增调拨end*/
+
+/*库存上传*/
+.inventory-upload{
+    height: 100%;
+}
+.inventory-upload .advance-search{
+    padding-bottom: 0;
+    border-bottom: none;
+}
+.inventory-upload .advance-search .l1{
+    margin: 36px 0;
+    color: #666666;
+    letter-spacing: 1px;
+}
+.inventory-upload .advance-search .l2{
+    padding: 25px 0 30px 0;
+    border-top: 1px solid #eeeeee;
+    font-size: 14px;
+    color: #999999;
+    letter-spacing: 1.17px;
+}
+.inventory-upload .advance-search .l2 .title{
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 1px;
+    margin-right: 50px;
+}
+.inventory-upload .advance-search .l3{
+    margin: 4px 0 26px 0;
+}
+.inventory-upload .advance-search .l3 .item .sewv{
+    display: block;
+    margin: 17px 25px 0 0;
+}
+.inventory-upload .footer .svg2{
+    margin: 15px 0 130px 0;
+}
+.inventory-upload .footer .svg2.b2{
+    margin: 0 20px 0 0;
+    background: #4DB557;
+    font-size: 14px;
+    color: #FFFFFF;
+    padding: 0 35px;
+    text-align: center;
+}
+.inventory-upload .content .search {
+    border-bottom: none;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.inventory-upload .item .title{
+    margin-right: 10px;
+    color: #666666;
+    font-size: 14px;
+}
+.inventory-upload .UploadContent{
+    height: 530px;
+    overflow: auto;
+    width: 100%;
+}
+.inventory-manage .inventoryContent{
+    height: 535px;
+    overflow: auto;
+}
+.inventory-manage .ProductSpecTableContent{
+    height: 530px !important;
+    overflow: auto;
+}
+.inventory-manage .ProductSpecTableContent{
+    height: 530px !important;
+    overflow: auto;
+}
+.inventory-manage .ProductSpecContent{
+    height: 415px !important;
+    overflow: auto;
+}
+
+/*库存上传end*/
+/*系统库存*/
+.inventory-manage .advancedSearch .selected{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    padding: 5px 0 10px 31px;
+    box-shadow: 0 2px 3px #eeeeee;
+    border: 0;
+    margin-top: 0;
+}
+
+/*系统库存end*/
+/*库存初始化*/
+.inventory-init .advance-search .items .item input{
+    display: inline-block;
+    margin: 0 0 0 10px;
+}
+.inventory-init .advance-search .ipt .title{
+    width: auto;
+}
+.inventory-init .advance-search .ipt{
+    margin: 0;
+}
+.inventory-manage .ipt-title{
+    height: 58px;
+    line-height: 58px;
+    background: #FAFAFA;
+    border-top: 1px solid #F5F5F5;
+    border-bottom: 1px solid #F5F5F5;
+}
+.inventory-manage .productDelete{
+    top: -1px !important;
+    right: 10px;
+}
+.inventory-manage .ipt-title  .column3{
+    width: 33.3%;
+    float: left;
+    text-align: center;
+}
+.inventory-manage .ipt-title  .column4{
+    width: 25%;
+    float: left;
+    text-align: center;
+}
+
+.inventory-manage .ipt-row{
+    line-height: 50px;
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid #F5F5F5;
+}
+.inventory-manage .spec-content{
+    height: 300px;
+    overflow-y:
+    auto;width: 100%;
+}
+.inventory-manage .ipt-row > div:first-child{
+    width: 50%;
+    float: left;
+    text-align: left;
+    padding-left: 50px;
+}
+.inventory-manage .ipt-row > div:nth-child(2){
+    width: 50%;
+    float: left;
+    text-align: right;
+    padding-right: 100px;
+}
+.inventory-manage .ipt-row ul li .column3{
+    width: 33.3%;
+    float: left;
+    text-align: center;
+}
+.inventory-manage .ipt-row ul li input{
+    width: 60px;
+    height: 30px;
+    border-color: #eee;
+    text-align: center;
+    cursor: pointer;
+}
+.inventory-manage .ipt-row ul li .column4{
+    width: 25%;
+    float: left;
+    text-align: center;
+}
+
+.inventory-manage .ipt-row ul li > div:first-child{
+    padding-left: 80px;
+    text-align: left;
+}
+
+.inventory-init .advance-search {
+    padding-bottom: 1.9%;
+    border-bottom: 1px solid #F5F5F5;
+    margin-bottom: 1.3%;
+}
+/*库存初始化end*/
+/*上传配置*/
+.inventory-manage .upload-config .advance-search .item input{
+    display: inline-block;
+    margin: 0 40px 0 20px;
+}
+.inventory-manage .upload-config .advance-search .ipt{
+    margin-bottom: 0px;
+}
+.inventory-manage .upload-config .advance-search {
+    padding-bottom: 25px;
+}
+.inventory-manage .upload-config .advance-search .oprate span{
+    cursor: pointer;
+    margin-right: 10px;
+}
+.inventory-manage .upload-config .advance-search .oprate{
+    margin-top: 0;
+    line-height: 40px;
+}
+.inventory-manage .upload-config .top-table .item{
+    margin-right: 25px;
+}
+.inventory-manage .upload-config .top-table .item span{
+    margin-left: 15px;
+    font-size: 14px;
+    color: #7F7F7F;
+    letter-spacing: 0;
+}
+.inventory-manage  .left-table{
+    float: left;
+    width: 60%;
+    overflow: auto;
+    height: 100%;
+}
+.inventory-manage .right-table{
+    float: right;
+    width: 40%;
+    overflow: auto;
+    background: #FBFDFB;
+    border: 1px solid #F5F5F5;
+    padding-bottom: 20px;
+    height: 100%;
+}
+.inventory-manage .upload-config .right-table .title{
+    padding: 19px 10px;
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 0;
+}
+.inventory-manage .upload-config .right-table .items{
+    padding: 19px 20px;
+    font-size: 12px;
+    color: #999999;
+    letter-spacing: 0;
+}
+.inventory-manage .upload-config .right-table .items .item{
+    margin-right: 25px;
+}
+.inventory-manage .upload-config .right-table .items .item .text{
+    color: #2A2A2A;
+    margin-left: 6px;
+}
+.inventory-manage .upload-config .express-tabel{
+    margin: 0 auto;
+    width: calc(100% - 20px);
+}
+.inventory-manage .upload-config .express-tabel thead tr{
+    background: #F0F7F0;
+    font-size: 12px;
+    color: #666666;
+    letter-spacing: 0;
+    height: 38px;
+}
+.inventory-manage .upload-config .express-tabel tbody tr{
+    background: #FBFDFB;
+    height: 48px;
+    border-bottom: 1px solid #F5F5F5;
+}
+.inventory-manage .upload-config .express-tabel tbody tr:last-child{
+    border-bottom: none;
+}
+
+.inventory-manage .upload-config .express-tabel.contact-table tbody tr:last-child{
+    border-bottom: 1px solid #F5F5F5;
+}
+/*上传配置end*/
+
+/*入库订单*/
+.inventory-manage .in-order .top-table{
+    text-align: right;
+}
+.inventory-manage .in-order .advance-search .items .item input.klw-input.start-time{
+    margin-right: 0;
+}
+.inventory-manage .in-order .advance-search .items .item input.klw-input.start-time,
+.inventory-manage .in-order .advance-search .items .item input.klw-input.end-time{
+    display: inline-block;
+    margin-top: 0;
+}
+.inventory-manage .in-order .advance-search .list .title{
+    width: 97px;
+    float: left;
+}
+.inventory-manage .in-order .advance-search .list>.line{
+    width: calc(100% - 97px);
+    float: left;
+}
+.inventory-manage .in-order .advance-search .list .items{
+    width: 84%;
+    float: left;
+}
+.inventory-manage .in-order .advance-search .list .im-check-box .items{
+    width: 100%;
+}
+.inventory-manage .in-order .advance-search .list .right-btn{
+    width: 16%;
+    float: right;
+    text-align: right;
+}
+.inventory-manage .in-order .advance-search .list .list-search{
+    margin-bottom: 10px;
+}
+.inventory-manage .in-order .advance-search .list .list-search .item {
+    margin-right: 10px;
+    cursor: pointer;
+    color: #666666;
+    padding: 0;
+}
+.inventory-manage .in-order .advance-search .list .list-search .title{
+    color: #C5C5C5;
+    width: auto;
+    margin-right: 30px;
+}
+.inventory-manage .in-order .advance-search .list .klw-search{
+    margin-bottom: 20px;
+}
+/*入库订单end*/
+
+.inventory-manage .in-order-add {
+    height: 100%;
+    background: #fafafa;
+    overflow: hidden;
+}
+.inventory-manage .in-order-add .purchase-content {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: #FFFFFF;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.05);
+    border-radius: 6px;
+    position: relative;
+}
+.inventory-manage .in-order-add .purchase-content > div {
+    margin: 0 30px;
+}
+.inventory-manage .in-order-add .klw-input {
+    width: 100%;
+}
+.inventory-manage .in-order-add .ml {
+    margin-left: 20px;
+}
+.inventory-manage .in-order-add .mt {
+    margin-top: 20px;
+}
+.inventory-manage .in-order-add .mr {
+    margin-right: 20px;
+}
+.inventory-manage .in-order-add .pr {
+    position: relative;
+}
+.inventory-manage .in-order-add .btn {
+    padding:0;
+    box-sizing: content-box;
+}
+/*导出图标*/
+.inventory-manage .in-order-add .exportBtn i:before {
+    content: '\e605';
+}
+.inventory-manage .in-order-add .purchase-content .disabled {
+    color: #CDCDCD;
+}
+.inventory-manage .in-order-add .purchase-content .disabled:hover {
+    background: #fff;
+    color: #CDCDCD;
+}
+.inventory-manage .in-order-add div[class='klwk-check'] {
+    display: inline-block;
+    position: relative;
+    top:3px;
+}
+.inventory-manage .in-order-add table div[class='klwk-check'] {
+    top: 0;
+}
+/*批量操作图标*/
+.inventory-manage .in-order-add .batch {
+    font-size: 12px;
+    position: absolute;
+    top:4px;
+    right:18px;
+    color: #E6E6E6;
+}
+/*下拉列表图标*/
+.inventory-manage .in-order-add .select {
+    font-size: 12px;
+    color: #D9D9D9;
+}
+/*必填字段*/
+.inventory-manage .in-order-add .important {
+    color: red;
+    margin-left: 5px;
+}
+/*新增按钮自定义*/
+.inventory-manage .in-order-add .green-btn {
+    border: 1px solid #54B254;
+    font-size: 14px;
+    color: #54B254;
+    letter-spacing: 1px;
+}
+.inventory-manage .in-order-add .green-btn i {
+    opacity: 0.3;
+    color: #59AF51;
+}
+.inventory-manage .in-order-add .green-btn:hover{
+    background: #F9FFFA;
+}
+.inventory-manage .in-order-add .green-btn:active{
+    background: #DFF7E2;
+}
+/*操作自定义*/
+.inventory-manage .in-order-add .operation .sewvtop{
+    border: 0;
+}
+.inventory-manage .in-order-add .operation .one {
+    width: 100px;
+    text-align: left;
+    left: 50%;
+    top: 32px;
+    margin-left: -50px;
+    display: none;
+}
+.inventory-manage .in-order-add .operation:hover .one {
+    display: block;
+}
+.inventory-manage .in-order-add .operation i{
+    color: #D8D8D8;
+}
+.inventory-manage .in-order-add .sewvtop > input {
+    border: 0;
+    display: inline-block;
+    width: 80%;
+    white-space: pre;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 38px;
+    color: #666;
+    padding: 0 5px;
+    vertical-align: middle;
+    padding-left: 10px;
+}
+
+/*头部公共样式 start*/
+.inventory-manage .in-order-add  .purchase-header {
+    padding: 30px 0;
+    position: relative;
+    border-bottom: 1px solid #EEEEEE;
+}
+/*tab栏*/
+.inventory-manage .in-order-add  .header-tab {
+    height: 61px;
+    padding-left: 50px;
+    background: #FFFFFF;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.05);
+    border-radius: 6px 6px 0 0;
+}
+.inventory-manage .in-order-add  .header-tab li{
+    float: left;
+    width: 118px;
+    height: 61px;
+    line-height: 61px;
+    font-size: 14px;
+    color: #999999;
+    letter-spacing: 1px;
+    margin-right: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+.inventory-manage .in-order-add  .header-tab li.current {
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 1.14px;
+    border-bottom: 4px solid #3FA248;
+}
+.inventory-manage .in-order-add .purchase-content .detail {
+    margin: 0;
+}
+.inventory-manage .in-order-add .purchase-content .detail .purchase-header {
+    padding: 0;
+}
+.inventory-manage .in-order-add .purchase-content .detail .purchase-body {
+    margin:0 30px;
+}
+/*表单格式化*/
+.inventory-manage .in-order-add  .advanced-search {
+    margin-left: 15px;
+    font-size: 12px;
+    color: #999999;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.inventory-manage .in-order-add .row {
+    position: relative;
+    margin: 0;
+}
+.inventory-manage .in-order-add .even {
+    margin-bottom: 30px;
+}
+.inventory-manage .in-order-add .odd {
+    margin-bottom: 16px;
+}
+.inventory-manage .in-order-add .row label {
+    margin-right: 15px;
+    font-size: 12px;
+    color: #666666;
+    letter-spacing: 0;
+    font-weight: normal;
+}
+.inventory-manage .in-order-add .column:first-child {
+    margin: 0;
+}
+.inventory-manage .in-order-add .column {
+    float: left;
+    width: 23.5%;
+    margin-left: 2%;
+}
+.inventory-manage .in-order-add .column > span {
+    font-size: 14px;
+    color: #B3B3B3;
+    letter-spacing: 1px;
+    line-height: 30px;
+}
+.inventory-manage .in-order-add .column > span > i {
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 1px;
+    line-height: 30px;
+    font-style: normal;
+    padding-left: 20px;
+}
+.inventory-manage .in-order-add .remark label {
+    display: block;
+    margin-bottom: 16px;
+}
+.inventory-manage .in-order-add .remark textarea {
+    width: 100%;
+    height: 100px;
+    font-size:14px;
+    padding: 15px;
+    resize: none;
+    border: 1px solid #ebebeb;
+    border-radius: 4px;
+}
+/*制单时间*/
+.inventory-manage .in-order-add .input-time label {
+    display: inline-block;
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 0;
+    width: 60px;
+}
+.inventory-manage .in-order-add  .line {
+    display: inline-block;
+    width: 15px;
+    height: 1px;
+    background: #f0f0f0;
+    margin: 3px 23px;
+}
+.inventory-manage .in-order-add .input-time input {
+    width: 230px;
+    height: 40px;
+    margin: 0 10px;
+    background: url('../../images/time%20icon.svg') no-repeat 190px;
+}
+/*高级搜索更多*/
+.inventory-manage .in-order-add .purchase-header.search-top {
+    margin-top: 42px;
+}
+.inventory-manage .in-order-add div.is-select {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    padding: 5px 0 10px 31px;
+    box-shadow: 0 2px 3px #eeeeee;
+    border: 0;
+    margin: 0;
+    height: 50px;
+}
+.inventory-manage .in-order-add .is-select > span {
+    line-height:45px;
+    color: #c5c5c5;
+    width: 55px;
+    float: left;
+}
+.inventory-manage .in-order-add .is-select .select-box {
+    min-width: 160px;
+    height: 30px;
+    display: inline-block;
+    border: 1px solid #F0F0F0;
+    border-radius: 3px;
+    line-height: 28px;
+    font-size: 10px;
+    padding: 0 10px;
+    margin-right: 10px;
+    margin-top: 7px;
+    color: #999999;
+    float: left;
+}
+.inventory-manage .in-order-add .is-select .select-title {
+    float: left;
+    margin-right: 4px;
+}
+.inventory-manage .in-order-add .is-select .select-content {
+    width: 67px;
+    display: inline-block;
+    color: #2A2A2A;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.inventory-manage .in-order-add .is-select .icon-icon_guanbisousuo {
+    float: right;
+    color: #d9d9d9;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 30px;
+}
+.inventory-manage .in-order-add .advanced-search {
+    margin-left: 15px;
+    font-size: 12px;
+    color: #999999;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.inventory-manage .in-order-add .search-check {
+    border-bottom: 1px dashed #EEEEEE;
+    line-height: 47px;
+    position: relative;
+}
+.inventory-manage .in-order-add .search-check label {
+    margin-right: 46px;
+    font-weight: normal;
+    position: absolute;
+}
+.inventory-manage .in-order-add .search-check > div {
+    padding-left: 100px;
+}
+.inventory-manage .in-order-add .search-check .enums {
+    margin-top: 20px;
+}
+.inventory-manage .in-order-add .search-check .singleWord {
+    color: #666;
+    cursor: pointer;
+    margin-left: 12px;
+}
+.inventory-manage .in-order-add .search-check .search-letter {
+    margin-right:31px;
+    color: #C5C5C5;
+}
+.inventory-manage .in-order-add .search-after .others-btn {
+    position: absolute;
+    top: -2px;
+    right:0;
+    z-index: 2;
+}
+.inventory-manage .in-order-add .more-footer-btn {
+    margin-bottom: 20px;
+}
+.inventory-manage .in-order-add .search-check span.current {
+    color: #469F45;
+}
+.inventory-manage .in-order-add .search-check span {
+    margin-left: 6px;
+    font-size: 12px;
+    color: #666666;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.inventory-manage .in-order-add .search-check .check-span {
+    color: #666;
+    margin-right: 40px;
+}
+.inventory-manage .in-order-add  .search-before-btn {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+.inventory-manage .in-order-add  .search-after-btn {
+    margin-top:15px;
+}
+/*头部公共样式 end*/
+
+
+/*主体内容公共样式 start*/
+.inventory-manage .in-order-add .purchase-body {
+    position: relative;
+    padding-top: 40px;
+}
+.inventory-manage .in-order-add .body-table {
+    position: relative;
+    height: 650px;
+    overflow: scroll;
+}
+.inventory-manage .in-order-add .detail-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.inventory-manage .in-order-add .detail-title h5{
+    font-size: 20px;
+    color: #666666;
+    letter-spacing: 0;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+.inventory-manage .in-order-add .add-title {
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 0;
+    margin: 30px 0;
+}
+.inventory-manage .in-order-add .add-title span {
+    display: block;
+    font-size: 14px;
+    color: #999999;
+}
+/*列表配置*/
+.inventory-manage .in-order-add .configuration {
+    position: absolute;
+    top: 5px;
+    right: 30px;
+}
+/*操作*/
+.inventory-manage .in-order-add .oprate{
+    position: relative;
+}
+.inventory-manage .in-order-add .oprate:hover .oprate-list{
+    display: block;
+}
+.inventory-manage .in-order-add .tr-icon{
+    line-height: 56px;
+    cursor: pointer;
+}
+.inventory-manage .in-order-add .oprate-list{
+    position: absolute;
+    left: 0;
+    top: 42px;
+    border: 1px solid #F5F5F5;
+    box-shadow: 0 5px 20px 0 rgba(0,0,0,0.10);
+    border-radius: 4px;
+    width: 114px;
+    display: none;
+    background: #ffffff;
+    z-index: 500;
+    max-height: 200px;
+    overflow: auto;
+}
+.inventory-manage .in-order-add .oprate-list li{
+    list-style: none;
+    padding: 10px 5px;
+    text-align: left;
+    color: #666666;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.inventory-manage .in-order-add .oprate-list li .disabled{
+    background: #cdcdcd;
+}
+.inventory-manage .in-order-add .oprate-list li:hover{
+    background: #FAFAFA;
+}
+.inventory-manage .in-order-add button.detail {
+    margin-top:20px;
+}
+.inventory-manage .in-order-add button.calculate {
+    position: absolute;
+    top: 46px;
+    right: 20px;
+}
+/*主体内容公共样式 end*/
+
+
+/*模态框公共样式 start*/
+.inventory-manage .in-order-add .cj-modal {
+    top: 200px;
+    background: transparent;
+    overflow: hidden;
+}
+.inventory-manage .in-order-add .modal-content {
+    width: 400px;
+    background: #FFFFFF;
+    box-shadow: 0 5px 20px 0 rgba(0,0,0,0.05);
+    border-radius: 6px;
+}
+.inventory-manage .in-order-add .modal-content.modal-600 {
+    width: 600px;
+}
+.inventory-manage .in-order-add .modal-header {
+    height: 50px;
+    padding: 12px 30px;
+    border-bottom: 1px solid #EEEEEE;
+}
+.inventory-manage .in-order-add .modal-header h4 {
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 0.89px;
+    vertical-align: middle;
+}
+.inventory-manage .in-order-add .modal-body{
+    margin: 30px 50px;
+}
+.inventory-manage .in-order-add .modal-column {
+    margin-bottom: 22px;
+}
+.inventory-manage .in-order-add .remind-text {
+    display: inline-block;
+    height: 48px;
+    line-height:48px;
+    font-size: 12px;
+    color: #999999;
+    letter-spacing: 0.85px;
+    width: 100%;
+    text-align: center;
+}
+.inventory-manage .in-order-add .modal-column:last-child{
+    margin: 0;
+}
+.inventory-manage .in-order-add .modal-column label{
+    font-size: 12px;
+    color: #999999;
+    font-weight: normal;
+    letter-spacing: 0;
+    margin-bottom: 16px;
+}
+.cj-modal .modal-footer {
+    height: 70px;
+    padding: 0;
+    line-height: 70px;
+    text-align: center;
+    border-top: 1px solid #EEEEEE;
+}
+.inventory-manage .in-order-add .product-list .modal-lg{
+    right: 0;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    bottom: 0;
+    top: 0;
+    width: 750px;
+}
+.inventory-manage .in-order-add .modal.product-list{
+    top : 0;
+}
+.inventory-manage .in-order-add .product-list .modal-content{
+    height: 100%;
+    border-radius: 0;
+    overflow: scroll;
+    width: 100%;
+}
+.inventory-manage .in-order-add .product-list .product-head{
+    width: 100%;
+    height: 54px;
+    border-bottom: 1px solid #eeeeee;
+    padding: 0 30px;
+}
+.inventory-manage .in-order-add .product-list .product-head .product-title{
+    float: left;
+    height: 100%;
+    line-height: 54px;
+    color: #666666;
+    font-size: 14px;
+}
+.inventory-manage .in-order-add .product-list .product-head .product-close{
+    float: right;
+    height: 100%;
+    line-height: 54px;
+    color: #CDCDCD;
+    font-size: 14px;
+}
+.inventory-manage .in-order-add .product-list .product-body{
+    padding: 25px 30px;
+}
+.inventory-manage .in-order-add .product-list .product-body .row .column{
+    width: 32%;
+}
+.inventory-manage .in-order-add .product-list .product-body .date input {
+    width: 30%;
+}
+.inventory-manage .in-order-add .product-list .body-table {
+    height:100%;
+}
+.inventory-manage .in-order-add .product-list .product-body .page-list {
+    min-width: 600px;
+}
+.inventory-manage .in-order-add .product-list .product-body .page-total {
+    margin-left: 5%;
+}
+.inventory-manage .in-order-add .product-list .product-body .page-list .page-container {
+    width: 100%;
+}
+/*模态框公共样式 end*/
+
+/*新增界面公共样式 start*/
+.inventory-manage .in-order-add  .add-input {
+    margin-top: 25px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #EEEEEE;
+}
+.inventory-manage .in-order-add .new-header {
+    margin-bottom:20px;
+}
+.inventory-manage .in-order-add .add-after-btn {
+    position: absolute;
+    top: -6px;
+    right: 0;
+}
+.inventory-manage table tbody  tr.current {
+    background: #FBFDFB;
+}
+.inventory-manage .in-order-add .left-table {
+    width: 70%;
+    float: left;
+}
+.inventory-manage .in-order-add .right-table {
+    width: 30%;
+    height: 100%;
+    float: right;
+    background: #FBFDFB;
+    border: 1px solid #F5F5F5;
+    padding: 10px 18px;
+    overflow: auto;
+}
+.inventory-manage .in-order-add .right-table thead td{
+    background: #DCECDC;
+    font-size: 12px;
+}
+.inventory-manage .in-order-add .right-table tr {
+    height: 48px;
+}
+.inventory-manage .in-order-add .right-table tbody tr {
+    border-bottom: 1px solid #EEE;
+    background: #FBFDFB;
+}
+.inventory-manage .in-order-add .explain {
+    height: 180px;
+    background: #FBFBFB;
+    padding: 32px 30px;
+    margin-bottom: 20px;
+}
+.inventory-manage .in-order-add .explain h5 {
+    margin:0 0 15px 0;
+}
+.inventory-manage .in-order-add .explain span {
+    display: block;
+    font-size: 14px;
+    color: #B3B3B3;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+.inventory-manage .in-order-add .lModule .column {
+    width: 49%;
+    position: relative;
+}
+.inventory-manage .in-order-add .lModule span{
+    font-size: 14px;
+    color: #2A0000;
+    letter-spacing: 1px;
+    line-height: 35px;
+    padding-left: 16px;
+}
+.inventory-manage .in-order-add .lModule span i {
+    color: #66A9FD;
+    margin-right: 5px;
+    cursor: pointer;
+    font-style: normal;
+}
+.inventory-manage .in-order-add .lModule .column i:before {
+    position: absolute;
+    right: 25px;
+    top: 8px;
+    content: "\e669";
+    color: #d9d9d9;
+}
+.inventory-manage .in-order-add .purchase-content .add-footer {
+    margin: 60px 30px;
+    padding-top: 20px;
+    border-top: 1px solid #EEEEEE;
+}
+.inventory-manage .in-order-add .purchase-content .btn-success {
+    color: #FFFFFF;
+    background: #4DB556;
+    border-radius: 4px;
+}
+.inventory-manage .in-order-add .purchase-content .btn.btn-success:hover {
+    background: #3FA248;
+    color: #FFFFFF;
+}
+
+.inventory-manage .in-order-add .purchase-content .btn-success:focus, .btn-success:active {
+    background: #3FA248;
+    box-shadow: inset 0 5px 10px 0 rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    color: #FFFFFF;
+}
+
+
+/* 出库订单 start*/
+.inventory-manage .out-order .top-table{
+    text-align: right;
+}
+.inventory-manage .out-order .advance-search .items .item input.klw-input.start-time{
+    margin-right: 0;
+}
+.inventory-manage .out-order .advance-search .items .item input.klw-input.start-time,
+.inventory-manage .out-order .advance-search .items .item input.klw-input.end-time{
+    display: inline-block;
+    margin-top: 0;
+}
+.inventory-manage .out-order .advance-search .list .title{
+    width: 97px;
+    float: left;
+}
+.inventory-manage .out-order .advance-search .list>.line{
+    width: calc(100% - 97px);
+    float: left;
+}
+.inventory-manage .out-order .advance-search .list .items{
+    width: 84%;
+    float: left;
+}
+.inventory-manage .out-order .advance-search .list .im-check-box .items{
+    width: 100%;
+}
+.inventory-manage .out-order .advance-search .list .right-btn{
+    width: 16%;
+    float: right;
+    text-align: right;
+}
+.inventory-manage .out-order .advance-search .list .list-search{
+    margin-bottom: 10px;
+}
+.inventory-manage .out-order .advance-search .list .list-search .item {
+    margin-right: 10px;
+    cursor: pointer;
+    color: #666666;
+    padding: 0;
+}
+.inventory-manage .out-order .advance-search .list .list-search .title{
+    color: #C5C5C5;
+    width: auto;
+    margin-right: 30px;
+}
+.inventory-manage .out-order .advance-search .list .klw-search{
+    margin-bottom: 20px;
+}
+/* 出库订单 end*/
+
+/*新增界面公共样式 end*/
+
+.inventory-manage #getProductSpecTable .table_tr_selected{
+    background: #FBFDFB;
+}

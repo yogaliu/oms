@@ -1,0 +1,1085 @@
+/*订单列表*/
+#orderList{
+    position: relative;
+}
+#orderList .fr .btn{
+    width: 133px!important;
+}
+#orderList .content li{
+    padding-left: 10px!important;
+}
+.orderList .blue {
+    color: #67A9FD;
+    cursor: pointer;
+}
+
+.orderList .red {
+    color: #F13A30;
+    cursor: pointer;
+}
+
+.orderList .yellow {
+    color: #F08C1B;
+    cursor: pointer;
+}
+
+#orderList .footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#orderList .time-chose{
+    margin-bottom: 20px;
+}
+
+#orderList #simpleSearch .fr > div:not(:last-child) {
+    margin-right: 10px;
+    width: 210px;
+}
+
+/*订单列表   end */
+
+/*新增订单*/
+
+/*店铺信息*/
+#addOrder .store-message {
+    padding-top: 15px;
+}
+#addOrder .store-chose{
+    width: 100%;
+    height: 71px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eeeeee;
+}
+#addOrder .store-title{
+    width: 100px;
+    height: 100%;
+    float: left;
+}
+#addOrder .store-list{
+    width: 322px;
+    height: 100%;
+    float: left;
+}
+#addOrder .store-message h3 {
+    float: left;
+    font-size: 16px;
+    font-weight: normal;
+    color: #666;
+    line-height: 40px;
+}
+
+#addOrder .store-message .storeSearch {
+    float: left;
+    margin-left: 20px;
+    width: 200px;
+}
+
+#addOrder .store-message .storeSearch .sewvtop {
+    width: 322px;
+}
+
+/*订单信息*/
+#addOrder .merchandise-message .merchandiseBatchLeadBtn {
+    width: 125px;
+}
+
+#addOrder .greenButton {
+    color: #59AF51;
+    border: 1px solid #54B254;
+}
+
+/*商品信息之有商品*/
+#addOrder .pay-detail .hasPayDetail,
+#addOrder .receive-message .hasReceive,
+#addOrder .invoice-detail .hasInvoice {
+    margin-top: 30px;
+    overflow: hidden;
+    font-size: 14px;
+}
+
+#addOrder .receive-message .hasReceive .receiveAddress {
+    width: 100%;
+    margin-top: 15px;
+}
+
+/*新增订单  end  */
+
+/*订单详情*/
+#orderDetail .jxmessage{
+    border-bottom: 1px solid #eee;
+    padding: 0 0 40px 20px;
+    margin: 30px 30px 0 50px;
+}
+#orderDetail .rowsText {
+    font-size: 14px;
+}
+
+#orderDetail .detail-top-operation-btn {
+    float: right;
+}
+
+#orderDetail .detail-top-operation-btn i.iconfont {
+    color: #E6E6E6;
+    margin-right: 8px;
+}
+
+#orderDetail .detail-top-operation-btn .detail-top-operation-more i.iconfont {
+    margin-left: 8px;
+    margin-right: 0;
+}
+
+#orderDetail .detail-top-operation-btn li {
+    width: 101px;
+    border-left: 1px solid #EEEEEE;
+    cursor: pointer;
+    float: left;
+    line-height: 61px;
+    text-align: center;
+    font-size: 14px;
+    color: #999999;
+}
+
+#orderDetail .detail-top-operation-btn .reset-state {
+    width: 127px;
+}
+
+#orderDetail .operation-more-btn {
+    width: 263px;
+    height: 191px;
+    position: absolute;
+    top: 55px;
+    right: 10px;
+    background: #FFFFFF;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.10);
+    z-index: 1;
+}
+
+#orderDetail .operation-more-btn > span {
+    display: inline-block;
+    width: 100%;
+    height: 64px;
+    text-align: center;
+    line-height: 64px;
+    border-bottom: 1px solid #F5F5F5;
+    font-size: 14px;
+    color: #7F7F7F;
+    letter-spacing: 1px;
+}
+
+#orderDetail .operation-more-btn > span.current {
+    color: #3FA248;
+}
+
+#orderDetail .operation-more-btn i.triangle {
+    left: 206px;
+}
+
+#orderDetail .detail-content-bottom {
+    margin-top: 35px;
+}
+
+#orderDetail .bottom-title {
+    text-align: center;
+}
+
+#orderDetail .bottom-title h5 {
+    display: inline;
+    font-size: 20px;
+    color: #666666;
+    letter-spacing: 1px;
+}
+
+#orderDetail .store-number {
+    display: block;
+    font-size: 14px;
+    color: #999999;
+    letter-spacing: 1px;
+    padding-top: 5px;
+}
+
+#orderDetail .bottom-order-process {
+    margin: 35px 70px 0;
+    height: 100px;
+}
+
+#orderDetail .bottom-order-process li {
+    float: left;
+    width: 23%;
+    height: 60px;
+    position: relative;
+    margin-right: 2%;
+}
+
+#orderDetail .bottom-order-process li > span {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 24px;
+    background: #FFFFFF;
+    text-align: center;
+    line-height: 60px;
+    color: #cccccc;
+    border: 1px solid #F0F0F0;
+}
+
+#orderDetail .bottom-order-process li > span.current {
+    background: #F4FFF4;
+    border: 1px solid #96E086;
+    color: #96E086;
+}
+
+#orderDetail .bottom-order-process li > div {
+    display: inline-block;
+    width: 100%;
+    height: 60px;
+    padding-left: 74px;
+    position: absolute;
+    top: 2px;
+    right: 0;
+}
+
+#orderDetail .bottom-order-process li > div > div:nth-child(1) {
+    padding-bottom: 6px;
+}
+
+#orderDetail .bottom-order-process li > div > div:nth-child(3) {
+    padding-top: 6px;
+}
+
+#orderDetail .order-process-line {
+    height: 1px;
+    background: #F0F0F0;
+}
+
+#orderDetail .order-process-line.current {
+    background: #96E086;
+}
+
+#orderDetail .bottom-commodity-table {
+    margin: 0 30px;
+    border-bottom: 1px solid #EEEEEE;
+    overflow: scroll;
+}
+
+#orderDetail table {
+    width: 100%;
+}
+
+#orderDetail table th {
+    height: 58px;
+}
+
+#orderDetail .commodity-select {
+    width: 5%;
+}
+
+#orderDetail .commodity-operation {
+    width: 5%;
+}
+
+#orderDetail .commodity-name {
+    width: 15%;
+}
+
+#orderDetail .commodity-coding {
+    width: 15%;
+}
+
+#orderDetail .specification-coding {
+    width: 12%;
+}
+
+#orderDetail .specification-name {
+    width: 10%;
+}
+
+#orderDetail .commodity-count {
+    width: 10%;
+}
+
+#orderDetail .commodity-money {
+    width: 8%;
+}
+
+#orderDetail .commodity-total-money {
+    width: 10%;
+}
+
+#orderDetail .commodity-favorable-money {
+    width: 10%;
+}
+
+#orderDetail .bottom-commodity-btn {
+    margin: 30px 0 40px 20px;
+}
+
+#orderDetail .bottom-commodity-btn select {
+    width: 133px;
+    height: 40px;
+}
+
+#orderDetail .bottom-commodity-btn > div {
+    margin-right: 20px;
+}
+
+#orderDetail .info-content .row {
+    margin-bottom: 5px;
+}
+
+#orderDetail .info-content .row .col-sm-3 {
+    padding-right: 0;
+}
+
+#orderDetail .receiving-information,
+#orderDetail .invoice-details {
+    position: relative;
+}
+
+#orderDetail .modify-address {
+    position: absolute;
+    top: -15px;
+    right: 0;
+}
+
+#orderDetail .btn-ensure {
+    background: #FFFFFF;
+    height: 40px;
+    font-size: 14px;
+    color: #59AF51;
+    letter-spacing: 1px;
+    border: 1px solid #54B254;
+    border-radius: 4px;
+}
+
+#orderDetail .invoice-details-btn {
+    position: absolute;
+    right: 0;
+    top: -13px;
+
+}
+
+#orderDetail .invoice-details-btn > div {
+    float: left;
+    box-sizing: content-box;
+}
+
+#orderDetail .invoice-details-btn .add-invoice-details {
+    margin-right: 20px;
+}
+
+#orderDetail .transportation-information-second,
+#orderDetail .operational-logbook-third {
+    padding-bottom: 20px;
+}
+
+#orderDetail .distribution-information,
+#orderDetail .distribution-detail,
+#orderDetail .express-detail,
+#orderDetail .wms-status {
+    position: relative;
+    margin: 0 30px;
+}
+
+#orderDetail .transportation-information-second > div > h5 {
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 1.14px;
+    margin: 40px 0 25px 0;
+    padding-left: 15px;
+}
+
+#orderDetail .transportation-information-second > div > table {
+    margin: 14px;
+}
+
+#orderDetail .operational-logbook-third {
+    margin: 30px;
+}
+
+#orderDetail .close-distribution {
+    position: absolute;
+    right: 0;
+    top: -15px;
+}
+#orderDetail .label-select{
+    width: 140px;
+    float: left;
+}
+
+/*订单详情  end */
+
+/*快递签收*/
+#expressGet .textsewv1 .sewvtop > span {
+    width: 88px;
+}
+
+/*快递签收  end*/
+
+/*新增快递签收单*/
+#addExpressGetBill .addBill {
+    color: #666;
+    padding-bottom: 20px;
+    margin-top: 10px!important;
+}
+
+
+#addExpressGetBill .noBorderMessage .tableOut{
+    max-height: 400px;
+    overflow: scroll;
+}
+
+#addExpressGetBill .addBill .input88 input {
+    width: 88px;
+    height: 40px;
+    color: #666;
+}
+
+#addExpressGetBill .addBill h3.addTitle {
+    float: left;
+    margin-top: 12px;
+}
+
+#addExpressGetBill .addBill .fr div {
+    float: left;
+    line-height: 40px;
+    margin-left: 10px;
+}
+
+#addExpressGetBill .addBill .port input {
+    width: 140px;
+    height: 40px;
+}
+
+#addExpressGetBill .alreadyScan {
+    font-size: 14px;
+    color: #999;
+    margin-top: 15px;
+}
+
+#addExpressGetBill .alreadyScan .number {
+    font-size: 16px;
+    color: #666;
+    margin-left: 10px;
+}
+
+#addExpressGetBill .noBorderMessage {
+    border: 0;
+}
+
+#addExpressGetBill .sewvtop {
+    width: 140px;
+    height: 40px;
+}
+
+#addExpressGetBill .sewvtop > span {
+    vertical-align: inherit;
+    padding-left: 20px;
+}
+
+#addExpressGetBill .sewvtop > i {
+    position: relative;
+    top: -16px;
+}
+
+#addExpressGetBill .sewvbm {
+    width: 140px;
+    left: 10px;
+}
+
+/*快递签收单 end */
+
+/*售后申请*/
+#afterMarketApply .textsewv1 .sewvtop > span {
+    width: 88px;
+}
+#afterMarketApply .select-div{
+    width: 200px;
+}
+
+/*售后申请 end*/
+
+/*退货扫描*/
+#quitGoodsScan .content-top {
+    padding: 13px 0;
+    border-bottom: 1px solid #eee;
+}
+
+#quitGoodsScan .content-top .btn {
+    height: 40px;
+}
+
+#quitGoodsScan .content-top .icon-refreshBtn {
+    width: 93px;
+}
+
+#quitGoodsScan .content-top .icon-refreshBtn i {
+    margin-right: 5px;
+}
+
+#quitGoodsScan .content-left {
+    width: 25%;
+    border-right: 1px solid #eee;
+}
+
+#quitGoodsScan .content-left > div {
+    width: 90%;
+    margin: 20px 0;
+}
+
+#quitGoodsScan .content-left > div > input,
+#quitGoodsScan .content-left > div > textarea {
+    width: 100%;
+}
+
+#quitGoodsScan .content-left > div .goodsImg {
+    height: 50px;
+    background: #FAFAFA;
+}
+
+#quitGoodsScan .content-right {
+    width: 75%;
+}
+
+#quitGoodsScan .content-right .content-content {
+    padding-top: 20px;
+    padding-left: 20px;
+    width: 50%;
+    height: 325px;
+}
+
+#quitGoodsScan .content-right .title {
+    margin-bottom: 8px;
+}
+
+#quitGoodsScan .content-right .title span {
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 1px;
+}
+
+#quitGoodsScan .content-right .title span.exchange {
+    color: #40ABEF;
+    cursor: pointer;
+}
+
+#quitGoodsScan .content-right .content-content .tableOut {
+    overflow: scroll;
+    max-height: 200px;
+}
+
+#quitGoodsScan .content-right .content-content table {
+    width: 800px;
+}
+
+#quitGoodsScan .content-right .content-content table tr {
+    height: 48px;
+}
+
+#quitGoodsScan .content-right .content-content .tableFooter {
+    height: 48px;
+    line-height: 48px;
+    color: #999;
+    font-size: 14px;
+}
+
+#quitGoodsScan .content-right .content-content .tableFooter span {
+    color: #666;
+}
+
+#quitGoodsScan .content-right .content-content input {
+    width: 100%;
+}
+#orderList .tableOut{
+    height: 466px;
+    overflow: scroll;
+}
+#orderList .advancedSearch .selected {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    padding : 5px 0 10px 31px;
+    box-shadow: 0 2px 3px #eeeeee;
+    border: 0;
+    margin-top: 0;
+}
+.tableOut .fht-tbody{
+    overflow: auto;
+}
+#advancedSearch .textsewv .sewvtop > i{
+    position: relative;
+    top: -14px;
+    right: 5px;
+}
+#orderList  #advancedSearch {
+    padding-top: 60px;
+}
+/*#addOrder .footer-button{*/
+    /*clear: both;*/
+/*}*/
+#addOrder .addMerchandiseDetails .addMerchandiseTable{
+    max-height: 500px;
+    float: left;
+    width: 70%;
+    overflow: scroll;
+}
+#addOrder .addMerchandiseTable{
+    height: 500px;
+    overflow: scroll;
+}
+#addOrder .wareHouseTable {
+    float: right;
+    width: 30%;
+    max-height: 500px;
+    overflow: scroll;
+    position: initial;
+    padding: 0;
+    box-shadow: 0 0 0;
+}
+#addOrder .addMerchandiseDetails .footer-button,
+#addOrder .addSuitDetails .footer-button{
+    clear: both;
+}
+#addOrder .details-del{
+    text-align: center;
+    color: #999999;
+    cursor: pointer;
+}
+#orderList .select-div .content{
+    width: 200px;
+}
+.sewvtop{
+    border: 0;
+}
+#orderList .icon-operate{
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+/*多级菜单*/
+.multilevel-menu .content{
+    display: none;
+}
+.menu-two{
+    display: none;
+}
+
+#allocationNoticeBill .select-div{
+    width: 133px;
+}
+.multilevel-menu{
+    /*width : 200px;*/
+    position: relative;
+}
+.multilevel-menu:hover .content{
+    /*display: block;*/
+}
+.multilevel-menu .content{
+    display: none;
+    position: absolute;
+    background: #ffffff;
+    z-index: 9999;
+    box-shadow: 0 5px 20px 0 rgba(0,0,0,0.10);
+}
+.multilevel-menu li{
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    padding: 0 10px;
+}
+.multilevel-menu li:hover{
+    background: #fafafa;
+}
+.multilevel-menu ul ul{
+    display: none;
+    position: absolute;
+    left: 131px;
+    top: 0;
+    width: 130px;
+    background: #ffffff;
+    box-shadow: 0 5px 20px 0 rgba(0,0,0,0.10);
+}
+.multilevel-menu li:hover ul{
+    display: block;
+}
+.multilevel-menu .content{
+    width: 130px;
+}
+#expressGet .content{
+    width: 133px;
+}
+
+/*输入框模态框*/
+.info-tip{
+    width: 400px;
+    height: 260px;
+    background: #ffffff;
+}
+.info-tip .info-tip-head{
+    width: 100%;
+    height: 50px;
+    background: #ffffff;
+}
+.info-tip .info-tip-head .info-tip-label{
+    float: left;
+    line-height: 50px;
+    padding-left: 20px;
+    font-size: 14px;
+    color: #666666;
+}
+.info-tip .info-tip-head .info-tip-close{
+    float: right;
+    line-height: 50px;
+    padding-right: 20px;
+}
+.info-tip .info-tip-head .info-tip-close .icon{
+    font-size: 12px;
+    color: #cdcdcd;
+}
+.info-tip .info-tip-body{
+    width: 100%;
+    height: 138px;
+    border-top:1px solid #eeeeee;
+    border-bottom:1px solid #eeeeee;
+}
+.info-tip-body textarea{
+    resize: none;
+    width: 100%;
+    height: 100%;
+    outline: 0;
+    border: 0;
+    padding: 20px 40px;
+}
+.info-tip .info-tip-header{
+    width: 100%;
+    height: 71px;
+    background: #ffffff;
+    margin: 0 auto;
+    padding: 16px 98px;
+    box-sizing: border-box;
+}
+
+
+/*新增退换货单*/
+
+.order-list-chose .page-total{
+    margin: 0!important;
+}
+
+#addQuitExchangeGoodsBill .order-list-chose .modal-lg,
+#orderList .order-list-chose .modal-lg,
+#orderDetail .order-list-chose .modal-lg,
+#addRefundBill .order-list-chose .modal-lg,
+#quitGoodsScan .order-list-chose .modal-lg{
+    right: 0;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    bottom: 0;
+    top: 0;
+    width: 750px;
+}
+#addQuitExchangeGoodsBill .modal,
+#orderList .modal,
+#orderDetail .modal,
+#addRefundBill .modal,
+#quitGoodsScan .modal{
+    top : 0;
+}
+#addQuitExchangeGoodsBill .modal-content,
+#orderList .modal-content,
+#orderDetail .modal-content,
+#addRefundBill .modal-content,
+#quitGoodsScan .modal-content{
+    height: 100%;
+    border-radius: 0;
+    overflow: scroll;
+}
+/*页面头部分*/
+#addQuitExchangeGoodsBill .order-list-head,
+#orderList .order-list-head,
+#orderDetail .order-list-head,
+#addRefundBill .order-list-head,
+#quitGoodsScan .order-list-head{
+    width: 100%;
+    height: 54px;
+    border-bottom: 1px solid #eeeeee;
+    padding: 0 30px;
+}
+#addQuitExchangeGoodsBill .order-list-head .order-list-title,
+#orderList .order-list-head .order-list-title,
+#orderDetail .order-list-head .order-list-title,
+#addRefundBill .order-list-head .order-list-title,
+#quitGoodsScan .order-list-head .order-list-title{
+    float: left;
+    height: 100%;
+    line-height: 54px;
+    color: #666666;
+    font-size: 14px;
+}
+#addQuitExchangeGoodsBill .order-list-head .order-list-close,
+#orderList .order-list-head .order-list-close,
+#orderDetail .order-list-head .order-list-close,
+#addRefundBill .order-list-head .order-list-close,
+#quitGoodsScan .order-list-head .order-list-close{
+    float: right;
+    height: 100%;
+    line-height: 54px;
+    color: #CDCDCD;
+    font-size: 14px;
+}
+#addQuitExchangeGoodsBill .order-list-body,
+#orderList .order-list-body,
+#orderDetail .order-list-body,
+#addRefundBill .order-list-body,
+#quitGoodsScan .order-list-body{
+    padding: 0 30px;
+}
+#addQuitExchangeGoodsBill .order-list-body .rows p,
+#addQuitExchangeGoodsBill .order-list-body .rows div,
+#addRefundBill .order-list-body .rows p,
+#addRefundBill .order-list-body .rows div,
+#orderList .order-list-body .rows p,
+#orderList .order-list-body .rows div,
+#orderDetail .order-list-body .rows p,
+#orderDetail .order-list-body .rows div,
+#quitGoodsScan .order-list-body .rows p,
+#quitGoodsScan .order-list-body .rows div{
+    width: 30%;
+}
+#addQuitExchangeGoodsBill .order-list-body .footer,
+#orderList .order-list-body .footer,
+#orderDetail .order-list-body .footer,
+#addRefundBill .order-list-body .footer,
+#quitGoodsScan .order-list-body .footer{
+    overflow: auto;
+}
+#addQuitExchangeGoodsBill .order-list-body .footer button,
+#orderList .order-list-body .footer button,
+#orderDetail .order-list-body .footer button,
+#addRefundBill .order-list-body .footer button,
+#quitGoodsScan .order-list-body .footer button{
+    float: left;
+}
+#addQuitExchangeGoodsBill .order-list-chose .order-lists,
+#orderList .order-list-chose .order-lists,
+#orderDetail .order-list-chose .order-lists,
+#addRefundBill .order-list-chose .order-lists,
+#quitGoodsScan .order-list-chose .order-lists{
+    clear: both;
+    margin-top: 20px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+
+/*新增退换货单*/
+#addQuitExchangeGoodsBill .body-table{
+    overflow: auto;
+    height: 650px;
+}
+#addQuitExchangeGoodsBill .left-table{
+    float: left;
+    width: 70%;
+    overflow: scroll;
+}
+#addQuitExchangeGoodsBill .right-table{
+    float: right;
+    width: 30%;
+    overflow: scroll;
+    height: 100%;
+}
+#addQuitExchangeGoodsBill .footer-button{
+    clear: both;
+}
+#quitGoodsScan .inner-label{
+    width: 100%;
+    height: 100px;
+    border:1px solid #ebebeb;
+}
+#quitGoodsScan img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+#orderDetail #distpicker {
+    width: 23.5%;
+    clear: both;
+}
+#orderDetail .footer-button{
+    clear: both;
+}
+#orderDetail .bottom-commodity-btn .sewv-pl{
+    width: 133px;
+    float: left;
+}
+#orderDetail .bottom-commodity-table .table-left{
+    float: left;
+    width: 70%;
+    overflow: scroll;
+}
+#orderDetail .bottom-commodity-table .table-right{
+    float: right;
+    width: 30%;
+    overflow: scroll;
+}
+#creatRefund .jxOutDiv{
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+    padding: 20px 20px 0 20px;
+    background: #ffffff;
+}
+#creatRefund .jxOutDiv .jxmessage{
+    margin-top: 0;
+    padding: 0;
+}
+
+/*弹出框选择时间*/
+.time-select .info-tip{
+    height: 215px;
+}
+.time-select .info-tip-body{
+    height: 90px;
+    padding: 22px;
+}
+.time-select .info-tip-body input{
+    background: url("../../images/time%20icon.svg") no-repeat 315px;
+}
+
+
+/*手工配货*/
+#manualDispatch{
+    width: 100%;
+    height: 100%;
+    padding: 20px 30px;
+    overflow: scroll;
+}
+#manualDispatch .content-top{
+    height: 61px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eeeeee;
+}
+#manualDispatch .table-top,
+#manualDispatch .table-bottom{
+    overflow: auto;
+}
+#manualDispatch .table-top-left,
+#manualDispatch .table-bottom-left{
+    width: 50%;
+    float: left;
+    box-sizing: border-box;
+    padding-right: 10px;
+    height: 325px;
+    overflow: scroll;
+}
+#manualDispatch .table-top-right,
+#manualDispatch .table-bottom-right{
+    width: 50%;
+    float: right;
+    box-sizing: border-box;
+    padding-left: 10px;
+    height: 325px;
+    overflow: scroll;
+}
+#manualDispatch .title{
+    margin: 8px 0;
+    font-size: 14px;
+    color:rgb(102,102,102);
+    cursor: pointer;
+}
+#manualDispatch .title i{
+    float: right;
+}
+#manualDispatch .content-bottom .match{
+    width: 133px;
+    float: left;
+    margin-right: 20px;
+}
+/*手工配货end*/
+#manualDispatch .order-details,
+#afterMarketApply .tableOut,
+#refundBill .tableOut,
+#addRefundBill .tableOut,
+#orderDetail .tableOut,
+#addQuitExchangeGoodsBill .tableOut,
+#expressGet .tableOut,
+#quitExchangeGoodsBill .tableOut{
+    overflow: scroll;
+}
+.clickDisabled{
+    cursor: not-allowed;
+    background: #fafafa;
+    color: #C5C5C5;
+    pointer-events: none;
+}
+/*手工配货模态框*/
+.manual-delal-modal .select-div{
+    width: 280px!important;
+}
+.manual-delal-modal .info-tip{
+    height: 300px;
+}
+.manual-delal-modal .info-tip-body {
+    height: 179px;
+    padding: 15px;
+}
+.manual-delal-modal .manual-express,
+.manual-delal-modal .express-no,
+.manual-delal-modal .express-weight{
+    height: 55px;
+}
+.manual-delal-modal .title{
+    height: 41px;
+    line-height: 41px;
+    float: left;
+    width: 70px;
+}
+.manual-delal-modal .select-div{
+    float: left;
+}
+.manual-delal-modal .right-value{
+    float: left;
+    width: 280px;
+}
+
+/*可操作按钮样式*/
+
+.td-can-operate{
+    color:#39A3E2;
+    cursor: pointer;
+}
+/*批量操作*/
+.batch-operate{
+    width: 133px;
+}
+/*退货扫描 end */
+/*配货通知单*/
+
+/*配货通知单 end*/
+
+/*退换货单*/
+#quitExchangeGoodsBill #simpleSearch .sewv-pl{
+    width: 200px;
+}
+/*退换货单 end*/
+
+/*退款单*/
+#refundBill #simpleSearch .sewv-pl{
+    width: 200px;
+}
+#refundBillDetail .insideTag {
+    position: relative;
+}
+#refundBillDetail .insideTag  .add-detail{
+    position: absolute;
+    right: 22px;
+    top: -15px;
+}
+#refundBillDetail .tableOut{
+    overflow: scroll;
+}
+/*退款单 end*/

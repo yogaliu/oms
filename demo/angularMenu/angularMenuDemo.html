@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en" ng-app="klwkOmsApp">
+<head>
+    <title>订单管理</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../public/css/bootstrap.css">
+    <link rel="stylesheet" href="../../public/css/layer.css">
+
+</head>
+<body>
+
+
+<style>
+    .multiMenu{
+        position: absolute;
+        top : 100px;
+        left: 200px;
+    }
+
+    .multiMenu .first_menu{
+        position: relative;
+    }
+
+    .multiMenu ul{
+        list-style: none;
+        padding-left: 0;
+    }
+    .multiMenu ul li{
+        border: 1px solid greenyellow;
+    }
+
+    .multiMenu .first_menu > ul{
+        height: 150px;
+        overflow: auto;
+    }
+
+    .multiMenu .first_menu .second_menu{
+        display: none;
+    }
+
+    .multiMenu .first_menu:hover .second_menu{
+        display: block;
+    }
+
+    .multiMenu .first_menu:hover .second_menu > ul{
+        display: none;
+    }
+
+    .multiMenu .second_menu{
+        position: absolute;
+        top: 0;
+        left: 90px;
+        width: 200px;
+        height: 200px;
+        overflow: auto;
+    }
+</style>
+
+
+
+
+<!-- 显示总的界面 -->
+<ui-view></ui-view>
+
+</body>
+<!-- 导入的基础插件，包含jquery,angularJs等 -->
+<script type="text/javascript" src="../../public/js/jquery.js"></script>
+<script type="text/javascript" src="../../public/js/base.js"></script>
+<script type="text/javascript" src="../../public/js/echarts.min.js"></script>
+<script type="text/javascript" src="../../public/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../public/js/layer.js"></script>
+<script type="text/javascript" src="../demoApp.js"></script>
+<script type="text/javascript" src="../../scripts/global/service/ApiService.js"></script>
+<script>
+
+    /**
+     * 定义常量WAP_CONFIG;WAP为当前子模块功能
+     * */
+    angular.module('klwkOmsApp')
+            .config(["$stateProvider","$urlRouterProvider",function ($stateProvider, $urlRouterProvider) {
+                // 如果没有匹配的路径，则设置默认路径
+                $urlRouterProvider.otherwise('/index');
+                $stateProvider
+                    //首页
+                    .state('index',{
+                        url: '/index',
+                        templateUrl:'angularMenuTemplate.html',
+                        controller:'AccordionDemoCtrl'
+                    })
+            }]);
+
+    /**
+     * Created by jx on 2017/3/16.
+     */
+    angular.module("klwkOmsApp")
+        .controller("AccordionDemoCtrl", ["$scope" ,function($scope) {
+
+            $scope.test = function(obj){
+                alert("test");
+                console.dir(obj);
+            };
+                $scope.formData = [
+                    {
+                        "name":"huangbiao",
+                        "age" : 29
+                    },
+                    {
+                        "name":"liumei",
+                        "age" : 18
+                    }
+                ];
+
+                $scope.getObj = function(obj){
+                    alert("getObj");
+                    console.dir(obj);
+                };
+
+
+
+    }])
+            .directive('huangbiao',function() {
+                return {
+                    restrict: 'A',
+                    controller: function($scope){
+
+                    },
+                    scope : false,
+                    transclude: true,
+                    template: "<div ng-transclude></div>",
+                    link:function postLink(scope, iElement, iAttrs, controller) {
+
+                        $(iElement).find(".first_menu > ul > li").on("mouseenter",function(event){
+                            console.dir(event);
+                            var currentObj = $(this);
+                            // 判断是否有子菜单
+                            var menuname = currentObj.attr("menuname");
+                            var subMenu = $(".multiMenu .second_menu").find("ul[parentmenu='"+menuname+"']");
+
+                            // 如果存在子菜单
+                            if(subMenu.length > 0){
+                                subMenu.css("display","block");
+//                var topPX = event.originalEvent.target.offsetTop - event.originalEvent.target.parentNode.parentNode.scrollHeight + "px";
+                                var topPX = event.originalEvent.target.offsetTop - event.originalEvent.target.parentNode.scrollTop + "px";
+                                console.log(topPX)
+                                $(".multiMenu .second_menu").css("top",topPX);
+                            }
+                            // 如果不存在子菜单，则不显示二级列表
+                            else{
+                                $(".multiMenu .second_menu").find("ul[parentmenu]").css("display","none");
+                            }
+                        });
+
+
+                    }
+                };
+            });;
+
+</script>
+</html>

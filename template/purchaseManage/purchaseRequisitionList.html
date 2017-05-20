@@ -1,0 +1,252 @@
+<!-- 采购通知单 -->
+
+<div id="purchaseRequisitionList" class="cj-purchase" ng-controller="purchaseRequisitionListController">
+    <div class="purchase-content">
+
+        <!--高级搜索显示配置-->
+        <div class="is-select" ng-if="num != 0">
+            <span>已选择</span>
+            <div class="select-box" ng-if="radioWarehouse.status == 'selected'">
+                <span class="select-title">收货仓库：</span>
+                <span class="select-content">{{radioWarehouse.content}}</span>
+                <i class="icon iconfont icon-icon_guanbisousuo" ng-click="closeSelect('radioWarehouse','warehouseid','warehouse')"></i>
+            </div>
+            <div class="select-box" ng-if="radioArrival.status == 'selected'">
+                <span class="select-title">到货状态：</span>
+                <span class="select-content">{{radioArrival.content}}</span>
+                <i class="icon iconfont icon-icon_guanbisousuo" ng-click="closeSelect('radioArrival','arrivalStatus')"></i>
+            </div>
+        </div>
+
+        <div class="purchase-header" ng-class="{true:'search-top',false:''}[num != 0]">
+
+            <!--高级搜索默认-->
+            <div class="search-before" ng-show="showSearchElement">
+                <input type="text" class="klw-search" placeholder="采购单号" ng-model="searchItem.purchaseCode" ng-keyup="myKeyup($event)">
+                <span class="advanced-search" ng-click="search('unfold')">高级搜索</span>
+                <div class="search-before-btn">
+                    <div class="btn add-order" style="width: 128px;" ng-click="add()">
+                        <i class="iconfont"></i>新增通知单
+                    </div>
+                </div>
+            </div>
+            <!--高级搜索展开-->
+            <div class="search-after" ng-show="!showSearchElement">
+                <!--创建时间-->
+                <div class="row odd input-time">
+                    <label>创建日期</label>
+                    <input class="klw-input datePlugin" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="searchItem.beginDate">
+                    <i class="line"></i>
+                    <input class="klw-input datePlugin" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="searchItem.endDate">
+                </div>
+                <!--收货仓库-->
+                <div class="row odd search-check" ng-if="radioWarehouse.status == 'selecting'">
+                    <label>收货仓库</label>
+                    <div class="more-before" ng-if="warehouse == 'radio'">
+                        <div>
+                            <span class="check-span" ng-click="radioList('radioWarehouse','warehouseid',item.name,item.id);" ng-repeat="item in warehouseData | limitTo:6">{{item.name}}</span>
+                        </div>
+                        <div class="others-btn">
+                            <div class="btn klwk-spread" ng-click="module('warehouse','more')">更多<i class="iconfont"></i></div>
+                        </div>
+                    </div>
+                    <div class="more-after" ng-if="warehouse == 'more'">
+                        <div class="enums">
+                            <input class="klw-search" type="text" placeholder="仓库" ng-keyup="singleWordSearch(queryWarehouse,'singleWordData')" ng-model="queryWarehouse">
+                            <div class="wordSearch">
+                                <span class="search-letter">所搜的仓库</span>
+                                <span ng-repeat="item in singleWord" ng-click="singleWordQuery(item,'singleWordData','warehouseData',$event)">{{item}}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="check-span" ng-show="item.isHide == false" ng-click="radioList('radioWarehouse','warehouseid',item.name,item.id);" ng-repeat="item in warehouseData">{{item.name}}</span>
+                        </div>
+                        <div class="others-btn">
+                            <div class="btn klwk-spread" ng-click="module('warehouse','radio')">收起<i class="iconfont"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <!--到货状态-->
+                <div class="row search-check" ng-if="radioArrival.status == 'selecting'">
+                    <label>到货状态</label>
+                    <div class="more-before" >
+                        <div>
+                            <span class="check-span" ng-click="radioList('radioArrival','arrivalStatus',item,$index+1);" ng-repeat="item in arrivalStatus">{{item}}</span>
+                        </div>
+                    </div>
+                </div>
+                <!--表单输入-->
+                <div class="mt">
+                    <div class="row odd">
+                        <div class="column">
+                            <label class="search-text">商品编码</label>
+                        </div>
+                        <div class="column">
+                            <label class="search-text">入库单号</label>
+                        </div>
+                        <div class="column">
+                            <label class="search-text">采购单号</label>
+                        </div>
+                        <div class="column">
+                            <label class="search-text">到货批次号</label>
+                        </div>
+                    </div>
+                    <div class="row even">
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入商品编码" ng-model="searchItem.productCode">
+                        </div>
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入入库单号" ng-model="searchItem.code">
+                        </div>
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入采购单号" ng-model="searchItem.purchaseCode">
+                        </div>
+                        <div class="column">
+                            <input type="text" class="klw-input" placeholder="请输入采购单号" ng-model="searchItem.arriveBatchNo">
+                        </div>
+                    </div>
+                </div>
+                <div class="search-after-btn">
+                    <button class="btn btn-success btn-78 mr"  ng-click="search('ensure')">确定</button>
+                    <button class="btn btn-default btn-78 mr" ng-click="search('cancel')">取消</button>
+                    <button class="btn btn-default btn-78" ng-click="search('empty')">清空</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="purchase-body">
+
+            <div class="configuration">
+                <div class="ti-pagination">
+                    <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                    / 共 <span>{{paginationConf.totalItems}}</span>
+
+                <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont"
+                                                                                   ng-click="prev()"></i></span>
+
+                <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont"
+                                                                                                    ng-click="next()"></i></span>
+
+                <span class="config-column" ng-mouseover="isHover()" ng-mouseleave="isHover()"
+                      ng-click="showColumnConfigPanel()"><i class="iconfont"></i></span>
+
+                    <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+                </div>
+            </div>
+
+            <div class="body-table">
+                <table id="purchaseNoticeListTable" class="display" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>操作</th>
+                        <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="obj in tableList" repeat-finished-directive repeataction="initFunc()" repeatIndex="{{$index}}" condition="{{$last == true}}">
+                        <td class="over-show">
+                            <div class="oprate">
+                                <div class="tr-icon"><i class="iconfont icon-icon2"></i></div>
+                                <ul class="oprate-list">
+                                    <li ng-click="detail($index)">通知单详情</li>
+                                    <li ng-class="{true:'',false:'disabled'}[obj.status == 0]" ng-click="edit($index)">修改</li>
+                                    <li ng-class="{true:'',false:'disabled'}[obj.status == 0]" ng-click="singleAudit($index)">审核</li>
+                                    <li ng-class="{true:'',false:'disabled'}[obj.status == 0 || obj.status == 1 || obj.status == 2]" ng-click="singleCancel($index)">取消单据</li>
+                                    <li ng-click="printNotice($index)">打印</li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td ng-repeat="item in theadList">{{obj[item.tag]}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <tm-pagination conf="paginationConf"></tm-pagination>
+
+        <!-- 右侧列表配置 -->
+        <div>
+            <tm-listallocation allo="allocation"></tm-listallocation>
+        </div>
+
+        <!--打印内容-->
+        <div id="printPurchase">
+            <div style="width: 33.3%;float: left;margin: 20px 0;" ng-repeat="obj in printList">
+                {{obj.name}}<span style="padding-left: 20px">{{obj.tag}}</span>
+            </div>
+            <div style="margin: 0 20px;">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>商品编码</th>
+                        <th>商品名称</th>
+                        <th>规格编码</th>
+                        <th>规格名称</th>
+                        <th>通知数量</th>
+                        <th>入库数量</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in purchaseDetail" repeat-finished-directive repeataction="initFunc()" repeatIndex="{{$index}}" condition="{{$last == true}}">
+                        <td>{{item.productcode}}</td>
+                        <td>{{item.productname}}</td>
+                        <td>{{item.skucode}}</td>
+                        <td>{{item.skuname}}</td>
+                        <td>{{item.noticeqty}}</td>
+                        <td>{{item.currentprice}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-top: 30px;">
+                <div style="width: 33.3%;float: left;margin-bottom: 20px;">
+                    打印人<span style="padding-left: 20px">{{activeItem.purchasename}}</span>
+                </div>
+                <div style="width: 33.3%;float: left;margin-bottom: 20px;">
+                    打印时间<span style="padding-left: 20px">{{activeItem.date}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--审核模态框-->
+    <div class="cj-modal modal fade" id="auditModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <span class="remind-text">确认要审核采购订单？</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-78 mr" ng-click="singleAuditOp()">确定</button>
+                    <button type="button" class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--取消单据模态框-->
+    <div class="cj-modal modal fade" id="cancelModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <span class="remind-text">确认要取消入库单？</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-78 mr" ng-click="singleCancelOp()">确定</button>
+                    <button type="button" class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /采购通知单 -->

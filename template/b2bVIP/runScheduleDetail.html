@@ -1,0 +1,100 @@
+
+<div id="runScheduleDetail" class="jxOutDiv jxOutDivDetail" ng-controller="runScheduleDetailController">
+    <div class="jxOutDivContent">
+        <div>
+            <button class="btn btn-default btn-78" ng-click="returnFun()" style="margin:35px 0 20px 50px;">返回</button>
+        </div>
+        <div class="detail-content-top">
+            <div class="detail-top-tab">
+                <ul>
+                    <li ng-class="{true:'current',false:''}[tab == 'first']" ng-click="isShow('first')">档期详情</li>
+                    <li ng-class="{true:'current',false:''}[tab == 'second']" ng-click="isShow('second')">操作日志</li>
+                </ul>
+            </div>
+        </div>
+        <div class="content-first" ng-show="tab == 'first'">
+            <div class="jxmessage">
+                <h3 class="detailTitle">
+                    档期编号&nbsp;&nbsp;&nbsp;<span>{{params.tableList.schedulecode}}</span>
+                    档期起止时间&nbsp;&nbsp;&nbsp;<span>{{params.tableList.schedulebegindate}}&nbsp;&nbsp;至&nbsp;&nbsp;{{params.tableList.schedulebegindate}}</span>
+                </h3>
+
+
+            </div>
+            <div class="jxmessage">
+                <div class="clear">
+                    <h3 class="detailTitle fl">档期详情</h3>
+                    <div class="fr actBtn">
+                        <div class="btn btn4 add-order notClick" ng-class="{false:'notClick'}[isZhengque]" ng-click="operate.startAct()">开始活动</div>
+                        <div class="btn klwk-cancle btn4" ng-class="{false:'notClick'}[isZhengque]" ng-click="operate.endAct()">结束活动</div>
+                    </div>
+                </div>
+
+                <div class="tableOut">
+                    <table id="runScheduleDetailTable" class="display" cellspacing="0" width="100%">
+                        <thead>
+
+                        <tr>
+                            <th>
+                                <label ng-click="isLabelSel($event);operate.selAll($event)">
+                                    <i class="iconfont icon-sel"></i>
+                                </label>
+                            </th>
+                            <th>操作</th>
+                            <th ng-repeat="obj in theadList1">{{obj.name}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in tableList1" repeat-finished-directive repeataction="initFunc()" repeatIndex="{{$index}}" condition="{{$last == true}}">
+                            <td>
+                                <label ng-click="isLabelSel($event);operate.selSingle($event,$index)">
+                                    <i class="iconfont icon-sel"></i>
+                                </label>
+                            </td>
+
+                            <td class="operate text-center">
+                                <div class="operateList">
+                                    <div class="operateIcon"><span class="iconfont icon-operate"></span></div>
+                                    <div class="content">
+                                        <ul class="one">
+                                            <li ng-click="operate.startAct(obj)">开始活动</li>
+                                            <li ng-click="operate.endAct(obj)">结束活动</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                            <td ng-repeat="item in theadList1">
+                                <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                                {{obj[item.tag] | jxFilter:item.tag:'runScheduleDetail' | setDefaultValueWithoutData}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="content-second" ng-show="tab == 'second'">
+            <div class="jxmessage">
+                <h3 class="detailTitle">操作记录</h3>
+
+                <div class="tableOut">
+                    <table id="operateTable" class="display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th ng-repeat="obj in theadList2">{{obj.name}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in tableList2" repeat-finished-directive repeataction="initFunc()" repeatIndex="{{$index}}" condition="{{$last == true}}">
+                            <td ng-repeat="item in theadList2">
+                                {{obj[item.tag] | setDefaultValueWithoutData}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,113 @@
+<div id="adjustBill" class="jxOutDiv" ng-controller="adjustBillController">
+    <div class="jxOutDivContent">
+        <div id="simpleSearch" class="simpleSearch" ng-hide="advancedSearchObj.advancedSearch == 'adjustBill'">
+            <input class="klw-search" placeholder="调整单号" ng-model="searchForm.stockadjustordercode"
+                   ng-keyup="searchKeyup()"/>
+            <span class="advancedSearchBtn" ng-click="advancedSearchObj.isShow('adjustBill')">高级搜索</span>
+
+            <div class="fr">
+                <div class="btn add-order btn6" ng-click="goOther('add')"><i class="iconfont"></i>新增调整单</div>
+            </div>
+        </div>
+
+        <div id="advancedSearch" class="advancedSearch" ng-show="advancedSearchObj.advancedSearch == 'adjustBill'">
+            <div class="searchItem searchItemInput">
+                <div class="rows rowsText">
+                    <p>调整单号</p>
+
+                    <p>档期编号</p>
+
+                    <p>商品编码</p>
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchForm.stockadjustordercode"
+                               placeholder="请输入调整单号"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchForm.schedulecode" placeholder="请输入档期编号"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchForm.productcode" placeholder="请输入商品编码"/>
+                    </div>
+                </div>
+            </div>
+            <div id="conditionSet">
+                <button class="btn btn-success btn-78" ng-click="advancedSearchObj.isShow('false');search()">确定</button>
+                <button class="btn btn-default btn-78 advancedSearchCancelBtn"
+                        ng-click="advancedSearchObj.isShow('false',$event)">取消
+                </button>
+                <button class="btn btn-default btn-78" ng-click="empty()">清空</button>
+            </div>
+        </div>
+
+        <div id="simpleSelect" class="simpleSelect clear">
+            <div class="ti-pagination">
+                <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                / 共 <span>{{paginationConf.totalItems}}</span>
+
+                <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont"
+                                                                                   ng-click="prev()"></i></span>
+
+                <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont"
+                                                                                                    ng-click="next()"></i></span>
+
+                <span style="position: relative">
+                    <span class="config-column" ng-click="showColumnConfigPanel()"  ng-mouseover="isHover()" ng-mouseleave="isHover()">
+                        <i class="iconfont"></i>
+                    </span>
+                    <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+                    <tm-listallocation allo="allocation"></tm-listallocation>
+                </span>
+            </div>
+        </div>
+
+        <div class="tableOut">
+            <table id="adjustBillTable" class="display" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>操作</th>
+                    <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="obj in tableList" repeat-finished-directive repeataction="initFunc()"
+                    repeatIndex="{{$index}}" condition="{{$last == true}}">
+
+                    <td class="operate">
+                        <div class="operateList">
+                            <div class="operateIcon"><span class="iconfont icon-operate"></span></div>
+                            <div class="content">
+                                <ul class="one">
+                                    <li ng-click="goOther('detail',$index)">调整单详情</li>
+
+                                    <li ng-click="goOther('modify',$index,$event)"
+                                        ng-class="{true:'notClick'}[obj.status!=2]">修改
+                                    </li>
+
+                                    <li ng-click="operate.check(obj,$event)"
+                                        ng-class="{true:'notClick'}[obj.status!=2]">审核
+                                    </li>
+
+                                    <li ng-click="operate.disabled(obj,$event)"
+                                        ng-class="{true:'notClick'}[obj.status!=2]">禁用
+                                    </li>
+
+                                    <li>导出明细</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td ng-repeat="item in theadList">
+                        <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                        {{obj[item.tag] | isBoolean | jxFilter:item.tag:'adjustBill' | setDefaultValueWithoutData}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--分页-->
+        <tm-pagination conf="paginationConf"></tm-pagination>
+    </div>
+</div>

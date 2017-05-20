@@ -1,0 +1,52 @@
+<div id="configManage" class="config-manage">
+    <div class="new-storage-information" id="newStorageInformation" ng-controller="newStorageInformationController">
+        <div id="content" class="content form">
+            <div class="advance-search">
+                <div class="items">
+                    <div class="ipt cf">
+                        <label class="item">
+                            <span class="title">仓库编码<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="currentItem.code">
+                        </label>
+                        <label class="item">
+                            <span class="title">仓库名称<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="currentItem.name">
+                        </label>
+                        <label class="item">
+                            <span class="title">仓库类型<i class="notice">*</i></span>
+                            <pull-select pull-config="warehousetypeList"></pull-select>
+                        </label>
+                        <label class="item">
+                            <span class="title">仓储类型<i class="notice" ng-show="storageTypeList.validate">*</i></span>
+                            <pull-select pull-config="storageTypeList"></pull-select>
+                        </label>
+                    </div>
+                    <div class="ipt cf">
+                        <label class="item">
+                            <span class="title">接口应用<i class="notice" ng-show="interfaceList.validate">*</i></span>
+                            <pull-select pull-config="interfaceList"></pull-select>
+                        </label>
+                        <label class="item">
+                            <span class="title">实体仓库<i class="notice" ng-show="WarehouseList.validate">*</i></span>
+                            <pull-select pull-config="WarehouseList"></pull-select>
+                        </label>
+                        <label class="item">
+                            <span class="title">电话</span>
+                            <input type="text" class="klw-input" ng-model="currentItem.telephone">
+                        </label>
+                    </div>
+                    <div class="ipt cf">
+                        <label class="item lg">
+                            <span class="title">仓库地址</span>
+                            <input type="text" class="klw-input klw-input2" ng-model="currentItem.address">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <button class="btn btn-success btn-78" ng-click="saveStorage()">保存</button>
+                <button class="btn btn-default btn-78" ng-click="goBack()">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

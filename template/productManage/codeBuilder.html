@@ -1,0 +1,71 @@
+<!-- 编码生成 -->
+
+<div id="codeBuilder" class="cj-product" ng-controller="codeBuilderController">
+    <div class="product-content">
+
+        <div class="product-row">
+            <div class="readonly" style="padding-left: 15px;">
+                <label for="productWord" style="margin-right: 15px;">商品代码</label>
+                <input type="text" id="productWord" class="klw-input" readonly>
+            </div>
+            <div class="generative-rule">
+                <span>生成规则</span>
+                <input type="checkbox">
+                <span>数字</span>
+                <input type="text">
+                <span>位</span>
+            </div>
+            <div class="generative-sort">
+                <span>生成顺序</span>
+                <input type="text">
+            </div>
+        </div>
+        <div class="row odd">
+            <div class="column">
+                <label for="productClassify">商品分类</label>
+            </div>
+            <div class="column">
+                <label for="productName">商品名称</label>
+            </div>
+            <div class="column">
+                <label for="productIntroduction">商品简介</label>
+            </div>
+            <div class="column">
+                <label for="addPerson">添加人</label>
+            </div>
+        </div>
+        <div class="row even">
+            <div class="column">
+                <input type="text" class="klw-input" id="productClassify" placeholder="请输入商品分类">
+            </div>
+            <div class="column">
+                <input type="text" class="klw-input" id="productName" placeholder="请输入商品名称">
+            </div>
+            <div class="column">
+                <input type="text" class="klw-input" id="productIntroduction" placeholder="请输入商品简介">
+            </div>
+            <div class="column">
+                <input type="text" class="klw-input" id="addPerson" placeholder="请添加人">
+            </div>
+        </div>
+        <div class="row odd">
+            <div class="column">
+                <label for="tagPrice">吊牌价</label>
+            </div>
+            <div class="column">
+                <label for="productName">销售价</label>
+            </div>
+        </div>
+        <div class="row even">
+            <div class="column">
+                <input type="text" class="klw-input" id="tagPrice" placeholder="请输入吊牌价">
+            </div>
+            <div class="column">
+                <input type="text" class="klw-input" id="salesPrice" placeholder="请输入销售价">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- /编码生成 -->

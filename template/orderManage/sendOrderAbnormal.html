@@ -1,0 +1,116 @@
+<div id="sendOrderAbnormal" class="jxOutDiv" ng-controller="sendOrderAbnormalController">
+    <div class="jxOutDivContent">
+        <!-- 主搜索框和主按钮-->
+        <div id="simpleSearch" class="simpleSearch" ng-hide="advancedSearchObj.advancedSearch == 'sendOrderAbnormal'">
+            <input class="klw-search" placeholder="平台订单号" ng-model="formData.TradeId" ng-keydown="domOperate.searchByCode($event)"/>
+            <span class="advancedSearchBtn"  ng-click="advancedSearchObj.isShow('sendOrderAbnormal')" >高级搜索</span>
+
+            <div class="fr">
+                <div class="btn  pl-import" ng-click="domOperate.refresh()"><i class="icon iconfont icon-icon_fanzhuan_default" ></i>刷新</div>
+                <div class="btn cancle-refund terraceSendBtn" ng-click="domOperate.platformDeliver()"><i class="iconfont"></i>平台发货</div>
+                <div class="btn cancle-refund systemSendBtn" ng-click="domOperate.systemDelliver()"><i class="iconfont"></i>系统发货</div>
+            </div>
+        </div>
+
+        <!-- 高级搜索展开-->
+        <div id="advancedSearch" class="advancedSearch" ng-show="advancedSearchObj.advancedSearch == 'sendOrderAbnormal'">
+            <!-- 支付时间-->
+            <div class="searchItem timeInput">
+                <span class="title">支付时间</span>
+
+                <div class="options">
+                    <input class="klw-input" ng-model="formData.paydatebegin" readonly id="payTimeMin" type="text">
+                    <i class="line"></i>
+                    <input class="klw-input" ng-model="formData.paydateend" readonly id="payTimeMax" type="text">
+                </div>
+            </div>
+
+            <!--店铺-->
+            <advanced-search-more-list  search-config="storeConfig"></advanced-search-more-list>
+            <advance-search-more-list-show search-config="storeConfig"></advance-search-more-list-show>
+
+            <!-- 会员昵称-->
+            <div class="searchItem searchItemInput">
+                <span class="title">会员昵称</span>
+
+                <div class="options">
+                    <div>
+                        <input type="text" class="klw-input" ng-model="formData.CustomerName" placeholder="会员昵称"/>
+                    </div>
+                </div>
+            </div>
+            <!-- 已选择行-->
+            <div class="searchItem selected">
+                <span class="title">已选择</span>
+                <div class="selectedBox" ng-repeat="list in formData1">
+                    <span class="selectedTitle">{{list.title}}：</span>
+                    <span class="selectedContent">{{list.name}}</span>
+                    <i ng-click="domOperate.cancleChose(list)">&times;</i>
+                </div>
+            </div>
+            <div id="conditionSet">
+                <button class="btn btn-success btn-78" ng-click="domOperate.searchConfirm($event)">确定</button>
+                <button class="btn btn-default btn-78 advancedSearchCancelBtn" ng-click="domOperate.searchCancle($event)">取消</button>
+                <button class="btn btn-default btn-78" ng-click="domOperate.clearCondition()">清空</button>
+            </div>
+        </div>
+
+        <!-- 特殊标识行-->
+        <div id="simpleSelect" class="simpleSelect clear">
+
+            <div class="ti-pagination">
+                <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                / 共 <span>{{paginationConf.totalItems}}</span>
+
+                <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont" ng-click="domOperate.prevPage()"></i></span>
+
+                <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont" ng-click="domOperate.nextPage()"></i></span>
+
+                <span class="config-column" ng-mouseover="isHover()" ng-mouseleave="isHover()" ng-click="domOperate.adjustColumn()"><i class="iconfont"></i></span>
+
+                <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+            </div>
+        </div>
+
+        <div class="tableOut">
+            <table id="abnormalOrderList">
+                <thead>
+                    <tr>
+                        <th ng-click="domOperate.selectAll()">
+                            <label >
+                                <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque' : checkAll}"></i>
+                            </label>
+                        </th>
+                        <th>操作</th>
+                        <th ng-repeat="column in abnormalOrdersHead">
+                            {{column.name}}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="list in abnormalOrdersBody" repeat-finished-directive condition="{{$last == true}}">
+                        <td>
+                            <label ng-click="domOperate.orderListChose(list)">
+                                <i class="iconfont icon-sel icon-sel-single" ng-class="{true : 'icon-sel-zhengque',false : ''}[list.trShow]"></i>
+                            </label>
+                        </td>
+                        <td ng-click="domOperate.jumpToDetails('发货异常订单：详情','../template/orderManage/sendOrderAbnormalDetail.html',list)" class="td-can-operate">查看详情</td>
+                        <td ng-repeat="column in abnormalOrdersHead">
+                            {{list[column.tag]}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--分页-->
+        <tm-pagination conf="paginationConf"></tm-pagination>
+    </div>
+    <!-- 右侧列表配置 -->
+    <span style="position: relative">
+        <span class="config-column" ng-click="showColumnConfigPanel()">
+            <i class="iconfont"></i>
+        </span>
+        <tm-listallocation allo="allocation"></tm-listallocation>
+    </span>
+</div>

@@ -1,0 +1,71 @@
+
+<div id="sendGoodsBillDetail" class="jxOutDiv jxOutDivDetail" ng-controller="sendGoodsBillDetailController">
+    <div class="jxOutDivContent">
+        <div>
+            <button class="btn btn-default btn-78" ng-click="returnFun()" style="margin:35px 0 20px 50px;">返回</button>
+        </div>
+        <div class="detail-content-top">
+            <div class="detail-top-tab">
+                <ul>
+                    <li ng-class="{true:'current',false:''}[tab == 'first']" ng-click="isShow('first')">送货单详情</li>
+                    <li ng-class="{true:'current',false:''}[tab == 'second']" ng-click="isShow('second')">操作日志</li>
+                </ul>
+            </div>
+        </div>
+        <div class="content-first" ng-show="tab == 'first'">
+            <div class="jxmessage">
+                <h3 class="detailTitle">
+                    送货单号&nbsp;&nbsp;&nbsp;<span>{{params.tableList.deliveryordercode}}</span>
+                    送货时间&nbsp;&nbsp;&nbsp;<span>{{params.tableList.deliverytime  | setDefaultValueWithoutData}}</span>
+                </h3>
+            </div>
+            <div class="jxmessage">
+                <div class="clear">
+                    <h3 class="detailTitle fl">商品明细</h3>
+                </div>
+
+                <div class="tableOut">
+                    <table id="sendGoodsBillDetailTable" class="display" cellspacing="0" width="100%">
+                        <thead>
+
+                        <tr>
+                            <th ng-repeat="obj in theadList1">{{obj.name}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in tableList1" repeat-finished-directive repeataction="initFunc()" repeatIndex="{{$index}}" condition="{{$last == true}}">
+                            <td ng-repeat="item in theadList1">
+                                <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                                {{obj[item.tag] | jxFilter:item.tag:'matchGoodsBillDetail' | setDefaultValueWithoutData}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="content-second" ng-show="tab == 'second'">
+            <div class="jxmessage">
+                <h3 class="detailTitle">操作记录</h3>
+
+                <div class="tableOut">
+                    <table id="operateTable" class="display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th ng-repeat="obj in theadList2">{{obj.name}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in tableList2" repeat-finished-directive repeataction="initFunc()" repeatIndex="{{$index}}" condition="{{$last == true}}">
+                            <td ng-repeat="item in theadList2">
+                                {{obj[item.tag] | setDefaultValueWithoutData}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

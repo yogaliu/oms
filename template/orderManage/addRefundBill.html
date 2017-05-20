@@ -1,0 +1,161 @@
+<div id="addRefundBill" class="jxOutDiv jxAdd" ng-controller="addRefundBillController">
+    <div class="jxOutDivContent">
+        <button class="btn btn-default btn-78" ng-click="domOperate.backTolist()" style="margin: 20px 0 0 35px;">返回</button>
+        <!-- 订单信息-->
+        <div class="order-message jxmessage form">
+            <div class="messageTitle">
+                <h3 class="addTitle">新增退款单基本信息</h3>
+            </div>
+
+            <div class="rows rowsText">
+                <p>订单编号 <span class="star">*</span></p>
+
+                <p>会员昵称 <span class="star">*</span></p>
+
+                <p>店铺名称<span class="star">*</span></p>
+
+                <p>手机</p>
+            </div>
+            <div class="rows rowsInput">
+                <div  ng-click="domOperate.orderDetailsShow()">
+                    <input type="text" ng-model="orderChosed.code" disabled class="klw-input validate" name="empty"/>
+                </div>
+                <div>
+                    <input type="text" ng-model="orderChosed.customername" disabled class="klw-input validate" name="empty"/>
+                </div>
+                <search-select search-config="pullSelect.storeList"></search-select>
+                <div>
+                    <input type="text" ng-model="orderChosed.subOrder.mobile" class="klw-input"/>
+                </div>
+            </div>
+            <div class="rows rowsText">
+                <p>退款类型 <span class="star">*</span></p>
+
+                <p>退货类型 <span class="star">*</span></p>
+
+                <p>退款金额</p>
+
+                <p>退款方式<span class="star">*</span></p>
+            </div>
+            <div class="rows rowsInput">
+                <div>
+                    <div class="sewv">
+                        <pull-select pull-config="pullSelect.refundType"></pull-select>
+                    </div>
+                </div>
+                <div>
+                    <div class="sewv">
+                        <pull-select pull-config="pullSelect.returnGoodsType"></pull-select>
+                    </div>
+                </div>
+                <div class="timeSelInput">
+                    <input type="text" id="deliverDate" ng-model="orderChosed.ActualAmount" class="klw-input"/>
+                </div>
+                <div>
+                    <div class="sewv">
+                        <pull-select pull-config="pullSelect.refundWay"></pull-select>
+                    </div>
+                </div>
+            </div>
+            <div class="rows rowsText">
+                <p>退款账号</p>
+
+                <p>备注</p>
+            </div>
+            <div class="rows rowsInput">
+                <div>
+                    <input type="text" ng-model="formData.expressfee" class="klw-input"/>
+                </div>
+                <div class="input75">
+                    <input type="text" ng-model="orderChosed.note" class="klw-input"/>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部按钮-->
+        <div class="content-footer jxmessage">
+            <button class="btn btn-success btn-78" ng-click='domOperate.saveOptions()'>确定</button>
+            <button class="btn btn-default btn-78" ng-click="domOperate.clearOptions()">取消</button>
+        </div>
+    </div>
+
+    <!--订单列表信息-->
+    <div class="modal fade order-list-chose" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="order-list-head">
+                    <div class="order-list-title">新增</div>
+                    <div class="order-list-close"><i class="icon iconfont icon-icon_guanbisousuo" ng-click="domOperate.closeModal()"></i></div>
+                </div>
+                <div class="order-list-body">
+
+                    <div class="rows rowsText">
+
+                        <p>订单编号 <span class="star">*</span></p>
+                        <p>平台编号<span class="star">*</span></p>
+                        <p>配货单号 <span class="star">*</span></p>
+
+                    </div>
+                    <div class="rows rowsInput">
+                        <div>
+                            <input class="klw-input" ng-model="formData.Code" type="text"/>
+                        </div>
+                        <div>
+                            <input class="klw-input" ng-model="formData.TradeId" type="text"/>
+                        </div>
+                        <div>
+                            <input class="klw-input" ng-model="formData.DispatchCode" type="text"/>
+                        </div>
+                    </div>
+                    <div class="rows rowsText">
+
+                        <p>会员信息 <span class="star">*</span></p>
+                        <p>商品编码<span class="star">*</span></p>
+                        <p>手机<span class="star">*</span></p>
+
+                    </div>
+                    <div class="rows rowsInput">
+                        <div>
+                            <input class="klw-input" ng-model="formData.CustomerName" type="text"/>
+                        </div>
+                        <div>
+                            <input class="klw-input" ng-model="formData.SkuCode" type="text"/>
+                        </div>
+                        <div>
+                            <input class="klw-input" ng-model="formData.Mobile" type="text"/>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <button class="btn btn-success btn-78" ng-click="domOperate.searchConfirm()">确认</button>
+                        <button class="btn btn-default btn-78" ng-click="domOperate.searchCancle()">取消</button>
+                    </div>
+
+                    <div class="order-lists">
+
+                        <div class="tableOut">
+                            <table id="dataListTable">
+                                <thead>
+                                <tr>
+                                    <th ng-repeat="column in orderListColumn">{{column.name}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="list in orderListData">
+                                    <td ng-repeat="column in orderListColumn"
+                                        ng-click="domOperate.orderChose(list)"
+                                        ng-bind-html="list[column.tag] | OrderListFilter : column.tag : list : column.otherInfo"></td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <!--分页-->
+                        <tm-pagination conf="paginationConf"></tm-pagination>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,65 @@
+<div id="configManage" class="config-manage">
+    <div id="newShop" class="new-shop" ng-controller="newShopController">
+        <div id="content" class="content">
+            <!--<div class="main-title">新增店铺</div>-->
+            <div class="advance-search form" id="formContent">
+                <div class="items">
+                    <div class="ipt cf">
+                        <label class="item">
+                            <span class="title">编码<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="editItem.code" ng-disabled="params.oprate == 'edit'">
+                        </label>
+                        <label class="item">
+                            <span class="title">名称<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="editItem.name">
+                        </label>
+                        <label class="item">
+                            <span class="title">电话</span>
+                            <input type="text" class="klw-input" ng-model="editItem.telephone">
+                        </label>
+                        <label class="item">
+                            <span class="title">官网</span>
+                            <input type="text" class="klw-input" ng-model="editItem.website">
+                        </label>
+                    </div>
+                    <div class="ipt cf">
+                        <label class="item">
+                            <span class="title">店铺性质<i class="notice">*</i></span>
+                            <pull-select pull-config="storetypeList"></pull-select>
+                        </label>
+                        <label class="item">
+                            <span class="title">公司</span>
+                            <pull-select pull-config="companyList"></pull-select>
+                        </label>
+                        <label class="item">
+                            <span class="title">平台类型<i class="notice">*</i></span>
+                            <pull-select pull-config="platformtypeList"></pull-select>
+                        </label>
+                        <label class="item">
+                            <span class="title">平台接口<i class="notice">*</i></span>
+                            <pull-select pull-config="interfaceList"></pull-select>
+                        </label>
+                    </div>
+                    <div class="ipt cf">
+                        <label class="item">
+                            <span class="title">地址</span>
+                            <input type="text" class="klw-input" ng-model="editItem.address">
+                        </label>
+                        <label class="item">
+                            <span class="title">备注</span>
+                            <input type="text" class="klw-input" ng-model="editItem.note">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <button class="btn btn-success btn-78" ng-click="save()">保存</button>
+                <button class="btn btn-default btn-78" ng-click="goBack()">取消</button>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+

@@ -1,0 +1,75 @@
+<div id="configManage" class="config-manage">
+    <div class="platform-interface" id="logisticsInterface" ng-controller="logisticsInterfaceController">
+        <div id="content" class="content">
+            <div class="search cf">
+                <div class="fr line">
+                    <button ng-click="fresh()" class="svg1">刷新</button>
+                    <menu-select menu-config="menuInfo"></menu-select>
+                    <button class="svg2" ng-click="newItem()">新增</button>
+                </div>
+            </div>
+            <!--<div id="topTable" class="top-table cf">
+                <div class="fr">
+
+                </div>
+            </div>-->
+            <div class="more-table" style="height: calc(100% - 60px);">
+                <div class="ab-position">
+                    <div class="all-table">
+                        <table class="table-thead" cellspacing="0" style="width: calc(100% - 4px);">
+                            <thead>
+                            <tr>
+                                <th ng-click="selectAll()">
+                                    <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                                </th>
+                                <th>操作</th>
+                                <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <table id="mainTable" class="display" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th ng-click="selectAll()">
+                                    <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                                </th>
+                                <th>操作</th>
+                                <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="obj in tableList">
+                                <td ng-click="selectItem($index);$event.stopPropagation();">
+                                    <div class="klwk-check" ng-hide="obj.isdatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="obj.isdatacheck"><i class="iconfont"></i></div>
+                                </td>
+                                <td class="over-show">
+                                    <div class="tr-oprate">
+                                        <div class="tr-icon"><i class="iconfont icon-operate"></i></div>
+                                        <ul class="tr-oprate-list">
+                                            <li ng-click="edit($index)">修改</li>
+                                            <li ng-click="enabledItem($index)">启用</li>
+                                            <li ng-click="disabledItem($index)">禁用</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td ng-repeat="item in theadList" title="{{obj[item.tag] | isBoolean }}">
+                                    <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                                    {{obj[item.tag] | isBoolean }}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+
+            </div>
+
+        </div>
+    </div>
+</div>

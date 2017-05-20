@@ -1,0 +1,176 @@
+<div id="fbpPlanBill" class="jxOutDiv" ng-controller="fbpPlanBillController">
+    <div class="jxOutDivContent">
+        <div id="simpleSearch" class="simpleSearch">
+            <input class="klw-search" placeholder="计划单号/批次号" ng-model="singleSearchCode" ng-keyup="domOperate.singleSearch($event)"/>
+            <span class="advancedSearchBtn"  ng-click="domOperate.searchShow('fbpPlanBill')">高级搜索</span>
+
+            <div class="fr">
+                <div class="btn add-order" ng-click="domOperate.jumpToAddBill('B2B计划单:新增计划单','../template/b2bFBP/addFbpPlanBill.html')" style="width: 157px;"><i class="iconfont"></i>新增计划单</div>
+            </div>
+        </div>
+            <!--高级搜索-->
+        <div id="advancedSearch" class="advancedSearch" ng-show="advancedSearch">
+            <!-- 已选择行-->
+            <div class="searchItem selected">
+                <span class="title">已选择</span>
+                <div class="selectedBox"
+                     ng-repeat="(key,orderlist) in formChoseData">
+                    <span class="selectedTitle">{{orderlist['title']}}：</span>
+                    <span class="selectedContent">{{orderlist['name']}}</span>
+                    <i class="icon iconfont icon-icon_guanbisousuo" ng-click="domOperate.clearChoseCondition(key,orderlist)"></i>
+                </div>
+            </div>
+            <!-- 制单时间-->
+            <div class="searchItem timeInput">
+                <span class="title">制单时间</span>
+
+                <div class="options">
+                    <input class="klw-input dateTime  ng-touched" type="text" name="empty" readonly="" ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="searchformData.BeginDate">
+                    <i class="line"></i>
+                    <input class="klw-input dateTime  ng-touched" type="text" name="empty" readonly="" ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="searchformData.EndDate">
+                </div>
+            </div>
+
+            <!-- 调出仓库-->
+
+            <advanced-search-more-list  search-config="outWarehouseConfigData"></advanced-search-more-list>
+
+            <!-- 调出仓库展开-->
+
+            <advance-search-more-list-show search-config="outWarehouseConfigData"></advance-search-more-list-show>
+
+            <!-- 调入仓库-->
+
+            <advanced-search-more-list  search-config="inWarehouseConfigData"></advanced-search-more-list>
+
+            <!-- 调入仓库展开-->
+
+            <advance-search-more-list-show search-config="inWarehouseConfigData"></advance-search-more-list-show>
+
+            <!-- 店铺-->
+
+            <advanced-search-more-list  search-config="storenameConfigData"></advanced-search-more-list>
+
+            <!-- 店铺展开-->
+
+            <advance-search-more-list-show search-config="storenameConfigData"></advance-search-more-list-show>
+
+            <!-- 单据状态-->
+
+            <advanced-search-list config-data="B2BplannedOrderStatusConfigData"></advanced-search-list>
+
+
+            <div class="searchItem clear searchItemInput">
+                <!-- 计划单号-->
+                <div class="rows rowsText">
+                    <p>商品编码</p>
+
+                    <p>计划单号</p>
+
+                    <p>批次号</p>
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchformData.ProductCode"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchformData.Code"/>
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchformData.ScheduleNo"/>
+                    </div>
+                </div>
+            </div>
+            <div id="conditionSet">
+                <button class="btn btn-success btn-78" ng-click="domOperate.advanceSearchConfirm($event)">确定</button>
+                <button class="btn btn-default btn-78 advancedSearchCancelBtn" ng-click="domOperate.searchShow(false)">取消</button>
+                <button class="btn btn-default btn-78" ng-click="domOperate.advanceSearchClear()">清空</button>
+            </div>
+
+        </div>
+
+        <div id="simpleSelect" class="simpleSelect clear">
+            <div class="selectItems fl">
+                <label class="selectItem">
+                    <i class="iconfont icon-sel"></i>
+                    <span>已上传</span>
+                </label>
+
+            </div>
+
+
+            <div class="ti-pagination">
+                <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                / 共 <span>{{paginationConf.totalItems}}</span>
+
+                <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont" ng-click="prev()"></i></span>
+
+                <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont" ng-click="next()"></i></span>
+
+                <span class="config-column" ng-mouseover="isHover()" ng-mouseleave="isHover()" ng-click="domOperate.listAllocation()"><i class="iconfont"></i></span>
+
+                <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+            </div>
+        </div>
+
+        <div class="tableOut">
+            <table id="dataListTable">
+                <thead class="template-head">
+                <tr>
+                    <th>
+                        <label ng-click="domOperate.selectAll()">
+                            <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':checkAll}"></i>
+                        </label>
+                    </th>
+                    <th>
+                        序号
+                    </th>
+                    <th>
+                        操作
+                    </th>
+                    <th ng-repeat="list in orderListThead">
+                        {{list.name}}
+                    </th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <!--<p ng-if="!orderListTbody.length">暂无数据</p>-->
+                <tr ng-repeat="list in orderListTbody" repeat-finished-directive condition="{{$last == true}}">
+                    <td>
+                        <label ng-click="domOperate.orderListChose($event,list)">
+                            <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':list.trShow}"></i>
+                        </label>
+                    </td>
+                    <td>{{$index+1}}</td>
+                    <td class="operate">
+                        <div class="multilevel-menu" >
+                        <div class="sewv">
+                            <div class="sewvtop"><span class="iconfont icon-operate"></span></div>
+                            <div class="content">
+                                <ul class="one">
+                                    <li ng-click="domOperate.jumpToDetails('B2B计划单:计划详情单','../template/b2bFBP/fbpPlanBillDetail.html',list)">计划单详情</li>
+                                    <li ng-click="domOperate.jumpToAddFbpNoticeBill('B2B通知单:生成通知单','../template/b2bFBP/addFbpNoticeBill.html',list)">生成通知单 </li>
+                                    <li ng-class="{true:'notClick'}[list.status!=0]" ng-click="domOperate.editFbpPlanBill('B2B计划单:修改计划单','../template/b2bFBP/addFbpPlanBill.html',list)">修改</li>
+                                    <li  ng-click="domOperate.auditOrder(list,$event)" >审核</li>
+                                    <li>反审</li>
+                                    <li ng-class="{true:'notClick'}[list.status == 9]" ng-click="domOperate.overOrder(list,$event)">终止</li>
+                                </ul>
+                            </div>
+                        </div>
+                            </div>
+                    </td>
+                    <td ng-repeat="item in orderListThead" ng-if="item.tag != ''">
+                        <p class="order-list-details" ng-bind-html="list[item.tag]"></p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--分页-->
+        <tm-pagination conf="paginationConf"></tm-pagination>
+        <!-- 右侧配置 -->
+        <tm-listallocation allo="allocation"></tm-listallocation>
+    </div>
+</div>

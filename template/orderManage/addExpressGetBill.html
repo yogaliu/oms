@@ -1,0 +1,74 @@
+<div id="addExpressGetBill" class="jxOutDiv jxAdd"  ng-controller="addExpressGetBillController">
+    <div class="jxOutDivContent">
+        <button class="btn btn-default btn-78" ng-click="domOperate.returnBack()" style="margin: 20px 0 0 35px;">返回</button>
+        <div class="jxmessage addBill">
+            <div class="clear">
+                <h3 class="addTitle">新增快递签收单</h3>
+            </div>
+        </div>
+
+        <div class="jxmessage noBorderMessage">
+            <div class="rows rowsText">
+                <p>快递名称</p>
+
+                <p>包裹重量</p>
+
+                <p>物流单号</p>
+            </div>
+            <div class="rows rowsInput form">
+                <div>
+                    <pull-select pull-config="menuInfo.expressList"></pull-select>
+                </div>
+                <div>
+                    <input name="number" type="text"  class="klw-input validate" ng-model="Weight"
+                           ng-blur="domOperate.setStatus($event,'weight')" placeholder="请输入包裹重量"/>
+                </div>
+                <div>
+                    <input type="text" class="klw-input validate"
+                           ng-model="ExpressNo"
+                           ng-keydown="domOperate.expressInfoDeal($event,'expressNo')" name="empty" placeholder="请扫描/输入物流单号"/>
+                </div>
+            </div>
+            <div class="tableOut">
+                <table>
+                    <thead>
+                    <tr>
+                        <th ng-repeat="column in expressColumn">
+                            <span ng-if="column.name == ''">
+                                <label ng-click="domOperate.selectAll()">
+                                    <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':checkAll}"></i>
+                                </label>
+                            </span>
+                            <span ng-if="column.name != ''">{{column.name}}</span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(key,list) in formData">
+                            <td ng-repeat="column in expressColumn">
+                                    <span ng-if="column.name == ''">
+                                        <label ng-click="domOperate.expressListChose($event,list)">
+                                            <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':list.trShow}"></i>
+                                        </label>
+                                    </span>
+                                <span ng-if="column.name !='' && column.tag != ''" >{{list[column.tag]}}</span>
+                                <span ng-if="column.name !='' && column.tag == ''" class="iconfont delate" ng-click="domOperate.deleteExpress(list)">&#xe639;</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="alreadyScan">
+                已扫描包裹数
+                <span class="number">{{formData.length}}</span>
+            </div>
+        </div>
+
+        <div class="jxmessage noBorderMessage">
+            <button class="btn btn-success btn-78" ng-click="domOperate.addExpressConfirm()">确定</button>
+            <button class="btn btn-default btn-78" ng-click="domOperate.returnBack()">取消</button>
+            <button class="btn btn-default btn-78" ng-click="domOperate.batchDeleteExpress()">删除</button>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,62 @@
+<!-- 库存管理：入库订单详情 -->
+<div id="inventoryManage" class="inventory-manage">
+<div id="inOrderDetails" class="cj-product" ng-controller="inOrderDetailsController">
+    <div class="product-content">
+
+        <div class="product-header">
+            <div class="header-tab">
+                <ul>
+                    <li ng-class="{true:'current',false:''}[tab == 'first']" ng-click="toggleTab('goodsList')">商品明细</li>
+                    <li ng-class="{true:'current',false:''}[tab == 'second']" ng-click="toggleTab('logList')">操作日志</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="product-body">
+            <div class="fr">
+                <button class="svg2" ng-click="backInOrderList()">
+                    <i class="iconfont icon-new"></i>返回
+                </button>
+            </div>
+
+            <!-- 商品明细 -->
+            <div class="first" ng-show="tab == 'goodsList'">
+                <h5 class="add-title">商品明细</h5>
+                <table id="goodListTabWidget" class="display" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <td ng-repeat="obj in theadListGoodsTitle">{{obj.name}}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="obj in theadListGoods">
+                            <td ng-repeat="item in theadListGoodsTitle">{{obj[item.tag]}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 操作日志 -->
+            <div class="second" ng-show="tab == 'logList'">
+                <h5 class="add-title">操作日志</h5>
+                <table id="controlListTabWidget" class="display" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <td ng-repeat="obj in theadListLogTitle">{{obj.name}}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="obj in tableListLog">
+                            <td ng-repeat="item in theadListLogTitle">{{obj[item.tag]}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+<!-- 库存管理：入库订单详情 -->

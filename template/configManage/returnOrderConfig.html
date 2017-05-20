@@ -1,0 +1,96 @@
+<div id="configManage" class="config-manage">
+    <div class="return-order-config" ng-controller="returnOrderConfigController">
+        <div id="topNav" class="top-nav">
+            <div class="path">
+                退换货单配置
+            </div>
+        </div>
+        <div id="content" class="content">
+            <div class="items">
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('scanAutoConfirm')">
+                        <div class="klwk-check-x" ng-show="formData.scanAutoConfirm"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.scanAutoConfirm"><i class="iconfont"></i></div>
+                        <span class="title">扫描商品自动确认</span>
+                        <span class="detail">扫描生成的退换货单自动确认，不选时只有商品订单关联正常才会确认</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('wrongProductIsAbnormal')">
+                        <div class="klwk-check-x" ng-show="formData.wrongProductIsAbnormal"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.wrongProductIsAbnormal"><i class="iconfont"></i></div>
+                        <span class="title">错发商品人工确认</span>
+                        <span class="detail">退换扫描时错发商品是否保存为异常退换货单</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('checkExpressOnScan')">
+                        <div class="klwk-check-x" ng-show="formData.checkExpressOnScan"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.checkExpressOnScan"><i class="iconfont"></i></div>
+                        <span class="title">扫描时校验快递</span>
+                        <span class="detail">退货扫描时校验快递是否签收</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('existsNotify')">
+                        <div class="klwk-check-x" ng-show="formData.existsNotify"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.existsNotify"><i class="iconfont"></i></div>
+                        <span class="title">存在相同订单的退换货单时提醒</span>
+                        <span class="detail">退货扫描时如果对应的订单已经有退换货单时提示</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('existsExchangeOrderNotify')">
+                        <div class="klwk-check-x" ng-show="formData.existsExchangeOrderNotify"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.existsExchangeOrderNotify"><i class="iconfont"></i></div>
+                        <span class="title">存在换货订单提醒</span>
+                        <span class="detail">退换货单复核时已有存在的换货订单时系统提醒</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('existsRefundOrderNotify')">
+                        <div class="klwk-check-x" ng-show="formData.existsRefundOrderNotify"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.existsRefundOrderNotify"><i class="iconfont"></i></div>
+                        <span class="title">存在退款单提醒</span>
+                        <span class="detail">退换货单复核时已有存在的退款单时系统提醒</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('exchangeAutoAudit')">
+                        <div class="klwk-check-x" ng-show="formData.exchangeAutoAudit"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.exchangeAutoAudit"><i class="iconfont"></i></div>
+                        <span class="title">换货单自动审核</span>
+                        <span class="detail">退换货单复核后生成的换货订单是否自动审核</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('allowMultiExchangeOrder')">
+                        <div class="klwk-check-x" ng-show="formData.allowMultiExchangeOrder"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.allowMultiExchangeOrder"><i class="iconfont"></i></div>
+                        <span class="title">允许生成多个换货单</span>
+                        <span class="detail">启用后将允许一个交易号生成多个换货订单</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('onlySameSku')">
+                        <div class="klwk-check-x" ng-show="formData.onlySameSku"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.onlySameSku"><i class="iconfont"></i></div>
+                        <span class="title">换货只能换同款</span>
+                        <span class="detail">启用后退换货单中换出商品只能选退入商品中的款且数量和金额不能大于退入商品中同款的数量和金额</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('applyPriceFirst')">
+                        <div class="klwk-check-x" ng-show="formData.applyPriceFirst"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.applyPriceFirst"><i class="iconfont"></i></div>
+                        <span class="title">优先售后申请金额</span>
+                        <span class="detail">启用后退货扫描时如果有售后申请，就使用售后申请的退款金额，否则使用订单销售金额</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <button class="btn btn-success btn-78" ng-click="save()">保存</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="login-container" ng-controller="loginController">
+    <div class="login-left">
+        <div></div>
+    </div>
+    <div class="login-right">
+        <div class="login-info">
+            <div class="title">OMS订单管理用户登录</div>
+            <div class="content">
+                <input class="userName" ng-model="userName" type="text" placeholder="请输入用户名"><i class="iconfont user"></i>
+                <input class="passWord" ng-model="passWord" type="password" placeholder="请输入密码"><i class="iconfont suo"></i>
+                <div class="no-password">
+                    <div ng-init="sing = false" ng-class="{active:sing}" ng-click="singleOn()">
+                        <i class="iconfont"></i>
+                    </div>
+                    <span style="font-size: 12px;color: #999999;margin-left: 5px">5天内免登</span>
+                    <span style="font-size: 12px;color: #3FA248; float: right;cursor: pointer">忘记密码?</span></div>
+                <div class="loginBtn" ng-click="login()">登陆</div>
+            </div>
+        </div>
+    </div>
+    <div class="login-foot">
+        <div>©2001-2015   深圳欢乐沃克人力资源有限公司 版权所有. 粤ICP备15090398号</div>
+    </div>
+</div>

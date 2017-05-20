@@ -1,0 +1,66 @@
+<div id="addReturnGoodsBill" class="jxOutDiv" ng-controller="addReturnGoodsBillController">
+    <div class="jxOutDivContent">
+        <div>
+            <button class="btn btn-default btn-78 topReturn" ng-click="returnFun()">返回</button>
+        </div>
+        <div class="basic-message jxmessage form">
+            <h3 class="addTitle">新增退货单基本信息</h3>
+
+            <div class="rows rowsText">
+                <p>商品箱码 <span class="star">*</span></p>
+                <p>商品规格</p>
+            </div>
+            <div class="rows rowsInput">
+                <div>
+                    <input class="klw-input validate" name="empty" type="text" ng-model="modify.tableList.boxno" placeholder="请输入商品箱码"/>
+                </div>
+                <div>
+                    <input class="klw-input" type="text" ng-model="modify.tableList.productcode" placeholder="请输入商品规格"/>
+                </div>
+            </div>
+            <div class="rows rowsText">
+                <p>备注</p>
+            </div>
+            <div class="rows rowsInput">
+                <div class="input100">
+                    <textarea class="klw-textarea" ng-model="modify.tableList.remark" placeholder="请输入备注"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="activity-merchandise jxmessage">
+
+            <div class="hasDetail">
+                <div class="tableOut">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>PO单号</th>
+                            <th>箱码</th>
+                            <th>规格编码</th>
+                            <th>唯品编码</th>
+                            <th>退货数量</th>
+                            <th>签收数量</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!--<tr>-->
+                            <!--<td>1</td>-->
+                            <!--<td>1</td>-->
+                            <!--<td>1</td>-->
+                            <!--<td>1</td>-->
+                            <!--<td>1</td>-->
+                            <!--<td>1</td>-->
+                        <!--</tr>-->
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- 底部按钮-->
+        <div class="content-footer jxmessage">
+            <button class="btn btn-success btn-78" ng-click="submit()">保存</button>
+            <button class="btn btn-default btn-78" ng-click="returnFun()">取消</button>
+        </div>
+    </div>
+</div>

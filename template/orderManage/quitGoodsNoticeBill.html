@@ -1,0 +1,136 @@
+<div id="quitGoodsNoticeBill" class="jxOutDiv" ng-controller="quitGoodsNoticeBillController">
+    <div class="jxOutDivContent">
+        <!-- 主搜索框和主按钮-->
+        <div id="simpleSearch" class="simpleSearch" ng-hide="advancedSearchObj.advancedSearch == 'quitGoodsNoticeBill'">
+            <input class="klw-search" placeholder="通知单号" ng-model="formData.Code" ng-keydown="domOperate.searchByCode($event)"/>
+            <span class="advancedSearchBtn" ng-click="advancedSearchObj.isShow('quitGoodsNoticeBill')">高级搜索</span>
+            <div class="fr">
+                <div class="btn  pl-import" ng-click="domOperate.refresh()"><i class="icon iconfont icon-icon_fanzhuan_default" ></i>刷新</div>
+                <div class="btn add-order" ng-click="domOperate.batchCancle()">
+                    <i class="iconfont"></i>
+                    批量取消
+                </div>
+            </div>
+        </div>
+
+        <!-- 高级搜索展开-->
+        <div id="advancedSearch" class="advancedSearch" ng-show="advancedSearchObj.advancedSearch == 'quitGoodsNoticeBill'">
+            <!-- 制单时间-->
+            <div class="searchItem timeInput">
+                <span class="title">制单时间</span>
+
+                <div class="options">
+                    <input class="klw-input" id="CreateDateBegin" readonly ng-model="formData.CreateDateBegin" type="text">
+                    <i class="line"></i>
+                    <input class="klw-input" id="CreateDateEnd" readonly ng-model="formData.CreateDateEnd" type="text">
+                </div>
+            </div>
+            <!-- 退供仓库-->
+            <advanced-search-more-list  search-config="wareHouseConfigData"></advanced-search-more-list>
+            <advance-search-more-list-show search-config="wareHouseConfigData"></advance-search-more-list-show>
+            <!-- 退供仓库-->
+
+            <!-- 单据状态-->
+            <advanced-search-list config-data="receiptsConfigData"></advanced-search-list>
+            <!-- 单据状态-->
+
+            <div class="searchItem searchItemInput">
+                <div class="rows rowsText">
+                    <p>商品编码</p>
+                    <p>箱码</p>
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <input type="text" ng-model="formData.Product" class="klw-input"/>
+                    </div>
+                    <div>
+                        <input type="text" ng-model="formData.PackageNo" class="klw-input"/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 已选择行-->
+            <div class="searchItem selected">
+                <span class="title">已选择</span>
+                <div class="selectedBox"
+                     ng-repeat="(key,orderlist) in formChoseData">
+                    <span class="selectedTitle">{{orderlist['title']}}：</span>
+                    <span class="selectedContent">{{orderlist['name']}}</span>
+                    <i class="icon iconfont icon-icon_guanbisousuo" ng-click="domOperate.clearChoseCondition(orderlist)"></i>
+                </div>
+            </div>
+            <div id="conditionSet">
+                <button class="btn btn-success btn-78" ng-click="domOperate.advanceSearchConfirm($event)">确定</button>
+                <button class="btn btn-default btn-78 advancedSearchCancelBtn" ng-click="domOperate.advanceSearchCancle($event)">取消
+                </button>
+                <button class="btn btn-default btn-78" ng-click="domOperate.advanceSearchClear()">清空</button>
+            </div>
+        </div>
+
+        <!-- 特殊标识行-->
+        <div id="simpleSelect" class="simpleSelect clear">
+
+            <div class="ti-pagination">
+                <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                / 共 <span>{{paginationConf.totalItems}}</span>
+
+                <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont" ng-click="prev()"></i></span>
+
+                <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont" ng-click="next()"></i></span>
+
+                <span class="config-column" ng-mouseover="isHover()" ng-mouseleave="isHover()" ng-click="domOperate.listAllocation()"><i class="iconfont"></i></span>
+
+                <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+            </div>
+        </div>
+
+        <div class="tableOut">
+            <table>
+                <thead>
+                <tr>
+                    <th>
+                        <label ng-click="domOperate.selectAll()">
+                            <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':checkAll}"></i>
+                        </label>
+                    </th>
+                    <th>序号</th>
+                    <th>操作</th>
+                    <th ng-repeat="column in quitGoodsHead">{{column.name}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="list in quitGoodsBody">
+                    <td>
+                        <label ng-click="domOperate.goodsNoticeChosed(list)">
+                            <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':list.trShow}"></i>
+                        </label>
+                    </td>
+                    <td>{{$index+1}}</td>
+                    <td class="operate">
+                        <div class="multilevel-menu">
+                            <div><span class="iconfont icon-operate"></span></div>
+                            <div class="content">
+                                <ul class="one">
+                                    <li ng-click="domOperate.jumpToDetails('退货通知单：通知单详情','../template/orderManage/quitGoodsNoticeBillDetail.html',list)">通知单详情</li>
+                                    <li ng-click="domOperate.cancleRequisition(list,$event)"
+                                        ng-class="{true : '',false : 'clickDisabled'}[operateCheck.cancleCheck(list)]">取消</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td ng-repeat="column in quitGoodsHead"
+                        ng-if="column.tag != ''"
+                        ng-bind-html="list[column.tag] | quitGoodsListFilter : column :list"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--分页-->
+        <tm-pagination conf="paginationConf"></tm-pagination>
+
+        <!-- 右侧列表配置 -->
+        <tm-listallocation allo="allocation"></tm-listallocation>
+
+    </div>
+</div>

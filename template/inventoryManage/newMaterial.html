@@ -1,0 +1,198 @@
+<!-- 新增实物调拨 -->
+
+<div id="inventoryManage" class="inventory-manage">
+    <div id="newMaterial" class="in-order-add" ng-controller="newMaterialController">
+
+        <div class="purchase-content">
+            <div class="add">
+                <h5 class="add-title">基本信息</h5>
+                <div>
+                    <div class="row odd">
+                        <div class="column">
+                            <label>调出仓库<span class="important">*</span></label>
+                        </div>
+                        <div class="column">
+                            <label>占用仓库<span class="important">*</span></label>
+                        </div>
+                        <div class="column">
+                            <label>调入仓库<span class="important">*</span></label>
+                        </div>
+                        <div class="column">
+                            <label>调拨类型</label>
+                        </div>
+                    </div>
+                    <div class="row even">
+                        <div class="column">
+                            <pull-select pull-config="selectOutWarehouse"></pull-select>
+                        </div>
+                        <div class="column">
+                            <pull-select pull-config="selectVirtualWarehouse"></pull-select>
+                        </div>
+                        <div class="column">
+                            <pull-select pull-config="selectInWarehouse"></pull-select>
+                        </div>
+                        <div class="column">
+                            <pull-select pull-config="selectType"></pull-select>
+                        </div>
+                    </div>
+                    <div class="row odd">
+                        <div class="remark">
+                            <label>备注</label>
+                            <textarea ng-model="formData.Remark"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--新增商品信息-->
+            <div class="add-purchase pr">
+                <h5 class="add-title">商品信息</h5>
+                <div ng-class="{true:'',false:'add-after-btn'}[addOrder == 'addBefore']">
+                    <div class="btn add-order green-btn mr" ng-if="addOrder != 'addSelect'" ng-click="addProduct.isInit()">
+                        <i class="iconfont"></i>新增商品
+                    </div>
+                    <div class="btn pl-import" ng-if="addOrder != 'batch'" ng-click="addProduct.module('addOrder','batch')"><i class="iconfont"></i>批量导入</div>
+                    <div class="btn pl-import ml" ng-if="tableInfoList.length != 0" ng-click="addProduct.delete()">
+                        <i class="iconfont"></i>批量删除
+                    </div>
+                </div>
+                <!--选择商品-->
+                <div ng-if="addOrder == 'addSelect'" class="odd">
+                    <div class="new-header">
+                        <input type="text" class="klw-search" ng-model="productItem.productCode" ng-keyup="addProduct.search($event)" placeholder="商品编码">
+                    </div>
+                    <div class="new-body">
+                        <div class="body-table">
+                            <div class="left-table">
+                                <table id="getProductTable" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th ng-click="addProduct.selectAll('tableSkuList')">
+                                            <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                                        </th>
+                                        <th ng-repeat="obj in theadSkuList">{{obj.name}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="obj in tableSkuList" ng-click="addProduct.viewInventory(obj,$event)">
+                                        <td ng-click="addProduct.selectItem($index,'tableSkuList')">
+                                            <div class="klwk-check" ng-hide="obj.isdatacheck"><i class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-show="obj.isdatacheck"><i class="iconfont"></i></div>
+                                        </td>
+                                        <td ng-repeat="item in theadSkuList">{{obj[item.tag]}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="right-table">
+                                <div style="overflow: auto">
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>仓库名称</th>
+                                            <th>库存数</th>
+                                            <th>可用数</th>
+                                            <th>可销数</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in inventoryNum">
+                                            <td>{{$index+1}}</td>
+                                            <td>{{item.warehousename}}</td>
+                                            <td>{{item.quantity}}</td>
+                                            <td>{{item.canUseQuantity}}</td>
+                                            <td>{{item.canSaleQuantity}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <tm-pagination conf="paginationConf"></tm-pagination>
+                        <div class="mt">
+                            <button class="btn btn-success btn-78 mr" ng-click="addProduct.save()">确定</button>
+                            <button class="btn btn-default btn-78" ng-click="addProduct.cancel()">取消</button>
+                        </div>
+                    </div>
+                </div>
+                <!--批量导入-->
+                <div ng-if="addOrder == 'batch'" class="even">
+                    <div class="explain">
+                        <h5 class="add-title">导入说明</h5>
+                        <span>1. 导入文件支持CSV、XLS、XLXS格式、大小不超过2M，数据不超过2万字</span>
+                        <span>2. 导入文件不能包括"合并单元格"，否则无法导入</span>
+                        <span>3. 待补充</span>
+                    </div>
+                    <div class="row odd">
+                        <div class="column">
+                            <label for="leadModule">导入模板<span class="important">*</span></label>
+                        </div>
+                    </div>
+                    <div class="row lModule even">
+                        <div class="column">
+                            <input type="text" id="leadModule" placeholder="请导入模板" class="klw-input" disabled>
+                            <i class="iconfont"></i>
+                        </div>
+                        <span>还没有模板下载，<i>点击下载</i><i class="iconfont icon-icon5"></i></span>
+                    </div>
+                    <div>
+                        <button class="btn btn-success btn-78 mr" ng-click="addProduct.module('addOrder','')">导入</button>
+                        <button class="btn btn-default btn-78" ng-click="addProduct.cancel()">取消</button>
+                    </div>
+                </div>
+                <!--生成表格-->
+                <div ng-if="tableInfoList.length != 0">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th ng-click="addProduct.selectAll('tableInfoList')">
+                                <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                            </th>
+                            <th ng-repeat="obj in theadInfoList">{{obj.name}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in tableInfoList" ng-show="obj.isShow">
+                            <td ng-click="addProduct.selectItem($index,'tableInfoList')">
+                                <div class="klwk-check" ng-hide="obj.isdatacheck"><i class="iconfont"></i></div>
+                                <div class="klwk-check-x" ng-show="obj.isdatacheck"><i class="iconfont"></i></div>
+                            </td>
+                            <td ng-repeat="item in theadInfoList">{{obj[item.tag]}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="footer-btn add-footer">
+                <button class="btn btn-success btn-78 mr" ng-click="save()">保存</button>
+                <button class="btn btn-default btn-78" ng-click="goBack()">取消</button>
+            </div>
+
+        </div>
+
+        <!--错误模态框-->
+        <div class="cj-modal modal fade" id="errorModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content modal-600">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">错误</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span class="remind-text" ng-repeat="item in quantityArr">{{'规格:'+ item.description + '计划数量为0不能保存,请删除后保存'}}</span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-success btn-78 mr">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- /新增实物调拨 -->

@@ -1,0 +1,585 @@
+<div id="addOrder" class="jxOutDiv jxAdd" ng-controller="addOrderController">
+    <div class="jxOutDivContent">
+
+        <!-- 订单信息-->
+        <div class="order-message jxmessage">
+            <div class="store-chose">
+                <h3 class="addTitle store-title">店铺信息</h3>
+                <div class="store-list">
+                    <search-select search-config="selectConfig.storeList"></search-select>
+                </div>
+            </div>
+            <div class="messageTitle">
+                <h3 class="addTitle">订单信息</h3>
+            </div>
+
+            <div class="rows rowsText">
+                <p>平台订单号 <span class="star">*</span></p>
+
+                <p>订单类型 <span class="star">*</span></p>
+
+                <p>币种</p>
+
+                <p>到付服务费</p>
+            </div>
+            <div class="rows rowsInput form">
+                <div>
+                    <input type="text" ng-model="formData.tradeid" disabled class="klw-input"/>
+                </div>
+                <pull-select pull-config="selectConfig.transtype"></pull-select>
+                <pull-select pull-config="selectConfig.coinType"></pull-select>
+                <div>
+                    <input type="text" ng-model="formData.codservicefee" class="klw-input validate" name="number"/>
+                </div>
+            </div>
+            <div class="rows rowsText">
+                <p>会员信息 <span class="star">*</span></p>
+
+                <p>建议快递 <span class="star">*</span></p>
+
+                <p>建议仓库</p>
+
+                <p>预计发货日</p>
+            </div>
+            <div class="rows rowsInput">
+                <div>
+                    <div class="sewv accountInfo">
+                        <search-select search-config="selectConfig.accountInfo"></search-select>
+                    </div>
+                </div>
+                <div>
+                    <div class="sewv">
+                        <search-select search-config="selectConfig.expressInfo"></search-select>
+                    </div>
+                </div>
+                <div>
+                    <div class="sewv">
+                        <search-select search-config="selectConfig.wareHouseInfo"></search-select>
+                    </div>
+                </div>
+                <div class="timeSelInput">
+                    <input type="text" id="deliverDate" ng-model="formData.subOrder.preshipmentdate" readonly name="empty" class="klw-input"/>
+                    <i></i>
+                </div>
+            </div>
+            <div class="rows rowsText">
+                <p>快递费用</p>
+
+                <p>买家备注</p>
+            </div>
+            <div class="rows rowsInput form">
+                <div>
+                    <input type="text" ng-model="formData.expressfee" name="number"  class="klw-input validate"/>
+                </div>
+                <div class="input75">
+                    <input type="text" ng-model="formData.subOrder.buyermemo"  class="klw-input"/>
+                </div>
+            </div>
+            <div class="rows rowsText">
+                <p>卖家备注</p>
+            </div>
+            <div class="rows rowsInput">
+                <div class="input100">
+                    <input type="text" ng-model="formData.subOrder.sellermemo" name="empty" class="klw-input"/>
+                </div>
+            </div>
+            <div class="rows rowsFooter">
+                <div>
+                    <label ng-click="domOperate.isLabelSel($event,'iscod')">
+                        <i class="iconfont icon-sel" ng-class="{true : 'icon-sel-zhengque',false :''}[!!formData.iscod]"></i>
+                        <span>货到付款</span>
+                    </label>
+                </div>
+                <div>
+                    <label ng-click="domOperate.isLabelSel($event,'hasinvoice')">
+                        <i class="iconfont icon-sel" ng-class="{true : 'icon-sel-zhengque',false :''}[!!formData.hasinvoice]"></i>
+                        <span>需开发票</span>
+                    </label>
+                </div>
+                <div>
+                    <label ng-click="domOperate.isLabelSel($event,'speeddelivery')">
+                        <i class="iconfont icon-sel" ng-class="{true : 'icon-sel-zhengque',false :''}[!!formData.speeddelivery]"></i>
+                        <span>加急订单</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 商品信息 -->
+        <div class="merchandise-message jxmessage">
+            <!-- 商品信息之title-->
+            <div class="messageTitle">
+                <h3 class="addTitle">商品信息</h3>
+
+                <div class="fr message-button" ng-show="formData.details.length">
+                    <div class="add-detail fl" ng-click="domOperate.addProduct('addGoods')"><i class="iconfont"></i>新增商品明细</div>
+                    <div class="btn add-order btn6" ng-click="domOperate.addSuit('addSuit')"><i class="iconfont"></i>新增套装明细</div>
+                    <!--<div class="btn update-info fl"><i class="iconfont"></i>修改商品明细</div>-->
+                    <div class="btn  pl-import merchandiseBatchLeadBtn fl" ng-click="isGoodsShow('batchLead')"><i
+                            class="iconfont"></i>批量导入
+                    </div>
+                </div>
+            </div>
+            <!-- 商品信息之button-->
+            <div class="message-button" ng-hide="formData.details.length || goodsContent =='addGoods' || goodsContent == 'addSuit'">
+                <div class="add-detail btn btn6" ng-click="domOperate.addProduct('addGoods')"><i class="iconfont"></i>新增商品明细</div>
+                <div class="btn add-order btn6" ng-click="domOperate.addSuit('addSuit')"><i class="iconfont"></i>新增套装明细</div>
+                <div class="btn  pl-import merchandiseBatchLeadBtn" ng-click="isGoodsShow('batchLead')"><i
+                        class="iconfont"></i>批量导入
+                </div>
+            </div>
+            <!-- 商品信息之详情界面 -->
+            <div class="merchandise-details message-content">
+                <!-- 新增商品明细详情-->
+                <div class="addMerchandiseDetails" ng-show="goodsContent == 'addGoods'">
+                    <div class="search360">
+                        <input type="text" class="klw-search" ng-model="proCodeSearch" ng-keydown="domOperate.searchByProCode($event)" placeholder="商品编码"/>
+                    </div>
+
+                    <div class="skuInfo">
+                        <div class="addMerchandiseTable tableOut">
+                            <table id="productsInfoList">
+                                <thead>
+                                <tr>
+                                    <th class="gouxuan">
+                                        <label ng-click="domOperate.selectAll()">
+                                            <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':checkAll}"></i>
+                                        </label>
+                                    </th>
+                                    <th ng-repeat="column in productColumn">{{column.name}}</th>
+                                </tr>
+
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="list in productsInfo" ng-click="domOperate.getProductDetails(list)">
+                                    <td class="gouxuan">
+                                        <label ng-click="domOperate.addProductsDetails(list)">
+                                            <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':list.trShow}"></i>
+                                        </label>
+                                    </td>
+                                    <td ng-repeat="column in productColumn" >{{list[column.tag]}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="wareHouseTable tableOut">
+                            <i class="triangle"></i>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th ng-repeat="column in occupationColumn">{{column.name}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="list in Occupation">
+                                    <td ng-repeat="details in occupationColumn">{{list[details.tag]}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!--分页-->
+                    <tm-pagination conf="productPage.paginationConf"></tm-pagination>
+                    <div class="footer-button">
+                        <button class="btn btn-success btn-78" ng-click="domOperate.addProductsConfirm()">确定</button>
+                        <button class="btn btn-default btn-cancel btn-78" ng-click="domOperate.addProductsCancle()">取消</button>
+                    </div>
+                </div>
+                <!-- 新增套装明细详情-->
+                <div class="addSuitDetails" ng-show="goodsContent == 'addSuit'">
+                    <div class="search360">
+                        <input type="text" class="klw-search" placeholder="套装代码" ng-model="suitCode" ng-keydown="domOperate.searchSuitByCode($event)"/>
+                    </div>
+
+                    <div class="addMerchandiseTable tableOut">
+                        <table id="productInfo">
+                            <thead>
+                            <tr>
+                                <th class="gouxuan">
+                                    <label ng-click="domOperate.suitSelectAll()">
+                                        <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':suitAll}"></i>
+                                    </label>
+                                </th>
+                                <th ng-repeat="column in combinedProductColumn">{{column.name}}</th>
+                            </tr>
+
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="list in combinedProduct">
+                                <td class="gouxuan">
+                                    <label ng-click="domOperate.addSuitDetails(list)">
+                                        <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':list.trShow}"></i>
+                                    </label>
+                                </td>
+                                <td ng-repeat="column in combinedProductColumn" ng-if="column.tag != ''">
+                                    <span ng-bind-html="list[column.tag] | suitInfoFilter : column.tag"></span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--分页-->
+                    <tm-pagination conf="suitPage.paginationConf"></tm-pagination>
+                    <div class="footer-button">
+                        <button class="btn btn-success btn-78" ng-click="domOperate.addSuitConfirm()">确定</button>
+                        <button class="btn btn-default btn-cancel btn-78" ng-click="domOperate.addProductsCancle()">取消</button>
+                    </div>
+                </div>
+                <!-- 批量导入详情-->
+                <div class="batchLeadDetails" ng-show="goodsContent == 'batchLead'">
+                    <div class="leadExplain">
+                        <p>导入说明</p>
+
+                        <p>1. 导入文件仅支持CSV、XLS、XLXS格式、大小不超过2M，数据不超过1万字</p>
+
+                        <p>2. 导入文件不能包含“合并单元格”，否则无法导入 </p>
+
+                        <p>3. 待补充</p>
+                    </div>
+                    <div class="leadTemplate">
+                        <p>导入模板 <span class="star">*</span></p>
+                        <div class="rows rowsInput">
+                            <div class="input50 leadFileInput">
+                                <input type="text" class="klw-input" placeholder="请选择导入文件" readonly/>
+                                <i class="iconfont"></i>
+                            </div>
+                            <div class="notTemplate">
+                                还没有模板,
+                                <span>点此下载  <i class="iconfont">&#xe681;</i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-button">
+                        <button class="btn btn-success btn-78" >确定</button>
+                        <button class="btn btn-default btn-cancel btn-78" ng-click="isGoodsShow(false)">取消</button>
+                    </div>
+                </div>
+            </div>
+            <!-- 商品信息之有商品-->
+            <div class="hasMerchandiseMessage" ng-show="formData.details.length">
+                <div class="merchandiseTable tableOut">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>操作</th>
+                                <th ng-repeat="column in productsChosedColumn">{{column.name}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="list in formData.details">
+                                <td>
+                                    <i class="icon iconfont icon-icon_shaixuan_default2" ng-click="domOperate.deleteProduct(list)"></i>
+                                </td>
+                                <td ng-repeat="column in productsChosedColumn"
+                                    ng-click="domOperate.changeNum(column.tag,$event,list)" nb-blur="domOperate.saveChage($event,list)">
+                                    {{list[column.tag] | productInfoFilter : column.tag}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>合计</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>{{quantity}}</td>
+                                <td></td>
+                                <td></td>
+                                <td>{{amount}}</td>
+                                <td></td>
+                                <td>{{actualamount}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 支付明细-->
+        <div class="pay-detail jxmessage">
+            <!-- 支付明细之title-->
+            <div class="messageTitle">
+                <h3 class="addTitle">支付明细</h3>
+
+                <div class="fr message-button" ng-show="formData.payMents.length">
+                    <div class="add-detail addPayDetailBtn" ng-click="isPayShow()"><i class="iconfont"></i>新增支付明细</div>
+                    <!--<div class="reviseReceiveMessageBtn btn update-info rightButton"><i class="iconfont"></i>修改支付明细</div>-->
+                </div>
+            </div>
+            <!-- 支付明细之button-->
+            <div class="message-button" ng-hide="formData.payMents.length || payContent">
+                <div class="add-detail addPayDetailBtn" ng-click="isPayShow()"><i class="iconfont"></i>新增支付明细</div>
+            </div>
+
+            <!-- 支付明细之新增界面-->
+            <div class="addPayPage message-content" ng-show="payContent">
+                <div class="rows rowsText">
+                    <p>支付方式 <span class="star">*</span></p>
+
+                    <p>支付人</p>
+
+                    <p>金额 <span class="star">*</span></p>
+
+                    <p>支付时间 <span class="star">*</span></p>
+                </div>
+                <div class="rows rowsInput form">
+                    <div>
+                        <div class="sewv">
+                            <pull-select pull-config="selectConfig.payType"></pull-select>
+                        </div>
+                    </div>
+                    <div>
+                        <input class="klw-input" ng-model="tmpData.payMents.payusername"  type="text"/>
+                    </div>
+                    <div>
+                        <input class="klw-input validate" ng-model="tmpData.payMents.amount" name="number" type="text"/>
+                    </div>
+                    <div>
+                        <input class="klw-input timeSelInput datetimepicker" id="payTime" ng-model="tmpData.payMents.paytime" name="empty" type="text"/>
+                    </div>
+                </div>
+                <div class="footer-button">
+                    <button class="btn btn-success btn-78" ng-click="domOperate.addPayDtailsConfirm()">确定</button>
+                    <button class="btn btn-default btn-cancel btn-78" ng-click="isPayShow()">取消</button>
+                </div>
+            </div>
+
+            <!--支付明细之有明细 -->
+            <div class="hasPayDetail" ng-repeat='pay in formData.payMents'>
+                <div class="span-text">
+                    <span class="span-odd">支付名称:</span>
+                    <span class="span-even">{{payment[pay.paytype]}}</span>
+                </div>
+                <div class="span-text">
+                    <span class="span-odd">支付人:</span>
+                    <span class="span-even">{{pay.payusername}}</span>
+                </div>
+                <div class="span-text">
+                    <span class="span-odd">支付时间:</span>
+                    <span class="span-even">{{pay.paytime}}</span>
+                </div>
+                <div class="span-text">
+                    <span class="span-odd">金额:</span>
+                    <span class="span-even">{{pay.amount}}</span>
+                </div>
+                <div class="span-text details-del">
+                    <span class="span-even" ng-click="domOperate.orderInfoDel(pay)">
+                         <i class="icon iconfont icon-icon_shaixuan_default2" ></i>&nbsp;&nbsp;作废
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 收货信息-->
+        <div class="receive-message jxmessage ">
+            <!-- 收货信息之title-->
+            <div class="messageTitle">
+                <h3 class="addTitle">收货信息</h3>
+
+                <div class="fr message-button" ng-show="formData.customername">
+                    <div class="reviseReceiveMessageBtn btn update-info rightButton" ng-click="domOperate.changeGoodsReceptions()"><i class="iconfont"></i>修改收货信息</div>
+                </div>
+            </div>
+
+            <!-- 收货信息之button-->
+            <div class="message-button" ng-hide="receiveContent || formData.customername">
+                <div class="add-detail addReceiveMessageBtn" ng-click="isReceiveShow()"><i class="iconfont"></i>新增收货信息</div>
+            </div>
+
+            <!-- 收货信息之新增界面-->
+            <div class="addReceivePage message-content form" ng-show="receiveContent">
+                <div class="rows rowsText">
+                    <p>买家昵称<span class="star">*</span></p>
+
+                    <p>买家邮箱</p>
+
+                    <p>收货人 <span class="star">*</span></p>
+
+                    <p>邮编</p>
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <input class="klw-input validate" ng-model="tmpData.customername" name="empty" type="text"/>
+                    </div>
+                    <div>
+                        <input class="klw-input" ng-model="tmpData.subOrder.buyeremail"  type="text"/>
+                    </div>
+                    <div>
+                        <input class="klw-input validate" ng-model="tmpData.subOrder.consignee" name="empty" type="text"/>
+                    </div>
+                    <div>
+                        <input class="klw-input" ng-model="tmpData.subOrder.zipcode" type="text"/>
+                    </div>
+
+                </div>
+                <div class="rows rowsText">
+                    <p>联系人<span class="star">*</span></p>
+
+                    <p>电话</p>
+
+                    <p>手机<span class="star">*</span></p>
+
+                    <p>传真</p>
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <input class="klw-input validate" ng-model="tmpData.subOrder.contacter" name="empty" type="text"/>
+                    </div>
+                    <div>
+                        <input class="klw-input" ng-model="tmpData.subOrder.telephone" type="text"/>
+                    </div>
+                    <div>
+                        <input class="klw-input validate" ng-model="tmpData.subOrder.mobile" name="phone" type="text"/>
+                    </div>
+                    <div>
+                        <input class="klw-input" ng-model="tmpData.subOrder.fax"  type="text"/>
+                    </div>
+                </div>
+                <div class="rows rowsText">
+                    <p>国家</p>
+
+                    <p>省</p>
+
+                    <p>市</p>
+
+                    <p>区</p>
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <pull-select pull-config="selectConfig.country"></pull-select>
+                    </div>
+                    <div>
+                        <pull-select pull-config="selectConfig.province"></pull-select>
+                    </div>
+                    <div>
+                        <pull-select pull-config="selectConfig.city"></pull-select>
+                    </div>
+                    <div>
+                        <pull-select pull-config="selectConfig.district"></pull-select>
+                    </div>
+                </div>
+                <div class="rows rowsText">
+                    <p>详细地址<span class="star">*</span></p>
+                </div>
+                <div class="rows rowsInput">
+                    <div class="input75">
+                        <input class="klw-input validate" ng-model="tmpData.subOrder.address" name="empty" type="text"/>
+                    </div>
+                </div>
+                <div class="footer-button">
+                    <button class="btn  btn-78 btn-success"
+                            ng-click="domOperate.addGoodsReceptionConfirm()">确定</button>
+                    <button class="btn btn-default btn-cancel btn-78" ng-click="isReceiveShow()">取消</button>
+                </div>
+            </div>
+
+            <!--收货信息之有信息 -->
+            <div class="hasReceive" ng-show="!receiveContent && formData.customername">
+                <div>
+                    <div class="span-text">
+                        <span class="span-odd">收货人:</span>
+                        <span class="span-even">{{formData.subOrder.consignee}}</span>
+                    </div>
+                    <div class="span-text">
+                        <span class="span-odd">联系方式:</span>
+                        <span class="span-even">{{formData.subOrder.mobile}}</span>
+                    </div>
+                    <div class="span-text">
+                        <span class="span-odd">买家昵称:</span>
+                        <span class="span-even">{{formData.customername}}</span>
+                    </div>
+                </div>
+                <div class="span-text receiveAddress">
+                    <span class="span-odd">地址:</span>
+                    <span class="span-even">{{formData.subOrder.address}}</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 发票明细-->
+        <div class="invoice-detail jxmessage">
+            <!-- 发票明细之title-->
+            <div class="messageTitle">
+                <h3 class="addTitle">发票明细</h3>
+
+                <div class="fr message-button" ng-show="formData.invoices.length">
+                    <div class="add-detail addInvoiceDetailBtn" ng-click="isInvoiceShow()"><i class="iconfont"></i>新增发票明细</div>
+                    <!--<div class="deleteInvoiceDetailBtn btn delete-detail rightButton"><i class="iconfont"></i>删除发票明细</div>-->
+                </div>
+            </div>
+
+            <!-- 发票明细之button-->
+            <div class="message-button" ng-hide="invoiceContent || formData.invoices.length">
+                <div class="add-detail addInvoiceDetailBtn" ng-click="isInvoiceShow()"><i class="iconfont"></i>新增发票明细</div>
+            </div>
+
+            <!-- 发票明细之新增界面-->
+            <div class="addInvoicePage message-content" ng-show="invoiceContent">
+                <div class="rows rowsText">
+                    <p>发票类型<span class="star">*</span></p>
+
+                    <p>发票金额<span class="star">*</span></p>
+
+                    <p>发票抬头<span class="star">*</span></p>
+
+                    <p>发票内容</p>
+                </div>
+                <div class="rows rowsInput form">
+                    <div>
+                        <div class="sewv">
+                            <pull-select pull-config="selectConfig.invoiceType"></pull-select>
+                        </div>
+                    </div>
+                    <div>
+                        <input class="klw-input validate" name="number" type="text" ng-model="tmpData.invoices.amount" placeholder="请输入发票金额"/>
+                    </div>
+                    <div>
+                        <input class="klw-input validate" name="empty" type="text" ng-model="tmpData.invoices.title" placeholder="请输入发票抬头"/>
+                    </div>
+                    <div>
+                        <input class="klw-input" type="text" ng-model="tmpData.invoices.content" placeholder="请输入发票内容"/>
+                    </div>
+                </div>
+                <div class="footer-button">
+                    <button class="btn btn-78 btn-success"
+                             ng-click="domOperate.addInvoiceDetailsConfirm()">确定</button>
+                    <button class="btn btn-default btn-cancel btn-78" ng-click="isInvoiceShow()">取消</button>
+                </div>
+            </div>
+
+            <!--发票明细之有明细 -->
+            <div class="hasInvoice" ng-repeat="list in formData.invoices track by $index">
+                <div>
+                    <div class="span-text">
+                        <span class="span-odd">发票抬头:</span>
+                        <span class="span-even">{{list.title}}</span>
+                    </div>
+                    <div class="span-text">
+                        <span class="span-odd">发票内容:</span>
+                        <span class="span-even">{{list.content}}</span>
+                    </div>
+                    <div class="span-text">
+                        <span class="span-odd">发票金额:</span>
+                        <span class="span-even">{{list.amount}}</span>
+                    </div>
+                    <div class="span-text details-del">
+                        <span class="span-even" ng-click="domOperate.invoiceDel(list)">
+                             <i class="icon iconfont icon-icon_shaixuan_default2"></i>&nbsp;&nbsp;作废
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 底部按钮-->
+        <div class="content-footer jxmessage">
+            <button class="btn btn-success btn-78" ng-click='domOperate.saveOptions()'>保存</button>
+            <button class="btn btn-default btn-78" ng-click="domOperate.cancleAddOrder()">取消</button>
+        </div>
+    </div>
+</div>

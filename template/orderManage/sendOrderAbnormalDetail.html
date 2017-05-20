@@ -1,0 +1,29 @@
+<div id="sendOrderAbnormalDetail" class="jxOutDiv jxOutDivDetail" ng-controller="sendOrderAbnormalDetailController">
+    <div class="jxOutDivContent">
+        <button class="btn btn-default btn-78" ng-click="domOperate.returnTolist()" style="margin: 20px 0 0 35px;">返回</button>
+        <div class="detail-content-top">
+            <div class="detail-top-tab">
+                <ul>
+                    <li class="current">异常明细详情</li>
+                </ul>
+            </div>
+        </div>
+        <div class="jxmessage">
+            <div class="tableOut">
+                <table>
+                    <thead>
+                        <tr>
+                            <th ng-repeat="column in columns">{{column.name}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="list in log">
+                            <td ng-repeat="column in columns">{{list[column.tag]}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

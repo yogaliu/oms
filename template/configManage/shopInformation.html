@@ -1,0 +1,349 @@
+<div id="configManage" class="config-manage">
+    <div id="shopInformation" class="shop-information" ng-controller="shopInformationController">
+        <div class="has-not-set" ng-if="!isAllSet">
+            <span class="text">以下标红的店铺未进行初始化，请在操作栏进行设置！</span>
+            <span class="icon" ng-click="hideSetAlert()"><i class="iconfont icon-delete"></i></span>
+        </div>
+        <div id="content" class="content">
+            <div class="cf table-oprate">
+                <div class="fl">
+                </div>
+                <div class="fr">
+                    <button class="svg2" ng-click="fresh()">刷新</button>
+                    <menu-select menu-config="menuInfo"></menu-select>
+                    <button class="svg2" ng-click="goNewShop()">新增店铺</button>
+                </div>
+            </div>
+            <!--<div id="topTable" class="top-table">
+                <div>
+                    <div class="ti-pagination">
+                        <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                        / 共 <span>{{paginationConf.totalItems}}</span>
+                        <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont"  ng-click="prev()"></i></span>
+                        <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont" ng-click="next()"></i></span>
+                        <span class="config-column"><i class="iconfont"></i></span>
+                    </div>
+                </div>
+            </div>-->
+            <div class="more-table" style="height: calc(100% - 120px);">
+                <div class="ab-position">
+                    <div class="all-table">
+                        <table class="table-thead" cellspacing="0" style="width: calc(100% - 4px);">
+                            <thead>
+                            <tr>
+                                <th ng-click="selectAll()">
+                                    <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                                </th>
+                                <th>操作</th>
+                                <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <table id="mainTable" class="display main-table" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th ng-click="selectAll()">
+                                    <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                                </th>
+                                <th>操作</th>
+                                <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="obj in tableList" ng-class="{true:'',false:'not-set'}[obj.isset]">
+                                <td ng-click="selectItem($index)">
+                                    <div class="klwk-check" ng-hide="obj.isdatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="obj.isdatacheck"><i class="iconfont"></i></div>
+                                </td>
+                                <td class="over-show">
+                                    <div class="tr-oprate">
+                                        <div class="tr-icon"><i class="iconfont icon-operate"></i></div>
+                                        <ul class="tr-oprate-list">
+                                            <li ng-click="showShopSetModal($index)">店铺设置</li>
+                                            <li ng-click="goEditShop($index)">修改</li>
+                                            <li ng-click="enabledItem($index)">启用</li>
+                                            <li ng-click="disabledItem($index)">禁用</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td ng-repeat="item in theadList" title="{{obj[item.tag] | isBoolean }}">
+                                    <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                                    {{obj[item.tag] | isBoolean }}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+
+        </div>
+
+
+        <!--店铺设置弹框-->
+        <div class="modal fade shop-set-modal form" id="shopSetModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span ng-class="{true:'tab active',false:'tab'}[tab=='basicSet']" ng-click="toggleTab('basicSet')">
+                            基础设置
+                        </span>
+                        <span ng-class="{true:'tab active',false:'tab'}[tab=='reviewWay']" ng-click="toggleTab('reviewWay')">
+                            审单策略
+                        </span>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="alt" ng-hide="activeItem.isset">此店铺尚未初始化店铺设置</div>
+                    <div class="modal-body">
+                        <div ng-show="tab=='basicSet'">
+                            <div class="advance-search">
+                                <div class="items">
+                                    <div class="ipt cf">
+                                        <label class="item">
+                                            <span class="title">默认仓库<i class="notice">*</i></span>
+                                            <pull-select pull-config="DefaultWarehouse"></pull-select>
+                                        </label>
+                                        <label class="item">
+                                            <span class="title">退入仓库</span>
+                                            <pull-select pull-config="DefaultInWarehouse"></pull-select>
+                                        </label>
+                                        <label class="item">
+                                            <span class="title">换出仓库</span>
+                                            <pull-select pull-config="DefaultOutWareshouse"></pull-select>
+                                        </label>
+                                    </div>
+                                    <div class="ipt cf">
+                                        <label class="item">
+                                            <span class="title">支付方式<i class="notice">*</i></span>
+                                            <pull-select pull-config="DefaultPayType"></pull-select>
+                                        </label>
+                                        <label class="item">
+                                            <span class="title">配货模板<i class="notice">*</i></span>
+                                            <pull-select pull-config="DispatchTemplate"></pull-select>
+                                        </label>
+                                        <label class="item">
+                                            <span class="title">配货模式<i class="notice">*</i></span>
+                                            <pull-select pull-config="DispatchMode"></pull-select>
+                                        </label>
+                                    </div>
+                                    <div class="ipt cf">
+                                        <label class="item">
+                                            <span class="title">铺货规则<i class="notice">*</i></span>
+                                            <pull-select pull-config="DistributionRule"></pull-select>
+                                        </label>
+                                        <label class="item">
+                                            <span class="title">京东模式</span>
+                                            <pull-select pull-config="Mode"></pull-select>
+                                        </label>
+                                        <label class="item">
+                                            <span class="title">订单过滤时间</span>
+                                            <input type="text" class="klw-input datetimepicker" id="filterdate" ng-model="activeItem.storeSetting.filterdate" readonly ng-disabled="!activeItem.storeSetting.isfilter">
+                                        </label>
+                                    </div>
+                                    <div class="ipt cf">
+                                        <label class="item">
+                                            <span class="title">退货留言</span>
+                                            <input type="text" class="klw-input" ng-model="activeItem.storeSetting.returnmessage">
+                                        </label>
+                                        <label class="item">
+                                            <span class="title">最大合单数量</span>
+                                            <input type="text" class="klw-input" ng-model="activeItem.storeSetting.mergemaxcount">
+                                        </label>
+                                        <label class="item">
+                                            <span class="title">预售NH前不拆单</span>
+                                            <input type="text" class="klw-input" ng-model="activeItem.storeSetting.presellnhnosplit">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="advance-check">
+                                <div class="sel cf">
+                                    <label class="item">
+                                        <div class="line" ng-click="checkItem('ispush')">
+                                            <div class="klwk-check" ng-hide="activeItem.storeSetting.ispush"><i class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-show="activeItem.storeSetting.ispush"><i class="iconfont"></i></div>
+                                            <span class="text">订单推送</span>
+                                        </div>
+                                    </label>
+                                    <label class="item">
+                                        <div class="line" ng-click="checkItem('isfilter')">
+                                            <div class="klwk-check" ng-hide="activeItem.storeSetting.isfilter"><i class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-show="activeItem.storeSetting.isfilter"><i class="iconfont"></i></div>
+                                            <span class="text">订单过滤</span>
+                                        </div>
+                                    </label>
+                                    <label class="item">
+                                        <div class="line" ng-click="checkItem('ispredeliveryfirit')">
+                                            <div class="klwk-check" ng-hide="activeItem.storeSetting.ispredeliveryfirit">
+                                                <i class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-show="activeItem.storeSetting.ispredeliveryfirit">
+                                                <i class="iconfont"></i></div>
+                                            <span class="text">预售有货先发</span>
+                                        </div>
+                                    </label>
+                                    <label class="item">
+                                        <div class="line" ng-click="checkItem('isrelsales')">
+                                            <div class="klwk-check" ng-hide="activeItem.storeSetting.isrelsales"><i class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-show="activeItem.storeSetting.isrelsales"><i class="iconfont"></i></div>
+                                            <span class="text">退换货关联订单</span>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="sel cf">
+                                    <label class="item">
+                                        <div class="line" ng-click="checkItem('isconnectcloudsstack')">
+                                            <div class="klwk-check" ng-hide="activeItem.storeSetting.isconnectcloudsstack">
+                                                <i class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-show="activeItem.storeSetting.isconnectcloudsstack">
+                                                <i class="iconfont"></i></div>
+                                            <span class="text">启用电子面单</span>
+                                        </div>
+                                    </label>
+                                    <label class="item">
+                                        <div class="line" ng-click="checkItem('isautodownloaddistribution')">
+                                            <div class="klwk-check" ng-hide="activeItem.storeSetting.isautodownloaddistribution">
+                                                <i class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-show="activeItem.storeSetting.isautodownloaddistribution">
+                                                <i class="iconfont"></i></div>
+                                            <span class="text">自动下载铺货</span>
+                                        </div>
+                                    </label>
+                                    <label class="item">
+                                        <div class="line" ng-click="checkItem('isusedistributionamount')">
+                                            <div class="klwk-check" ng-hide="activeItem.storeSetting.isusedistributionamount">
+                                                <i class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-show="activeItem.storeSetting.isusedistributionamount">
+                                                <i class="iconfont"></i></div>
+                                            <span class="text">启用分销价</span>
+                                        </div>
+                                    </label>
+                                    <label class="item">
+                                        <div class="line" ng-click="checkItem('isautoauditrefundorder')">
+                                            <div class="klwk-check" ng-hide="activeItem.storeSetting.isautoauditrefundorder">
+                                                <i class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-show="activeItem.storeSetting.isautoauditrefundorder">
+                                                <i class="iconfont"></i></div>
+                                            <span class="text">自动审核退款单</span>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="sel cf">
+                                    <label class="item">
+                                        <div class="line" ng-click="checkItem('isautodownloadalipayrecord')">
+                                            <div class="klwk-check" ng-hide="activeItem.storeSetting.isautodownloadalipayrecord">
+                                                <i class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-show="activeItem.storeSetting.isautodownloadalipayrecord">
+                                                <i class="iconfont"></i></div>
+                                            <span class="text">自动下载支付宝账单</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="tab=='reviewWay'">
+                            <div class="advance-search">
+                                <div class="items">
+                                    <div class="ipt cf">
+                                        <label class="item auto-stop">
+                                            <span class="title">自动审单拦截</span>
+                                            <input type="text" class="klw-input" id="auditfilterbegin" ng-model="activeItem.storeSetting.auditfilterbeginFormat" readonly>
+                                            <div class="short-line"></div>
+                                            <input type="text" class="klw-input" id="auditfilterend" ng-model="activeItem.storeSetting.auditfilterendFormat" readonly>
+                                        </label>
+                                    </div>
+                                    <div class="ipt cf">
+                                        <label class="item">
+                                            <span class="title">拦截件数</span>
+                                            <input type="text" class="klw-input" ng-model="activeItem.storeSetting.totalproduct">
+                                        </label>
+                                        <label class="item">
+                                            <span class="title">拦截金额</span>
+                                            <input type="text" class="klw-input" ng-model="activeItem.storeSetting.totalamount">
+                                        </label>
+                                        <label class="item">
+                                            <span class="title">拦截区域</span>
+                                            <input type="text" class="klw-input" ng-model="activeItem.storeSetting.regionkey">
+                                        </label>
+                                    </div>
+                                    <div class="ipt cf">
+                                        <label class="item">
+                                            <span class="title">拦截商品信息</span>
+                                            <input type="text" class="klw-input" ng-model="activeItem.storeSetting.product">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="advance-check">
+                                <div class="sel cf">
+                                    <label class="item">
+                                        <div class="line" ng-click="checkItem('ischeckaddress')">
+                                            <div class="klwk-check" ng-hide="activeItem.storeSetting.ischeckaddress">
+                                                <i class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-show="activeItem.storeSetting.ischeckaddress">
+                                                <i class="iconfont"></i></div>
+                                            <span class="text">审核地址</span>
+                                        </div>
+
+                                    </label>
+                                    <label class="item">
+                                        <div class="line" ng-click="checkItem('ischeckbuyermemo')">
+                                            <div class="klwk-check" ng-hide="activeItem.storeSetting.ischeckbuyermemo">
+                                                <i class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-show="activeItem.storeSetting.ischeckbuyermemo">
+                                                <i class="iconfont"></i></div>
+                                            <span class="text">审核买家备注</span>
+                                        </div>
+
+                                    </label>
+                                    <label class="item">
+                                        <div class="line" ng-click="checkItem('ischecksellermemo')">
+                                            <div class="klwk-check" ng-hide="activeItem.storeSetting.ischecksellermemo">
+                                                <i class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-show="activeItem.storeSetting.ischecksellermemo">
+                                                <i class="iconfont"></i></div>
+                                            <span class="text">审核卖家备注</span>
+                                        </div>
+
+                                    </label>
+                                    <label class="item">
+                                        <div class="line" ng-click="checkItem('isinvoiceautoaudit')">
+                                            <div class="klwk-check" ng-hide="activeItem.storeSetting.isinvoiceautoaudit">
+                                                <i class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-show="activeItem.storeSetting.isinvoiceautoaudit">
+                                                <i class="iconfont"></i></div>
+                                            <span class="text">发票自动审核</span>
+                                        </div>
+
+                                    </label>
+                                </div>
+                                <div class="sel cf">
+                                    <label class="item">
+                                        <div class="line" ng-click="checkItem('ischeckcod')">
+                                            <div class="klwk-check" ng-hide="activeItem.storeSetting.ischeckcod">
+                                                <i class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-show="activeItem.storeSetting.ischeckcod">
+                                                <i class="iconfont"></i></div>
+                                            <span class="text">货到付款自动审核</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="saveSet()">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>

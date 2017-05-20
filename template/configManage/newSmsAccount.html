@@ -1,0 +1,38 @@
+<div id="configManage" class="config-manage">
+    <div class="new-sms-account" id="newSmsAccount" ng-controller="newSmsAccountController">
+        <div id="content" class="content">
+            <div class="advance-search">
+                <div class="items" id="form">
+                    <div class="ipt cf form">
+                        <label class="item">
+                            <span class="title">名称<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="formData.name">
+                        </label>
+                        <label class="item">
+                            <span class="title">账号<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="formData.account">
+                        </label>
+                        <label class="item">
+                            <span class="title">密码<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="formData.password">
+                        </label>
+                        <label class="item">
+                            <span class="title">产品编号<i class="notice">*</i></span>
+                            <input type="text" class="klw-input validate" name="empty" ng-model="formData.productid">
+                        </label>
+                    </div>
+                    <div class="ipt cf">
+                        <label class="item">
+                            <span class="title">备注</span>
+                            <input type="text" class="klw-input" ng-model="formData.note">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <button class="btn btn-success btn-78" ng-click="newSmsAccount()">保存</button>
+                <button class="btn btn-default btn-78" ng-click="cancle()">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

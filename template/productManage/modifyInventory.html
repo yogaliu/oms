@@ -1,0 +1,64 @@
+<!-- 修改库存扣减方式 -->
+
+<div id="modifyInventory" class="cj-product" ng-controller="modifyInventoryController">
+    <div class="product-content">
+
+        <div class="product-header">
+            <h5 class="add-title">修改库存扣减方式</h5>
+            <div class="row odd">
+                <div class="column">
+                    <label>减库存方式<span class="important">*</span></label>
+                </div>
+                <div class="column">
+                    <label for="store">店铺</label>
+                </div>
+            </div>
+            <div class="row even">
+                <div class="column">
+                    <pull-select pull-config="selectReduce"></pull-select>
+                </div>
+                <div class="column">
+                    <input type="text" id="store" class="klw-input" readonly ng-model="param.store.name">
+                </div>
+            </div>
+        </div>
+
+        <div class="product-body">
+            <div class="mt">
+                <div class="body-table">
+                    <table ng-if="param.obj.length != 0">
+                        <thead>
+                        <tr>
+                            <td>操作</td>
+                            <td>平台商品ID</td>
+                            <td>商品编码</td>
+                            <td>商品名称</td>
+                            <td>信息</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in param.obj">
+                            <td ng-click="delete($index)"><i class="iconfont icon-icon22"></i></td>
+                            <td>{{item.platformid}}</td>
+                            <td>{{item.product.productcode}}</td>
+                            <td>{{item.product.producttitle}}</td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="right-btn">
+                <div class="btn klwk-cancle mr" ng-click="empty()"><i class="iconfont"></i>清空</div>
+                <div class="btn pl-import"><i class="iconfont"></i>导入商品</div>
+            </div>
+        </div>
+
+        <div class="footer-btn">
+            <button type="button" class="btn btn-success btn-78 mr" ng-disabled="!importantField" ng-class="{true:'',false:'forbid'}[reduceStyle && param.obj!= 0?importantField = true:importantField = false]" ng-click="ensure()">开始修改</button>
+            <button type="button" class="btn btn-default btn-78" ng-click="goBack()">取消</button>
+        </div>
+    </div>
+</div>
+
+<!-- /修改库存扣减方式 -->

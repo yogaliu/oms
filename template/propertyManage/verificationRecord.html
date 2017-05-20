@@ -1,0 +1,87 @@
+<div id="verificationRecord" class="jxOutDiv" ng-controller="verificationRecordController">
+    <div class="jxOutDivContent">
+
+        <!-- 高级搜索展开-->
+        <div id="advancedSearch" class="advancedSearch">
+            <div class="searchItem1 clear">
+                <div class="clear">
+                    <span class="title">店铺名称</span>
+
+                    <div>
+                        <search-select search-config="selectStore"></search-select>
+                    </div>
+                    <span class="title">处理时间 <span class="star">*</span></span>
+
+                    <div class="timeInputDiv fl">
+                        <input class="klw-input dateTime" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="searchForm.StartDate">
+                        <i class="iconfont icon-time"></i>
+                    </div>
+
+                    <i class="line fl"></i>
+
+                    <div class="timeInputDiv fl">
+                        <input class="klw-input dateTime" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="searchForm.EndDate">
+                        <i class="iconfont icon-time"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div id="conditionSet">
+                <button class="btn btn-success btn-78" ng-click="searchObj()">搜索</button>
+                <button class="btn btn-default btn-78" ng-click="empty()">清空</button>
+            </div>
+        </div>
+
+        <!-- 特殊标识行-->
+        <div id="simpleSelect" class="simpleSelect clear">
+            <div class="selectItems fl">
+                <label ng-click="isThreeSel($event,'1')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow"
+                       ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[simpleSelect.isauto]"></i>
+                    <span>自动核销</span>
+                </label>
+            </div>
+            <div class="ti-pagination">
+                <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                / 共 <span>{{paginationConf.totalItems}}</span>
+
+                <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont"
+                                                                                   ng-click="prev()"></i></span>
+
+                <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont"
+                                                                                                    ng-click="next()"></i></span>
+
+                 <span style="position: relative">
+                    <span class="config-column" ng-click="showColumnConfigPanel()"  ng-mouseover="isHover()" ng-mouseleave="isHover()">
+                        <i class="iconfont"></i>
+                    </span>
+                    <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+                    <tm-listallocation allo="allocation"></tm-listallocation>
+                </span>
+            </div>
+        </div>
+
+        <div class="tableOut">
+            <table id="verificationRecordTable" class="display" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="obj in tableList" repeat-finished-directive repeataction="initFunc()"
+                    repeatIndex="{{$index}}" condition="{{$last}}">
+                    <td ng-repeat="item in theadList">
+                        <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                        {{obj[item.tag] | isBoolean | setDefaultValueWithoutData}}
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+        <!--分页-->
+        <tm-pagination conf="paginationConf"></tm-pagination>
+    </div>
+</div>

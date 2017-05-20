@@ -1,0 +1,143 @@
+<div id="handworkVerification" class="jxOutDiv" ng-controller="handworkVerificationController">
+    <div class="jxOutDivContent">
+        <!-- 高级搜索展开-->
+        <div id="advancedSearch" class="advancedSearch">
+
+            <div class="searchItem1 clear">
+                <p class="title1">系统单据</p>
+
+                <div class="clear">
+                    <span class="title">店铺名称 <span class="star">*</span></span>
+
+                    <div>
+                        <search-select search-config="selectStore"></search-select>
+                    </div>
+                    <span class="title">处理时间 <span class="star">*</span></span>
+
+                    <div class="timeInputDiv timeInputDiv1">
+                        <input class="klw-input dateTime" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="searchForm.systemStart">
+                        <i class="iconfont icon-time"></i>
+                    </div>
+
+                    <i class="line"></i>
+
+                    <div class="timeInputDiv">
+                        <input class="klw-input dateTime" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="searchForm.systemEnd">
+                        <i class="iconfont icon-time"></i>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="searchItem1 clear">
+                <p class="title1">平台对账单</p>
+
+                <div class="clear">
+                    <span class="title">账单店铺  <span class="star">*</span></span>
+
+                    <div>
+                        <search-select search-config="selectStore2"></search-select>
+                    </div>
+
+                    <span class="title">账单时间 <span class="star">*</span></span>
+
+                    <div class="timeInputDiv timeInputDiv1">
+                        <input class="klw-input dateTime" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="searchForm.checkStart">
+                        <i class="iconfont icon-time"></i>
+                    </div>
+
+                    <i class="line"></i>
+
+                    <div class="timeInputDiv">
+                        <input class="klw-input dateTime" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="searchForm.checkEnd">
+                        <i class="iconfont icon-time"></i>
+                    </div>
+
+                    <span class="title">平台订单号</span>
+
+                    <div>
+                        <input type="text" class="klw-input" ng-model="searchForm.orderno" placeholder="请输入平台订单号"/>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div id="conditionSet">
+                <button class="btn btn-success btn-78" ng-click="search($event)"
+                        ng-class="{false:'disabledBtn'}[!!searchForm.systemStart && !!searchForm.systemEnd && !!searchForm.checkStart&& !!searchForm.checkEnd&& !!searchForm.systemStoreId&& !!searchForm.otherStoreId]">搜索</button>
+                <button class="btn btn-default btn-78" ng-click="empty()"> 清空</button>
+            </div>
+        </div>
+        <div class="systemBills">
+            <div class="clear">
+                <span class="title1">系统单据</span>
+
+                <div class="fr clear">
+                    <div class="btn klwk-cancle" ng-click="verificationFun()">核销</div>
+                </div>
+            </div>
+
+
+            <div class="tableOut">
+                <table id="systemBillsTable" class="display" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>选择操作</th>
+                        <th ng-repeat="obj in theadList1 ">{{obj.name}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="obj in tableList1" repeat-finished-directive repeataction="initFunc()"
+                        repeatIndex="{{$index}}" condition="{{$last == true}}">
+                        <td>
+                            <label ng-click="isLabelSel($event)">
+                                <i class="iconfont icon-sel"></i>
+                            </label>
+                        </td>
+                        <td ng-repeat="item in theadList1">{{obj[item.tag] | setDefaultValueWithoutData}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!--&lt;!&ndash;分页&ndash;&gt;-->
+            <!--<tm-pagination conf="paginationConf1"></tm-pagination>-->
+        </div>
+
+        <div class="platformCheckBill">
+            <div class="clear">
+                <span class="title1">平台对账单</span>
+            </div>
+
+            <div class="tableOut">
+                <table id="platformCheckBillTable" class="display" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>选择操作</th>
+                        <th ng-repeat="obj in theadList2">{{obj.name}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="obj in tableList2" repeat-finished-directive repeataction="initFunc()"
+                        repeatIndex="{{$index}}" condition="{{$last == true}}">
+                        <td>
+                            <label ng-click="isLabelSel($event)">
+                                <i class="iconfont icon-sel"></i>
+                            </label>
+                        </td>
+                        <td ng-repeat="item in theadList2">{{obj[item.tag] | jxFilter:item.tag:'handworkVerification'}}</td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+            <!--&lt;!&ndash;分页&ndash;&gt;-->
+            <!--<tm-pagination conf="paginationConf2"></tm-pagination>-->
+        </div>
+
+
+    </div>
+</div>

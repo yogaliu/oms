@@ -1,0 +1,70 @@
+<div id="configManage" class="config-manage">
+    <div class="system-config" ng-controller="systemConfigController">
+        <div id="content" class="content">
+            <!--<div class="tit"></div>-->
+            <div class="items">
+                <div class="sel-item">
+                    <span class="title">日志保留天数</span>
+                    <input type="number" class="klw-input" ng-model="formData.logSaveDays">
+                    <span class="detail">（日志数据包含配货单获取日志、库存异动日志、库存上传日志、发货日志、铺货日志）</span>
+                </div>
+                <div class="sel-item">
+                    <span class="title">规格编码截取器</span>
+                    <input type="text" class="klw-input" ng-model="formData.skuCodeMatcher">
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('enableECO')">
+                        <div class="klwk-check-x" ng-show="formData.enableECO"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.enableECO"><i class="iconfont"></i></div>
+                        <span class="title">启用御城河</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('taobaoOrderNotify')">
+                        <div class="klwk-check-x" ng-show="formData.taobaoOrderNotify"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.taobaoOrderNotify"><i class="iconfont"></i></div>
+                        <span class="title">启用淘宝安全链路</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('allotWithCanSell')">
+                        <div class="klwk-check-x" ng-show="formData.allotWithCanSell"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.allotWithCanSell"><i class="iconfont"></i></div>
+                        <span class="title">虚拟调拨按可销计算</span>
+                        <span class="detail">（虚拟调拨时可调拨的库存数按可销数量计算，不勾选按可用）</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('specMessageDigest')">
+                        <div class="klwk-check-x" ng-show="formData.specMessageDigest"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.specMessageDigest"><i class="iconfont"></i></div>
+                        <span class="title">敏感信息加密</span>
+                        <span class="detail">（会员手机、电话）</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('hddenCostPice')">
+                        <div class="klwk-check-x" ng-show="formData.hddenCostPice"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.hddenCostPice"><i class="iconfont"></i></div>
+                        <span class="title">成本价字段隐藏</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('autoPurchareNotice')">
+                        <div class="klwk-check-x" ng-show="formData.autoPurchareNotice"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.autoPurchareNotice"><i class="iconfont"></i></div>
+                        <span class="title">自动生成采购通知单</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <span class="title">系统头像</span>
+                    <img src="../images/zhengque icom xuanzhong.svg">
+                    <button class="btn btn-default btn-78">选择</button>
+                </div>
+            </div>
+            <div class="footer">
+                <button class="btn btn-success btn-78" ng-click="save()">保存</button>
+            </div>
+        </div>
+    </div>
+</div>

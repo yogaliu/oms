@@ -1,0 +1,72 @@
+<div id="creatRefund"  ng-controller="createRefundBillController">
+
+    <div class="jxOutDiv">
+        <div class="order-message jxmessage">
+            <div class="messageTitle">
+                <h3 class="addTitle">生成退款单</h3>
+            </div>
+
+            <div class="rows rowsText">
+                <p>订单编号 <span class="star">*</span></p>
+
+                <p>店铺 <span class="star">*</span></p>
+
+                <p>会员昵称</p>
+
+                <p>手机</p>
+            </div>
+            <div class="rows rowsInput">
+                <div>
+                    <input type="text" ng-model="formData.SalesOrderCode" disabled class="klw-input"/>
+                </div>
+                <!--店铺信息-->
+                <pull-select pull-config="pullInfo.store"></pull-select>
+                <!--会员昵称-->
+                <div>
+                    <input type="text" ng-model="formData.CustomerName" class="klw-input" disabled/>
+                </div>
+                <div>
+                    <input type="text" ng-model="formData.Mobile" class="klw-input"/>
+                </div>
+            </div>
+            <div class="rows rowsText">
+                <p>退款类型<span class="star">*</span></p>
+
+                <p>退货类型<span class="star">*</span></p>
+
+                <p>退款金额</p>
+
+                <p>退款方式</p>
+            </div>
+            <div class="rows rowsInput">
+                <!--退款类型-->
+                <pull-select pull-config="pullInfo.refundType"></pull-select>
+                <!--退货类型-->
+                <pull-select pull-config="pullInfo.returnGoods"></pull-select>
+                <div>
+                    <input type="text" ng-model="formData.ActualAmount" class="klw-input"/>
+                </div>
+                <!--退款方式-->
+                <pull-select pull-config="pullInfo.refundWay"></pull-select>
+            </div>
+            <div class="rows rowsText">
+                <p>备注</p>
+            </div>
+            <div class="rows rowsInput">
+                <div class="input100">
+                    <input type="text" ng-model="formData.Note" class="klw-input"/>
+                </div>
+            </div>
+
+
+            <div class="content-footer jxmessage">
+                <button class="btn btn-success btn-78" ng-click="domOperate.save('订单详情','../template/orderManage/orderDetail.html')">保存</button>
+                <button class="btn btn-default btn-78" ng-click="domOperate.cancleCreate('订单详情','../template/orderManage/orderDetail.html')">取消</button>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>

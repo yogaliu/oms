@@ -1,0 +1,369 @@
+<div id="inventoryManage" class="inventory-manage cj-product ng-scope">
+    <div id="goodsRelationship" ng-controller="inventoryUploadController">
+        <div class="inventory-upload" id="inventoryUpload" >
+        <div id="topNav" class="top-nav">
+            <div class="path">
+                库存上传
+            </div>
+        </div>
+        <div id="content" class="content">
+            <div class="tab">
+                <span ng-class="{true:'title active',false:'title'}[tab == 'upload']" ng-click="toggleTab('upload')">
+                    库存上传
+                </span>
+                <span ng-class="{true:'title active',false:'title'}[tab == 'result']" ng-click="toggleTab('result')">
+                    上传结果查看
+                </span>
+            </div>
+            <div ng-if="tab == 'upload'">
+                <div class="advance-search">
+                    <div class="items">
+                        <div class="ipt l1">
+                            <label class="item">
+                                <span class="title">店铺信息<i class="notice">*</i></span>
+                                <div style="width: 230px;margin-top: 10px;">
+                                    <pull-select pull-config="pullInfo" ></pull-select>
+                                </div>
+                            </label>
+                            <label class="item itemBtn" >
+                                <!--<div class="btn add-order mr"  ng-click="showModal('productSelectModal')">选择商品</div>-->
+                                <div style="width: 120px">
+                                    <menu-select menu-config="productInfo"></menu-select>
+                                </div>
+
+                            </label>
+                            <label class="item itemBtn">
+                                <!--<div class="btn add-order mr"  ng-click="inportGoods()">导入商品</div>-->
+                                <div style="width: 120px">
+                                    <menu-select menu-config="importInfo"></menu-select>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="l2">
+                            <span class="title">待上传商品信息</span>
+                            <div ng-click="zlChecked()" ng-class="{true:'klwk-check-x',false:'klwk-check'}[ischeck]"   style="top: -2px"><i class="iconfont"></i></div>
+                            <span>增量上传</span>
+                            <button class="btn btn-default btn-78 m1"  ng-disabled="formData.delete" ng-click="deleteProductSpec($event)">删除</button>
+                        </div>
+                        <div class="ipt l3">
+                            <div class="ipt-title">
+                                <div ng-class="{true:'column4',false:'column3'}[ischeck]">商品名称</div>
+                                <div ng-class="{true:'column4',false:'column3'}[ischeck]">规格编码</div>
+                                <div ng-class="{true:'column4',false:'column3'}[ischeck]">商规格名称</div>
+                                <div ng-class="{true:'column4',false:'column3'}[ischeck]" ng-show="ischeck" >上传数量</div>
+                            </div>
+                            <div class="spec-content">
+                                <div class="ipt-row" ng-repeat="ProductItemObj in association" ng-init="outerIndex = $index" ng-click="productSpecInfo($index);">
+                                    <div>
+                                        <!--<label ng-click="selectAll($event);$event.stopPropagation();">-->
+                                            <!--<i class="iconfont icon-sel productDelete"></i>-->
+                                        <!--</label>-->
+                                        商品编码 : {{ProductItemObj.productcode}}</div>
+                                    <div>规格数量 : {{ProductItemObj.specNumber}}</div>
+                                    <div ng-show="ProductItemObj.isShow" ng-click="$event.stopPropagation();">
+                                        <ul ng-click="$event.stopPropagation();">
+                                            <li ng-repeat="obj in ProductItemObj.productSpec"  >
+                                                <div ng-class="{true:'column4',false:'column3'}[ischeck]">
+                                                    <label >
+                                                        <i  ng-click="selectSingle($event);" class="iconfont icon-sel productDelete" data-parentIndex="{{outerIndex}}" data-index="{{$index}}"></i>
+                                                    </label>
+                                                    {{obj.productname}}
+                                                </div>
+                                                <div ng-class="{true:'column4',false:'column3'}[ischeck]">{{obj.productcode}}</div>
+                                                <div ng-class="{true:'column4',false:'column3'}[ischeck]">{{obj.description}}</div>
+                                                <div ng-class="{true:'column4',false:'column3'}[ischeck]" ng-show="ischeck">
+                                                    <input type="input" ng-blur="uploadNumber($event,outerIndex,$index)">
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <div>
+                        <button class="btn btn-default btn-78 svg2 b2 fl" ng-disabled="formData.count == 0" ng-click="uploadProductSpec()">开始上传</button>
+                        <button class="btn btn-default btn-78 fl" ng-disabled="formData.count == 0" ng-click="clearProductSpec()">清空</button>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="tab == 'result'">
+                <div class="search cf">
+                    <div class="items line fl">
+                        <div class="ipt line">
+                            <label class="item title" >
+                                <span class="title">上传状态</span>
+                                <div style="width: 230px;margin-top: 10px;">
+                                    <pull-select pull-config="uploadStatus" ></pull-select>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="oprate line fl">
+                        <button class="svg2" ng-click="getUploadLog()">刷新结果</button>
+                        <button class="svg2" ng-click="fialUpload()" ng-show="isFail">失败重试</button>
+                    </div>
+                    <div class="fr line import">
+                        <button class="svg2">导出本页</button>
+                    </div>
+                </div>
+                <div class="UploadContent">
+                    <table id="UploadLogTable" class="display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th ng-repeat="obj in uploadLogList">{{obj.name}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in tableUploadLog">
+                            <td ng-repeat="item in uploadLogList">{{obj[item.tag]}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <tm-pagination conf="paginationUploadLogConf"></tm-pagination>
+            </div>
+
+        </div>
+    </div>
+        <!--选择规格模态框-->
+        <div class="modal fade product-list" id="productSpecModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="product-head">
+                        <div class="product-title">选择规格</div>
+                        <div class="product-close" ng-click="hideModal('productSpecModal')"><i class="icon iconfont icon-icon_guanbisousuo"></i></div>
+                    </div>
+                    <div class="product-body">
+                        <div>
+                            <div class="row">
+                                <div class="column">
+                                    <label>商品代码 <span class="important">*</span></label>
+                                </div>
+                                <div class="column">
+                                    <label>商品名称<span class="important">*</span></label>
+                                </div>
+                                <div class="column">
+                                    <label>规格代码 <span class="important">*</span></label>
+                                </div>
+                            </div>
+                            <div class="row odd">
+                                <div class="column">
+                                    <input class="klw-input" ng-model="productItem.productCode" type="text"/>
+                                </div>
+                                <div class="column">
+                                    <input class="klw-input" ng-model="productItem.productName" type="text"/>
+                                </div>
+                                <div class="column">
+                                    <input class="klw-input" ng-model="productItem.code" type="text"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="column">
+                                    <label>规格名称 <span class="important">*</span></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="column">
+                                    <input class="klw-input" ng-model="productItem.description" type="text"/>
+                                </div>
+                            </div>
+                            <div class="mt">
+                                <button class="btn btn-success btn-78 mr" ng-click="productSearchEnsure(1)">确认</button>
+                                <button class="btn btn-default btn-78" ng-click="productSearchCancel()">清空</button>
+                            </div>
+                        </div>
+
+                        <div class="mt">
+                            <div class="body-table ProductSpecContent">
+                                <table id="getProductSpecTable" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th ng-repeat="obj in theadSkuList">{{obj.name}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="obj in tableSkuList" ng-click="selectProduct(obj,$event,1)">
+                                        <td ng-repeat="item in theadSkuList">{{obj[item.tag]}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <tm-pagination conf="paginationSkuConf"></tm-pagination>
+                        </div>
+                        <div class="mt">
+                            <div class="body-table">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th>仓库名称</th>
+                                        <th>库存数</th>
+                                        <th>可用数</th>
+                                        <th>可销数</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="item in inventoryNum">
+                                        <td>{{item.warehouseid}}</td>
+                                        <td>{{item.quantity}}</td>
+                                        <td>{{item.canUseQuantity}}</td>
+                                        <td>{{item.canSaleQuantity}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="footer mt">
+                                <button class="btn btn-success btn-78 mr" ng-click="productEnsure('productSpecModal')">保存</button>
+                                <button class="btn btn-default btn-78" ng-click="hideModal('productSpecModal')">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--选择商品模态框-->
+        <div class="modal fade product-list" id="productSelectModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="product-head">
+                        <div class="product-title">选择商品</div>
+                        <div class="product-close" ng-click="hideModal('productSelectModal')"><i class="icon iconfont icon-icon_guanbisousuo"></i></div>
+                    </div>
+                    <div class="product-body">
+                        <div>
+                            <div class="row">
+                                <div class="column">
+                                    <label>商品代码 <span class="important">*</span></label>
+                                </div>
+                                <div class="column">
+                                    <label>商品名称<span class="important">*</span></label>
+                                </div>
+                                <div class="column">
+                                    <label>规格代码 <span class="important">*</span></label>
+                                </div>
+                            </div>
+                            <div class="row odd">
+                                <div class="column">
+                                    <input class="klw-input" ng-model="productItem.productCode" type="text"/>
+                                </div>
+                                <div class="column">
+                                    <input class="klw-input" ng-model="productItem.productName" type="text"/>
+                                </div>
+                                <div class="column">
+                                    <input class="klw-input" ng-model="productItem.code" type="text"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="column">
+                                    <label>规格名称 <span class="important">*</span></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="column">
+                                    <input class="klw-input" ng-model="productItem.description" type="text"/>
+                                </div>
+                            </div>
+                            <div class="mt">
+                                <button class="btn btn-success btn-78 mr" ng-click="productSearchEnsure(0)">确认</button>
+                                <button class="btn btn-default btn-78" ng-click="productSearchCancel()">清空</button>
+                            </div>
+                        </div>
+
+                        <div class="mt">
+                            <div class="body-table ProductSpecTableContent">
+                                <table id="getProductTable" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th ng-repeat="obj in selectProductList">{{obj.name}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="obj in tableSkuList" ng-click="selectProduct(obj,$event,0)">
+                                        <td ng-repeat="item in selectProductList">{{obj[item.tag]}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <tm-pagination conf="paginationProductConf"></tm-pagination>
+
+                        <div class="footer mt">
+                            <button class="btn btn-success btn-78 mr" ng-click="productEnsure('productSelectModal')">保存</button>
+                            <button class="btn btn-default btn-78" ng-click="hideModal('productSelectModal')">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--选择组合模态框-->
+        <div class="modal fade product-list" id="productGroupModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="product-head">
+                        <div class="product-title">选择组合套装</div>
+                        <div class="product-close" ng-click="hideModal('productGroupModal')"><i class="icon iconfont icon-icon_guanbisousuo"></i></div>
+                    </div>
+                    <div class="product-body">
+                        <div>
+                            <div class="row">
+                                <div class="column">
+                                    <label>套装代码 <span class="important">*</span></label>
+                                </div>
+                                <div class="column">
+                                    <label>套装名称<span class="important">*</span></label>
+                                </div>
+                                <div class="column">
+                                    <label>规格代码 <span class="important">*</span></label>
+                                </div>
+                            </div>
+                            <div class="row odd">
+                                <div class="column">
+                                    <input class="klw-input" ng-model="productItem.productCode" type="text"/>
+                                </div>
+                                <div class="column">
+                                    <input class="klw-input" ng-model="productItem.productName" type="text"/>
+                                </div>
+                                <div class="column">
+                                    <input class="klw-input" ng-model="productItem.code" type="text"/>
+                                </div>
+                            </div>
+                            <div class="mt">
+                                <button class="btn btn-success btn-78 mr" ng-click="productSearchEnsure(2)">确认</button>
+                                <button class="btn btn-default btn-78" ng-click="productSearchCancel()">清空</button>
+                            </div>
+                        </div>
+
+                        <div class="mt">
+                            <div class="body-table">
+                                <table id="getGroupTable" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th ng-repeat="obj in productGroupList">{{obj.name}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="obj in tableSkuList" ng-click="selectProduct(obj,$event,0)">
+                                        <td ng-repeat="item in productGroupList">{{obj[item.tag]}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <tm-pagination conf="paginationGroupConf"></tm-pagination>
+                        </div>
+
+                        <div class="footer mt">
+                            <button class="btn btn-success btn-78 mr" ng-click="productEnsure('productGroupModal')">保存</button>
+                            <button class="btn btn-default btn-78" ng-click="hideModal('productGroupModal')">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

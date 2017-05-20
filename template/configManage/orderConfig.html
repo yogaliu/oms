@@ -1,0 +1,156 @@
+<div id="configManage" class="config-manage">
+    <div class="order-config" id="orderConfig" ng-controller="orderConfigController">
+        <div id="topNav" class="top-nav">
+            <div class="path">
+                订单配置
+            </div>
+        </div>
+        <div id="content" class="content">
+            <div class="tit">审核配置</div>
+            <div class="items">
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('payAbnormalNotify')">
+                        <div class="klwk-check-x" ng-show="formData.payAbnormalNotify"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.payAbnormalNotify"><i class="iconfont"></i></div>
+                        <span class="title">支付异常提醒</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('notCheckBlackList')">
+                        <div class="klwk-check-x" ng-show="formData.notCheckBlackList"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.notCheckBlackList"><i class="iconfont"></i></div>
+                        <span class="title">自动订单黑名单不检查</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('showWarehouseWhenSelectExpress')">
+                        <div class="klwk-check-x" ng-show="formData.showWarehouseWhenSelectExpress"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.showWarehouseWhenSelectExpress"><i class="iconfont"></i></div>
+                        <span class="title">选择快递时加载仓库</span>
+                        <span class="detail">订单列表右击菜单选择快递时加载仓库信息</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('checkAddress')">
+                        <div class="klwk-check-x" ng-show="formData.checkAddress"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.checkAddress"><i class="iconfont"></i></div>
+                        <span class="title">订单导入验证省市区</span>
+                        <span class="detail">订单导入时省市区匹配不上时不允许导入</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('manualOrderNeedCheck')">
+                        <div class="klwk-check-x" ng-show="formData.manualOrderNeedCheck"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.manualOrderNeedCheck"><i class="iconfont"></i></div>
+                        <span class="title">手工订单需要确认</span>
+                        <span class="detail">手工新增订单，导入订单时要人工确认</span>
+                    </div>
+                </div>
+            </div>
+            <div class="tit">转化配置</div>
+            <div class="items">
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('stopUpdateMemoWhenDistribution')">
+                        <div class="klwk-check-x" ng-show="formData.stopUpdateMemoWhenDistribution"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.stopUpdateMemoWhenDistribution"><i class="iconfont"></i></div>
+                        <span class="title">配货后停止更新备注</span>
+                        <span class="detail">订单配货后停止更新买家备注和卖家备注</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('replaceSellerMemo')">
+                        <div class="klwk-check-x" ng-show="formData.replaceSellerMemo"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.replaceSellerMemo"><i class="iconfont"></i></div>
+                        <span class="title">替换卖家备注</span>
+                        <span class="detail">最新卖家备注替换原有卖家备注</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('reMarkExpress')">
+                        <div class="klwk-check-x" ng-show="formData.reMarkExpress"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.reMarkExpress"><i class="iconfont"></i></div>
+                        <span class="title">备注匹配快递</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('jDReplaceOrderAmountUseOrig')">
+                        <div class="klwk-check-x" ng-show="formData.jDReplaceOrderAmountUseOrig"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.jDReplaceOrderAmountUseOrig"><i class="iconfont"></i></div>
+                        <span class="title">京东换货订单结算取原单金额</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('enabledPresell')">
+                        <div class="klwk-check-x" ng-show="formData.enabledPresell"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.enabledPresell"><i class="iconfont"></i></div>
+                        <span class="title">启用预售</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <span class="title">预售通配符</span>
+                    <input type="text" class="klw-input" ng-model="formData.presellWildcard">
+                </div>
+            </div>
+            <div class="tit">配货配置</div>
+            <div class="items">
+                <div class="sel-item">
+                    <span class="title">云栈订购店铺</span>
+                    <pull-select pull-config="StoreList"></pull-select>
+                </div>
+                <div class="sel-item">
+                    <span class="title">配货等待时间</span>
+                    <input type="number" class="klw-input" ng-model="formData.distributeWaitTime">
+                    <span class="detail">配货设定时间之前的订单，一版设置在30分钟以上，有利于合单等待</span>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('mergeWithSameMember')">
+                        <div class="klwk-check-x" ng-show="formData.mergeWithSameMember"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.mergeWithSameMember"><i class="iconfont"></i></div>
+                        <span class="title">相同会员合单</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('mergeWithSameStore')">
+                        <div class="klwk-check-x" ng-show="formData.mergeWithSameStore"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.mergeWithSameStore"><i class="iconfont"></i></div>
+                        <span class="title">相同店铺合单</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('splitAutoDistribute')">
+                        <div class="klwk-check-x" ng-show="formData.splitAutoDistribute"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.splitAutoDistribute"><i class="iconfont"></i></div>
+                        <span class="title">拆单自动配货</span>
+                        <span class="detail">自动拆单和手工拆单后，未配货的明细在有库存的条件下可以自动配货</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('manualDistributeOccupyInventory')">
+                        <div class="klwk-check-x" ng-show="formData.manualDistributeOccupyInventory"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.manualDistributeOccupyInventory"><i class="iconfont"></i></div>
+                        <span class="title">手工配货抢占库存</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('distributeWhenSurfaceFail')">
+                        <div class="klwk-check-x" ng-show="formData.distributeWhenSurfaceFail"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.distributeWhenSurfaceFail"><i class="iconfont"></i></div>
+                        <span class="title">电子面单获取失败时是否继续生成配货单</span>
+                    </div>
+                </div>
+
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('checkInventory')">
+                        <div class="klwk-check-x" ng-show="formData.checkInventory"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.checkInventory"><i class="iconfont"></i></div>
+                        <span class="title">配货检查库存</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="footer">
+                <button class="btn btn-success btn-78" ng-click="save()">保存</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,114 @@
+<div id="configManage" class="config-manage">
+    <div class="platform-interface" id="platformInterface" ng-controller="platformInterfaceController">
+        <div id="content" class="content">
+            <div class="search cf">
+                <div class="fr line">
+                    <button ng-click="fresh()" class="svg1">刷新</button>
+                    <button class="svg2" ng-click="batchDelete()">批量删除</button>
+                    <button class="svg2" ng-click="newItem()">新增</button>
+                </div>
+            </div>
+            <!--<div id="topTable" class="top-table cf">
+                <div class="fr">
+
+                </div>
+            </div>-->
+            <div class="more-table" style="height: calc(100% - 60px);">
+                <div class="ab-position">
+                    <div class="all-table">
+                        <table class="table-thead" cellspacing="0" style="width: calc(100% - 4px);">
+                            <thead>
+                            <tr>
+                                <th ng-click="selectAll()">
+                                    <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                                </th>
+                                <th>操作</th>
+                                <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <table id="mainTable" class="display" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th ng-click="selectAll()">
+                                    <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                                </th>
+                                <th>操作</th>
+                                <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="obj in tableList">
+                                <td ng-click="selectItem($index);$event.stopPropagation();">
+                                    <div class="klwk-check" ng-hide="obj.isdatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="obj.isdatacheck"><i class="iconfont"></i></div>
+                                </td>
+                                <td class="over-show">
+                                    <div class="tr-oprate">
+                                        <div class="tr-icon"><i class="iconfont icon-operate"></i></div>
+                                        <ul class="tr-oprate-list">
+                                            <li ng-click="edit($index)">修改</li>
+                                            <li ng-click="delete($index)">删除</li>
+                                            <li ng-click="isCanReauthorization($index)">重新授权</li>
+                                            <li ng-click="refreshToken($index)">刷新令牌</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td ng-repeat="item in theadList" title="{{obj[item.tag] | isBoolean}}">
+                                    <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                                    {{obj[item.tag] | isBoolean}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+
+            </div>
+
+        </div>
+
+
+        <!--重新授权弹框-->
+        <div class="modal fade reauthorization" id="reauthorizationModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">重新授权</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="ipt">
+                            <div class="item cf">
+                                <span class="title">Code</span>
+                                <input class="klw-input" type="text" placeholder="请输入" ng-model="activeItem.reauthorizationCode">
+                                <button class="btn btn-success btn-78" ng-click="getCode()">检测Code</button>
+                            </div>
+                            <div class="item cf">
+                                <span class="title">授权地址</span>
+                                <input class="klw-input" type="text" placeholder="请输入" ng-model="activeItem.authorizationurl" readonly>
+                            </div>
+                            <div class="item cf">
+                                <span class="title">请求地址</span>
+                                <input class="klw-input" type="text" placeholder="请输入" ng-model="activeItem.requesturl">
+                            </div>
+                            <div class="tip">
+                                <i class="notice">*</i>
+                                请通过外部浏览器使用【授权地址】登录后将浏览器的Url地址填到【请求地址】点击【检测Code】后进行授权
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="saveReauthorization()">确定</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

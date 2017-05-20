@@ -1,0 +1,25 @@
+<style>
+    .myred{
+        color:red;
+    }
+</style>
+<div>
+
+    <!-- scope变量绑定 : 直接使用变量设置class -->
+    <div class="oneClass {{myred}}">
+        class="{{myred}}"
+    </div>
+
+    <!-- 字符串数组形式是针对class简单变化，具有排斥性的变化，true是什么class，false是什么class -->
+    <div ng-class="{true: 'active', false: 'inactive'}[isActive]">
+        ng-class="{true: 'active', false: 'inactive'}[isActive]"
+    </div>
+
+    <!-- 对象key/value处理； 如果isSelected为true,则显示selected样式 -->
+    <div ng-class="{'selected': isSelected, 'car': isCar}">
+        ng-class="{'selected': isSelected, 'car': isCar}"
+    </div>
+</div>
+
+
+

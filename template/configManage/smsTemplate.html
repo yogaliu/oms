@@ -1,0 +1,198 @@
+<div id="configManage" class="config-manage">
+    <div class="sms-template express-information peering-strategy" id="SMSTemplate" ng-controller="SMSTemplateController">
+        <div id="content" class="content">
+            <div class="table-oprate">
+                <button class="svg2" ng-click="fresh()">刷新</button>
+                <menu-select menu-config="menuInfo"></menu-select>
+                <button class="svg2" ng-click="showCreatModal()">新增短信模板</button>
+            </div>
+            <div id="topTable" class="top-table cf">
+                <div class="items fl">
+                    <label class="item" ng-click="queryCondition('isdisabled')">
+                        <div class="klwk-check-f" ng-if="formData.isdisabled === ''"><i class="iconfont"></i></div>
+                        <div class="klwk-check-x" ng-if="formData.isdisabled === true"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-if="formData.isdisabled === false"><i class="iconfont"></i></div>
+                        <span>禁用</span>
+                    </label>
+                </div>
+                <div class="fr">
+
+                </div>
+            </div>
+            <div class="cf more-table" style="height: calc(100% - 113px);">
+                <div class="ab-position">
+                    <div class="left-table" style="width: 70%;">
+                        <table class="table-thead" cellspacing="0" style="width: calc(70% - 4px);">
+                            <thead>
+                            <tr>
+                                <th ng-click="selectAll()">
+                                    <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                                </th>
+                                <th>操作</th>
+                                <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <table id="mainTable" class="display main-table" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th ng-click="selectAll()">
+                                    <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                                </th>
+                                <th>操作</th>
+                                <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="obj in tableList" ng-click="queryRight($index)" ng-class="{'green':currentIndex == $index}">
+                                <td ng-click="selectItem($index);$event.stopPropagation();">
+                                    <div class="klwk-check" ng-hide="obj.isdatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="obj.isdatacheck"><i class="iconfont"></i></div>
+                                </td>
+                                <td class="over-show">
+                                    <div class="tr-oprate">
+                                        <div class="tr-icon"><i class="iconfont icon-operate"></i></div>
+                                        <ul class="tr-oprate-list">
+                                            <li ng-click="showEditModal($index);$event.stopPropagation();">修改</li>
+                                            <li ng-click="enabledItem($index);$event.stopPropagation();">启用</li>
+                                            <li ng-click="disabledItem($index);$event.stopPropagation();">禁用</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td ng-repeat="item in theadList" title="{{obj[item.tag] | isBoolean }}">
+                                    <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                                    {{obj[item.tag] | isBoolean }}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="right-table" style="width: 30%;">
+                        <div class="title">
+                            关联店铺
+                            <button class="btn-green" ng-click="showContactStoreModal()">关联</button>
+                        </div>
+                        <div class="more-table" style="height: calc(100% - 45px);">
+                            <div class="ab-position">
+                                <div class="all-table">
+                                    <table class="table-thead" cellspacing="0" style="width: calc(100% - 4px);">
+                                        <thead>
+                                        <tr>
+                                            <th>操作</th>
+                                            <th ng-repeat="obj in bottomTheadList">{{obj.name}}</th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                    <table class="display express-tabel contact-table" cellspacing="0" width="100%">
+                                        <thead>
+                                        <tr>
+                                            <th>操作</th>
+                                            <th ng-repeat="obj in bottomTheadList">{{obj.name}}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="(key,value) in bottomTableList">
+                                            <td class="over-show">
+                                                <div ng-click="deleteStore(key)">
+                                                    <i class="iconfont icon-delete"></i>
+                                                </div>
+                                            </td>
+                                            <td>{{value.storename}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+
+            </div>
+
+        </div>
+        <!--新增&修改弹框-->
+        <div class="modal fade creat-modal form" id="editModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog wide">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">新增</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="cf">
+                            <div class="item fl">
+                                <span>名称<i class="notice">*</i></span>
+                                <input class="klw-input validate" name="empty" type="text" placeholder="请输入编码" ng-model="activeItem.name">
+                            </div>
+                            <div class="item fr">
+                                <span>账号<i class="notice">*</i></span>
+                                <pull-select pull-config="SMSAccount"></pull-select>
+                            </div>
+                        </div>
+                        <div class="cf">
+                            <div class="item fl">
+                                <span>模板类型</span>
+                                <pull-select pull-config="edittemplatetype"></pull-select>
+                            </div>
+                            <div class="item fr">
+                                <span>会员类型</span>
+                                <pull-select pull-config="editcustomertype"></pull-select>
+                            </div>
+                        </div>
+                        <div class="cf">
+                            <div class="item wide">
+                                <span>环境变量</span>
+                                <div class="tag-line">
+                                    <div class="tag" ng-click="editVariable('{店铺名称}')">店铺名称</div>
+                                    <div class="tag" ng-click="editVariable('{会员昵称}')">会员昵称</div>
+                                    <div class="tag" ng-click="editVariable('{收货人}')">收货人</div>
+                                    <div class="tag" ng-click="editVariable('{来源单号}')">来源单号</div>
+                                    <div class="tag" ng-click="editVariable('{物流公司}')">物流公司</div>
+                                    <div class="tag" ng-click="editVariable('{物流单号}')">物流单号</div>
+                                    <div class="tag" ng-click="editVariable('{商品名称}')">商品名称</div>
+                                    <div class="tag" ng-click="editVariable('{商品数量}')">商品数量</div>
+                                    <div class="tag" ng-click="editVariable('{发货时间}')">发货时间</div>
+                                    <div class="tag" ng-click="editVariable('{店铺电话}')">店铺电话</div>
+                                    <div class="tag" ng-click="editVariable('{店铺地址}')">店铺地址</div>
+                                    <div class="tag" ng-click="editVariable('{活动编码}')">活动编码</div>
+                                </div>
+                            </div>
+                            <textarea class="sms-content validate" name="empty" id="editTemplateContent" ng-model="activeItem.content"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="editTemplate()">保存</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--关联店铺弹框-->
+        <div class="modal fade set-express" id="contactStore" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">关联店铺</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="item" ng-repeat="(key,value) in storeList" data-id="{{value.id}}">
+                            <div class="klwk-check-x" ng-show="value.ischecked" ng-click="checkStore(key)"><i class="iconfont"></i></div>
+                            <div class="klwk-check" ng-hide="value.ischecked" ng-click="checkStore(key)"><i class="iconfont"></i></div>
+                            <span class="text">{{value.name}}</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="setStore()">确定</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

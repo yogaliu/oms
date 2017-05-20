@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" ng-app="klwkOmsApp">
+<head>
+    <title>订单管理</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../public/css/bootstrap.css">
+
+</head>
+<body>
+
+    <div style="width: 1000px;height: 1000px;border: 1px solid red;" onclick="outerFunc();">
+        <div style="width: 500px;height: 500px;border: 1px solid greenyellow;" onclick="innerFunc();">
+            点击我
+        </div>
+    </div>
+
+
+
+</body>
+<!-- 导入的基础插件，包含jquery,angularJs等 -->
+<script type="text/javascript" src="../../public/js/jquery.js"></script>
+<script type ="text/javascript">
+
+    // 捕获阶段绑定事件
+    window.addEventListener("click", function(e){
+        console.log("window 捕获", e.target.nodeName, e.currentTarget.nodeName);
+    }, true);
+
+    document.addEventListener("click", function(e){
+        console.log("document 捕获", e.target.nodeName, e.currentTarget.nodeName);
+    }, true);
+
+
+    function outerFunc(){
+        console.log("outerFunc");
+    }
+    function innerFunc(){
+        console.log("innerFunc");
+    }
+
+    // 捕获阶段绑定事件
+    window.addEventListener("click", function(e){
+        console.log("window 冒泡", e.target.nodeName, e.currentTarget.nodeName);
+    }, false);
+
+    document.addEventListener("click", function(e){
+        console.log("document 冒泡", e.target.nodeName, e.currentTarget.nodeName);
+    }, false);
+
+</script>
+</html>

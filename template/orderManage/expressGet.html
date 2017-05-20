@@ -1,0 +1,185 @@
+<div id="expressGet" class="jxOutDiv" ng-controller="expressGetController">
+    <div class="jxOutDivContent">
+        <!-- 主搜索框和主按钮-->
+        <div id="simpleSearch" class="simpleSearch" ng-hide="advancedSearchObj.advancedSearch == 'expressGet'">
+            <input class="klw-search" placeholder="退款单号/平台订单号/会员昵称/物流单号"/>
+            <span class="advancedSearchBtn"  ng-click="advancedSearchObj.isShow('expressGet')">高级搜索</span>
+
+            <div class="fr">
+                <div class="batch-operate">
+                    <pull-select pull-config="menuInfo.batch"></pull-select>
+                </div>
+                <div class="btn  pl-import" ng-click="domOperate.refresh()"><i class="icon iconfont icon-icon_fanzhuan_default" ></i>刷新</div>
+                <div class="btn add-order" ng-click="domOperate.jumpToAddExpress('快递签收：新增快递签收单','../template/orderManage/addExpressGetBill.html')" style="width: 93px;"><i class="iconfont"></i>新增</div>
+                <div class="btn  pl-import" style="width: 93px;"><i class="iconfont"></i>导入</div>
+                <div class="btn klwk-cancle exportBtn"><i class="iconfont"></i>导出</div>
+            </div>
+        </div>
+
+        <!-- 高级搜索展开-->
+        <div id="advancedSearch" class="advancedSearch" ng-show="advancedSearchObj.advancedSearch == 'expressGet'">
+            <!-- 制单时间-->
+            <div class="searchItem timeInput">
+                <div>
+                    <div class="title textsewv" ng-hide="advancedSearchObj.timeShow">
+                        <div class="sewv">
+                            <div class="sewvtop">
+                                <span>制单时间</span>
+                                <i class="iconfont icon-xiajiantou"></i>
+                            </div>
+                            <div class="content">
+                                <ul class="sewvbm">
+                                    <li>制单时间</li>
+                                    <li>确认时间</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <span class="title" ng-show="advancedSearchObj.timeShow">制单时间</span>
+
+                    <div class="options">
+                        <input class="klw-input" id="CreateDate1" ng-model="formData.CreateDate1" type="text">
+                        <i class="line"></i>
+                        <input class="klw-input" id="CreateDate2" ng-model="formData.CreateDate2" type="text">
+                    </div>
+                </div>
+
+                <div class="more">
+                    <div class="btn klwk-spread timeSpreadBtn" ng-click="advancedSearchObj.isTimeShow()"><span>{{advancedSearchObj.timeText}}</span><i class="iconfont"></i></div>
+                </div>
+            </div>
+            <!-- 制单时间展开-->
+            <div class="searchItem timeInput timeSpread" ng-show="advancedSearchObj.timeShow">
+                <div>
+                    <span class="title">确认时间</span>
+
+                    <div class="options">
+                        <input class="klw-input" id="ConfirmBeginDate" ng-model="formData.ConfirmBeginDate" type="text">
+                        <i class="line"></i>
+                        <input class="klw-input" id="ConfirmEndDate" ng-model="formData.ConfirmEndDate" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 快递公司-->
+            <advanced-search-more-list  search-config="expressConfigData"></advanced-search-more-list>
+            <advance-search-more-list-show search-config="expressConfigData"></advance-search-more-list-show>
+            <!-- 快递公司-->
+
+            <!-- 已选择行-->
+            <div class="searchItem selected">
+                <span class="title">已选择</span>
+                <div class="selectedBox"
+                     ng-repeat="(key,orderlist) in formChoseData">
+                    <span class="selectedTitle">{{orderlist['title']}}：</span>
+                    <span class="selectedContent">{{orderlist['name']}}</span>
+                    <i class="icon iconfont icon-icon_guanbisousuo" ng-click="domOperate.clearChoseCondition(orderlist)"></i>
+                </div>
+            </div>
+            <div id="conditionSet">
+                <button class="btn btn-success btn-78" ng-click="domOperate.advanceSearchConfirm()">确定</button>
+                <button class="btn btn-default btn-78 advancedSearchCancelBtn" ng-click="domOperate.advanceSearchCancle()">取消
+                </button>
+                <button class="btn btn-default btn-78" ng-click="domOperate.advanceSearchClear()">清空</button>
+            </div>
+        </div>
+
+        <!-- 特殊标识行-->
+        <div id="simpleSelect" class="simpleSelect clear">
+            <div class="selectItems fl">
+                <label ng-click="domOperate.threeSelect($event,'IsObsolete')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow" ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[formData.IsObsolete]"></i>
+                    <span>作废</span>
+                </label>
+                <label ng-click="domOperate.threeSelect($event,'IsConfirm')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow" ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[formData.IsConfirm]"></i>
+                    <span>确认</span>
+                </label>
+            </div>
+
+            <div class="ti-pagination">
+                <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                / 共 <span>{{paginationConf.totalItems}}</span>
+
+                <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont" ng-click="prev()"></i></span>
+
+                <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont" ng-click="next()"></i></span>
+
+                <span class="config-column" ng-mouseover="isHover()" ng-mouseleave="isHover()" ng-click="domOperate.listAllocation()"><i class="iconfont"></i></span>
+
+                <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+            </div>
+        </div>
+
+        <div class="tableOut">
+            <table id="expressTable">
+                <thead>
+                <tr>
+                    <th>
+                        <label ng-click="domOperate.sellectAll()">
+                            <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':checkAll}"></i>
+                        </label>
+                    </th>
+                    <th>序号</th>
+                    <th>操作</th>
+                    <th ng-repeat="column in expressHead">{{column.name}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="list in expressBody">
+                    <td>
+                        <label ng-click="domOperate.exoressListChose(list)">
+                            <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':list.trShow}"></i>
+                        </label>
+                    </td>
+                    <td>{{$index+1}}</td>
+                    <td class="operate">
+                        <div class="multilevel-menu">
+                            <div><span class="iconfont icon-operate"></span></div>
+                            <div class="content">
+                                <ul class="one">
+                                    <li ng-click="domOperate.obsoleteExpress(list)">作废</li>
+                                    <li ng-click="domOperate.remarkExpress(list)">备注</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td ng-repeat="column in expressHead"
+                        ng-bind-html="list[column.tag] | expressFilter : column : list">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--批量备注模态框-->
+        <div class="modal fade info-get-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="info-tip">
+                        <div class="info-tip-head">
+                            <p class="info-tip-label">{{modal.title}}</p>
+                            <p class="info-tip-close" ng-click="domOperate.modalDismiss()">
+                                <i class="icon iconfont icon-icon_guanbisousuo"></i>
+                            </p>
+                        </div>
+                        <div class="info-tip-body">
+                            <textarea name="" id="" cols="30" rows="10" ng-init="content = ''" ng-model="content">请输入内容</textarea>
+                        </div>
+                        <div class="info-tip-header">
+                            <button type="button" class="btn btn-success btn-78" ng-click="modal.confirm(content)">确定</button>
+                            <button type="button" class="btn btn-default btn-78" ng-click="domOperate.modalDismiss()">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--分页-->
+        <tm-pagination conf="paginationConf"></tm-pagination>
+    </div>
+
+    <!-- 右侧列表配置 -->
+    <tm-listallocation allo="allocation"></tm-listallocation>
+</div>

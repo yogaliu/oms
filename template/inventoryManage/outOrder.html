@@ -1,0 +1,205 @@
+<div id="inventoryManage" class="inventory-manage">
+    <div class="out-order" id="outOrder" ng-controller="outOrderController">
+        <div id="topNav" class="top-nav">
+            <div class="path">
+                虚拟调拨
+            </div>
+            <div class="top-condition" ng-if="formData.productName">
+                商品名称：
+                <span ng-bind="formData.productName"></span>
+                <img src="../images/icon－guanbi.svg" ng-click="clearSingleFilter('productName')">
+            </div>
+            <div class="top-condition" ng-if="formData.productNo">
+                商品编码：
+                <span ng-bind="formData.productNo"></span>
+                <img src="../images/icon－guanbi.svg" ng-click="clearSingleFilter('productNo')">
+            </div>
+            <div class="top-condition" ng-if="formData.typeNo">
+                规格编码：
+                <span ng-bind="formData.typeNo"></span>
+                <img src="../images/icon－guanbi.svg" ng-click="clearSingleFilter('typeNo')">
+            </div>
+            <span ng-if="isTopCondition()" ng-click="clearFilter()" class="top-cl">清空筛选</span>
+        </div>
+
+        <div id="content" class="content">
+            <div class="search" ng-hide="advance">
+                <input type="text" class="klw-search" placeholder="商品编码/调拨单号">
+                <span ng-click="showAdvance(true)" class="showAdvance">高级搜索</span>
+                <div class="fr">
+                    <button class="svg2" ng-click="showAddInOrderPanel()">
+                        <i class="iconfont icon-new"></i>新增出库订单
+                    </button>
+                </div>
+            </div>
+
+            <div class="advance-search" ng-show="advance">
+                <div class="items">
+
+                    <div class="ipt">
+                        <label class="item">
+                            <span class="title">制单时间</span>
+                            <input type="text" class="klw-input start-time" ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="formData.BeginDate">
+                            <div class="short-line"></div>
+                            <input type="text" class="klw-input end-time" ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="formData.EndDate">
+                        </label>
+                    </div>
+
+                    <!-- 入库仓库 选择  -->
+                    <div class="list cf">
+                        <span class="title">出库仓库</span>
+                        <div class="line"  ng-if="!advanceQueryCondition.warehouseList.isExpand">
+                            <div class="items line">
+                                <span class="item" ng-repeat="item in warehouseList" ng-if="isShowMore($index,'warehouseList')" ng-click="inWarehouseQueryCondition(item.id)" ng-class="{true:'item sel',false:'item'}[formData.warehouseListSelectedId==item.id]">{{item.name}}</span>
+                            </div>
+                            <div class="right-btn">
+                                <button class="more" ng-click="showMoreCondition('warehouseList')">更多</button>
+                            </div>
+                        </div>
+
+                        <div class="line" ng-if="advanceQueryCondition.warehouseList.isExpand">
+                            <div class="items">
+                                <input class="klw-search" type="text" placeholder="调入仓库">
+                                <div class="list-search">
+                                    <span class="title">所搜的店铺</span>
+                                    <span class="item">全部</span>
+                                    <span class="item" ng-repeat="item in wordList">{{item}}</span>
+                                </div>
+                                <div class="more-item">
+                                    <span class="item" ng-repeat="item in warehouseList" ng-click="inWarehouseQueryCondition(item.id)" ng-class="{true:'item sel',false:'item'}[formData.warehouseListSelectedId == item.id]">
+                                        {{item.name}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="right-btn">
+                                <button class="more" ng-click="hideMoreCondition('warehouseList')">收起</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!--  入库类型 选择 -->
+                    <div class="list cf">
+
+                        <span class="title">出库类型</span>
+                        <div class="line"  ng-if="!advanceQueryCondition.inWarehouseTypeList.isExpand">
+                            <div class="items line">
+                                <span class="item" ng-repeat="item in inWarehouseTypeList" ng-if="isShowMore($index,'inWarehouseTypeList')" ng-click="inWarehouseTypeQueryCondition(item.code)" ng-class="{true:'item sel',false:'item'}[formData.inWarehouseTypeId==item.code]">{{item.name}}</span>
+                            </div>
+                            <div class="right-btn">
+                                <button class="more" ng-click="showMoreCondition('inWarehouseTypeList')">更多</button>
+                            </div>
+                        </div>
+
+                        <div class="line" ng-if="advanceQueryCondition.inWarehouseTypeList.isExpand">
+                            <div class="items">
+                                <input class="klw-search" type="text" placeholder="调入仓库">
+                                <div class="list-search">
+                                    <span class="title">所搜的店铺</span>
+                                    <span class="item">全部</span>
+                                    <span class="item" ng-repeat="item in wordList">{{item}}</span>
+                                </div>
+                                <div class="more-item">
+                                    <span class="item" ng-repeat="item in inWarehouseTypeList" ng-click="inWarehouseTypeQueryCondition(item.id)" ng-class="{true:'item sel',false:'item'}[formData.inWarehouseTypeId==item.id]">
+                                        {{item.name}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="right-btn">
+                                <button class="more" ng-click="hideMoreCondition('inWarehouseTypeList')">收起</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!--  单据状态 选择 -->
+                    <div class="list cf">
+                        <span class="title">单据状态</span>
+                        <div class="line"  >
+                            <div class="items line">
+                                <span class="item" ng-repeat="item in inventoryOutboundOrderStatusList" ng-click="inventoryOutboundOrderStatusQueryCondition(item.id)" ng-class="{true:'item sel',false:'item'}[formData.inventoryOutboundOrderStatusId == item.id]">{{item.name}}</span>
+                            </div>
+                            <div class="right-btn">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--  入库单号 商品编码 来源单号 手动输入查询条件-->
+                    <div class="ipt">
+                        <label class="item">
+                            <span class="title">入库单号</span>
+                            <input type="text" class="klw-input" ng-model="formData.Code">
+                        </label>
+
+                        <label class="item">
+                            <span class="title">商品编码</span>
+                            <input type="text" class="klw-input" ng-model="formData.ProductCode">
+                        </label>
+
+                        <label class="item">
+                            <span class="title">来源单号</span>
+                            <input type="text" class="klw-input" ng-model="formData.FromCode">
+                        </label>
+                    </div>
+                </div>
+                <div class="oprate">
+                    <button ng-click="advanceSearch()" class="btn btn-success btn-78">搜索</button>
+                    <button class="btn btn-default btn-78" ng-click="showAdvance(false)">取消</button>
+                    <button class="btn btn-default btn-78" ng-click="clearAdvancCondition()">清空</button>
+                </div>
+            </div>
+            <div id="topTable" class="top-table cf">
+                <div class="ti-pagination">
+                    <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                    / 共 <span>{{paginationConf.totalItems}}</span>
+                    <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont"  ng-click="prev()"></i></span>
+                    <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont" ng-click="next()"></i></span>
+                    <span class="config-column" ng-click="showColumnConfigPanel()"><i class="iconfont"></i></span>
+                </div>
+            </div>
+
+            <table id="mainTable" class="display" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th ng-click="selectAll($event)"><div class="klwk-check"><i class="iconfont"></i></div></th>
+                    <th>操作</th>
+                    <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="obj in outOrderTableList">
+                    <td ng-click="selectOne($event)"><div class="klwk-check"><i class="iconfont"></i></div></td>
+                    <td class="over-show">
+                        <div class="tr-oprate">
+                            <div class="tr-icon"><i class="iconfont icon-operate"></i></div>
+                            <ul class="tr-oprate-list">
+                                <li ng-click="getInOrderDetail($index,obj.id)">
+                                    调拨单详情
+                                </li>
+                                <li ng-click="editTransfer($index)">修改</li>
+                                <li>审核</li>
+                                <li>导出明细</li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td ng-repeat="item in theadList" repeat-finished-directive repeataction="tableRepeatFinished()" condition="{{$last}}">{{obj[item.tag] | inOrderTypeFilter:item.tag}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="footer">
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+
+            <!-- 右侧列表配置 -->
+            <div class="" >
+                <tm-listallocation allo="allocation"></tm-listallocation>
+            </div>
+
+        </div>
+
+        <!-- 新增入库订单 -->
+
+    </div>
+</div>

@@ -1,0 +1,177 @@
+<div id="inventoryManage" class="inventory-manage jxOutDiv " style="position: relative;">
+    <div id="systemInventory" class="system-inventory virtual-transfer" ng-controller="systemInventoryController">
+        <div id="topNav" class="top-nav">
+            <div class="path">
+                系统库存
+            </div>
+            <div class="top-condition" ng-if="formData.productName">
+                商品名称：
+                <span ng-bind="formData.productName"></span>
+                <img src="../images/icon－guanbi.svg" ng-click="clearSingleFilter('productName')">
+            </div>
+            <div class="top-condition" ng-if="formData.productNo">
+                商品编码：
+                <span ng-bind="formData.productNo"></span>
+                <img src="../images/icon－guanbi.svg" ng-click="clearSingleFilter('productNo')">
+            </div>
+            <div class="top-condition" ng-if="formData.typeNo">
+                规格编码：
+                <span ng-bind="formData.typeNo"></span>
+                <img src="../images/icon－guanbi.svg" ng-click="clearSingleFilter('typeNo')">
+            </div>
+            <span ng-if="isTopCondition()" ng-click="clearFilter()" class="top-cl">清空筛选</span>
+        </div>
+        <div id="content" class="content" style="padding-top: 40px">
+            <div class="search" ng-hide="advance">
+                <input type="text" class="klw-search" placeholder="商品名称/商品编码/规格编码">
+                <span ng-click="toggleAdvance()" class="showAdvance">高级搜索</span>
+                <div class="fr">
+                    <button class="svg2"><i class="iconfont icon-download"></i>历史库存下载</button>
+                    <button class="svg2"><i class="iconfont icon-import"></i>导出</button>
+                </div>
+            </div>
+            <div class="advancedSearch" ng-if="advance">
+                <div class="items">
+                    <!-- 推荐仓库-->
+                    <advanced-search-more-list  search-config="commendWareHouseConfigData"></advanced-search-more-list>
+                    <advance-search-more-list-show search-config="commendWareHouseConfigData"></advance-search-more-list-show>
+
+                    <!--品牌-->
+                    <advanced-search-more-list  search-config="commendBrandConfigData"></advanced-search-more-list>
+                    <advance-search-more-list-show search-config="commendBrandConfigData"></advance-search-more-list-show>
+
+                    <div class="searchItem clear searchItemInput">
+                        <div class="rows rowsText">
+                            <p>商品名称</p>
+
+                            <p>商品编码</p>
+
+                            <p>规格编码</p>
+                        </div>
+                        <div class="rows rowsInput">
+                            <div>
+                                <input type="text" class="klw-input ng-pristine ng-untouched ng-valid" ng-model="formData.productName">
+                            </div>
+                            <div>
+                                <input type="text" class="klw-input ng-pristine ng-untouched ng-valid" ng-model="formData.productCode">
+                            </div>
+                            <div>
+                                <input type="text" class="klw-input ng-pristine ng-untouched ng-valid" ng-model="formData.skuCode">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 已选择行-->
+                <div class="searchItem selected">
+                    <span class="title">已选择</span>
+                    <div class="selectedBox"
+                         ng-repeat="(key,orderlist) in formChoseData">
+                        <span class="selectedTitle">{{orderlist['title']}}：</span>
+                        <span class="selectedContent">{{orderlist['name']}}</span>
+                        <i class="icon iconfont icon-icon_guanbisousuo" ng-click="domOperate.clearChoseCondition(key,orderlist)"></i>
+                    </div>
+                </div>
+
+                <div id="conditionSet">
+                    <button class="btn btn-success btn-78" ng-click="domOperate.advanceSearchConfirm($event)">确定</button>
+                    <button class="btn btn-default btn-78 advancedSearchCancelBtn" ng-click="domOperate.advanceSearchCancle($event)">取消</button>
+                    <button class="btn btn-default btn-78" ng-click="domOperate.advanceSearchClear()">清空</button>
+                </div>
+            </div>
+            <div id="topTable" class="top-table cf">
+                <div class="items fl">
+                    <label class="item" ng-click="toggleSelect($event)">
+                        <div class="klwk-check-f"><i class="iconfont"></i></div>
+                        <span>有库存</span>
+                    </label>
+                    <!--<label class="item" ng-click="toggleSelect($event)">-->
+                        <!--<div class="klwk-check"><i class="iconfont"></i></div>-->
+                        <!--<span>显示在途</span>-->
+                    <!--</label>-->
+                    <button ng-if="isMore()">展开更多</button>
+                </div>
+                <div class="ti-pagination">
+                    <span class="num"><span>{{first}}</span>-<span>{{last}}</span></span>
+                    / 共 <span>{{paginationConf.totalItems}}</span>
+                    <span class="prev" ng-class="{disabled: conf.currentPage == 1}">
+                        <i class="iconfont"  ng-click="prev()"></i>
+                    </span>
+                    <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}">
+                        <i class="iconfont" ng-click="next()"></i>
+                    </span>
+                    <span class="config-column" ng-mouseover="isHover()" ng-mouseleave="isHover()" ng-click="listAllocation()"><i class="iconfont"></i></span>
+
+                    <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+
+                    <!-- 右侧列表配置 -->
+                    <tm-listallocation allo="allocation"></tm-listallocation>
+                </div>
+            </div>
+            <div class="inventoryContent">
+                <div class="cf userManage">
+                    <table id="omsDataTable" class="display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th><label ng-click="selectAll($event)">
+                                <i class="iconfont icon-sel"></i>
+                            </label></th>
+                            <th>操作</th>
+                            <th>序号</th>
+                            <th ng-repeat="item in systemcolumn">{{item.name}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in inventoryList" data-warehouseid="{{item.warehouseid}}" data-skuid="{{item.skuid}}" >
+                            <td><label ng-click="selectSingle($event)">
+                                <i class="iconfont icon-sel {{isSelect}}" ></i>
+                            </label></td>
+                            <td>{{$index + 1}}</td>
+                            <td>
+                                <div class="tr-oprate" ng-click="oprateTr($event)">
+                                    <div class="tr-icon"><i class="iconfont icon-operate"></i></div>
+                                    <ul class="tr-oprate-list">
+                                        <li ng-click="synchronizeInventory($event,item)">同步所选库存</li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td ng-repeat="column in systemcolumn">{{item[column.tag]?item[column.tag]:item.sku[column.tag]}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="systemConfig-foot">
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+
+
+
+        </div>
+        <!--同步所选库存弹框-->
+        <div class="modal fade" id="synchronizeInventoryModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">同步所选库存</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="item">
+                            <span class="title">仓库</span>
+                            <div style="margin-top: 10px;">
+                                <pull-select pull-config="pullInfo" ng-repeat="i in pullInfoList"></pull-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="virtualScuess()" class="btn btn-success">同步</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

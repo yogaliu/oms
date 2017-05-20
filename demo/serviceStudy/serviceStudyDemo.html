@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en" ng-app="klwkOmsApp">
+<head>
+    <title>订单管理</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../public/css/bootstrap.css">
+
+</head>
+<body>
+<!-- 显示总的界面 -->
+<ui-view></ui-view>
+
+</body>
+<!-- 导入的基础插件，包含jquery,angularJs等 -->
+<script type="text/javascript" src="../../public/js/jquery.js"></script>
+<script type="text/javascript" src="../../public/js/base.js"></script>
+<script type="text/javascript" src="../../public/js/echarts.min.js"></script>
+<script type="text/javascript" src="../../public/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../demoApp.js"></script>
+<script>
+
+    /**
+     * 定义常量WAP_CONFIG;WAP为当前子模块功能
+     * */
+    angular.module('klwkOmsApp')
+            .config(["$stateProvider","$urlRouterProvider",function ($stateProvider, $urlRouterProvider) {
+                // 如果没有匹配的路径，则设置默认路径
+                $urlRouterProvider.otherwise('/index');
+                $stateProvider
+                    //首页
+                    .state('index',{
+                        url: '/index',
+                        templateUrl:'serviceStudyTemp.html',
+                        controller:'AccordionDemoCtrl'
+                    })
+                    .state('serviceStudyTemp2',{
+                        url: '/serviceStudyTemp2',
+                        templateUrl:'serviceStudyTemp2.html',
+                        controller:'serviceStudyTemp2Controller'
+                    })
+            }]);
+
+
+    /**
+     * 定义ApiService服务
+     * 功能：专门向服务器发送post 和 get请求
+     * */
+    angular.module("klwkOmsApp")
+            .factory('myService1', ["$window", "$http", "$q", "$log",function($window, $http, $q, $log) {
+                console.log("我是闭包部分的内容");
+                // public api
+                return {
+                    getUserData:function(){
+                        console.log("我是getUserData");
+                    },
+                    getOrgList:function(){
+                        console.log("我是getOrgList");
+                    },
+                    delUserById:function(userId){
+                        console.log("我来删除数据：" + userId);
+                    },
+                    // 作为共享的数据（可以缓存数据）
+                    shareData : {
+                        name:"huangbiao"
+                    }
+                };
+            }])
+            //当前方法就是service
+            .service("myService2",["$window", "$http", "$q", "$log",function($window, $http, $q, $log) {
+//                console.dir($q);
+               this.serviceMethod = function(){
+                   console.log("serviceMethod")
+               };
+                this.serviceMethod2 = function(){
+                    console.log("serviceMethod2")
+                };
+                this.shareData = {
+                    name : "liumei",
+                    age : 18
+                }
+            }])
+//            .provider("myServicePro",["$window", "$http", "$q", "$log",function($window, $http, $q, $log) {
+            //Providers 是唯一一种你可以传进 .config() 函数的 service。当你想要在 service 对象启用之前，先进行模块范围的配置，那就应该用 provider。
+            // 所以这种方式没有办法传入其他参数注入
+            .provider("myServicePro",[ function() {
+//                console.dir($q);
+                console.log("我是闭包部分");
+
+                this.$get = function(){
+                    console.log("我是闭包部分2");
+                    var resultService = {};
+                    resultService.myServiceProMethod = function(){
+                        console.log("serviceMethod")
+                    };
+                    resultService.myServiceProMethod2 = function(){
+                        console.log("serviceMethod2")
+                    };
+                    resultService.myServiceProShareData = {
+                        name : "huangbiao",
+                        age : 28
+                    }
+                    return resultService;
+                };
+            }]);
+
+    angular.module("klwkOmsApp")
+        .controller("AccordionDemoCtrl", ["$scope","myService1","myService2","myServicePro" ,function($scope,myService1,myService2,myServicePro) {
+                myService1.getUserData();
+                myService1.getOrgList();
+                myService1.delUserById(123);
+                $scope.before = function(){
+                    alert(myService1.shareData.name);
+                };
+                $scope.change = function(){
+                    myService1.shareData.name = "我变了";
+                };
+
+                console.dir(myService2);
+                console.dir(myServicePro);
+
+            }])
+            .controller("serviceStudyTemp2Controller", ["$scope","myService1" ,function($scope,myService1) {
+                $scope.test = function(){
+                    alert(myService1.shareData.name);
+                };
+            }]);
+
+</script>
+</html>

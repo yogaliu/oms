@@ -1,0 +1,58 @@
+<div id="configManage" class="config-manage">
+    <div class="return-order-config" ng-controller="vipConfigController">
+        <div id="topNav" class="top-nav">
+            <div class="path">
+                唯品配置
+            </div>
+        </div>
+        <div id="content" class="content">
+            <div class="items">
+                <div class="sel-item">
+                    <span class="title">每</span>
+                    <input type="number" class="klw-input" ng-model="formData.noPickUpNumber">
+                    <span class="title">个未拣货数生成一个配货通知单</span>
+                </div>
+                <div class="sel-item">
+                    <span class="title">每</span>
+                    <input type="number" class="klw-input" ng-model="formData.timeSpan">
+                    <span class="title">分钟强制生成一个配货通知单</span>
+                    <span class="detail">每隔多少分钟系统没生成通知单会执行</span>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('isCheckInventory')">
+                        <div class="klwk-check-x" ng-show="formData.isCheckInventory"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.isCheckInventory"><i class="iconfont"></i></div>
+                        <span class="title">档期报名检查库存</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('isDownLoadBackOrder')">
+                        <div class="klwk-check-x" ng-show="formData.isDownLoadBackOrder"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.isDownLoadBackOrder"><i class="iconfont"></i></div>
+                        <span class="title">下载唯品补货单</span>
+                        <span class="detail">勾选将自动下载唯品补货单</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('isScanVipReturnOrder')">
+                        <div class="klwk-check-x" ng-show="formData.isScanVipReturnOrder"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.isScanVipReturnOrder"><i class="iconfont"></i></div>
+                        <span class="title">启用退货单扫描</span>
+                        <span class="detail">不勾选按退货数量生成通知单</span>
+                    </div>
+                </div>
+                <div class="sel-item">
+                    <div class="line" ng-click="checkItem('isNotUpdateStock')">
+                        <div class="klwk-check-x" ng-show="formData.isNotUpdateStock"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-hide="formData.isNotUpdateStock"><i class="iconfont"></i></div>
+                        <span class="title">唯品不更新库存</span>
+                        <span class="detail">不勾选默认更新库存</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <button class="btn btn-success btn-78" ng-click="save()">保存</button>
+            </div>
+        </div>
+    </div>
+</div>

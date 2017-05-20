@@ -1,0 +1,355 @@
+<!-- 商品设置 -->
+
+<div id="productSettingUp" class="cj-product" ng-controller="productSettingUpController">
+    <div class="product-content">
+
+        <div class="product-header">
+            <div class="header-tab">
+                <ul>
+                    <li ng-class="{true:'current',false:''}[tab == 'first']" ng-click="toggleTab('first')">
+                        商品编码规则
+                    </li>
+                    <li ng-class="{true:'current',false:''}[tab == 'second']" ng-click="toggleTab('second')">
+                        自定义属性
+                    </li>
+                    <li ng-class="{true:'current',false:''}[tab == 'third']" ng-click="toggleTab('third')">
+                        商品分类
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="product-body">
+
+            <!--商品编码规则-->
+            <div class="first" ng-show="tab == 'first'">
+
+                <div class="left-btn">
+                    <div class="batch mr">
+                        <menu-select menu-config="menuRule"></menu-select>
+                    </div>
+                    <div class="btn klwk-cancle refresh mr" ng-click="ruleRefresh()">
+                        <i class="iconfont icon-icon24"></i>刷新
+                    </div>
+                    <div class="btn add-order" ng-click="addRules()">
+                        <i class="iconfont"></i>新增规则
+                    </div>
+                </div>
+
+                <div class="configuration">
+                    <div class="ti-pagination">
+                        <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                        / 共 <span>{{rulesPaginationConf.totalItems}}</span>
+
+                <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont"
+                                                                                   ng-click="prevRule()"></i></span>
+
+                <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont"
+                                                                                                    ng-click="nextRule()"></i></span>
+                    </div>
+                </div>
+
+                <div class="body-table clear-scroll" ng-if="tableListRule.length != 0">
+
+                    <div class="left-table">
+                        <table id="ruleTable"  class="display" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th ng-click="selectAll('tableListRule')">
+                                    <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                                </th>
+                                <th>操作</th>
+                                <th ng-repeat="item in theadListRule">{{item.name}}</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr ng-repeat="obj in tableListRule" ng-click="getRuleValue(obj,$index)" ng-class="{true:'current',false:''}[obj.isSelect]">
+                                <td ng-click="selectItem($index,'tableListRule')">
+                                    <div class="klwk-check" ng-hide="obj.isdatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="obj.isdatacheck"><i class="iconfont"></i></div>
+                                </td>
+                                <td class="over-show">
+                                    <div class="oprate">
+                                        <div class="tr-icon"><i class="iconfont icon-icon2"></i></div>
+                                        <ul class="oprate-list">
+                                            <li ng-click="editRules($index)">修改</li>
+                                            <li ng-click="showModal($index,'deleteRuleModal','rule')">删除</li>
+                                            <li ng-class="{true:'',false:'disabled'}[obj.isdisabled]" ng-click="singleEnabled($index)">启用</li>
+                                            <li ng-class="{true:'disabled',false:''}[obj.isdisabled]" ng-click="showModal($index,'isDisabledModal','rule')">禁用</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td ng-repeat="item in theadListRule">
+                                    {{obj[item.tag] | isBoolean}}
+                                    <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                                </td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                    <div class="right-table">
+                        <div class="title">名称&nbsp;:&nbsp;&nbsp;<span>{{parentName}}</span></div>
+                        <div class="title">编码&nbsp;:&nbsp;&nbsp;<span>{{parentCode}}</span></div>
+                        <table>
+
+                            <thead>
+                            <tr>
+                                <td>代码</td>
+                                <td>名称</td>
+                                <td>排序</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in ruleChildData">
+                                <td>{{item.code}}</td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.seq}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <tm-pagination conf="rulesPaginationConf"></tm-pagination>
+
+            </div>
+
+            <!--自定义属性-->
+            <div class="second" ng-show="tab == 'second'">
+                <div>
+                    <input type="text" class="klw-search" placeholder="编码" ng-model="code" ng-keyup="myKeyup($event)">
+                    <div class="right-btn">
+                        <div class="batch mr">
+                            <menu-select menu-config="menuAttribute"></menu-select>
+                        </div>
+                        <div class="btn klwk-cancle refresh mr" ng-click="attributeRefresh()"><i class="iconfont icon-icon25"></i>刷新</div>
+                        <div class="btn add-order" ng-click="showModal(0,'attributeModal','attribute','new')"><i class="iconfont"></i>新增属性</div>
+                    </div>
+                </div>
+                <div class="body-table" ng-if="tableListAttribute.length != 0">
+                    <table id="attributeTable"  class="display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th ng-click="selectAll('tableListAttribute')">
+                                <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                            </th>
+                            <th>操作</th>
+                            <th ng-repeat="item in theadListAttribute">{{item.name}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in tableListAttribute">
+                            <td ng-click="selectItem($index,'tableListAttribute')">
+                                <div class="klwk-check" ng-hide="obj.isdatacheck"><i class="iconfont"></i></div>
+                                <div class="klwk-check-x" ng-show="obj.isdatacheck"><i class="iconfont"></i></div>
+                            </td>
+                            <td class="over-show">
+                                <div class="oprate">
+                                    <div class="tr-icon"><i class="iconfont icon-icon2"></i></div>
+                                    <ul class="oprate-list">
+                                        <li ng-click="showModal($index,'attributeModal','attribute','edit')">修改</li>
+                                        <li ng-click="showModal($index,'deleteAttributeModal','attribute')">删除</li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td ng-repeat="item in theadListAttribute">
+                                {{obj[item.tag]}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <tm-pagination conf="attributPaginationConf"></tm-pagination>
+            </div>
+
+            <!--商品分类-->
+            <div class="third" ng-show="tab == 'third'">
+                <div class="btn add-order green-btn" ng-click="showModal(1,'classifyModal','classify','parent')"><i class="iconfont"></i>分类</div>
+                <classify show-modal="showModal" toggle-expand="toggleExpand" expander='expander' children='expander.children' ng-repeat='expander in classifyList'></classify>
+            </div>
+
+        </div>
+    </div>
+
+    <!--删除规则数据模态框-->
+    <div class="cj-modal modal fade" id="deleteRuleModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <span class="remind-text">删除过后数据将不再服务器保存,是否确定?</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-78 mr" ng-click="singleDeleteRule()">确定</button>
+                    <button type="button" class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--批量删除规则数据模态框-->
+    <div class="cj-modal modal fade" id="batchDeleteRuleModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <span class="remind-text">删除过后数据将不再服务器保存,是否确定?</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-78 mr" ng-click="batchDeleteRuleOp()">确定</button>
+                    <button type="button" class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--禁用规则模态框-->
+    <div class="cj-modal modal fade" id="isDisabledModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <span class="remind-text">数据禁用后将不可使用,是否继续禁用?</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-78 mr" ng-click="singleDisabled()">确定</button>
+                    <button type="button" class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--批量禁用模态框-->
+    <div class="cj-modal modal fade" id="batchIsDisabledModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <span class="remind-text">数据禁用后将不可使用,是否继续禁用?</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-78 mr" ng-click="batchDisabledOp()">确定</button>
+                    <button type="button" class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--删除属性数据模态框-->
+    <div class="cj-modal modal fade" id="deleteAttributeModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <span class="remind-text">删除过后数据将不再服务器保存,是否确定?</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-78 mr" ng-click="attributeDelete()">确定</button>
+                    <button type="button" class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--批量删除属性数据模态框-->
+    <div class="cj-modal modal fade" id="batchDeleteAttributeModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <span class="remind-text">删除过后数据将不再服务器保存,是否确定?</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-78 mr" ng-click="batchAttributeDeleteOp()">确定</button>
+                    <button type="button" class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 保存属性模态框 -->
+    <div class="cj-modal modal form fade" id="attributeModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">{{activeAttributeItem.title}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-column">
+                        <label>编码<span class="important">*</span></label>
+                        <input type="text" class="klw-input validate" name="empty" placeholder="请输入编码" ng-model="activeAttributeItem.code">
+                    </div>
+                    <div class="modal-column">
+                        <label>名称<span class="important">*</span></label>
+                        <input type="text" class="klw-input validate" name="empty" placeholder="请输入名称" ng-model="activeAttributeItem.name">
+                    </div>
+                    <div class="modal-column">
+                        <label>属性</label>
+                        <pull-select pull-config="selectAttribute"></pull-select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-78 mr" ng-click="attributeSave()">确定</button>
+                    <button type="button" class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 保存商品分类模态框 -->
+    <div class="cj-modal modal form fade" id="classifyModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">{{classifyItem.title}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-column">
+                        <label>分类代码<span class="important">*</span></label>
+                        <input type="text" class="klw-input validate" name="empty" placeholder="请输入分类代码"  ng-model="classifyItem.code">
+                    </div>
+                    <div class="modal-column">
+                        <label>分类名称<span class="important">*</span></label>
+                        <input type="text"  class="klw-input validate" name="empty" placeholder="请输入分类名称"  ng-model="classifyItem.name">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-78 mr" ng-click="classifySave()">确定</button>
+                    <button type="button" class="btn btn-default btn-78" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- /商品设置 -->
+
+
+

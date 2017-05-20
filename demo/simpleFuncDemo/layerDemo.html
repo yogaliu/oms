@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>订单管理</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../public/css/bootstrap.css">
+    <link rel="stylesheet" href="../../public/css/layer.css">
+    <style>
+        .layui-layer-dialog .layui-layer-padding {
+            padding: 10px 20px 10px 55px;
+            text-align: left;
+        }
+        .layui-layer-dialog .layui-layer-content .layui-layer-ico {
+            position: absolute;
+            top: 16px;
+            left: 15px;
+            width: 15px;
+            height: 15px;
+        }
+        .layui-layer-ico1 {
+            background-position: -82px -40px;
+        }
+
+        .layui-layer-ico2 {
+            background-position: -105px -42px;
+        }
+    </style>
+</head>
+<body>
+
+
+
+
+<div id="huangbiao">dsadfsa</div>
+</body>
+<!-- 导入的基础插件，包含jquery,angularJs等 -->
+<script type="text/javascript" src="../../public/js/jquery.js"></script>
+<script type="text/javascript" src="../../public/js/layer.js"></script>
+<script>
+//    成功
+//    layer.msg('hello',{
+//        icon : 1,
+//        time : 500000,
+//        offset : ['100px']
+//    });
+
+//失败
+//    layer.msg('hello',{
+//        icon : 2,
+//        time : 500000,
+//        offset : ['100px']
+//    });
+
+//提示
+    layer.open({
+        type: 0,
+        title : "提示",
+        time : 5000000,
+        //这里content是一个普通的String
+        content: '传入任意的文本或html',
+        yes: function(index, layero){
+            //按钮【按钮一】的回调
+            alert("第一个按钮触发的事件")
+        }
+    });
+
+//layer.open({
+//    type: 0,
+//    title : "提示",
+//    time : 5000000,
+//    //这里content是一个普通的String
+//    content: '传入任意的文本或html',
+//    btn : ['确定','取消'],
+//    yes: function(index, layero){
+//        //按钮【按钮一】的回调
+//        alert("第一个按钮触发的事件")
+//    }
+//    ,btn2: function(index, layero){
+//        //按钮【按钮二】的回调
+//        alert("第二个按钮触发的事件")
+//        //return false 开启该代码可禁止点击该按钮关闭
+//    }
+//});
+
+//layer.open({
+//    type: 0,
+//    content: '传入任意的文本或html' //这里content是一个普通的String
+//});
+
+//layer.open({
+//    type: 4,
+//    content: ['内容', '#huangbiao'] //数组第二项即吸附元素选择器或者DOM
+//});
+
+</script>
+</html>

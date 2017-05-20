@@ -1,0 +1,14 @@
+<!--<div >-->
+    <ul ng-include="'recursion'" recursion></ul>
+<!--</div>-->
+
+<script id="recursion" type="text/ng-template">
+    <li ng-repeat="item in cate"  cateid="{{item.cateId}}">
+        <div  style="cursor: pointer;">{{item.cateName}}</div>
+        <ul ng-if="item.child.length" ng-include="'recursion'" recursion ng-init="cate=item.child"></ul>
+    </li>
+</script>
+
+<!--<ul recursion origin-data="cate"></ul>-->
+
+

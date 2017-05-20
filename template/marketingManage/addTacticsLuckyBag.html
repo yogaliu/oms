@@ -1,0 +1,216 @@
+<div id="addTacticsLuckyBag" class="jxOutDiv jxAdd" ng-controller="addTacticsLuckyBagController">
+    <div class="jxOutDivContent">
+
+        <div>
+            <button class="btn btn-default btn-78 topReturn" ng-click="returnFun()">返回</button>
+        </div>
+
+        <div class="basic-message jxmessage form">
+            <h3 class="addTitle">策略基本信息</h3>
+
+            <div class="rows rowsText">
+                <p>活动名称<span class="star">*</span></p>
+
+                <p>活动店铺<span class="star">*</span></p>
+
+                <p>匹配时间<span class="star">*</span></p>
+
+                <p>开始时间<span class="star">*</span></p>
+            </div>
+            <div class="rows rowsInput">
+                <div>
+                    <input class="klw-input validate" name="empty" type="text" placeholder="请输入活动名称" ng-model="modify.tableList.name"/>
+                </div>
+                <div>
+                    <div class="sewv" ng-click="showShopModal()">
+                        <div class="sewvtop"><span>{{storeName}}</span></div>
+                    </div>
+                </div>
+                <div>
+                    <pull-select pull-config="selectDateType"></pull-select>
+                </div>
+                <div class="timeInputDiv">
+                    <input class="klw-input dateTime" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="modify.tableList.begindate">
+                    <i class="iconfont icon-time"></i>
+                </div>
+            </div>
+            <div class="rows rowsText">
+                <p>结束时间<span class="star">*</span></p>
+            </div>
+            <div class="rows rowsInput">
+                <div class="timeInputDiv">
+                    <input class="klw-input dateTime" type="text" readonly ng-click="showDatetimePick($event)" data-date-format="yyyy-mm-dd" ng-model="modify.tableList.enddate">
+                    <i class="iconfont icon-time"></i>
+                </div>
+                <div>
+                    送任意
+                    <input class="klw-input input100 validate" name="empty" type="number" min="1" ng-model="modify.tableList.sendproductqty"/>
+                    款
+                </div>
+            </div>
+            <div class="rows rowsText">
+                <p>备注</p>
+            </div>
+            <div class="rows rowsInput">
+                <div class="input100">
+                    <textarea class="klw-textarea remark" placeholder="请输入备注" ng-model="modify.tableList.note"></textarea>
+                </div>
+            </div>
+
+        </div>
+        <div class="activity-merchandise jxmessage">
+            <!-- 福袋商品之title-->
+            <div class="messageTitle clear">
+                <h3 class="addTitle">福袋商品</h3>
+
+                <div class="fr message-button" ng-hide="bagBtn">
+                    <div class="btn  pl-import btn2" ng-click="isBagShow('batchLead1')"><i class="iconfont"></i>导入</div>
+                </div>
+            </div>
+            <!-- 福袋商品之button-->
+            <div class="message-button" ng-show="bagBtn">
+                <div class="btn  pl-import btn2" ng-click="isBagShow('batchLead1')"><i class="iconfont"></i>导入</div>
+            </div>
+
+            <!-- 福袋商品之详情界面 -->
+            <div class="merchandise-details message-content">
+                <!-- 批量导入详情-->
+                <div class="batchLeadDetails" ng-show="bagContent == 'batchLead1'">
+                    <div class="leadExplain">
+                        <p>导入说明</p>
+
+                        <p>1. 导入文件仅支持CSV、XLS、XLXS格式、大小不超过2M，数据不超过1万字</p>
+
+                        <p>2. 导入文件不能包含“合并单元格”，否则无法导入 </p>
+
+                        <p>3. 待补充</p>
+                    </div>
+                    <div class="leadTemplate">
+                        <p>导入模板 <span class="star">*</span></p>
+
+                        <div class="rows rowsInput">
+                            <div class="input50 leadFileInput" ng-click="leadObj.leadXlsx($event)">
+                                <input type="text" class="klw-input leadObj" placeholder="请选择导入文件" readonly/>
+                                <input type="file" class="fileElem" multiple accept="image/*" style="display:none">
+                                <i class="iconfont"></i>
+                            </div>
+                            <div class="notTemplate">
+                                还没有模板,
+                                <span ng-click="leadObj.downFile('ActivityStrategyLuckyTPL')">
+                                    点此下载  <i class="iconfont icon-down"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-button">
+                        <button class="btn btn-success btn-78" ng-click="leadObj.leadConfirm()">确定</button>
+                        <button class="btn btn-default btn-cancel btn-78" ng-click="isBagShow(false)">取消</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--福袋商品之有明细 -->
+            <div class="hasDetail" ng-show="tableList1.length>0">
+                <div class="tableOut">
+                    <table id="bagDetailTable" class="display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>操作</th>
+                            <th ng-repeat="obj in theadList1">{{obj.name}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="(key,obj) in tableList1" repeat-finished-directive
+                            repeataction="initFunc()" repeatIndex="{{$index}}" condition="{{$last == true}}">
+                            <td>
+                                <i class="iconfont icon-delete" ng-click="deleteMessage($index)"></i>
+                            </td>
+                            <td ng-repeat="item in theadList1">
+
+                                <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                                <span  ng-hide="item.tag=='quantity' || item.tag=='plansendqty'|| item.tag=='alertquantity'">{{obj[item.tag] | isBoolean}}</span>
+                                <input class="input-modify" ng-show="item.tag=='quantity'" ng-model="obj[item.tag]" ng-blur="inputBlur(key,'quantity',obj[item.tag])"/>
+                                <input class="input-modify" ng-show="item.tag=='plansendqty'" ng-model="obj[item.tag]" ng-blur="inputBlur(key,'plansendqty',obj[item.tag])"/>
+                                <input class="input-modify" ng-show="item.tag=='alertquantity'" ng-model="obj[item.tag]" ng-blur="inputBlur(key,'alertquantity',obj[item.tag])"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部按钮-->
+        <div class="content-footer jxmessage">
+            <button class="btn btn-success btn-78" ng-click="addBuySubmit()">保存</button>
+            <button class="btn btn-default btn-78" ng-click="returnFun()">取消</button>
+        </div>
+
+
+        <!--店铺选择弹框-->
+        <div class="modal fade shop-modal" id="shopModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="header-title">店铺</div>
+                        <div class="header-close" data-dismiss="modal" aria-hidden="true"><i class="icon iconfont icon-icon_guanbisousuo"></i></div>
+                    </div>
+                    <div class="modal-body clear">
+                        <div class="cf">
+                            <div class="fl left">
+                                <i class="iconfont icon-search-blod"></i>
+                                <input type="text" class="klw-search" placeholder="编码/名称">
+
+                                <div class="thead">
+                                    <span class="td">
+                                        <div style="width:38px;height:1px">
+                                            <!--<i class="iconfont"></i>-->
+                                        </div>
+                                    </span>
+                                    <span class="td">编码</span>
+                                    <span class="td">店铺名称</span>
+                                </div>
+                                <div class="tbody">
+                                    <div class="tr" ng-repeat="item in storeList"
+                                         ng-click="selectOneStore($event,$index)">
+                                        <div class="td oh">
+                                            <div class="klwk-check" ng-hide="isInSelectStoreList(item)"><i
+                                                    class="iconfont"></i></div>
+                                            <div class="klwk-check-x" ng-if="isInSelectStoreList(item)"><i
+                                                    class="iconfont"></i></div>
+                                        </div>
+                                        <span class="td oh">{{item.code}}</span>
+                                        <span class="td oh">{{item.name}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fl left right">
+                                <div class="title">已选择</div>
+                                <div class="thead">
+                                    <span class="td">编码</span>
+                                    <span class="td">店铺名称</span>
+                                    <span class="td"></span>
+                                </div>
+                                <div class="tbody">
+                                    <div class="tr" ng-repeat="item in selectStoreList">
+                                        <span class="td oh">{{item.code}}</span>
+                                        <span class="td oh">{{item.name}}</span>
+
+                                        <div class="td oh" ng-click="deleteOneStore($index)">
+                                            <i class="iconfont icon-close"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-78 btn-success" ng-click="showStores()">确定</button>
+                        <button type="button" class="btn btn-78 btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

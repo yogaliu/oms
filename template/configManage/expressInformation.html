@@ -1,0 +1,198 @@
+<div id="configManage" class="config-manage">
+    <div id="expressInformation" class="express-information" ng-controller="expressInformationController">
+        <div id="content" class="content">
+            <div class="search cf">
+                <div class="items line fl">
+                    <div class="ipt line">
+                        <label class="item">
+                            <span class="title">快递编码</span>
+                            <input type="text" class="klw-input" placeholder="请输入快递编码" ng-model="formData.code">
+                        </label>
+                        <label class="item">
+                            <span class="title">快递名称</span>
+                            <input type="text" class="klw-input" placeholder="请输入快递名称" ng-model="formData.name">
+                        </label>
+                    </div>
+                </div>
+                <div class="oprate line fl">
+                    <span class="blue" ng-click="search()">搜索</span>
+                    <span ng-click="clearOnly()">清空</span>
+                </div>
+                <div class="fr line">
+                    <menu-select menu-config="menuInfo"></menu-select>
+                    <button class="svg2" ng-click="goCreatPage()">新增快递</button>
+                </div>
+            </div>
+            <div id="topTable" class="top-table">
+                <div class="items fl">
+                    <label class="item" ng-click="queryCondition('isdisabled')">
+                        <div class="klwk-check-f" ng-if="formData.isdisabled === ''"><i class="iconfont"></i></div>
+                        <div class="klwk-check-x" ng-if="formData.isdisabled === true"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-if="formData.isdisabled === false"><i class="iconfont"></i></div>
+                        <span>禁用</span>
+                    </label>
+                    <label class="item" ng-click="queryCondition('iscancod')">
+                        <div class="klwk-check-f" ng-if="formData.iscancod === ''"><i class="iconfont"></i></div>
+                        <div class="klwk-check-x" ng-if="formData.iscancod === true"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-if="formData.iscancod === false"><i class="iconfont"></i></div>
+                        <span>支持货到付款</span>
+                    </label>
+                    <label class="item" ng-click="queryCondition('isonlycancod')">
+                        <div class="klwk-check-f" ng-if="formData.isonlycancod === ''"><i class="iconfont"></i></div>
+                        <div class="klwk-check-x" ng-if="formData.isonlycancod === true"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-if="formData.isonlycancod === false"><i class="iconfont"></i></div>
+                        <span>仅支持货到付款</span>
+                    </label>
+                    <label class="item" ng-click="queryCondition('isusecloudsstack')">
+                        <div class="klwk-check-f" ng-if="formData.isusecloudsstack === ''"><i class="iconfont"></i></div>
+                        <div class="klwk-check-x" ng-if="formData.isusecloudsstack === true"><i class="iconfont"></i></div>
+                        <div class="klwk-check" ng-if="formData.isusecloudsstack === false"><i class="iconfont"></i></div>
+                        <span>支持云栈电子面单</span>
+                    </label>
+                </div>
+                <div>
+                    <div class="ti-pagination">
+                        <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                        / 共 <span>{{paginationConf.totalItems}}</span>
+                        <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont"  ng-click="prev()"></i></span>
+                        <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont" ng-click="next()"></i></span>
+                        <span class="config-column"><i class="iconfont"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="cf more-table" style="height: calc(100% - 178px);">
+                <div class="ab-position">
+                    <div class="left-table" style="width: 70%;">
+                        <table class="table-thead" style="width: calc(70% - 4px);">
+                            <thead>
+                            <tr>
+                                <th ng-click="selectAll()">
+                                    <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                                </th>
+                                <th>操作</th>
+                                <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <table id="mainTable" class="display main-table" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th ng-click="selectAll()">
+                                    <div class="klwk-check" ng-hide="isalldatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="isalldatacheck"><i class="iconfont"></i></div>
+                                </th>
+                                <th>操作</th>
+                                <th ng-repeat="obj in theadList">{{obj.name}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="obj in tableList" ng-click="queryExpressPlatform($index)" ng-class="{'green':currentIndex == $index}">
+                                <td ng-click="selectItem($index);$event.stopPropagation();">
+                                    <div class="klwk-check" ng-hide="obj.isdatacheck"><i class="iconfont"></i></div>
+                                    <div class="klwk-check-x" ng-show="obj.isdatacheck"><i class="iconfont"></i></div>
+                                </td>
+                                <td class="over-show">
+                                    <div class="tr-oprate">
+                                        <div class="tr-icon"><i class="iconfont icon-operate"></i></div>
+                                        <ul class="tr-oprate-list">
+                                            <li ng-click="goEditPage($index);$event.stopPropagation();">修改</li>
+                                            <li ng-click="enabledItem($index);$event.stopPropagation();">启用</li>
+                                            <li ng-click="disabledItem($index);$event.stopPropagation();">禁用</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td ng-repeat="item in theadList" title="{{obj[item.tag] | isBoolean }}">
+                                    <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                                    {{obj[item.tag] | isBoolean }}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="right-table" style="width:30%;">
+                        <div class="items title">
+                            <div class="item line">
+                                <span>快递公司：</span>
+                                <span class="text">{{queryItem.name}}</span>
+                            </div>
+                            <div class="item line">
+                                <span>快递编码：</span>
+                                <span class="text">{{queryItem.code}}</span>
+                            </div>
+                            <button class="btn-green" ng-click="showRightCreatModal()">新增</button>
+                        </div>
+                        <div class="more-table" style="height: calc(100% - 45px);">
+                            <div class="ab-position">
+                                <div class="all-table">
+                                    <table class="table-thead" cellspacing="0" style="width: calc(100% - 4px);">
+                                        <thead>
+                                        <tr>
+                                            <th>操作</th>
+                                            <th ng-repeat="obj in righttheadList">{{obj.name}}</th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                    <table class="display main-table express-tabel" cellspacing="0" width="100%">
+                                        <thead>
+                                        <tr>
+                                            <th>操作</th>
+                                            <th ng-repeat="obj in righttheadList">{{obj.name}}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="obj in righttableList">
+                                            <td class="over-show">
+                                                <div class="tr-oprate">
+                                                    <div class="tr-icon"><i class="iconfont icon-operate"></i></div>
+                                                    <ul class="tr-oprate-list">
+                                                        <li ng-click="showRightEditModal($index)">修改</li>
+                                                        <li ng-click="deleteRightItem($index)">删除</li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                            <td ng-repeat="item in righttheadList">
+                                                {{obj[item.tag]}}
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+
+        </div>
+        <!--新增&修改关联平台弹框-->
+        <div class="modal fade" id="editRightModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">修改</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="item">
+                            <span>平台名称<i class="notice">*</i></span>
+                            <pull-select pull-config="platformtypeList"></pull-select>
+                        </div>
+                        <div class="item">
+                            <span>平台快递编码<i class="notice">*</i></span>
+                            <input class="klw-input" placeholder="请输入平台快递编码" ng-model="activeRightItem.code">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="editRight()">保存</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

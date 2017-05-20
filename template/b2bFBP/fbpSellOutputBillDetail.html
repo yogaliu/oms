@@ -1,0 +1,55 @@
+<div id="fbpSellOutputBillDetail" class="jxOutDiv jxOutDivDetail" ng-controller="fbpSellOutputBillDetailController">
+    <div class="jxOutDivContent">
+        <div class="detail-content-top">
+            <div class="detail-top-tab">
+                <ul>
+                    <li ng-class="{true:'current',false:''}[tab == 'first']" ng-click="isShow('first')">出库单详情</li>
+                    <li ng-class="{true:'current',false:''}[tab == 'second']" ng-click="isShow('second')">操作日志</li>
+                </ul>
+                <button class="btn btn-default btn-78" ng-click="domOperate.backTolist() ">返回</button>
+            </div>
+        </div>
+        <div class="content-first" ng-show="tab == 'first'">
+            <!--<div class="jxmessage">-->
+                <!--<h3 class="detailTitle">-->
+                    <!--调整单号：VA1702244876348-->
+                <!--</h3>-->
+            <!--</div>-->
+            <div class="activityMerchandise jxmessage">
+                <!--<h3 class="detailTitle">活动商品信息</h3>-->
+
+                <div class="tableOut">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th ng-repeat="list in planListThead">{{ list.name }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="list in planListTbody">
+                            <td ng-repeat=" item in planListThead" ng-bind-html="list[item.tag]"></td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="content-second" ng-show="tab == 'second'">
+            <div id="tableOut" style="margin:30px;">
+                <table>
+                    <thead>
+                    <th ng-repeat="list in logListThead">{{ list.name }}</th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="list in logListTbody">
+                        <td ng-repeat="item in logListThead" ng-bind-html="list[item.tag]">
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

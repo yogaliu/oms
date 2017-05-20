@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" ng-app="klwkOmsApp">
+<head>
+    <title>订单管理</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../public/css/bootstrap.css">
+
+</head>
+<body>
+<!-- 显示总的界面 -->
+<ui-view></ui-view>
+
+</body>
+<!-- 导入的基础插件，包含jquery,angularJs等 -->
+<script type="text/javascript" src="../../public/js/jquery.js"></script>
+<script type="text/javascript" src="../../public/js/base.js"></script>
+<script type="text/javascript" src="../../public/js/echarts.min.js"></script>
+<script type="text/javascript" src="../../public/js/bootstrap.min.js"></script>
+<script>
+    angular.module('hb',[])
+            .controller('myController', ['$scope',"myservice", function TabsetCtrl($scope,myservice) {
+                console.log("angular.module('hb',[]) ");
+                myservice.test();
+            }])
+            .directive('huangbiao', function() {
+                return {
+                    restrict: 'A',
+                    controller: 'myController',
+                    template: 'huangbiao hello word'
+                };
+            })
+            .factory('myservice', function() {
+                return {
+                    test:function(){
+                        console.log("1111111")
+                    }
+                };
+            });
+</script>
+<script type="text/javascript" src="demoApp.js"></script>
+<script>
+
+
+
+    /**
+     * 定义常量WAP_CONFIG;WAP为当前子模块功能
+     * */
+    angular.module('klwkOmsApp')
+            .config(["$stateProvider","$urlRouterProvider",function ($stateProvider, $urlRouterProvider) {
+                // 如果没有匹配的路径，则设置默认路径
+                $urlRouterProvider.otherwise('/index');
+                $stateProvider
+                    //首页
+                    .state('index',{
+                        url: '/index',
+                        templateUrl:'angularui-alertTmp.html',
+                        controller:'myController'
+                    })
+            }]);
+
+    /**
+     * Created by jx on 2017/3/16.
+     */
+//    angular.module("klwkOmsApp")
+//        .controller("myController", ["$scope" ,function($scope) {
+//                console.log("angular.module('klwkOmsApp',[]) ");
+//    }]);
+
+//    angular.module("klwkOmsApp").directive('huangbiao', function() {
+//        return {
+//            restrict: 'A',
+//            controller: 'myController',
+//            template: 'huangbiao hello word'
+//        };
+//    });
+
+    angular.module("klwkOmsApp").factory('myservice', function() {
+        return {
+            test:function(){
+                console.log("222222")
+            }
+        };
+    });
+
+</script>
+</html>

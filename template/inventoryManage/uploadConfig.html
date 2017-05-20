@@ -1,0 +1,179 @@
+<div id="inventoryManage" class="inventory-manage">
+    <div id="uploadConfig" class="upload-config" ng-controller="uploadConfigController">
+        <div id="topNav" class="top-nav">
+            <div class="path">
+                上传配置
+            </div>
+        </div>
+        <div id="content" class="content">
+            <div class="search cf">
+                <div class="fr line">
+                    <button class="svg2" ng-click="search()"><i class="iconfont icon-delete"></i>搜索</button>
+                    <button class="svg2" ng-click="showAddConfigModal('add')"><i class="iconfont icon-new"></i>新增</button>
+                </div>
+            </div>
+            <div id="topTable" class="top-table">
+                <div class="items fl">
+                    <label class="item">
+                        <input type="checkbox">
+                        <span>自动上传</span>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox">
+                        <span>手动上传</span>
+                    </label>
+                </div>
+                <div>
+                    &nbsp;
+                </div>
+            </div>
+            <div class="cf">
+                <div class="">
+                    <table cellspacing="0" class="left-table">
+                        <thead>
+                        <tr>
+                            <th>操作</th>
+                            <th>店铺</th>
+                            <th>品牌</th>
+                            <th>自动上传</th>
+                            <th>手动上传</th>
+                        </tr>
+                        </thead>
+                        <tbody class="storeListTbody">
+                        <tr ng-repeat="item in uploadConfigList" ng-click="showRepertory(item)" repeat-finished-directive condition="{{$last}}" repeataction="getFirstStoreWarehouse()">
+                            <td >
+                                <div class="tr-oprate" ng-click="oprateTr($event)">
+                                    <div class="tr-icon"><i class="iconfont icon-operate"></i></div>
+                                    <ul class="tr-oprate-list">
+                                        <li ng-click="showAddConfigModal('update',item)">修改</li>
+                                        <li ng-click="delUploadConfigItem(item)">删除</li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td>
+                                <span ng-bind="item.storeObject.name"></span>
+                            </td>
+                            <td>{{item.brandname}}</td>
+                            <td>
+                                <i class="iconfont icon-icon9 correct" ng-if="item.isupload === true"></i>
+                            </td>
+                            <td>
+                                <i class="iconfont icon-icon9 correct" ng-if="item.ismanualupload === true"></i>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="right-table">
+                    <div class="items">
+                        <div class="item line">
+                            <span>店铺：</span>
+                            <span class="text">{{selectedStoreObj.storeObject.name}}</span>
+                        </div>
+                        <div class="item line">
+                            <span>品牌：</span>
+                            <span class="text">{{selectedStoreObj.brandname}}</span>
+                        </div>
+
+                        <div class="item line" style="float:right">
+                            <button class="svg2" ng-click="showWarehouseAddConfigModal()"><i class="iconfont icon-new"></i>新增</button>
+                        </div>
+
+                    </div>
+                    <table cellspacing="0" class="express-tabel">
+                        <thead>
+                        <tr>
+                            <th>操作</th>
+                            <th>仓库名称</th>
+                            <th>仓库类型</th>
+                            <th>上传比例</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="warehouse in warehouseList">
+                            <td >
+                                <div class="tr-oprate" ng-click="oprateTr($event)">
+                                    <div class="tr-icon"><i class="iconfont icon-operate"></i></div>
+                                    <ul class="tr-oprate-list">
+                                        <li>修改</li>
+                                        <li>删除</li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td>{{warehouse.warehouseObject.name}}</td>
+                            <td>{{warehouse.warehouseObject.warehousetype | warehouseTypeFilter}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!--新增 店铺 弹框-->
+        <div class="modal fade" id="{{AddConfigModalId}}" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">新增</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="item" style="clear: both;line-height: 30px;">
+                            <span class="title">店铺<i class="notice">*</i></span>
+                            <pull-select pull-config="selectConfig.storeList" ></pull-select>
+                        </div>
+                        <div class="item" style="clear: both;line-height: 30px;">
+                            <span class="title">品牌</span>
+                            <pull-multi multi-config="selectConfig.brandList"></pull-multi>
+                        </div>
+                        <div class="item" style="clear: both;line-height: 30px;margin-top: 10px;">
+                           <span>
+                               <input type="checkbox" ng-model="addConfigObj.IsUpload">
+                               <span>自动上传</span>
+                           </span>
+                            <span style="margin-left: 10px;">
+                               <input type="checkbox" ng-model="addConfigObj.IsManualUpload">
+                                <span>手动上传</span>
+                           </span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="saveAddUploadConfig()">确认</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 根据店铺 新增仓库  和 比例 的模态框 -->
+        <div class="modal fade" id="{{AddWarehouseConfigModalId}}" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">新增</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="item" style="clear: both;line-height: 30px;">
+                            <span class="title">仓库<i class="notice">*</i></span>
+                            <pull-select pull-config="selectConfig.warehouseList" ></pull-select>
+                        </div>
+                        <div class="item" style="clear: both;line-height: 30px;">
+                            <span class="title">上传比例</span>
+                            <input type="text" ng-model="selectConfig.IsUpload">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="saveAddWarehouseScale()">确认</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

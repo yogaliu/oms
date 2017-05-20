@@ -1,0 +1,87 @@
+<div id="secondList" class="inventory-manage jxOutDiv" ng-controller="secondListController">
+    <div id="content" class="content">
+        <div class="search" ng-hide="advance">
+            <input type="text" class="klw-search" placeholder="借用人/商品编码">
+            <span ng-click="showAdvance()" class="showAdvance">高级搜索</span>
+        </div>
+        <div class="advance-search" ng-show="advance">
+            <div class="items">
+                <div class="ipt">
+                    <label class="item col-width" style="float: left">
+                        <span class="title">借调人</span>
+                        <input type="text" class="klw-input" ng-model="formData.loanUser">
+                    </label>
+
+                    <label class="item col-width">
+                        <span class="title">商品编码</span>
+                        <input type="text" class="klw-input" ng-model="formData.productCode">
+                    </label>
+
+                    <label class="item col-width">
+                        <span class="title">规格编码</span>
+                        <input type="text" class="klw-input" ng-model="formData.skuCode">
+                    </label>
+                </div>
+                <div class="ipt">
+                    <div class="searchItem timeInput" style="position: relative;left: 8px;display: grid;">
+                        <span class="title">制单时间</span>
+                        <div class="options" style="margin-top: 15px;">
+                            <input class="klw-input ng-pristine ng-untouched ng-valid" id="beginCreateDate" type="text" ng-model="formData.beginCreateDate">
+                            <i class="line"></i>
+                            <input class="klw-input ng-pristine ng-untouched ng-valid" id="endCreateDate" type="text" ng-model="formData.endCreateDate">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="oprate">
+                <button ng-click="advanceSearch()" class="btn btn-success btn-78">搜索</button>
+                <button class="btn btn-default btn-78" ng-click="showAdvance()">取消</button>
+                <button class="btn btn-default btn-78" ng-click="clearOnly()">清空</button>
+            </div>
+        </div>
+        <div id="topTable" class="top-table cf">
+            <div class="items fl">
+                <button class="btn btn-default btn-78">导出</button>
+            </div>
+            <div class="ti-pagination">
+                <span class="num"><span>{{first}}</span>-<span>{{last}}</span></span>
+                / 共 <span>{{paginationConf.totalItems}}</span>
+                <span class="prev" ng-class="{disabled: conf.currentPage == 1}">
+                        <i class="iconfont"  ng-click="prev()"></i>
+                    </span>
+                <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}">
+                        <i class="iconfont" ng-click="next()"></i>
+                    </span>
+                <span class="config-column" ng-mouseover="isHover()" ng-mouseleave="isHover()" ng-click="listAllocation()"><i class="iconfont"></i></span>
+
+                <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+                <!-- 右侧列表配置 -->
+                <tm-listallocation allo="allocation"></tm-listallocation>
+            </div>
+        </div>
+        <div class="inventoryContent" >
+            <div class="cf userManage">
+                <table id="omsDataTable" class="display" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <td ng-repeat="obj in columnList">{{obj.name}}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="obj in loanList">
+                        <td ng-repeat="item in columnList">
+                            <i class="iconfont icon-icon9 correct" ng-if="obj[item.tag] === true"></i>
+                            {{obj[item.tag] | isBoolean}}
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <tm-pagination conf="paginationConf"></tm-pagination>
+    </div>
+</div>

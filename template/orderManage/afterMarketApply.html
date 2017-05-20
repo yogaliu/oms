@@ -1,0 +1,222 @@
+<div id="afterMarketApply" class="jxOutDiv" ng-controller="afterMarketApplyController">
+    <div class="jxOutDivContent">
+        <!-- 主搜索框和主按钮-->
+        <div id="simpleSearch" class="simpleSearch" ng-hide="advancedSearchObj.advancedSearch == 'afterMarketApply'">
+            <div class="textsewv textsewv1">
+                <div class="sewv">
+                    <div class="sewvtop"><span>仅退款单</span><i class="iconfont icon-xiajiantou"></i></div>
+                    <div class="content">
+                        <ul class="sewvbm">
+                            <li>全部售后单</li>
+                            <li>仅退款单</li>
+                            <li>退款退货单</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <input class="klw-search" placeholder="退款单号" ng-model="formData.RefundCode" ng-keydown="domOperate.searchByCode($event)"/>
+            <span class="advancedSearchBtn"  ng-click="advancedSearchObj.isShow('afterMarketApply')">高级搜索</span>
+
+            <div class="fr">
+                <menu-select menu-config="batchOperate"></menu-select>
+                <div class="btn  pl-import" ng-click="domOperate.refresh()"><i class="icon iconfont icon-icon_fanzhuan_default" ></i>刷新</div>
+                <div class="btn klwk-cancle exportBtn"><i class="iconfont"></i>导出</div>
+            </div>
+        </div>
+
+        <!-- 高级搜索展开-->
+        <div id="advancedSearch" class="advancedSearch" ng-show="advancedSearchObj.advancedSearch == 'afterMarketApply'">
+            <!-- 退款时间-->
+            <div class="searchItem timeInput">
+
+                <div>
+                    <div class="title textsewv" ng-hide="advancedSearchObj.timeShow">
+                        <div class="sewv">
+                            <div class="sewvtop">
+                                <span>退款时间</span>
+                                <i class="iconfont icon-xiajiantou"></i>
+                            </div>
+                            <div class="content">
+                                <ul class="sewvbm">
+                                    <li>退款时间</li>
+                                    <li>修改时间</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="title" ng-show="advancedSearchObj.timeShow">退款时间</span>
+                    <div class="options">
+                        <input class="klw-input" id="SearchBegin" readonly ng-model="formData.SearchBegin" type="text">
+                        <i class="line"></i>
+                        <input class="klw-input" id="SearchEnd" readonly ng-model="formData.SearchEnd" type="text">
+                    </div>
+                </div>
+                <div class="more">
+                    <div class="btn klwk-spread timeSpreadBtn" ng-click="advancedSearchObj.isTimeShow()"><span>{{advancedSearchObj.timeText}}</span><i class="iconfont"></i></div>
+                </div>
+            </div>
+            <!-- 退款时间展开-->
+            <div class="searchItem timeInput timeSpread" ng-show="advancedSearchObj.timeShow">
+                <div>
+                    <span class="title">修改时间</span>
+                    <div class="options">
+                        <input class="klw-input" id="SearchLastBegin" readonly ng-model="formData.SearchLastBegin" type="text">
+                        <i class="line"></i>
+                        <input class="klw-input" id="SearchLastEnd" readonly ng-model="formData.SearchLastEnd" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 店铺-->
+            <advanced-search-more-list  search-config="storeListConfigData"></advanced-search-more-list>
+            <advance-search-more-list-show search-config="storeListConfigData"></advance-search-more-list-show>
+            <!-- 店铺-->
+
+            <!-- 平台状态-->
+            <advanced-search-more-list  search-config="platformConfigData"></advanced-search-more-list>
+            <advance-search-more-list-show search-config="platformConfigData"></advance-search-more-list-show>
+            <!-- 平台状态-->
+
+            <!-- 退款状态-->
+            <advanced-search-more-list  search-config="refundConfigData"></advanced-search-more-list>
+            <advance-search-more-list-show search-config="refundConfigData"></advance-search-more-list-show>
+            <!-- 退款状态-->
+
+            <!-- 退款类型-->
+            <advanced-search-list config-data="refundType"></advanced-search-list>
+            <!-- 退款类型-->
+
+            <!-- 订单标记-->
+            <advanced-search-list config-data="orderMarks"></advanced-search-list>
+            <!-- 订单标记-->
+
+            <!-- 会员昵称-->
+            <div class="searchItem searchItemInput">
+                <div class="rows rowsText">
+                    <p>手机</p>
+
+                    <p>退款单号</p>
+
+                    <p>平台订单号</p>
+
+                    <p>物流单号</p>
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <input type="text" class="klw-input ng-pristine ng-untouched ng-valid" ng-model="formData.Mobile" placeholder="手机">
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input ng-pristine ng-valid ng-touched" ng-model="formData.RefundCode" placeholder="退款单号">
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input ng-pristine ng-untouched ng-valid" ng-model="formData.TradeId" placeholder="平台订单号">
+                    </div>
+                    <div>
+                        <input type="text" class="klw-input ng-pristine ng-untouched ng-valid" ng-model="formData.ExpressNumber" placeholder="物流单号">
+                    </div>
+                </div>
+                <div class="rows rowsText">
+                    <p>会员昵称</p>
+                </div>
+                <div class="rows rowsInput">
+                    <div>
+                        <input type="text" class="klw-input ng-pristine ng-valid ng-touched" ng-model="formData.BuyerNick" placeholder="会员昵称">
+                    </div>
+                </div>
+            </div>
+            <!-- 已选择行-->
+            <div class="searchItem selected">
+                <span class="title">已选择</span>
+                <div class="selectedBox"
+                     ng-repeat="(key,orderlist) in formChoseData">
+                    <span class="selectedTitle">{{orderlist['title']}}：</span>
+                    <span class="selectedContent">{{orderlist['name']}}</span>
+                    <i class="icon iconfont icon-icon_guanbisousuo" ng-click="domOperate.clearChoseCondition(orderlist)"></i>
+                </div>
+            </div>
+            <div id="conditionSet">
+                <button class="btn btn-success btn-78" ng-click="domOperate.advanceSearchConfirm($event)">确定</button>
+                <button class="btn btn-default btn-78 advancedSearchCancelBtn" ng-click="domOperate.advanceSearchCancle($event)">取消
+                </button>
+                <button class="btn btn-default btn-78" ng-click="domOperate.advanceSearchClear($event)">清空</button>
+            </div>
+        </div>
+
+        <!-- 特殊标识行-->
+        <div id="simpleSelect" class="simpleSelect clear">
+            <div class="selectItems fl">
+                <label ng-click="domOperate.threeSelect($event,'IsRefund')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow" ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[formData.IsRefund]"></i>
+                    <span>退款</span>
+                </label>
+                <label ng-click="domOperate.threeSelect($event,'IsReturn')" class="selectItem">
+                    <i class="iconfont icon-sel-yellow" ng-class="{true:'icon-sel-zhengque',false:'icon-sel'}[formData.IsReturn]"></i>
+                    <span>退货</span>
+                </label>
+            </div>
+
+            <div class="ti-pagination">
+                <span class="num"><span>{{first}}</span>-<span>{{last}}</span> </span>
+                / 共 <span>{{paginationConf.totalItems}}</span>
+
+                <span class="prev" ng-class="{disabled: conf.currentPage == 1}"><i class="iconfont" ng-click="prev()"></i></span>
+
+                <span class="next" ng-class="{disabled: conf.currentPage == conf.numberOfPages}"><i class="iconfont" ng-click="next()"></i></span>
+
+                <span class="config-column" ng-mouseover="isHover()" ng-mouseleave="isHover()" ng-click="domOperate.listAllocation('orderList')"><i class="iconfont"></i></span>
+
+                <span class="listAllocationHover" ng-show="listAllocationHover">列表配置</span>
+            </div>
+        </div>
+
+        <div class="tableOut">
+            <table id="afterMarketTable">
+                <thead>
+                <tr>
+                    <th>
+                        <label ng-click="domOperate.sellectAll()">
+                            <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':checkAll}"></i>
+                        </label>
+                    </th>
+                    <th>序号</th>
+                    <th>操作</th>
+                    <th ng-repeat="column in afterHead">{{column.name}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="list in afterMarketBody">
+                    <td>
+                        <label ng-click="domOperate.orderListChose($event,list)">
+                            <i class="iconfont icon-sel" ng-class="{'icon-sel-zhengque':list.trShow}"></i>
+                        </label>
+                    </td>
+                    <td>{{$index+1}}</td>
+                    <td class="operate">
+                        <div class="multilevel-menu">
+                            <div><span class="iconfont icon-operate"></span></div>
+                            <div class="content">
+                                <ul class="one">
+                                    <li>
+                                        <span>标记</span>
+                                        <ul>
+                                            <li ng-click="domOperate.productReturn($event,'正品退货',list)">正品退货</li>
+                                            <li ng-click="domOperate.productReturn($event,'次品退货',list)">次品退货</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td ng-repeat="column in afterHead"
+                        ng-bind-html="list[column.tag] | specialLabelFilter : column : list">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--分页-->
+        <tm-pagination conf="paginationConf"></tm-pagination>
+    </div>
+    <!-- 右侧列表配置 -->
+    <tm-listallocation allo="allocation"></tm-listallocation>
+</div>

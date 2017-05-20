@@ -1,0 +1,26 @@
+<div class="selectItems fl" id="huangbiao">
+    <label >
+        <i oms-checkbox-directive is-checkbox-switch="true" switch-scope="#huangbiao" class="icon-sel iconfont"></i>
+        全选
+    </label>
+
+    <label ng-repeat="item in lists">
+        <i oms-checkbox-directive is-checkbox-switch="false" userAction="useraction1(rrr)" checkbox-value="{{item}}" switch-scope="#huangbiao" class="icon-sel iconfont"></i>
+        {{item.username}}--{{item.age}}
+    </label>
+
+    <!--<label >-->
+        <!--<i oms-checkbox-directive is-checkbox-switch="false" switch-scope="#huangbiao" class="icon-sel iconfont"></i>-->
+        <!--选中指令1-->
+    <!--</label>-->
+
+    <!--<label >-->
+        <!--<i oms-checkbox-directive is-checkbox-switch="false" switch-scope="#huangbiao" class="icon-sel iconfont"></i>-->
+        <!--选中指令2-->
+    <!--</label>-->
+
+    <!--<label >-->
+        <!--<i oms-checkbox-directive is-checkbox-switch="false" switch-scope="#huangbiao" class="icon-sel iconfont"></i>-->
+        <!--选中指令3-->
+    <!--</label>-->
+</div>

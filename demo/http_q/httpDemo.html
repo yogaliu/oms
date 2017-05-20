@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" ng-app="klwkOmsApp">
+<head>
+    <title>订单管理</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../public/css/bootstrap.css">
+    <link rel="stylesheet" href="../../public/css/layer.css">
+
+</head>
+<body style="background: #000;">
+<!-- 显示总的界面 -->
+<ui-view></ui-view>
+
+</body>
+<!-- 导入的基础插件，包含jquery,angularJs等 -->
+<script type="text/javascript" src="../../public/js/jquery.js"></script>
+<script type="text/javascript" src="../../public/js/base.js"></script>
+<script type="text/javascript" src="../../public/js/echarts.min.js"></script>
+<script type="text/javascript" src="../../public/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../public/js/layer.js"></script>
+<script type="text/javascript" src="../demoApp.js"></script>
+<script type="text/javascript" src="../../scripts/global/service/ApiService.js"></script>
+<script type="text/javascript" src="../../scripts/common/controller/wap_config.js"></script>
+<script>
+
+    /**
+     * 定义常量WAP_CONFIG;WAP为当前子模块功能
+     * */
+    angular.module('klwkOmsApp')
+            .config(["$stateProvider","$urlRouterProvider",function ($stateProvider, $urlRouterProvider) {
+                // 如果没有匹配的路径，则设置默认路径
+                $urlRouterProvider.otherwise('/index');
+                $stateProvider
+                    //首页
+                    .state('index',{
+                        url: '/index',
+                        templateUrl:'httpTemplate.html',
+                        controller:'AccordionDemoCtrl'
+                    })
+            }]);
+
+    /**
+     * Created by jx on 2017/3/16.
+     */
+    angular.module("klwkOmsApp")
+        .controller("AccordionDemoCtrl", ["$scope","ApiService" ,function($scope,ApiService) {
+
+                var ActivityRegisterGet = function (__scope__,PageIndex,PageSize,SeletedCount,Data,isInit) {
+                    var url = "/ActivityRegister/ActivityRegister/Get";
+                    if(Data==undefined){
+                        Data=[];
+                    }
+                    var paramObj = {
+                        TimeStamp: '2017-03-14 16:10:19',
+                        Sign: '5D996AC6AD05BA977371743ACA8012BE',
+                        Version: '0.0.0',
+                        UserId: '9dda65da-6b26-468d-9dad-fe39490f54ea',
+                        UserName: '张秦',
+                        LoginKey: '76c87473-8b32-4cfe-9c75-7d6a35033419',
+                        body: JSON.stringify({
+                            "PageIndex": PageIndex,
+                            "PageSize": PageSize,
+                            "Timespan": "00:00:00.221",
+                            "SeletedCount": SeletedCount,
+                            "Data": Data,
+                            "Deleted": false,
+                            "IsNew": false,
+                            "IsUpdate": false
+                        })
+                    };
+                    var promise = ApiService.postLoad(url, paramObj);
+                    promise.then(function (res) {
+
+                    }, function (res) {
+                        console.log("我是错误的方法");
+                    });
+                };
+
+            $scope.init = function(){
+                console.dir(ApiService);
+                ActivityRegisterGet($scope, 1, 10, 0, [], true);
+            };
+            $scope.init();
+    }]);
+
+</script>
+</html>

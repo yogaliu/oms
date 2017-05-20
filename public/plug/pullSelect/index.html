@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>下拉选框</title>
+    <!--样式-->
+    <link rel="stylesheet" href="../../../css/public.css">
+
+</head>
+<body ng-app="myApp">
+<div ng-controller="testController">
+    <!--下拉选项-->
+    <div style="width: 200px">
+        <pull-select pull-config="pullInfo"></pull-select>
+    </div>
+    <button ng-click="init()">asdasd</button>
+
+    <!--多级菜单-->
+    <div style="margin-top: 150px;width: 200px">
+        <menu-select menu-config="menuInfo"></menu-select>
+    </div>
+
+    <!--下拉搜索-->
+    <div style="margin-top: 150px;width: 200px">
+        <search-select search-config="searchInfo"></search-select>
+    </div>
+
+    <!--下拉搜索-->
+    <div style="margin-top: 150px;width: 200px">
+        <pull-multi multi-config="multiInfo"></pull-multi>
+    </div>
+
+
+</div>
+
+<!--依赖脚本-->
+<script type="text/javascript" src="../../../public/js/angularjs.js"></script>
+<script type="text/javascript" src="pullSelect.js"></script>
+<script typet="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    angular.module('myApp', ['pullSelect']).controller('testController', function($scope, $timeout){
+        /*下拉列表*/
+        $scope.pullInfo ={
+            isshow:false,
+            info:[
+                {name:'第一个',id:'0001'},
+                {name:'第二个',id:'0002'},
+                {name:'第三个',id:'0003'},
+                {name:'第四个',id:'0004'},
+                {name:'第五个',id:'0005'}
+            ],
+            objName:{id:'0004'},
+            onChange: function(obj,index){	//点击之后的回调
+            }
+        };
+        /*手动初始化*/
+         $scope.init = function () {
+           $scope.pullInfo.init();
+       };
+
+        /*下拉菜单*/
+        $scope.menuInfo ={
+            isshow:false,
+            info:[
+                {name:'第一个'},
+                {name:'第二个'},
+                {name:'第三个'},
+                {name:'第四个'},
+                {name:'第五个',list:[
+                    {name:'第一个'},
+                    {name:'第二个'},
+                    {name:'第三个'},
+                    {name:'第四个',list:[
+                        {name:'第一个'},
+                        {name:'第二个'},
+                        {name:'第三个'},
+                    ]},
+                ]},
+                {name:'第四个'},
+                {name:'第四个'},
+                {name:'第四个'},
+                {name:'第四个'},
+                {name:'第四个'}
+
+            ],
+            objName:{name:'批量操作'},
+            onChange: function(obj,index){	//点击之后的回调
+
+            }
+        };
+
+        /*下拉搜索*/
+        $scope.searchInfo ={
+            isshow:false,
+            info:[
+                {name:'成都',id:'0001'},
+                {name:'南方菇凉',id:'0002'},
+                {name:'画',id:'0003'},
+                {name:'我们的时光',id:'0004'},
+                {name:'吉姆餐厅',id:'0005'}
+            ],
+            objName:{name:'第二个',id:'0002'},
+            onChange: function(obj,index){	//点击之后的回调
+            }
+        };
+
+        /*下拉多选*/
+        $scope.multiInfo ={
+            isshow:false,
+            info:[
+                {name:'第一个',id:'0001'},
+                {name:'第二个',id:'0002'},
+                {name:'第三个',id:'0003'},
+                {name:'第四个',id:'0004'},
+                {name:'第五个',id:'0005'}
+            ],
+//            objName:[{name:'第二个',id:'0002'},{name:'第一个',id:'0001'}],
+            objName:[{id:'0002'},{id:'0001'}],
+            onChange: function(data){	//点击之后的回调 data:选中的数组对象
+                console.log(data);
+            }
+        };
+    });
+</script>
+</body>
+</html>

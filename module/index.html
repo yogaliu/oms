@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en" ng-app="klwkOmsApp">
+<head>
+    <title>OMS管理系统</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../public/css/bootstrap.css">
+    <link rel="stylesheet" href="../public/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="../public/fonts/iconfont.css">
+    <link rel="stylesheet" href="../public/css/layer.css">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../css/jxPublic.css">
+
+    <!-- 订单管理-->
+    <link rel="stylesheet" href="../css/orderManage/orderManage.css">
+
+    <!--b2bVIP-->
+    <link rel="stylesheet" href="../css/b2bVIP/b2bVIP.css">
+
+    <!--b2bFBP-->
+    <link rel="stylesheet" href="../css/b2bFBP/b2bFBP.css">
+
+    <!-- 商品管理 -->
+    <link rel="stylesheet" href="../css/productManage/productManage.css">
+
+    <!--库存管理-->
+    <link rel="stylesheet" href="../css/inventoryManage/inventoryManage.css">
+
+    <!--配置管理-->
+    <link rel="stylesheet" href="../css/configManage/configManage.css">
+
+    <!-- 营销管理-->
+    <link rel="stylesheet" href="../css/marketingManage/marketingManage.css">
+
+    <!-- 财务管理-->
+    <link rel="stylesheet" href="../css/propertyManage/propertyManage.css">
+
+    <!-- 采购管理 -->
+    <link rel="stylesheet" media="screen" href="../css/purchaseManage/purchaseManage.css">
+
+</head>
+<body>
+<!-- 显示总的界面 -->
+<ui-view></ui-view>
+
+</body>
+
+<!-- 导入的基础插件，包含jquery,angularJs等 -->
+<script type="text/javascript" src="../public/js/base.js"></script>
+<script type="text/javascript" src="../public/js/lodash.min.js"></script>
+<script type="text/javascript" src="../public/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../public/js/jQuery.print.js"></script>
+<script type="text/javascript" src="../public/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../public/js/dataTables.fixedColumns.min.js"></script>
+<script type="text/javascript" src="../public/js/echarts.min.js"></script>
+<script type="text/javascript" src="../public/js/md5-min.js"></script>
+<script type="text/javascript" src="../public/js/jquery.fixedheadertable.js"></script>
+<script type="text/javascript" src="../public/js/omsTools.js"></script>
+<script type="text/javascript" src="../public/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="../public/js/bootstrap-datetimepicker.zh-CN.js"></script>
+
+<!-- 常用的工具方法 -->
+<script type="text/javascript" src="../public/plug/selectPlug.js"></script>
+<script type="text/javascript" src="../public/plug/arrayToTreeData.js"></script>
+<script type="text/javascript" src="../public/plug/pullSelect/pullSelect.js"></script>
+<script type="text/javascript" src="../public/plug/citySelect/city-picker.data.js"></script>
+<script type="text/javascript" src="../public/plug/citySelect/city-picker.js"></script>
+<script type="text/javascript" src="../public/js/layer.js"></script>
+<!-- angular 模块的配置文件 -->
+<script type="text/javascript" src="../scripts/common/app.js"></script>
+<script type="text/javascript" src="../scripts/common/config/router_config.js"></script>
+<script type="text/javascript" src="../scripts/common/config/wap_config.js"></script>
+<script type="text/javascript" src="../scripts/common/config/setting_config.js"></script>
+
+<!-- 公共模块使用的控制器 -->
+<script type="text/javascript" src="../scripts/common/controller/indexController.js"></script>
+<script type="text/javascript" src="../scripts/common/controller/publicController.js"></script>
+<script type="text/javascript" src="../scripts/common/controller/loginController.js"></script>
+<script type="text/javascript" src="../scripts/common/service/loginService.js"></script>
+<!-- 公共模块使用的过滤器 -->
+<script type="text/javascript" src="../scripts/global/filter/isTrue.js"></script>
+<script type="text/javascript" src="../scripts/global/filter/isZero.js"></script>
+<script type="text/javascript" src="../scripts/global/filter/trustHtml.js"></script>
+<script type="text/javascript" src="../scripts/global/filter/setDefaultValue.js"></script>
+<script type="text/javascript" src="../scripts/global/filter/classificationtype.js"></script>
+<script type="text/javascript" src="../scripts/global/filter/isZero.js"></script>
+
+<!--公共模块使用的指令-->
+<script type="text/javascript" src="../scripts/global/directive/repeatFinishedDirective.js"></script>
+<script type="text/javascript" src="../scripts/global/directive/menu.js"></script>
+<script type="text/javascript" src="../scripts/global/directive/region.js"></script>
+<script type="text/javascript" src="../scripts/global/directive/tm.listAllocation.js"></script>
+<script type="text/javascript" src="../scripts/global/directive/tm.pagination.js"></script>
+
+<!--订单管理逻辑控制器-->
+<script type="text/javascript" src="../scripts/orderManage/controller/orderListController.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/controller/addOrderController.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/controller/orderDetailController.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/controller/sendOrderAbnormalController.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/controller/afterMarketApplyController.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/controller/expressGetController.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/controller/addExpressGetBillController.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/controller/quitExchangeGoodsBillController.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/controller/addQuitExchangeGoodsBillController.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/controller/quitExchangeGoodsBillDetailController.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/controller/quitGoodsNoticeBillController.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/controller/quitGoodsNoticeBillDetailController.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/controller/refundBillController.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/controller/refundBillDetailController.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/controller/sendOrderAbnormalDetailController.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/controller/allocationNoticeBillController.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/controller/allocationNoticeBillDetailController.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/controller/quitGoodsScanController.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/controller/createRefundBillController.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/controller/manualDispatchController.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/controller/addRefundBillController.js"></script>
+
+<!--订单管理service-->
+<script type="text/javascript" src="../scripts/orderManage/service/orderManagePublicService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/addOrderService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/orderListService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/orderDetailService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/sendOrderAbnormalService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/afterMarketApplyService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/expressGetService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/addExpressGetBillService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/quitExchangeGoodsBillService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/addQuitExchangeGoodsBillService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/quitExchangeGoodsBillDetailService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/quitExchangeGoodsBillDetailService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/quitGoodsNoticeBillDetailService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/quitGoodsNoticeBillService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/refundBillService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/refundBillDetailService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/sendOrderAbnormalDetailService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/allocationNoticeBillService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/allocationNoticeBillDetailService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/quitGoodsScanService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/createRefundBillService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/manualDispatchService.js"></script>
+<script type="text/javascript" src="../scripts/orderManage/service/addRefundBillService.js"></script>
+
+<!--订单管理filter-->
+<script type="text/javascript" src="../scripts/orderManage/filter/orderListFilter.js"></script>
+
+<!--订单管理指令directive-->
+<!--<script type="text/javascript" src="../scripts/orderManage/directive/orderManagePublicDirective.js"></script>-->
+<script type="text/javascript" src="../scripts/orderManage/directive/orderManageDirective.js"></script>
+
+<!--B2B唯品逻辑控制器-->
+<script type="text/javascript" src="../scripts/b2bVIP/controller/addAdjustBillController.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/controller/addMatchGoodsBillController.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/controller/addReturnGoodsBillController.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/controller/addRunScheduleController.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/controller/addSendGoodsBillController.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/controller/adjustBillController.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/controller/adjustBillDetailController.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/controller/checkBillController.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/controller/matchGoodsBillDetailController.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/controller/matchGoodsBillController.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/controller/runScheduleDetailController.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/controller/runScheduleController.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/controller/returnGoodsNoticeBillController.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/controller/returnGoodsNoticeBillDetailController.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/controller/returnGoodsBillController.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/controller/returnGoodsBillDetailController.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/controller/sendGoodsBillDetailController.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/controller/sendGoodsBillController.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/controller/scanQuitGoodsBillController.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/controller/returnGoodsScanController.js"></script>
+
+<!--B2B唯品逻辑服务-->
+<script type="text/javascript" src="../scripts/b2bVIP/service/runScheduleService.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/service/runScheduleDetailService.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/service/addRunScheduleService.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/service/matchGoodsBillService.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/service/matchGoodsBillDetailService.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/service/addMatchGoodsBillService.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/service/sendGoodsBillService.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/service/addSendGoodsBillService.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/service/sendGoodsBillDetailService.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/service/adjustBillService.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/service/addAdjustBillService.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/service/adjustBillDetailService.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/service/returnGoodsBillService.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/service/addReturnGoodsBillService.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/service/returnGoodsBillDetailService.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/service/returnGoodsNoticeBillService.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/service/returnGoodsNoticeBillDetailService.js"></script>
+<script type="text/javascript" src="../scripts/b2bVIP/service/checkBillService.js"></script>
+
+<!--B2BFBP逻辑控制器-->
+<script type="text/javascript" src="../scripts/b2bFBP/controller/addFbpSellOutputBillController.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/controller/addFbpNoticeBillController.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/controller/addFbpPlanBillController.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/controller/addFbpQuitGoodsBillController.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/controller/fbpSellOutputBillDetailController.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/controller/fbpSellOutputBillController.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/controller/fbpQuitGoodsNoticeBillDetailController.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/controller/fbpQuitGoodsNoticeBillController.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/controller/fbpQuitGoodsBillDetailController.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/controller/fbpQuitGoodsBillController.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/controller/fbpNoticeBillController.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/controller/fbpNoticeBillDetailController.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/controller/fbpPlanBillController.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/controller/fbpPlanBillDetailController.js"></script>
+<!--B2BFBPservice-->
+<script type="text/javascript" src="../scripts/b2bFBP/service/fbpPublicService.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/service/fbpPlanBillService.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/service/fbpNoticeBillService.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/service/addFbpPlanBillService.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/service/fbpPlanBillDetailService.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/service/fbpQuitGoodsBillService.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/service/fbpQuitGoodsNoticeBillService.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/service/fbpQuitGoodsNoticeBillDetailService.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/service/fbpNoticeBillDetailService.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/service/addFbpNoticeBillService.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/service/fbpSellOutputBillService.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/service/fbpSellOutputBillDetailService.js"></script><script type="text/javascript" src="../scripts/b2bFBP/service/addFbpSellOutputBillService.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/service/fbpSellOutputBillDetailService.js"></script><script type="text/javascript" src="../scripts/b2bFBP/service/addFbpQuitGoodsBillService.js"></script>
+<script type="text/javascript" src="../scripts/b2bFBP/service/fbpQuitGoodsBillDetailService.js"></script><script type="text/javascript" src="../scripts/b2bFBP/service/addFbpQuitGoodsBillService.js"></script>
+
+
+<!--商品逻辑控制器-->
+<script type="text/javascript" src="../scripts/productManage/controller/addGroupController.js"></script>
+<script type="text/javascript" src="../scripts/productManage/controller/addProductController.js"></script>
+<script type="text/javascript" src="../scripts/productManage/controller/codeBuilderController.js"></script>
+<script type="text/javascript" src="../scripts/productManage/controller/goodsInspectionController.js"></script>
+<script type="text/javascript" src="../scripts/productManage/controller/goodsInspectionLogController.js"></script>
+<script type="text/javascript" src="../scripts/productManage/controller/goodsRelationshipController.js"></script>
+<script type="text/javascript" src="../scripts/productManage/controller/groupDetailController.js"></script>
+<script type="text/javascript" src="../scripts/productManage/controller/productInformationController.js"></script>
+<script type="text/javascript" src="../scripts/productManage/controller/productInformationDetailController.js"></script>
+<script type="text/javascript" src="../scripts/productManage/controller/productSettingUpController.js"></script>
+<script type="text/javascript" src="../scripts/productManage/controller/productGroupController.js"></script>
+<script type="text/javascript" src="../scripts/productManage/controller/addProductRulesController.js"></script>
+<script type="text/javascript" src="../scripts/productManage/controller/modifyInventoryController.js"></script>
+<!--商品管理service-->
+<script type="text/javascript" src="../scripts/productManage/service/productSettingUpService.js"></script>
+<script type="text/javascript" src="../scripts/productManage/service/addProductRulesService.js"></script>
+<script type="text/javascript" src="../scripts/productManage/service/addGroupService.js"></script>
+<script type="text/javascript" src="../scripts/productManage/service/addProductService.js"></script>
+<script type="text/javascript" src="../scripts/productManage/service/codeBuilderService.js"></script>
+<script type="text/javascript" src="../scripts/productManage/service/goodsInspectionService.js"></script>
+<script type="text/javascript" src="../scripts/productManage/service/goodsInspectionLogService.js"></script>
+<script type="text/javascript" src="../scripts/productManage/service/goodsRelationshipService.js"></script>
+<script type="text/javascript" src="../scripts/productManage/service/groupDetailService.js"></script>
+<script type="text/javascript" src="../scripts/productManage/service/modifyInventoryService.js"></script>
+<script type="text/javascript" src="../scripts/productManage/service/productGroupService.js"></script>
+<script type="text/javascript" src="../scripts/productManage/service/productInformationService.js"></script>
+<script type="text/javascript" src="../scripts/productManage/service/productInformationDetailService.js"></script>
+<!--商品管理directive-->
+<script type="text/javascript" src="../scripts/global/directive/classify.js"></script>
+<script type="text/javascript" src="../scripts/productManage/filter/productFilter.js"></script>
+
+
+
+<!--配置管理逻辑控制器-->
+<script type="text/javascript" src="../scripts/configManage/controller/downloadConfigController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/generalClassifyController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/inventoryConfigController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/noticeConfigController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/orderConfigController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/productConfigController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/returnOrderConfigController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/smsAccountController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/smsConfigController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/systemConfigController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/vipConfigController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/systemLogController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/platformInterfaceController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/logisticsInterfaceController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/serviceInterfaceController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/newPlatformInterfaceController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/newSmsAccountController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/smsTemplateController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/newSmsTemplateController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/areaContactController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/expressCostController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/newExpressCostController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/newStorageInformationController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/storageInformationController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/areaInformationController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/expressAreaController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/expressInformationController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/newExpressAreaController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/shopInformationController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/newShopController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/peeringStrategyController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/storageAreaController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/characterManageController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/companyInformationController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/newCompanyInformationController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/departmentInformationController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/userManageController.js"></script>
+<script type="text/javascript" src="../scripts/configManage/controller/newExpressInformationController.js"></script>
+<!--配置管理service-->
+<script type="text/javascript" src="../scripts/configManage/service/smsAccountService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/newSmsAccountService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/generalClassifyService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/downloadConfigService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/platformInterfaceService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/logisticsInterfaceService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/serviceInterfaceService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/newPlatformInterfaceService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/companyInformationService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/newCompanyInformationService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/departmentInformationService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/characterManageService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/peeringStrategyService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/userManageService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/shopInformationService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/newShopService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/storageInformationService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/newStorageInformationService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/expressAreaService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/areaInformationService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/areaContactService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/smsTemplateService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/storageAreaService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/expressInformationService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/newExpressInformationService.js"></script>
+<script type="text/javascript" src="../scripts/configManage/service/newExpressAreaService.js"></script>
+<!--配置管理filter-->
+<script type="text/javascript" src="../scripts/configManage/filter/configManageFilter.js"></script>
+<!--库存管理逻辑控制器-->
+<script type="text/javascript" src="../scripts/inventoryManage/controller/systemInventoryController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/inOrderController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/inOrderDetailsController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/inOrderAddController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/inventoryInitController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/inventoryUploadController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/newTransferController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/outOrderController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/outOrderDetailsController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/outOrderAddController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/physicalTransferController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/secondListController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/transferDetailController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/transferNoticeController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/newNoticeOrderController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/noticeOrderDetailController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/transferNoticeController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/uploadConfigController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/virtualTransferController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/materialTransferController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/newMaterialController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/materialDetailController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/addLoanController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/lendListController.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/loanInContoller.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/controller/addLoanInController.js"></script>
+
+
+
+<!--库存管理service-->
+
+<script type="text/javascript" src="../scripts/inventoryManage/service/inventoryUploadService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/systemInventoryService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/uploadConfigService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/virtualTransferService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/transferDetailService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/newTransferService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/inOrderService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/inOrderDetailsService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/inOrderAddService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/outOrderService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/outOrderDetailsService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/outOrderAddService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/materialTransferService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/newMaterialService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/materialTransferService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/materialDetailService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/transferNoticeService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/newNoticeOrderService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/noticeOrderDetailService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/lendListService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/addLoanService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/loanInService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/addLoanInService.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/service/secondListService.js"></script>
+
+<!--库存管理filter-->
+<script type="text/javascript" src="../scripts/inventoryManage/filter/inventoryManageFilter.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/filter/warehouseTypeFilter.js"></script>
+<script type="text/javascript" src="../scripts/inventoryManage/filter/inOrderTypeFilter.js"></script>
+
+<!--营销管理逻辑控制器-->
+<script type="text/javascript" src="../scripts/marketingManage/controller/activityApplyController.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/controller/activityDetailController.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/controller/addActivityApplyController.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/controller/addPresellPlanController.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/controller/addTacticsBuyController.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/controller/addTacticsLuckyBagController.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/controller/presellPlanController.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/controller/presellPlanDetailController.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/controller/presentTacticsController.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/controller/presentTacticsDetailController.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/controller/vipMessageController.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/controller/addVipMessageController.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/controller/modifyRepertoryController.js"></script>
+
+<!--营销管理逻辑服务-->
+<script type="text/javascript" src="../scripts/marketingManage/service/activityApplyService.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/service/activityDetailService.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/service/addActivityApplyService.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/service/addPresellPlanService.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/service/addTacticsBuyService.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/service/addTacticsLuckyBagService.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/service/presellPlanService.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/service/presentTacticsDetailService.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/service/presentTacticsService.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/service/presellPlanDetailService.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/service/vipMessageService.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/service/addVipMessageService.js"></script>
+<script type="text/javascript" src="../scripts/marketingManage/service/modifyRepertoryService.js"></script>
+
+<!--财务管理逻辑控制器-->
+<script type="text/javascript" src="../scripts/propertyManage/controller/checkRecordController.js"></script>
+<script type="text/javascript" src="../scripts/propertyManage/controller/goodsDetailController.js"></script>
+<script type="text/javascript" src="../scripts/propertyManage/controller/platformCheckController.js"></script>
+<script type="text/javascript" src="../scripts/propertyManage/controller/verificationRecordController.js"></script>
+<script type="text/javascript" src="../scripts/propertyManage/controller/verificationManageDetailController.js"></script>
+<script type="text/javascript" src="../scripts/propertyManage/controller/handworkVerificationController.js"></script>
+<script type="text/javascript" src="../scripts/propertyManage/controller/verificationManageController.js"></script>
+
+<!--财务管理逻辑服务-->
+<script type="text/javascript" src="../scripts/propertyManage/service/checkRecordService.js"></script>
+<script type="text/javascript" src="../scripts/propertyManage/service/goodsDetailService.js"></script>
+<script type="text/javascript" src="../scripts/propertyManage/service/handworkVerificationService.js"></script>
+<script type="text/javascript" src="../scripts/propertyManage/service/platformCheckService.js"></script>
+<script type="text/javascript" src="../scripts/propertyManage/service/verificationManageService.js"></script>
+<script type="text/javascript" src="../scripts/propertyManage/service/verificationManageDetailService.js"></script>
+<script type="text/javascript" src="../scripts/propertyManage/service/verificationRecordService.js"></script>
+<script type="text/javascript" src="../scripts/propertyManage/filter/jxFilter.js"></script>
+
+<!--采购管理逻辑控制器-->
+<script type="text/javascript" src="../scripts/purchaseManage/controller/supplierInformationController.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/controller/addSupplierInformationController.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/controller/purchaseListController.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/controller/purchaseRequisitionListController.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/controller/returnRequisitionListController.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/controller/addPurchaseOrderController.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/controller/addPurchaseRequisitionController.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/controller/addReturnRequisitionController.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/controller/purchaseDetailsController.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/controller/purchaseRequisitionDetailsController.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/controller/returnRequisitionDetailsController.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/controller/purchaseAdviseController.js"></script>
+<!--采购管理service-->
+<script type="text/javascript" src="../scripts/purchaseManage/service/supplierInformationService.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/service/addSupplierInformationService.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/service/purchaseListService.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/service/purchaseDetailsService.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/service/addPurchaseOrderService.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/service/purchaseAdviseService.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/service/purchaseRequisitionListService.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/service/addPurchaseRequisitionService.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/service/purchaseRequisitionDetailsService.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/service/returnRequisitionDetailsService.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/service/returnRequisitionListService.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/service/addReturnRequisitionService.js"></script>
+<script type="text/javascript" src="../scripts/purchaseManage/filter/costFilter.js"></script>
+
+
+<script type="text/javascript" src="../scripts/global/service/ApiService.js"></script>
+<script type="text/javascript" src="../scripts/global/service/toolsService.js"></script>
+<script type="text/javascript" src="../scripts/global/service/routeHelpersService.js"></script>
+<script type="text/javascript" src="../scripts/global/service/httpCacheService.js"></script>
+<!--校验service-->
+<script type="text/javascript" src="../scripts/global/service/validateService.js"></script>
+</html>

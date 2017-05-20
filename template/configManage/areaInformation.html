@@ -1,0 +1,47 @@
+<div id="configManage" class="config-manage">
+    <div class="area-information" id="areaInformation" ng-controller="areaInformationController">
+        <div id="topNav" class="top-nav">
+            <div class="path">
+                区域信息
+            </div>
+        </div>
+        <div id="content" class="content">
+            <div class="title cf">
+                区域信息
+                <button class="btn-green" ng-click="showAddFirst()"><i class="iconfont icon-new"></i>新增</button>
+            </div>
+            <region show-modal="showModal" toggle-expand="toggleExpand" expander='expander' children='expander.children' ng-repeat='expander in classifyList'></region>
+        </div>
+        <!--新增&新增第一级&修改弹框-->
+        <div class="modal fade" id="creatModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">新增</h4>
+                    </div>
+                    <div class="modal-body form">
+                        <div class="item">
+                            <span>区域代码<i class="notice">*</i></span>
+                            <input class="klw-input validate" name="empty" type="text" placeholder="请输入区域代码" ng-model="creatItem.code">
+                        </div>
+                        <div class="item">
+                            <span>区域名称<i class="notice">*</i></span>
+                            <input class="klw-input validate" name="empty" type="text" placeholder="请输入区域名称" ng-model="creatItem.name">
+                        </div>
+                        <div class="item">
+                            <span>邮编<i class="notice">*</i></span>
+                            <input class="klw-input validate" name="empty" type="text" placeholder="请输入代码" ng-model="creatItem.zip">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="creatArea()">保存</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
